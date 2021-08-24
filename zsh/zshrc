@@ -33,5 +33,4 @@ source $(brew --prefix)/etc/profile.d/z.sh
 #oh-my-zsh seems to enable this by default. No me gusta en macOS.
 DISABLE_AUTO_TITLE="true"
 
-
 neofetch
