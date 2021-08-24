@@ -14,3 +14,15 @@ command! Test :call Test()
 "	au!
 "	autocmd BufWritePost *.cpp,*.hpp Test
 "augroup END
+
+
+function! BuildDebug()
+	cd ./debug
+	make -j 2 all check
+	cd ..
+	copen
+endfunction
+
+nnoremap <leader>bd :call BuildDebug()<CR>
+
+

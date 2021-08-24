@@ -21,7 +21,7 @@ let g:tmuxcomplete#asyncomplete_source_options = {
 			\     'truncate':        0
 			\     },
 			\ }
-let g:clangd_path = '/usr/local/llvm12/bin/clangd'
+let g:clangd_path = '/Library/Developer/CommandLineTools/usr/bin/clangd'
 
 if executable(g:clangd_path)
 	augroup lsp_clangd

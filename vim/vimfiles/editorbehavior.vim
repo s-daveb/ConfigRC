@@ -4,6 +4,9 @@ au BufWinEnter *.* set nu
 
 "set autochdir
 
+" for sh shell
+let g:is_posix=1
+
 set directory=$HOME/.cache/vim/swap/
 set viewdir=$HOME/.cache/vim/view
 
@@ -72,3 +75,4 @@ cabbrev delview <c-r>=(getcmdtype()==':' && getcmdpos()==1 ? 'Delview' : 'delvie
 com! FormatXML :%!python3 -c "import xml.dom.minidom, sys; print(xml.dom.minidom.parse(sys.stdin).toprettyxml())"
 
 nnoremap <leader>x :FormatXML<Cr>
+

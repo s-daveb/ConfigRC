@@ -27,6 +27,8 @@ Plug 'octol/vim-cpp-enhanced-highlight'
 Plug 'moll/vim-bbye' " buffer cleaner
 Plug 'takac/vim-hardtime'
 
+Plug 'chaoren/vim-wordmotion'
+
 " Netrw config
 Plug 'tpope/vim-vinegar'
 
@@ -86,4 +88,6 @@ source $HOME/.vim/UltiSnips.vim
 source $HOME/.vim/editorconfig.vim
 source $HOME/.vim/netrw-conf.vim
 source $HOME/.vim/vim-asynclsp/asynclsp.vim
+
+source $HOME/.vim/vim-wordmotion.vim
 

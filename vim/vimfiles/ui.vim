@@ -36,13 +36,15 @@ if has('gui_running')
     set guifont=Iosevka-Slaggathor:h14
     set macligatures
     set lines=48
-    set columns=80
+    set columns=83
   else
     set guifont=Fira\ Code\ 16
 
   	set lines=24
-  	set columns=80
+  	set columns=83
   endif
+
+  set nu
 
 	"#hi Folded term=standout cterm=bold ctermfg=6 ctermbg=0 guifg=#455457 guibg=#1b1d1e gui=italic
 	" imap <LeftClick> <nop>
