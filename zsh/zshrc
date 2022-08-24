@@ -10,7 +10,6 @@ antigen use oh-my-zsh
 antigen bundle osx
 #antigen bundle command-not-found
 
-#
 ## Syntax highlighting bundle.
 antigen bundle zsh-users/zsh-syntax-highlighting
 antigen bundle zsh-users/zsh-autosuggestions
@@ -33,4 +32,8 @@ source $(brew --prefix)/etc/profile.d/z.sh
 #oh-my-zsh seems to enable this by default. No me gusta en macOS.
 DISABLE_AUTO_TITLE="true"
 
-neofetch
+if [ -d ~/.zshrc.d ]; then
+	for script in `ls ~/.zshrc.d/*.zsh`; do
+		source ${script}
+	done
+fi
