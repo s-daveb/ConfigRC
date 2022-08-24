@@ -5,7 +5,13 @@
 
 priority -10
 
+snippet /**=
+/* ${1}
+ *  -- Saul `date +%d.%m.%y` ☕️  */
+endsnippet
+
 snippet modeline "// vim: set foldmethod..."
+// clang-format off
 // vim: set foldmethod=marker foldmarker=#region,#endregion textwidth=80 ts=8 sts=0 sw=8  noexpandtab ft=cpp.doxygen :
 endsnippet
 
@@ -25,6 +31,11 @@ snippet doxyclass "Doxygen documentation for a class"
  */
 endsnippet
 
+snippet testsuite_name "Create a static string in this file"
+namespace {
+const char* TEST_SUITE_NAME= "${1}"
+}
+endsnippet
 snippet includefold
 // @fold  #include directives
 // C includes

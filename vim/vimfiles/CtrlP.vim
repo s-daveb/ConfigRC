@@ -8,5 +8,6 @@ let g:ctrlp_user_command = {
 			\}
 let g:ctrlp_switch_buffer = 'e'
 
+let g:ctrlp_open_multiple_files='2hjr'
 
 " vim:set noet sts=0 sw=4 ts=4 tw=4:

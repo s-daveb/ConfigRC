@@ -27,7 +27,10 @@ Plug 'wellle/tmux-complete.vim'
 
 " Snippet support
 " This is quite brittle
-Plug 'SirVer/ultisnips'
-Plug 'honza/vim-snippets'
-Plug 'prabirshrestha/asyncomplete-ultisnips.vim'
-" vim:set et sts=0 sw=4 ts=4 tw=80:
+if has('python3')
+    Plug 'SirVer/ultisnips'
+    Plug 'honza/vim-snippets'
+    Plug 'thomasfaingnaert/vim-lsp-snippets'
+    Plug 'thomasfaingnaert/vim-lsp-ultisnips'
+    "Plug 'prabirshrestha/asyncomplete-ultisnips.vim'
+endif

@@ -72,18 +72,3 @@ au User asyncomplete_setup call asyncomplete#register_source(asyncomplete#source
 
 
 autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-"
-if has('python3')
-	let g:UltiSnipsExpandTrigger="<c-l>"
-	let g:UltiSnipsJumpForwardTrigger="<c-j>"
-	let g:UltiSnipsJumpBackwardTrigger="<c-k>"
-
-	call asyncomplete#register_source(asyncomplete#sources#ultisnips#get_source_options({
-				\ 'name': 'ultisnips',
-				\ 'whitelist': ['*'],
-				\ 'completor': function('asyncomplete#sources#ultisnips#completor'),
-				\ }))
-endif
-
-
-" vim:set noet sts=2 sw=8 ts=2 tw=80:

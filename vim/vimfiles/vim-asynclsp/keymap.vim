@@ -1,6 +1,9 @@
-inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<cr>"
+inoremap <expr> <C-j> pumvisible() ? "\<C-n>" : "\<C-j>"
+inoremap <expr> <C-k> pumvisible() ? "\<C-p>" : "\<C-k>"
+inoremap <expr> <Tab> pumvisible() ? "\<C-y>" : "\<Tab>"
+
+nnoremap <buffer> lx :LspDocumentDiagnostics<CR>
+nnoremap <buffer> <leader>x :LspDocumentDiagnostics<CR>
 
 nnoremap <buffer> <leader>n :LspNextError<CR>
 nnoremap <buffer> <leader>p :LspPreviousError<CR>
@@ -10,4 +13,4 @@ nnoremap <buffer> <leader>r :LspRename<CR>
 nnoremap <buffer> <leader>] :LspDefinition<CR>
 nnoremap <buffer> <leader>[ :LspDeclaration<CR>
 
-nnoremap <buffer> <leader>fixit :LspCodeAction quickfix<CR>
+nnoremap <buffer> <leader>f :LspCodeAction quickfix<CR>

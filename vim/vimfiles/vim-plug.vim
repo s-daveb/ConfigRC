@@ -5,7 +5,8 @@ call plug#begin('~/.vim-plug')
 Plug 'xolox/vim-misc'
 
 " Filetypes
-Plug 'hallison/vim-markdown'
+Plug 'tpope/vim-markdown'
+"Plug 'hallison/vim-markdown'
 Plug 'kchmck/vim-coffee-script'
 Plug 'sjl/splice.vim'
 Plug 'dag/vim-fish'
@@ -16,8 +17,6 @@ Plug 'keith/swift.vim'
 Plug 'mustache/vim-mustache-handlebars'
 Plug 'octol/vim-cpp-enhanced-highlight'
 
-Plug 'majutsushi/tagbar'
-
 " Command and Edit mode plugins
 Plug 'tpope/vim-abolish'
 Plug 'ntpeters/vim-better-whitespace'
@@ -27,15 +26,22 @@ Plug 'octol/vim-cpp-enhanced-highlight'
 Plug 'moll/vim-bbye' " buffer cleaner
 Plug 'takac/vim-hardtime'
 
+" Integrated builds and error reporting
+Plug 'tpope/vim-dispatch'
+
+" Better detect word boundaries
 Plug 'chaoren/vim-wordmotion'
 
-" Netrw config
-Plug 'tpope/vim-vinegar'
+" File Management and searching plugins
+Plug 'tpope/vim-vinegar' " Better Netrw config
 
 " File searching plugins
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'justinmk/vim-dirvish'
-Plug '/mileszs/ack.vim'
+Plug 'mileszs/ack.vim'
+
+" Code Navigation
+Plug 'preservim/tagbar'
 
 " Tmux integration
 Plug 'benmills/vimux'
@@ -56,6 +62,7 @@ Plug 'dracula/vim'
 Plug 'kitten/vim-adventurous'  " Dracula's baby
 Plug 'sjl/badwolf'
 Plug 'marciomazza/vim-brogrammer-theme'
+Plug 'sainnhe/everforest'
 
 " Git/HG integration
 Plug 'ludovicchabant/vim-lawrencium'
@@ -78,16 +85,14 @@ filetype plugin indent on    " required
 "
 source $HOME/.vim/colorscheme.switcher.vim
 source $HOME/.vim/airline.vim
-source $HOME/.vim/tagbar.vim
 source $HOME/.vim/CtrlP.vim
-source $HOME/.vim/projects.vim
 source $HOME/.vim/better-whitespace.vim
 source $HOME/.vim/hardtime.vim
+source $HOME/.vim/tagbar.keys.vim
 source $HOME/.vim/tmux.compat.vim
 source $HOME/.vim/UltiSnips.vim
 source $HOME/.vim/editorconfig.vim
 source $HOME/.vim/netrw-conf.vim
-source $HOME/.vim/vim-asynclsp/asynclsp.vim
-
+source $HOME/.vim/projects.vim
 source $HOME/.vim/vim-wordmotion.vim
-
+source $HOME/.vim/vim-asynclsp/asynclsp.vim

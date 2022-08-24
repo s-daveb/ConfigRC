@@ -1,9 +1,5 @@
 
 
-au BufWinEnter *.* set nu
-
-"set autochdir
-
 " for sh shell
 let g:is_posix=1
 
@@ -33,6 +29,7 @@ function! FileOffset()
 endfunction
 
 set viewoptions-=options
+set splitbelow
 
 autocmd BufLeave *.* mkview!
 autocmd BufEnter *.* silent loadview
@@ -50,6 +47,13 @@ endfunction
 
 nnoremap s :<C-U>exec "normal a".RepeatChar(nr2char(getchar()), v:count1)<CR>
 nnoremap S :<C-U>exec "normal i".RepeatChar(nr2char(getchar()), v:count1)<CR>
+
+function! WriteRandomNum()
+ r! dd if=/dev/urandom count=4 bs=1 2> /dev/null | od -D | awk '{ print $2 }'
+endfunction
+
+command WriteRandom call WriteRandomNum()
+nnoremap <leader>rand :WriteRandom<CR>
 
 " # Function to permanently delete views created by 'mkview'
 function! MyDeleteView()
@@ -70,9 +74,19 @@ endfunction
 " # Command Delview (and it's abbreviation 'delview')
 command Delview call MyDeleteView()
 " Lower-case user commands: http://vim.wikia.com/wiki/Replace_a_builtin_command_using_cabbrev
-cabbrev delview <c-r>=(getcmdtype()==':' && getcmdpos()==1 ? 'Delview' : 'delview')<CR>
+cabbrev delview <CR>=(getcmdtype()==':' && getcmdpos()==1 ? 'Delview' : 'delview')<CR>
 
 com! FormatXML :%!python3 -c "import xml.dom.minidom, sys; print(xml.dom.minidom.parse(sys.stdin).toprettyxml())"
+nnoremap <leader>x :FormatXML<CR>
 
-nnoremap <leader>x :FormatXML<Cr>
+set clipboard=unnamed
 
+map q] :cn<CR>
+map q[ :cp<CR>
+map q{ :copen<CR>
+map q} :cclose<CR>
+
+map l] :ln<CR>
+map l[ :lp<CR>
+map l{ :lopen<CR>
+map l} :lclose<CR>
