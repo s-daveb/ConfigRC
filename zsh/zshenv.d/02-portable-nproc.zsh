@@ -13,3 +13,4 @@ portable_nproc() {
     echo "$NPROCS"
 }
 
+alias nproc="portable_nproc"
