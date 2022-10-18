@@ -1,26 +1,33 @@
 
-source /usr/local/share/antigen/antigen.zsh
+#source /usr/local/share/antigen/antigen.zsh
+
+export ZPLUG_HOME=/usr/local/opt/zplug
+source $ZPLUG_HOME/init.zsh
+
 
 # Load the oh-my-zsh's library.
-antigen use oh-my-zsh
-
-# Bundles from the default repo (robbyrussell's oh-my-zsh).
-#antigen bundle git
-#antigen bundle pip
-#antigen bundle macos
-#antigen bundle command-not-found
+zplug "plugins/git", from:oh-my-zsh
+zplug "plugins/pip", from:oh-my-zsh
+zplug "plugins/macos", from:oh-my-zsh, if:"[[ $OSTYPE == *darwin* ]]"
+zplug "plugins/command-not-found", from:oh-my-zsh
 
 ## Syntax highlighting bundle.
-antigen bundle zsh-users/zsh-syntax-highlighting
-antigen bundle zsh-users/zsh-autosuggestions
-antigen bundle mafredri/zsh-async
+zplug "zsh-users/zsh-syntax-highlighting", defer:2
+zplug "zsh-users/zsh-autosuggestions"
+zplug "mafredri/zsh-async"
 
 # Load the theme.
-antigen bundle jackharrisonsherlock/common
-antigen theme  jackharrisonsherlock/common
+zplug "jackharrisonsherlock/common", as:theme
 
-# Tell Antigen that you're dne.
-antigen apply
+if ! zplug check --verbose; then
+    printf "Install? [y/N]: "
+    if read -q; then
+        echo; zplug install
+    fi
+fi
+
+zplug load #--verbose
+#  Zplug configuration is complete. User settings start below.
 
 alias wtf='wtf -o'
 eval "$(thefuck --alias)"
@@ -28,7 +35,9 @@ alias howmanyfucks="history | grep fuck | wc -l "
 
 alias firepower='sudo /usr/libexec/ApplicationFirewall/socketfilterfw'
 alias gd=gallery-dl
-source $(brew --prefix)/etc/profile.d/z.sh
+
+# maintains a jump list of the directories you actually use
+#source $(brew --prefix)/etc/profile.d/z.sh
 
 #oh-my-zsh seems to enable this by default. No me gusta en macOS.
 DISABLE_AUTO_TITLE="true"
