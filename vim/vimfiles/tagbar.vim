@@ -10,7 +10,7 @@ endfunction
 "au BufWinEnter *.c,*.cpp,*.h,*.hpp, TagbarOpen
 "au BufWinEnter * if &previewwindow | resize 5
 
-let tagbar_width=30
-let tagbar_expand=1
+let g:tagbar_width=15
+let g:tagbar_expand=1
 
 source ~/.vim/tagbar.keys.vim

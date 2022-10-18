@@ -6,7 +6,7 @@ imap <C-K><c-o> :py3f /usr/local/share/clang/clang-format.py<CR>
 
 function FormatBuffer()
   	let s:formatting = 1
-	 
+
   	if &modified && !empty(findfile('.clang-format', expand('%:p:h') . ';'))
     	let cursor_pos = getpos('.')
     	:silent %!clang-format

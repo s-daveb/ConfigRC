@@ -88,6 +88,7 @@ source $HOME/.vim/airline.vim
 source $HOME/.vim/CtrlP.vim
 source $HOME/.vim/better-whitespace.vim
 source $HOME/.vim/hardtime.vim
+source $HOME/.vim/tagbar.vim
 source $HOME/.vim/tagbar.keys.vim
 source $HOME/.vim/tmux.compat.vim
 source $HOME/.vim/UltiSnips.vim

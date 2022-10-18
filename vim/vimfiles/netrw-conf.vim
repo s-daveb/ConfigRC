@@ -14,7 +14,7 @@ endif
 
 let g:netrw_hide = 1
 unlet gitignore
-unlet g:netrw_list_hide
+"unlet g:netrw_list_hide
 
 "if &columns > 110 | let g:netrw_winsize = 25 | else | let g:netrw_winsize = 15 | endif
 let g:netrw_winsize = 10

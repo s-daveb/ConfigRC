@@ -1,5 +1,3 @@
-
-
 " for sh shell
 let g:is_posix=1
 
@@ -81,6 +79,8 @@ nnoremap <leader>x :FormatXML<CR>
 
 set clipboard=unnamed
 
+set errorbells
+
 map q] :cn<CR>
 map q[ :cp<CR>
 map q{ :copen<CR>
@@ -90,3 +90,10 @@ map l] :ln<CR>
 map l[ :lp<CR>
 map l{ :lopen<CR>
 map l} :lclose<CR>
+
+function SetEditorViewOptions()
+TagbarOpen
+"Vexplore
+endfunction
+
+autocmd FileType cpp.doxygen call SetEditorViewOptions()
