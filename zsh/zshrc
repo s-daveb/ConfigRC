@@ -1,8 +1,8 @@
 
 #source /usr/local/share/antigen/antigen.zsh
 
-export ZPLUG_HOME=/usr/local/opt/zplug
-source $ZPLUG_HOME/init.zsh
+export ZPLUG_INSTALL=/usr/local/opt/zplug
+source $ZPLUG_INSTALL/init.zsh
 
 
 # Load the oh-my-zsh's library.
