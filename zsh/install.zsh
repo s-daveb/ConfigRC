@@ -10,8 +10,8 @@ cd $HOME
 
 unlink "${HOME}/.zshrc"
 unlink "${HOME}/.zshenv"
-unlink "${HOME}/.zshenv.d" 2> /dev/null
-unlink "${HOME}/.zshrc.d"
+unlink -R "${HOME}/.zshenv.d" 2> /dev/null
+unlink -R "${HOME}/.zshrc.d" 2> /dev/null
 
 ln -sv "${REPODIR}/zshrc" "${HOME}/.zshrc"
 ln -sv "${REPODIR}/zshenv" "${HOME}/.zshenv"

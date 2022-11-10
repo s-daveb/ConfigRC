@@ -1,2 +1,0 @@
-
-export WINEARCH="win32"

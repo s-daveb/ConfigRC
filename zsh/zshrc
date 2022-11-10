@@ -1,14 +1,11 @@
 
-#source /usr/local/share/antigen/antigen.zsh
-
-export ZPLUG_INSTALL=/usr/local/opt/zplug
 source $ZPLUG_INSTALL/init.zsh
 
-
 # Load the oh-my-zsh's library.
+zplug 'zplug/zplug', hook-build:'zplug --self-manage'
+
 zplug "plugins/git", from:oh-my-zsh
 zplug "plugins/pip", from:oh-my-zsh
-zplug "plugins/macos", from:oh-my-zsh, if:"[[ $OSTYPE == *darwin* ]]"
 zplug "plugins/command-not-found", from:oh-my-zsh
 
 ## Syntax highlighting bundle.
@@ -28,16 +25,6 @@ fi
 
 zplug load #--verbose
 #  Zplug configuration is complete. User settings start below.
-
-alias wtf='wtf -o'
-eval "$(thefuck --alias)"
-alias howmanyfucks="history | grep fuck | wc -l "
-
-alias firepower='sudo /usr/libexec/ApplicationFirewall/socketfilterfw'
-alias gd=gallery-dl
-
-# maintains a jump list of the directories you actually use
-#source $(brew --prefix)/etc/profile.d/z.sh
 
 #oh-my-zsh seems to enable this by default. No me gusta en macOS.
 DISABLE_AUTO_TITLE="true"
