@@ -1,11 +1,8 @@
 #/usr/bin/env zsh
 
-if [[ ! -o interactive ]]; then
-	#echo "ZSH login shell - limited environment"
-	source ~/.zshrc.d/01-usr-local.zsh
-else
+if [[  -o interactive ]]; then
 	# prepare environment for zshrc
-	export ZPLUG_INSTALL=${HOME}/Downloads/zplug.git
+	export ZPLUG_INSTALL="${HOME}/.local/share/zplug"
 	export ZPLUG_HOME="${HOME}/.config/zplug"
 fi
 
