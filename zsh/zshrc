@@ -7,6 +7,7 @@ zplug 'zplug/zplug', hook-build:'zplug --self-manage'
 zplug "plugins/git", from:oh-my-zsh
 zplug "plugins/pip", from:oh-my-zsh
 zplug "plugins/command-not-found", from:oh-my-zsh
+zplug 'plugins/vi-mode', from:oh-my-zsh
 
 ## Syntax highlighting bundle.
 zplug "zsh-users/zsh-syntax-highlighting", defer:2
@@ -34,3 +35,17 @@ if [ -d ~/.zshrc.d ]; then
 		source ${script}
 	done
 fi
+
+# Lines configured by zsh-newuser-install
+HISTFILE=~/.histfile
+HISTSIZE=1000
+SAVEHIST=1000
+# End of lines configured by zsh-newuser-install
+# The following lines were added by compinstall
+zstyle :compinstall filename '/home/sdavid/.zshrc'
+
+autoload -Uz compinit
+compinit
+# End of lines added by compinstall
+
+test -e /home/sdavid/.iterm2_shell_integration.zsh && source /home/sdavid/.iterm2_shell_integration.zsh || true
