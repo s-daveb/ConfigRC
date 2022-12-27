@@ -4,7 +4,6 @@
 export ZPLUG_INSTALL=/usr/local/opt/zplug
 source $ZPLUG_INSTALL/init.zsh
 
-
 # Load the oh-my-zsh's library.
 zplug "plugins/git", from:oh-my-zsh
 zplug "plugins/pip", from:oh-my-zsh
@@ -41,6 +40,10 @@ alias gd=gallery-dl
 
 #oh-my-zsh seems to enable this by default. No me gusta en macOS.
 DISABLE_AUTO_TITLE="true"
+# Lines configured by zsh-newuser-install
+setopt autocd beep extendedglob notify
+bindkey -e
+# End of lines configured by zsh-newuser-install
 
 if [ -d ~/.zshrc.d ]; then
 	for script in `ls ~/.zshrc.d/*.zsh`; do
