@@ -31,12 +31,12 @@ augroup END
 function! SetColors()
   if has('gui_running')
     if has('mac')
-      set guifont=Iosevka-Slaggathor:h14
+      set guifont=Iosevka-Fixed:h16
       set macligatures
       set lines=48
       set columns=83
     else
-      set guifont=Fira\ Code\ 14
+      set guifont=Fira\ Code\ 16
 
   	  set lines=24
   	  set columns=83
@@ -45,7 +45,6 @@ function! SetColors()
     "set background=dark
     "let g:everforest_background = 'hard'
     colo brogrammer
-
   else
     if has("mouse_sgr")
         set ttymouse=sgr

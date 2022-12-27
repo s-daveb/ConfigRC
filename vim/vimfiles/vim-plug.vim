@@ -16,6 +16,7 @@ Plug 'skwp/vim-html-escape'
 Plug 'keith/swift.vim'
 Plug 'mustache/vim-mustache-handlebars'
 Plug 'octol/vim-cpp-enhanced-highlight'
+Plug 'yump/vim-kerboscript'
 
 " Command and Edit mode plugins
 Plug 'tpope/vim-abolish'
