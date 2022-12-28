@@ -34,7 +34,7 @@ yabai -m config                                 \
     window_gap                   6              \
     layout                       bsp            \
     mouse_modifier               fn             \
-    mouse_action1                move           
+    mouse_action1                move
     mouse_action2                resize         \
     mouse_drop_action            swap
 
@@ -56,8 +56,9 @@ yabai -m rule --add label="WhatsApp" app="^WhatsApp$" manage="off" grid="4:4:1:1
 yabai -m rule --add label="FaceTime" app="^FaceTime$" manage="off"
 
 yabai -m rule --add label="OBS Studio" app="^OBS Studio" manage="off" #grid="4:4:1:1:2:2"
-yabai -m rule --add label="QuickTime" app="^QuickTime Player" manage="off" 
+yabai -m rule --add label="QuickTime" app="^QuickTime Player" manage="off"
 
-yabai -m rule --add label="Finder" app="^Connect to.*" manage="off" 
+yabai -m rule --add label="Finder Connect Dialog" title="Finder" app="^Connect to.*" manage="off"
+yabai -m rule --add label="Music" app="Music" title="MiniPlayer" manage="off"
 
 echo "yabai configuration loaded.."
