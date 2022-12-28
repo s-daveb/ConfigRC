@@ -2,25 +2,34 @@
 
 # Script working directory
 SWD="$(dirname $0)"
-layout_script="yabai-layout-toggle.sh"
 
+scripts_dest="${HOME}/.bin"
+
+REPO=$PWD
 cd $SWD
-REPODIR=$PWD
 
-cd $HOME
+scripts_dir="scripts"
 
 unlink "${HOME}/.skhdrc"
 unlink "${HOME}/.yabairc"
-unlink "${HOME}/.bin/${layout_script}" 2> /dev/null
+unlink "${HOME}/.yabai-sh.env"
 
-if [ -d "${HOME}/.bin" ]; then
-	mkdir -pv "${HOME}/.bin"
-	echo "Created \"${HOME}/.bin\""
-   	echo "Please add \"${HOME}/.bin\" to your path"
+if [ ! -d "${scripts_dest}" ]; then
+	mkdir -pv "${scripts_dest}"
+	echo "Created \"${scripts_dest}\""
+   	echo "Please add \"${scripts_dest}\" to your path"
 fi
 
-ln -sv "${REPODIR}/yabairc" "${HOME}/.yabairc"
-ln -sv "${REPODIR}/skhdrc" "${HOME}/.skhdrc"
-ln -sv "${REPODIR}/${layout_script}" "${HOME}/.bin/"
+for F in ${scripts_dir}/*.sh; do
+	script_name="$(basename $F)"
+	rm -v "${scripts_dest}/${script_name}" 2> /dev/null
+	ln -sv "${REPO}/${F}" "${scripts_dest}/${script_name}"
+done
+
+echo
+
+ln -sv "${REPO}/yabai-sh.env" "${HOME}/.yabai-sh.env"
+ln -sv "${REPO}/yabairc" "${HOME}/.yabairc"
+ln -sv "${REPO}/skhdrc" "${HOME}/.skhdrc"
 
 chmod +x "${HOME}/.bin/${layout_script}"

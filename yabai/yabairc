@@ -1,15 +1,7 @@
 #!/usr/bin/env sh
 
-#
-# for this to work you must configure sudo such that
-# it will be able to run the command without password
-#
-# see this wiki page for information:
+# see this wiki page for information on script additions
 #  - https://github.com/koekeishiya/yabai/wiki/Installing-yabai-(latest-release)#configure-scripting-addition
-#
-# yabai -m signal --add event=dock_did_restart action="sudo yabai --load-sa"
-# sudo yabai --load-sa
-#
 
 # global settings
 yabai -m config                                 \
@@ -35,15 +27,37 @@ yabai -m config                                 \
     split_ratio                  0.50           \
     split_type                   auto           \
     auto_balance                 off            \
-    top_padding                  3              \
-    bottom_padding               3              \
-    left_padding                 3              \
-    right_padding                3              \
-    window_gap                   10             \
+    top_padding                  6              \
+    bottom_padding               6              \
+    left_padding                 6              \
+    right_padding                6              \
+    window_gap                   6              \
     layout                       bsp            \
     mouse_modifier               fn             \
-    mouse_action1                move           \
+    mouse_action1                move           
     mouse_action2                resize         \
     mouse_drop_action            swap
+
+yabai -m rule --add label="Reminders" app="^Reminders$" manage="off"
+yabai -m rule --add label="Barrier" app="^Barrier$" manage="off"
+
+yabai -m rule --add label="Loopback" app="^Loopback$" manage="off"
+yabai -m rule --add label="Audio MIDI Setup" app="^Audio MIDI Setup$" manage="off" grid="4:4:1:1:2:2"
+
+yabai -m rule --add label="Home" app="^Home$" manage="off"
+yabai -m rule --add label="System Settings" app="^System Settings$" manage="off"
+yabai -m rule --add label="Stickies" app="^Stickies$" manage="off"
+yabai -m rule --add label="Calendar" app="^Calendar$" manage="off"
+
+yabai -m rule --add label="Pixea" app="^Pixea$" manage="off"
+yabai -m rule --add label="Iina" app="^IINA$" manage="off"
+
+yabai -m rule --add label="WhatsApp" app="^WhatsApp$" manage="off" grid="4:4:1:1:2:2"
+yabai -m rule --add label="FaceTime" app="^FaceTime$" manage="off"
+
+yabai -m rule --add label="OBS Studio" app="^OBS Studio" manage="off" #grid="4:4:1:1:2:2"
+yabai -m rule --add label="QuickTime" app="^QuickTime Player" manage="off" 
+
+yabai -m rule --add label="Finder" app="^Connect to.*" manage="off" 
 
 echo "yabai configuration loaded.."

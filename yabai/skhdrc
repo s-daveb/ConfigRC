@@ -106,7 +106,9 @@ alt + shift - t : yabai -m window --toggle float --grid 4:4:1:1:2:2
 alt + shift - s : yabai -m window --toggle split
 
 cmd + ctrl - l : sh ~/.bin/yabai-layout-toggle.sh
-cmd + ctrl - y : sh -c "brew services restart yabai"
+cmd + ctrl - y : sh ~/.bin/restart-yabai.sh
+
+cmd + ctrl - s : launchctl unload homebrew.mxcl.yabai
 
 ### Unused Example settings (may require SIP)
 #
