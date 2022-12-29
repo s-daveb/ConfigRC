@@ -77,27 +77,51 @@
 # ############################################################### #
 
 # focus window
-alt + shift - h : yabai -m window --focus west
-alt + shift - l : yabai -m window --focus east
-alt + shift - k : yabai -m window --focus east
-alt + shift - j : yabai -m window --focus east
+cmd - left  : yabai -m window --focus west
+cmd - right : yabai -m window --focus east
+cmd - up    : yabai -m window --focus north
+cmd - down  : yabai -m window --focus south
+
+ctrl - h : yabai -m window --focus west
+ctrl - l : yabai -m window --focus east
+ctrl - k : yabai -m window --focus north
+ctrl - j : yabai -m window --focus south
+
+# move managed window
+cmd + alt - left   : yabai -m window --warp west
+cmd + alt - right  : yabai -m window --warp east
+cmd + alt - up     : yabai -m window --warp north
+cmd + alt - down   : yabai -m window --warp south
+
+ctrl + alt - h   : yabai -m window --warp west
+ctrl + alt - l   : yabai -m window --warp east
+ctrl + alt - k   : yabai -m window --warp north
+ctrl + alt - j   : yabai -m window --warp south
 
 # swap managed window
-ctrl + shift - h : yabai -m window --swap west
-ctrl + shift - l : yabai -m window --swap east
-ctrl + shift - k : yabai -m window --swap north
-ctrl + shift - j : yabai -m window --swap south
+cmd  + alt + shift - left   : yabai -m window --swap west
+cmd  + alt + shift - right  : yabai -m window --swap east
+cmd  + alt + shift - up     : yabai -m window --swap north
+cmd  + alt + shift - down   : yabai -m window --swap south
 
-# increase window size
-cmd + shift - h : yabai -m window --resize left:-20:0
-cmd + shift - k : yabai -m window --resize top:0:-20
+ctrl + alt + shift - h   : yabai -m window --swap west
+ctrl + alt + shift - l   : yabai -m window --swap east
+ctrl + alt + shift - k   : yabai -m window --swap north
+ctrl + alt + shift - j   : yabai -m window --swap south
 
-# decrease window size
-cmd + shift - l : yabai -m window --resize left:20:0
-cmd + shift - j : yabai -m window --resize top:0:20
+#  window resize
+alt - left : yabai -m window --resize left:-20:0
+alt - down : yabai -m window --resize top:0:-20
+alt - right : yabai -m window --resize left:20:0
+alt - up : yabai -m window --resize top:0:20
+
+alt - h : yabai -m window --resize left:-20:0
+alt - k : yabai -m window --resize top:0:-20
+alt - l : yabai -m window --resize left:20:0
+alt - k : yabai -m window --resize top:0:20
 
 # balance size of windows
-cmd + shift - 0x18 : yabai -m space --balance
+alt - 0x18 : yabai -m space --balance
 
 # float / unfloat window and center on screen
 alt + shift - t : yabai -m window --toggle float --grid 4:4:1:1:2:2
@@ -105,10 +129,10 @@ alt + shift - t : yabai -m window --toggle float --grid 4:4:1:1:2:2
 # toggle window split type
 alt + shift - s : yabai -m window --toggle split
 
-cmd + ctrl - l : sh ~/.bin/yabai-layout-toggle.sh
-cmd + ctrl - y : sh ~/.bin/restart-yabai.sh
+alt + shift - l : sh ~/.bin/yabai-layout-toggle.sh
+alt + shift - y : sh ~/.bin/restart-yabai.sh
 
-cmd + ctrl - s : launchctl unload homebrew.mxcl.yabai
+#cmd + ctrl - s : launchctl unload homebrew.mxcl.yabai
 
 ### Unused Example settings (may require SIP)
 #
