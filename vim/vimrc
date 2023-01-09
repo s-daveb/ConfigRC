@@ -11,6 +11,8 @@ source $HOME/.vim/vim-plug.vim
 """"""""   My configuration """""""""
 runtime macros/matchit.vim " for html % matching
 
+set rtp+=/usr/local/opt/fzf
+
 source $HOME/.vim/help.vim
 source $HOME/.vim/editorbehavior.vim
 source $HOME/.vim/ui.vim

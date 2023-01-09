@@ -37,9 +37,10 @@ Plug 'chaoren/vim-wordmotion'
 Plug 'tpope/vim-vinegar' " Better Netrw config
 
 " File searching plugins
-Plug 'ctrlpvim/ctrlp.vim'
+"Plug 'ctrlpvim/ctrlp.vim'
 Plug 'justinmk/vim-dirvish'
 Plug 'mileszs/ack.vim'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 
 " Code Navigation
 Plug 'preservim/tagbar'
@@ -87,7 +88,7 @@ filetype plugin indent on    " required
 "
 source $HOME/.vim/colorscheme.switcher.vim
 source $HOME/.vim/airline.vim
-source $HOME/.vim/CtrlP.vim
+"source $HOME/.vim/CtrlP.vim
 source $HOME/.vim/better-whitespace.vim
 source $HOME/.vim/hardtime.vim
 source $HOME/.vim/tagbar.vim

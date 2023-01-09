@@ -12,12 +12,11 @@ Plug 'mattn/vim-lsp-settings'
 Plug 'Shougo/neco-vim'
 Plug 'prabirshrestha/asyncomplete-necovim.vim'
 
-" Broken: URL-like constructions make VIM hang
+" Broken: URL-like constructions make VIM hang (??)
 Plug 'prabirshrestha/asyncomplete-file.vim'
 
 " For path completion and others
 Plug 'yami-beta/asyncomplete-omni.vim'
-
 
 " Content from other VIM buffers
 Plug 'prabirshrestha/asyncomplete-buffer.vim'
