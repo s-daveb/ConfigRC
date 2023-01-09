@@ -13,6 +13,8 @@ scripts_dir="scripts"
 unlink "${HOME}/.skhdrc"
 unlink "${HOME}/.yabairc"
 unlink "${HOME}/.yabai-sh.env"
+unlink "${HOME}/.yabai.rules"
+
 
 if [ ! -d "${scripts_dest}" ]; then
 	mkdir -pv "${scripts_dest}"
@@ -30,6 +32,7 @@ echo
 
 ln -sv "${REPO}/yabai-sh.env" "${HOME}/.yabai-sh.env"
 ln -sv "${REPO}/yabairc" "${HOME}/.yabairc"
+ln -sv "${REPO}/yabai.rules" "${HOME}/.yabai.rules"
 ln -sv "${REPO}/skhdrc" "${HOME}/.skhdrc"
 
 chmod +x "${HOME}/.bin/${layout_script}"
