@@ -16,3 +16,5 @@ done
 
 alias ssh-lforward='ssh -nNT -L'
 
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
