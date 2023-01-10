@@ -1,14 +1,32 @@
 [user]
-#       name =  AAAA BBBB
+	name = S David
+	email = 2100425+s-daveb@users.noreply.github.com
 
 ###### For Maximum Github Privacy, do not set your git email here.
 ###### You can set it per-project at <proj-root>/.git/config
 #	email = xxxxxxx@yyyy.zzz
 
 [core]
-	editor = vim
+	excludesFile = /home/sdavid/.config/gitignore
+	pager = less -S
+	editor = /usr/local/bin/vim
 [push]
 	default = simple
 [alias]
 	st = status
 	lg = log --graph --oneline --all --decorate
+	sdiff = diff --staged
+	deepclone = clone --recursive --shallow-submodules
+	cl = deepclone
+
+[color]
+	diff = auto
+	status = auto
+	branch = auto
+	interactive = auto
+	ui = true
+	pager = true
+[pull]
+	rebase = true
+[init]
+	defaultBranch = devel
