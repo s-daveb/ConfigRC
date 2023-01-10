@@ -23,6 +23,7 @@ Plug 'prabirshrestha/asyncomplete-buffer.vim'
 
 " because I can't stop getting new plugins
 Plug 'wellle/tmux-complete.vim'
+Plug 's-daveb/lsp-actions'
 
 " Snippet support
 " This is quite brittle
@@ -33,3 +34,5 @@ if has('python3')
     Plug 'thomasfaingnaert/vim-lsp-ultisnips'
     "Plug 'prabirshrestha/asyncomplete-ultisnips.vim'
 endif
+
+
