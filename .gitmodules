@@ -1,3 +1,6 @@
 [submodule "bash-osx/.bashrc.d/from-github/tmux-bash-completion"]
 	path = bash-macOS/.bashrc.d/from-github/tmux-bash-completion
 	url = https://github.com/imomaliev/tmux-bash-completion
+[submodule "dist-scripts.git"]
+	path = dist-scripts.git
+	url = git@github.com:s-daveb/dist-scripts.git
