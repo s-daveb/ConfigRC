@@ -9,6 +9,7 @@ zplug "plugins/pip", from:oh-my-zsh
 
 zplug "plugins/command-not-found", from:oh-my-zsh
 zplug 'plugins/vi-mode', from:oh-my-zsh
+#zplug "jeffreytse/zsh-vi-mode"
 
 ## Syntax highlighting bundle.
 zplug "zsh-users/zsh-syntax-highlighting", defer:2
