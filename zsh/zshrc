@@ -1,11 +1,16 @@
 
 source $ZPLUG_INSTALL/init.zsh
 
+export ZPLUG_INSTALL="/usr/share/zplug"
+source ${ZPLUG_INSTALL}/init.zsh
+>>>>>>> 206c995 (Manually adding support autocd and compinit.)
+
 # Load the oh-my-zsh's library.
 zplug 'zplug/zplug', hook-build:'zplug --self-manage'
 
 zplug "plugins/git", from:oh-my-zsh
 zplug "plugins/pip", from:oh-my-zsh
+
 zplug "plugins/command-not-found", from:oh-my-zsh
 zplug 'plugins/vi-mode', from:oh-my-zsh
 
