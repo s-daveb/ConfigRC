@@ -28,3 +28,5 @@ fi
 
 ln -sv "${REPODIR}/vimrc"    "$HOME/.vimrc"
 ln -sv "${REPODIR}/vimfiles" "$HOME/.vim"
+
+vim +PlugInstall +qa
