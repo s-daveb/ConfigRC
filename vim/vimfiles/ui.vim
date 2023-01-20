@@ -27,7 +27,6 @@ augroup resCur
 	autocmd BufWinEnter * call ResCur()
 augroup END
 
-
 function! SetColors()
   if has('gui_running')
     if has('mac')
