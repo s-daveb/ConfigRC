@@ -6,4 +6,4 @@ if [[  -o interactive ]]; then
 	export ZPLUG_HOME="${HOME}/.config/zplug"
 fi
 
-export XDG_RUNTIME_DIR="/var/tmp/$EUID/"
+# export XDG_RUNTIME_DIR="/var/tmp/$EUID/" # not needed with systemd

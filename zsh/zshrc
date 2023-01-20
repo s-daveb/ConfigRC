@@ -27,6 +27,10 @@ fi
 zplug load #--verbose
 #  Zplug configuration is complete. User settings start below.
 
+alias wtf='wtf -o'
+eval "$(thefuck --alias)"
+alias howmanyfucks="history | grep fuck | wc -l "
+
 #oh-my-zsh seems to enable this by default. No me gusta en macOS.
 DISABLE_AUTO_TITLE="true"
 

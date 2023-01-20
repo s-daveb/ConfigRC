@@ -26,3 +26,4 @@ ln -sv "${REPODIR}/dependencies/zplug" "${ZPLUG_LINK_DEST}"
 ln -sv "${REPODIR}/zshenv" "${HOME}/.zshenv"
 ln -sv "${REPODIR}/zshrc" "${HOME}/.zshrc"
 ln -sv "${REPODIR}/zshrc.d" "${HOME}/.zshrc.d"
+
