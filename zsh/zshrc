@@ -1,9 +1,5 @@
 
-source $ZPLUG_INSTALL/init.zsh
-
-export ZPLUG_INSTALL="/usr/share/zplug"
-source ${ZPLUG_INSTALL}/init.zsh
->>>>>>> 206c995 (Manually adding support autocd and compinit.)
+source $ZPLUG_HOME/init.zsh
 
 # Load the oh-my-zsh's library.
 zplug 'zplug/zplug', hook-build:'zplug --self-manage'
