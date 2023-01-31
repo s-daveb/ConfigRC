@@ -2,5 +2,5 @@
 GEM_BIN=`which gem`
 
 if [ -x "${GEM_BIN}" ]; then
-	echo PATH="${PATH}:$(gem environment path)"
+	export PATH="${PATH}:$(${GEM_BIN} environment path)"
 fi
