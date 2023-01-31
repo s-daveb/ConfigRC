@@ -1,2 +1,6 @@
 
-export PATH="${PATH}:/home/sdavid/.local/share/gem/ruby/3.0.0/bin"
+GEM_BIN=`which gem`
+
+if [ -x "${GEM_BIN}" ]; then
+	echo PATH="${PATH}:$(gem environment path)"
+fi
