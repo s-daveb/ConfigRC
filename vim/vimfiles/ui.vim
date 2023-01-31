@@ -35,7 +35,7 @@ function! SetColors()
       set lines=48
       set columns=83
     else
-      set guifont=Fira\ Code\ 14
+      set guifont=IosevkaTerm\ Nerd\ Font\ 12
 
   	  set lines=24
   	  set columns=83
@@ -53,9 +53,9 @@ function! SetColors()
     end
 
   "  colo monokai
-    "set background=light
+    set background=light
     let g:everforest_background = 'hard'
-    colo brogrammer
+    colo everforest
 
     if exists('+termguicolors')
       let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
