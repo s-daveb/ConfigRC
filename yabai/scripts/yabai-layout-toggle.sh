@@ -8,17 +8,16 @@ layout_name=""
 
 case $current_layout in
 	"bsp")
-		yabai -m config layout float
 		current_layout="float"
 		;;
 	"float")
-		yabai -m config layout stack
-		current_layout="stack"
+		current_layout="bsp"
 		;;
 	"stack")
-		yabai -m config layout bsp
 		current_layout="bsp"
 		;;
 esac
+
+yabai -m config layout $current_layout
 
 sys-notify "${current_layout}" "Yabai" "layout changed to:"

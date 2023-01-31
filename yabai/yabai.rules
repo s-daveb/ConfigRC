@@ -36,8 +36,11 @@ yabai -m rule --add label="Day One Settings" app="Day One" title="(General|Sync|
 yabai -m rule --add label="Flow Timer" app="Flow" manage="off"  grid="4:4:1:1:2:2"
 
 yabai -m rule --add label="All Settings Windows" title="(Control Center|Settings|Config|Configure|Preferences|General|Security|Support|Appearance|^Advanced$|Privacy)" manage="off"
-yabai -m rule --add label="File Transfers" title="(^Copy$|^Delete$|Deleting|Copying|Transfer)" manage="off"
+
+yabai -m rule --add label="File Transfers" title="(^Copy$|^Delete$|Deleting|Copying|Transfer|Archive Utility)" manage="off"
 
 
 yabai -m rule --add label="Misc Dialogues" title="(^Convert Image$|Converting)" manage="off"
 
+
+yabai -m rule --add label="Discord" app="Discord"
