@@ -37,7 +37,7 @@ Plug 'tpope/vim-vinegar' " Better Netrw config
 
 " File searching plugins
 Plug 'ctrlpvim/ctrlp.vim'
-Plug 'justinmk/vim-dirvish'
+"Plug 'justinmk/vim-dirvish'
 Plug 'mileszs/ack.vim'
 
 " Code Navigation
