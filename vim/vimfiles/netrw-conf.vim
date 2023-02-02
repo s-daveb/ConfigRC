@@ -14,17 +14,28 @@ endif
 
 let g:netrw_hide = 1
 unlet gitignore
-"unlet g:netrw_list_hide
 
-"if &columns > 110 | let g:netrw_winsize = 25 | else | let g:netrw_winsize = 15 | endif
-let g:netrw_winsize = 10
 
-map <silent> <C-E> :Lexplore<cr>
 
-"autocmd FileType cpp :Lexplore
+fu! TreeView()
+	if &filetype != "netrw"
+		if &columns > 110
+ 	   		let g:netrw_winsize = 25
+			Lexplore
+		elseif &columns > 80
+ 	   		let g:netrw_winsize = 20
+			Lexplore
+		else
+ 	   		let g:netrw_winsize = 20
+			Sexplore
+		endif
+	endif
+endfunction
 
+map <silent> <C-E> :call TreeView()<cr>
 fu! MapNtree()
 	map <silent><buffer> gn    :Ntree<cr>
 endfunction
+
 
 autocmd FileType netrw :call MapNtree()
