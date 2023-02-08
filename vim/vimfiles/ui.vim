@@ -28,10 +28,6 @@ augroup resCur
 		autocmd BufWinEnter * call ResCur()
 augroup END	" #endregion
 function! GuiConfig() " #region detects GVIM and handles some things differently
-"		if !has('g:loaded_auto_light_dark')
-"			set background=dark
-"			colorscheme brogrammer
-"		endif
 		if has('gui_running')
 				if has('macunix')
 						set guifont=Iosevka-Fixed:h16
@@ -50,8 +46,12 @@ function! GuiConfig() " #region detects GVIM and handles some things differently
 				end
 
 				au BufWinEnter :silent set title<CR>
+
+				" #region change how the end of the file is highlighted.
+				" Just subtly change text width and set a fg color
 				hi NonText cterm=bold ctermfg=245 ctermbg=None guibg=NONE
 				hi EndOfbuffer cterm=bold ctermfg=245 ctermbg=None guibg=NONE
+				" #endregion
 
 				" Need these changes to enable terminal transparency in iTerm2 #region
 				if exists('+termguicolors')
@@ -62,20 +62,17 @@ function! GuiConfig() " #region detects GVIM and handles some things differently
 
 				hi Normal ctermbg=None guibg=NONE
 				"#endregion
-
+				" #region make sure comments are gray-ish and stand out.
 				hi clear Comment
 				hi Comment term=standout ctermfg=247 ctermbg=228 guifg=#939f91
-				"hi Comment term=standout ctermfg=247 ctermbg=228 guifg=#939f91 guibg=#f3efda
-				"hi Comment term=bold cterm=italic ctermfg=none gui=italic guifg=#95B6B9
+				" #endregion
 		endif
 endfunc	" #endregion
 
-if !has('g:loaded_auto_light_dark')
-		call GuiConfig()
-endif
+call GuiConfig()
 
-" #region  SynStack() - Displays the syntax highlighting group under the cursor
-function! <SID>SynStack()  
+" #region func SynStack() - Displays the syntax highlighting group under the cursor
+function! <SID>SynStack()
 		if !exists("*synstack")
 				return
 		endif
