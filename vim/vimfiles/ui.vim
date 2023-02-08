@@ -32,12 +32,9 @@ function! GuiConfig() " #region detects GVIM and handles some things differently
 				if has('macunix')
 						set guifont=Iosevka-Fixed:h16
 						set macligatures
-						set lines=48
 				else
 						set guifont=Fira\ Code\ 16
-						set lines=24
 				endif
-				set columns=83
 		else " if has('gui_running') == false
 				if has("mouse_sgr")
 						set ttymouse=sgr
@@ -61,7 +58,7 @@ function! GuiConfig() " #region detects GVIM and handles some things differently
 				endif
 
 				hi Normal ctermbg=None guibg=NONE
-				"#endregion
+				"#endregicuon
 				" #region make sure comments are gray-ish and stand out.
 				hi clear Comment
 				hi Comment term=standout ctermfg=247 ctermbg=228 guifg=#939f91
