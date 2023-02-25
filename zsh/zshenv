@@ -6,4 +6,6 @@ if [[  -o interactive ]]; then
 	export ZPLUG_HOME="${HOME}/.config/zplug"
 fi
 
-# export XDG_RUNTIME_DIR="/var/tmp/$EUID/" # not needed with systemd
+export XDG_RUNTIME_DIR="/var/tmp/$EUID/" # needed for wayland on BSD
+
+export DOAS_PS1="(doas) `sh -c "echo $PS1"`"
