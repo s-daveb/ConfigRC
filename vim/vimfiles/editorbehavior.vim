@@ -91,6 +91,10 @@ map l[ :lp<CR>
 map l{ :lopen<CR>
 map l} :lclose<CR>
 
+" Disable obnoxious period repeat thing, so that I can use vim on an ipad
+" without an ESC key with cmd+.
+nnoremap . <nop>
+
 function SetEditorViewOptions()
 TagbarOpen
 "Vexplore
