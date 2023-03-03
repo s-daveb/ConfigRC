@@ -2,15 +2,21 @@
 
 function DarkMode()
     set background=dark
-	colorscheme everforest
-	AirlineTheme everforest
+	colorscheme dracula
+	AirlineTheme dracula
 	call GuiConfig()
 endfunction
 
 function LightMode()
-    set background=light
-	colorscheme everforest
-	AirlineTheme everforest
+	if ( $TMUX != "" )
+    	set background=light
+		colorscheme  everforest
+		AirlineTheme  everforest
+	else
+    	set background=dark
+		colorscheme dracula
+		AirlineTheme dracula
+	endif
 	call GuiConfig()
 endfunction
 
