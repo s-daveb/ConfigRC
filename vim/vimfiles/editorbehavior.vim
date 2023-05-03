@@ -78,7 +78,9 @@ com! FormatXML :%!python3 -c "import xml.dom.minidom, sys; print(xml.dom.minidom
 nnoremap <leader>x :FormatXML<CR>
 
 set clipboard=unnamed
-
+if $DISPLAY =~# 'localhost:'
+	set clipboard=autoselect,exclude:.* 
+endi
 set errorbells
 
 map q] :cn<CR>

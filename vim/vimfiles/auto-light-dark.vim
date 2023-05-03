@@ -1,22 +1,41 @@
 
+" This is a comment
+function _common_colorsettings()
+	let g:everforest_better_performance = 1
+	let g:everforest_background = 'medium'
+	let g:everforest_transparent_background=1
+	let g:everforest_ui_contrast = 'high'
+endfunction
 
 function DarkMode()
     set background=dark
-	colorscheme dracula
-	AirlineTheme dracula
-	call GuiConfig()
-endfunction
+	call _common_colorsettings()
 
-function LightMode()
 	if ( $TMUX != "" )
-    	set background=light
 		colorscheme  everforest
 		AirlineTheme  everforest
 	else
-    	set background=dark
 		colorscheme dracula
 		AirlineTheme dracula
 	endif
-	call GuiConfig()
+	call TransparentTerminalFix()
+	call UiConfig()
+endfunction
+
+function LightMode()
+    set background=light
+	call _common_colorsettings()
+	echo "light mode"
+	if ( $TMUX != "" )
+    	set background=dark
+		colorscheme  everforest
+		AirlineTheme  everforest
+	else
+		set background=dark
+		colorscheme dracula
+		AirlineTheme dracula
+	endif
+	call TransparentTerminalFix()
+	call UiConfig()
 endfunction
 

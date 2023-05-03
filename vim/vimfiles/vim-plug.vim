@@ -63,7 +63,6 @@ Plug 'kitten/vim-adventurous'  " Dracula's baby
 Plug 'sjl/badwolf'
 Plug 'marciomazza/vim-brogrammer-theme'
 Plug 'sainnhe/everforest'
-Plug 's-daveb/vim-auto-light-dark'
 
 " Git/HG integration
 Plug 'ludovicchabant/vim-lawrencium'
@@ -98,5 +97,4 @@ source $HOME/.vim/netrw-conf.vim
 source $HOME/.vim/projects.vim
 source $HOME/.vim/vim-wordmotion.vim
 source $HOME/.vim/vim-asynclsp/asynclsp.vim
-source $HOME/.vim/auto-light-dark.vim
 
