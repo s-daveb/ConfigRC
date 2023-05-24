@@ -30,7 +30,7 @@ augroup END	" #endregion
 function! GuiConfig() " #region detects GVIM and handles some things differently
 		if has('gui_running')
 				if has('macunix')
-						set guifont=Iosevka-Fixed:h16
+						set guifont=Iosevka-Fixed-Light:h16
 						set macligatures
 				else
 						set guifont=Fira\ Code\ 16
@@ -44,24 +44,27 @@ function! GuiConfig() " #region detects GVIM and handles some things differently
 
 				au BufWinEnter :silent set title<CR>
 
-				" #region change how the end of the file is highlighted.
-				" Just subtly change text width and set a fg color
-				hi NonText cterm=bold ctermfg=245 ctermbg=None guibg=NONE
-				hi EndOfbuffer cterm=bold ctermfg=245 ctermbg=None guibg=NONE
-				" #endregion
+				" #region hard-code some things like background transparency and colorcolums
 
-				" Need these changes to enable terminal transparency in iTerm2 #region
+				" #region enable terminal transparency by disabling background colors.
 				if exists('+termguicolors')
 						let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
 						let &t_8b = "\<ESC>[48;2;%lu;%lu;%lum"
 						set termguicolors
 				endif
+				" #endregion
 
+				" #region change how the end of the file is highlighted.
+				" Just subtly change text width and set a fg color
 				hi Normal ctermbg=None guibg=NONE
-				"#endregicuon
+				hi NonText cterm=bold ctermfg=245 ctermbg=None guibg=NONE
+				hi EndOfbuffer cterm=bold ctermfg=245 ctermbg=None guibg=NONE
+				" #endregion
+
 				" #region make sure comments are gray-ish and stand out.
 				hi clear Comment
 				hi Comment term=standout ctermfg=247 ctermbg=228 guifg=#939f91
+				" #endregion
 				" #endregion
 		endif
 endfunc	" #endregion

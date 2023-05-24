@@ -28,7 +28,7 @@ if executable(g:clangd_path)
 		autocmd!
 		autocmd User lsp_setup call lsp#register_server({
 					\ 'name': 'clangd',
-					\ 'cmd': {server_info->[g:clangd_path, '--background-index', '--suggest-missing-includes', '-j=2']},
+					\ 'cmd': {server_info->[g:clangd_path, '--background-index', '--suggest-missing-includes', '-j=3']},
 					\ 'whitelist': ['c', 'cpp', 'cpp.doxygen', 'objc', 'objcpp'],
 					\ })
 		autocmd FileType c setlocal omnifunc=lsp#complete
@@ -39,13 +39,21 @@ if executable(g:clangd_path)
 	augroup end
 endif
 
+if has('python3')
+    let g:UltiSnipsExpandTrigger="<c-e>"
+	call asyncomplete#register_source(asyncomplete#sources#ultisnips#get_source_options({
+			    \ 'name': 'ultisnips',
+				\ 'allowlist': ['*'],
+				\ 'completor': function('asyncomplete#sources#ultisnips#completor'),
+				\ }))
+endif
 
 " Blacklisted because it's buggy - anything that looks like a URL makes VIM hang
-"au User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#file#get_source_options({
-"    \ 'name': 'file',
-"    \ 'whitelist': ['*'],
-"    \ 'completor': function('asyncomplete#sources#file#completor')
-"    \ }))
+au User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#file#get_source_options({
+    \ 'name': 'file',
+    \ 'whitelist': ['*'],
+    \ 'completor': function('asyncomplete#sources#file#completor')
+    \ }))
 "
 call asyncomplete#register_source(asyncomplete#sources#omni#get_source_options({
 			\ 'name': 'omni',
@@ -69,6 +77,4 @@ au User asyncomplete_setup call asyncomplete#register_source(asyncomplete#source
 			\ 'whitelist': ['vim'],
 			\ 'completor': function('asyncomplete#sources#necovim#completor'),
 			\ }))
-
-
 autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS

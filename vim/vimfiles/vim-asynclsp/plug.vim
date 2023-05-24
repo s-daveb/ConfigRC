@@ -30,9 +30,10 @@ Plug 's-daveb/lsp-actions'
 if has('python3')
     Plug 'SirVer/ultisnips'
     Plug 'honza/vim-snippets'
-    Plug 'thomasfaingnaert/vim-lsp-snippets'
-    Plug 'thomasfaingnaert/vim-lsp-ultisnips'
-    "Plug 'prabirshrestha/asyncomplete-ultisnips.vim'
+    "Plug 'thomasfaingnaert/vim-lsp-snippets'
+    "Plug 'thomasfaingnaert/vim-lsp-ultisnips'
+    Plug 'prabirshrestha/asyncomplete-ultisnips.vim'
 endif
+
 
 

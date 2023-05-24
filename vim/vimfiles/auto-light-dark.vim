@@ -1,13 +1,28 @@
 
+function! SetEverForestOptions()
+	if has('termguicolors')
+        set termguicolors
+    endif
 
-function DarkMode()
+    " Set contrast.
+    " This configuration option should be placed before `colorscheme everforest`.
+    " Available values: 'hard', 'medium'(default), 'soft'
+    "let g:everforest_background = 'soft'
+
+    " For better performance
+    let g:everforest_better_performance = 0
+endfunction
+
+function! DarkMode()
+	let g:everforest_background='hard'
     set background=dark
 	colorscheme everforest
 	AirlineTheme everforest
 	call GuiConfig()
 endfunction
 
-function LightMode()
+function! LightMode()
+	let g:everforest_background='medium'
     set background=light
 	colorscheme everforest
 	AirlineTheme everforest

@@ -1,6 +1,9 @@
-inoremap <expr> <C-j> pumvisible() ? "\<C-n>" : "\<C-j>"
-inoremap <expr> <C-k> pumvisible() ? "\<C-p>" : "\<C-k>"
-inoremap <expr> <Tab> pumvisible() ? "\<C-y>" : "\<Tab>"
+inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+inoremap <expr> <cr>    pumvisible() ? asyncomplete#close_popup() : "\<cr>"
+
+imap <c-space> <Plug>(asyncomplete_force_refresh)
+imap <c-@> <Plug>(asyncomplete_force_refresh)
 
 nnoremap <buffer> lx :LspDocumentDiagnostics<CR>
 nnoremap <buffer> <leader>x :LspDocumentDiagnostics<CR>
