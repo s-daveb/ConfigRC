@@ -21,14 +21,17 @@ let g:tmuxcomplete#asyncomplete_source_options = {
 			\     'truncate':        0
 			\     },
 			\ }
-let g:clangd_path = '/usr/bin/clangd'
 
+let g:clangd_path = '/usr/bin/clangd'
 if executable(g:clangd_path)
 	augroup lsp_clangd
 		autocmd!
 		autocmd User lsp_setup call lsp#register_server({
 					\ 'name': 'clangd',
-					\ 'cmd': {server_info->[g:clangd_path, '--background-index', '--suggest-missing-includes', '-j=3']},
+					\ 'cmd': {server_info->
+					\ [g:clangd_path,
+					\ '-j=2','--background-index', '--pch-storage=memory',
+					\  '--header-insertion=never' ]},
 					\ 'whitelist': ['c', 'cpp', 'cpp.doxygen', 'objc', 'objcpp'],
 					\ })
 		autocmd FileType c setlocal omnifunc=lsp#complete

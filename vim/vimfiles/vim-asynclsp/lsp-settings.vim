@@ -1,5 +1,4 @@
 
-"let g:lsp_settings_filetype_cpp = ['clangd']
 let g:lsp_settings_enable_suggestions = 0
 
 let g:lsp_settings_root_markers = [
@@ -11,7 +10,7 @@ let g:lsp_settings_root_markers = [
 			\   '.npmrc'
 			\ ]
 
-let g:my_lsp_diagnostics_enabled = 0
+"let g:my_lsp_diagnostics_enabled = 0
 
 "function s:MyToggleLSPDiagnostics()
 "    if g:my_lsp_diagnostics_enabled == 1
@@ -29,5 +28,12 @@ let g:my_lsp_diagnostics_enabled = 0
 "
 "nnoremap <F12> :MyToggleLSPDiagnostics<CR>
 nnoremap <F12> :LspDocumentDiagnostics<CR>
+
+
+let g:lsp_log_verbose = 1
+let g:lsp_log_file = expand('~/lsp.log')
+"
+" for asyncomplete.vim log
+let g:asyncomplete_log_file = expand('~/asyncomplete.log')
 
 " vim:set ts=2 sts=2 sw=2 noet:

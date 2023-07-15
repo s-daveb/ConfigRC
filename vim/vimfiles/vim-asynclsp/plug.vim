@@ -4,7 +4,6 @@ Plug 'prabirshrestha/async.vim'
 Plug 'prabirshrestha/asyncomplete.vim'
 Plug 'prabirshrestha/vim-lsp'
 Plug 'prabirshrestha/asyncomplete-lsp.vim'
-Plug 'mattn/vim-lsp-settings'
 
 " Completion Sources
 " ---------------
@@ -12,17 +11,17 @@ Plug 'mattn/vim-lsp-settings'
 Plug 'Shougo/neco-vim'
 Plug 'prabirshrestha/asyncomplete-necovim.vim'
 
-" Broken: URL-like constructions make VIM hang (??)
+"" Broken: URL-like constructions make VIM hang (??)
 Plug 'prabirshrestha/asyncomplete-file.vim'
 
-" For path completion and others
+"" For path completion and others
 Plug 'yami-beta/asyncomplete-omni.vim'
 
-" Content from other VIM buffers
+"" Content from other VIM buffers
 Plug 'prabirshrestha/asyncomplete-buffer.vim'
 
-" because I can't stop getting new plugins
-Plug 'wellle/tmux-complete.vim'
+"" because I can't stop getting new plugins
+"Plug 'wellle/tmux-complete.vim'
 Plug 's-daveb/lsp-actions'
 
 " Snippet support
