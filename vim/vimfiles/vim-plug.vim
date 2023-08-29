@@ -80,7 +80,7 @@ Plug 'airblade/vim-gitgutter'
 Plug 'amiorin/vim-project'
 
 " Project Integration
-Plug 'editorconfig/editorconfig-vim'
+"Plug 'editorconfig/editorconfig-vim'
 
 source $HOME/.vim/vim-asynclsp/plug.vim
 
@@ -98,7 +98,7 @@ source $HOME/.vim/tagbar.vim
 source $HOME/.vim/tagbar.keys.vim
 source $HOME/.vim/tmux.compat.vim
 source $HOME/.vim/UltiSnips.vim
-source $HOME/.vim/editorconfig.vim
+"source $HOME/.vim/editorconfig.vim
 source $HOME/.vim/netrw-conf.vim
 source $HOME/.vim/projects.vim
 source $HOME/.vim/vim-wordmotion.vim

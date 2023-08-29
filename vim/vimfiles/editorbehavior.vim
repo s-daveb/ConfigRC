@@ -90,10 +90,8 @@ map l] :ln<CR>
 map l[ :lp<CR>
 map l{ :lopen<CR>
 map l} :lclose<CR>
+" Switch to header file
 
-function SetEditorViewOptions()
-TagbarOpen
-"Vexplore
-endfunction
+map  :redraw!
 
-autocmd FileType cpp.doxygen call SetEditorViewOptions()
+

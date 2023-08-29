@@ -29,11 +29,12 @@ if executable(g:clangd_path)
 		autocmd User lsp_setup call lsp#register_server({
 					\ 'name': 'clangd',
 					\ 'cmd': {server_info->
-					\ [g:clangd_path,
+					\ [ g:clangd_path,
 					\ '-j=2','--background-index', '--pch-storage=memory',
-					\  '--header-insertion=never' ]},
+ 				   	\  '--limit-results=100', '--limit-references=100' ]},
 					\ 'whitelist': ['c', 'cpp', 'cpp.doxygen', 'objc', 'objcpp'],
 					\ })
+"  '--header-insertion=never', '--all-scopes-completion',
 		autocmd FileType c setlocal omnifunc=lsp#complete
 		autocmd FileType cpp setlocal omnifunc=lsp#complete
 		autocmd FileType cpp.doxygen setlocal omnifunc=lsp#complete
@@ -80,4 +81,5 @@ au User asyncomplete_setup call asyncomplete#register_source(asyncomplete#source
 			\ 'whitelist': ['vim'],
 			\ 'completor': function('asyncomplete#sources#necovim#completor'),
 			\ }))
+
 autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS

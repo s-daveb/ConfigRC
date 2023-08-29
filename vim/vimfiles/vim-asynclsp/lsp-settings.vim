@@ -10,30 +10,30 @@ let g:lsp_settings_root_markers = [
 			\   '.npmrc'
 			\ ]
 
-"let g:my_lsp_diagnostics_enabled = 0
+let g:my_lsp_diagnostics_enabled = 0
 
-"function s:MyToggleLSPDiagnostics()
-"    if g:my_lsp_diagnostics_enabled == 1
-"        call lsp#disable_diagnostics_for_buffer()
-"        let g:my_lsp_diagnostics_enabled = 0
-"        echo "LSP Diagnostics : off"
-"    else
-"        call lsp#enable_diagnostics_for_buffer()
-"        let g:my_lsp_diagnostics_enabled = 1
-"        echo "LSP Diagnostics : on"
-"    endif
-"endfunction
-"
-"command MyToggleLSPDiagnostics call s:MyToggleLSPDiagnostics()
-"
-"nnoremap <F12> :MyToggleLSPDiagnostics<CR>
-nnoremap <F12> :LspDocumentDiagnostics<CR>
+function s:MyToggleLSPDiagnostics()
+    if g:my_lsp_diagnostics_enabled == 1
+        call lsp#disable_diagnostics_for_buffer()
+        let g:my_lsp_diagnostics_enabled = 0
+        echo "LSP Diagnostics : off"
+    else
+        call lsp#enable_diagnostics_for_buffer()
+        let g:my_lsp_diagnostics_enabled = 1
+        echo "LSP Diagnostics : on"
+    endif
+endfunction
+
+command MyToggleLSPDiagnostics call s:MyToggleLSPDiagnostics()
+
+nnoremap <F12> :MyToggleLSPDiagnostics<CR>
+"nnoremap <F12> :LspDocumentDiagnostics<CR>
 
 
-let g:lsp_log_verbose = 1
-let g:lsp_log_file = expand('~/lsp.log')
+let g:lsp_log_verbose = 0
+"let g:lsp_log_file = expand('~/lsp.log')
 "
 " for asyncomplete.vim log
-let g:asyncomplete_log_file = expand('~/asyncomplete.log')
+"let g:asyncomplete_log_file = expand('~/asyncomplete.log')
 
 " vim:set ts=2 sts=2 sw=2 noet:

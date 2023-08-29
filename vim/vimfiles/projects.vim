@@ -1,4 +1,6 @@
 
+" before call project#rc()
+let g:project_enable_welcome = 0
 call project#rc("~/Developer")
 
 Project 'Personal/ConfigRC', 				'configrc'
