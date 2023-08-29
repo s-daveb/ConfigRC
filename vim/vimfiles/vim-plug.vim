@@ -30,6 +30,9 @@ Plug 'takac/vim-hardtime'
 " Integrated builds and error reporting
 Plug 'tpope/vim-dispatch'
 
+" Debugger integration
+Plug 'epheien/termdbg'
+
 " Better detect word boundaries
 Plug 'chaoren/vim-wordmotion'
 
@@ -38,11 +41,11 @@ Plug 'tpope/vim-vinegar' " Better Netrw config
 
 " File searching plugins
 "Plug 'ctrlpvim/ctrlp.vim'
-Plug 'justinmk/vim-dirvish'
+"Plug 'justinmk/vim-dirvish'
 Plug 'mileszs/ack.vim'
-
 Plug '/usr/local/opt/fzf'
 Plug 'junegunn/fzf'
+
 "Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 
 " Code Navigation
@@ -68,27 +71,25 @@ Plug 'kitten/vim-adventurous'  " Dracula's baby
 Plug 'sjl/badwolf'
 Plug 'marciomazza/vim-brogrammer-theme'
 Plug 'sainnhe/everforest'
-Plug 's-daveb/vim-auto-light-dark'
+Plug 'nburns/vim-auto-light-dark'
 
 " Git/HG integration
 Plug 'ludovicchabant/vim-lawrencium'
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
-Plug 's-daveb/vim-project'
-" Plug 'amiorin/vim-project' " Forked because it was ugly. Fixed syntax
-" colors.
+Plug 'amiorin/vim-project'
 
 " Project Integration
 Plug 'editorconfig/editorconfig-vim'
 
 source $HOME/.vim/vim-asynclsp/plug.vim
-"
-" " All of your Plugs must be added before the following line
+
+" All of your Plugs must be added before the following line
 call plug#end()            " required
 filetype plugin indent on    " required
 
 """"""""""""""""""""""" PLUGIN CONFIG """""""""""""""""""""""""""""""
-"
+
 source $HOME/.vim/colorscheme.switcher.vim
 source $HOME/.vim/airline.vim
 source $HOME/.vim/better-whitespace.vim
@@ -103,3 +104,4 @@ source $HOME/.vim/projects.vim
 source $HOME/.vim/vim-wordmotion.vim
 source $HOME/.vim/vim-asynclsp/asynclsp.vim
 source $HOME/.vim/auto-light-dark.vim
+source $HOME/.vim/termdbg.vim
