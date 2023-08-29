@@ -2,7 +2,7 @@
 
 source ~/.yabai-sh.env
 
-launchctl kickstart -k gui/501/homebrew.mxcl.yabai
+launchctl kickstart -k gui/`id -u`/com.koekeishiya.yabai
 
 if [ $? -eq 0 ]; then
 	sys-notify "Restarting service..." "Yabai" "launchctl status"
