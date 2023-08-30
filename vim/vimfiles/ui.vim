@@ -56,7 +56,7 @@ function! GuiConfig() " #region detects GVIM and handles some things differently
 
 				" #region change how the end of the file is highlighted.
 				" Just subtly change text width and set a fg color
-				"hi Normal ctermbg=None guibg=NONE
+				hi Normal ctermbg=None guibg=NONE
 				hi NonText cterm=bold ctermfg=245 ctermbg=None guibg=NONE
 				hi EndOfbuffer cterm=bold ctermfg=245 ctermbg=None guibg=NONE
 				" #endregion
