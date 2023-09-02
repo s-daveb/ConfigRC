@@ -5,12 +5,13 @@ alias brestart="brew services restart"
 
 function colorls_cmd_generator()
 {
-	color_param="--light"
+	color_param="--dark"
 
-	# colorls should only be in light mode if the session is not
+	# colorls should only be in light mode if the session is 
 	# coming through an iTerm tmux session
-	if [[ "${TERM_PROGRAM}" == "tmux"  ]] || [[ $(date +"%H") -gt 17 ]]; then
-		color_param="--dark"
+	
+	if [[ -n "$TMUX" ]] &&[[ $(date +"%H") -lt 18 ]] && [[ $(date +"%H") -gt 7 ]]; then
+		color_param="--light"
 	fi
 
 	echo "colorls --gs ${color_param}"
@@ -25,13 +26,20 @@ function alias_colorls()
 	if [ $colorls_result -eq 0 ]; then
 		alias ls="${colorls_cmd}"
 	else
-		alias ls="ls --color=auto"
+		if [ -x "$(which exa 2>/dev/null)" ]; then
+			alias ls="exa"
+		else
+			alias ls="ls --color=auto"
+		fi
 	fi
 }
 
 alias_colorls
 
 alias usystemctl="systemctl --user"
-alias docker="sudo docker"
-alias podman="sudo podman"
-alias docker-compose="sudo docker-compose"
+
+alias pacman="sudo pacman"
+
+alias tsession="tmux new-session -As"
+
+alias tmuxupdate="systemd-run --user -p CPUWeight=50 -p CPUQuota=50% --pty tmux new-session -As update"
