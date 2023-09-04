@@ -1,7 +1,0 @@
-#!/usr/bin/env zsh
-
-export PATH="/usr/local/opt/llvm/bin:$PATH"
-
-export LDFLAGS="${LDFLAGS} -L/usr/local/opt/llvm/lib -Wl,-rpath,/usr/local/opt/llvm/lib"
-export CPPFLAGS="${CPPFLAGS} -I/usr/local/opt/llvm/include"
-
