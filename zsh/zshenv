@@ -3,7 +3,7 @@
 
 if [[ ! -o interactive ]]; then
 	#echo "ZSH login shell - limited environment"
-	source ~/.zshrc.d/01-usr-local.zsh
+	source ~/.zshrc.d/02-usr-local.zsh
 fi
 
 export HOMEBREW_NO_ENV_HINTS=1
