@@ -70,7 +70,8 @@ if [ -d ~/.zshrc.d ]; then
 		# or the compiled file is older than the zsh file, 
 		if [ ! -f $script_compiled ] ||
 		   [ $script_compiled -ot $script ] ; then
-			zsh -c "zcompile $script" &;  #recompile
+			zsh -c "zcompile $script" & # recompile but do not wait for the job to finish
+  		  	disown
 		fi
 
 		if [ -f $script_compiled ]; then
@@ -79,6 +80,5 @@ if [ -d ~/.zshrc.d ]; then
 			source $script
 		fi
 
-		disown
 	done
 fi
