@@ -27,60 +27,79 @@ augroup resCur
 		autocmd!
 		autocmd BufWinEnter * call ResCur()
 augroup END	" #endregion
-function! GuiConfig() " #region detects GVIM and handles some things differently
-"		if !has('g:loaded_auto_light_dark')
-"			set background=dark
-"			colorscheme brogrammer
-"		endif
-		if has('gui_running')
-				if has('macunix')
-					set guifont=Iosevka-Fixed:h16
-					set macligatures
-					set lines=48
-				else
- 	 	 	 		set guifont=IosevkaTerm\ Nerd\ Font\ 12
-					set lines=24
-				endif
-				set columns=83
-		else " if has('gui_running') == false
-				if has("mouse_sgr")
-						set ttymouse=sgr
-				else
-						set ttymouse=xterm2
-				end
 
-				au BufWinEnter :silent set title<CR>
-				hi NonText cterm=bold ctermfg=245 ctermbg=None guibg=NONE
-				hi EndOfbuffer cterm=bold ctermfg=245 ctermbg=None guibg=NONE
-
-				" Need these changes to enable terminal transparency in iTerm2 #region
-				if exists('+termguicolors')
-						let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
-						let &t_8b = "\<ESC>[48;2;%lu;%lu;%lum"
-						set termguicolors
-				endif
-
-				hi Normal ctermbg=None guibg=NONE
-				"#endregion
-
-				hi clear Comment
-				hi Comment term=standout ctermfg=247 ctermbg=228 guifg=#939f91
-				"hi Comment term=standout ctermfg=247 ctermbg=228 guifg=#939f91 guibg=#f3efda
-				"hi Comment term=bold cterm=italic ctermfg=none gui=italic guifg=#95B6B9
+function! FontConfig() " for gvim
+	if has('gui_running')
+		if has('macunix')
+			set guifont=BerkeleyMono-Regular:h15
+			set macligatures
+			set lines=48
+		else
+ 	 	 	set guifont=BerkeleyMono Regular\ 14
+			set lines=24
 		endif
+		set columns=83
+	endif
 endfunc	" #endregion
 
-if !has('g:loaded_auto_light_dark')
-		call GuiConfig()
-endif
+call FontConfig()
+
+function! TransparentTerminalFix()
+	if !has("gui_running")
+		hi NonText cterm=bold ctermfg=245 ctermbg=None guibg=NONE
+		hi EndOfbuffer cterm=bold ctermfg=245 ctermbg=None guibg=NONE
+
+		" Need these changes to enable terminal transparency in iTerm2 #region
+		if exists('+termguicolors')
+			let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+			"let &t_8b = "\<ESC>[48;2;%lu;%lu;%lum"
+			set termguicolors
+		endif
+
+		"hi Normal ctermbg=None guibg=NONE
+		"#endregion
+
+		hi clear Comment
+		"hi Comment term=standout ctermfg=247 ctermbg=228 guifg=#939f91
+		"hi Comment term=standout ctermfg=247 ctermbg=228 guifg=#939f91 guibg=#f3efda
+		"hi Comment term=bold cterm=italic ctermfg=none gui=italic guifg=#95B6B9
+	endif
+endfunction
+
+function! ReloadColors()
+	if exists("g:loaded_auto_light_dark") && (g:loaded_auto_light_dark == 1)
+		call DesiredInterfaceMode()
+	else
+		if has("gui_running")
+			set background=dark
+			colo dracula
+		else
+			set background=dark
+  		if ($TMUX != "" || $SSH != "")
+					let g:everforest_transparent_background=2
+					let g:everforest_better_performance = 0
+					let g:everforest_background = 'medium'
+					let g:everforest_transparent_background=1
+					let g:everforest_ui_contrast = 'high'
+					colo everforest
+			else
+				colo dracula
+			endif
+			call TransparentTerminalFix()
+		endif
+	endif
+endfunction
+
+nmap <leader>bg :let &background = ( &background == "dark"? "light" : "dark" )<CR>
+nmap <leader>rc :call ReloadColors()<CR>
 
 " #region  SynStack() - Displays the syntax highlighting group under the cursor
-function! <SID>SynStack()  
-		if !exists("*synstack")
-				return
-		endif
-		echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
+function! <SID>SynStack()
+	if !exists("*synstack")
+		return
+	endif
+	echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
 endfunc " #endregion
 nmap <leader>sp :call <SID>SynStack()<CR>
 
-" vim: set ts=2 sts=0 sw=4 noet foldmethod=marker foldmarker=#region,#endregion :
+" vim: set ts=2 sts=0 sw=2 noet foldmethod=marker foldmarker=#region,#endregion :
