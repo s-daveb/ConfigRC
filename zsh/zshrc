@@ -65,13 +65,20 @@ bindkey -e
 if [ -d ~/.zshrc.d ]; then
 	for script in `ls ~/.zshrc.d/*.zsh`; do
 		script_compiled=${script//.zsh/.zwc}
+
+		# If there's no precompiled zwc file,
+		# or the compiled file is older than the zsh file, 
+		if [ ! -f $script_compiled ] ||
+		   [ $script_compiled -ot $script ] ; then
+			zsh -c "zcompile $script" &;  #recompile
+		fi
+
 		if [ -f $script_compiled ]; then
  		   	source $script_compiled
 		else
 			source $script
 		fi
 
-		zsh -c "zcompile $script" &
 		disown
 	done
 fi
