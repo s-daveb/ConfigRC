@@ -60,7 +60,7 @@ function! TransparentTerminalFix()
 		"#endregion
 
 		hi clear Comment
-		"hi Comment term=standout ctermfg=247 ctermbg=228 guifg=#939f91
+		hi Comment term=standout ctermfg=247 ctermbg=228 guifg=#939f91
 		"hi Comment term=standout ctermfg=247 ctermbg=228 guifg=#939f91 guibg=#f3efda
 		"hi Comment term=bold cterm=italic ctermfg=none gui=italic guifg=#95B6B9
 	endif
