@@ -1,7 +1,10 @@
 
 " This is a comment
-function _common_colorsettings()
-	let g:everforest_better_performance = 1
+function _everforest_settings()
+	if !has("gui_running")
+		let g:everforest_transparent_background=2
+	endif
+	let g:everforest_better_performance = 0
 	let g:everforest_background = 'medium'
 	let g:everforest_transparent_background=1
 	let g:everforest_ui_contrast = 'high'
@@ -9,9 +12,9 @@ endfunction
 
 function DarkMode()
     set background=dark
-	call _common_colorsettings()
 
-	if ( $TMUX != "" )
+	if ( $TMUX != "" || $SSH_CLIENT !="" )
+		call _everforest_settings()
 		colorscheme  everforest
 		AirlineTheme  everforest
 	else
@@ -19,15 +22,14 @@ function DarkMode()
 		AirlineTheme dracula
 	endif
 	call TransparentTerminalFix()
-	call UiConfig()
 endfunction
 
 function LightMode()
     set background=light
-	call _common_colorsettings()
-	echo "light mode"
-	if ( $TMUX != "" )
-    	set background=dark
+
+	if ( $TMUX != "" || $SSH_CLIENT !="" )
+		call _everforest_settings()
+    	set background=light
 		colorscheme  everforest
 		AirlineTheme  everforest
 	else
@@ -36,6 +38,5 @@ function LightMode()
 		AirlineTheme dracula
 	endif
 	call TransparentTerminalFix()
-	call UiConfig()
 endfunction
 

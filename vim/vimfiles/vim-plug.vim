@@ -63,6 +63,7 @@ Plug 'kitten/vim-adventurous'  " Dracula's baby
 Plug 'sjl/badwolf'
 Plug 'marciomazza/vim-brogrammer-theme'
 Plug 'sainnhe/everforest'
+Plug 'nburns/vim-auto-light-dark'
 
 " Git/HG integration
 Plug 'ludovicchabant/vim-lawrencium'
@@ -83,6 +84,7 @@ filetype plugin indent on    " required
 
 """"""""""""""""""""""" PLUGIN CONFIG """""""""""""""""""""""""""""""
 "
+source $HOME/.vim/auto-light-dark.vim
 source $HOME/.vim/colorscheme.switcher.vim
 source $HOME/.vim/airline.vim
 source $HOME/.vim/CtrlP.vim
