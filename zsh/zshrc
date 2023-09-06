@@ -29,8 +29,8 @@ zplug "zsh-users/zsh-syntax-highlighting", defer:2
 #zplug "caiogondim/bullet-train.zsh", as:theme
 
 # Multi-line prompts
-#zplug "themes/gnzh", from:oh-my-zsh, as:theme
-zplug "halfo/lambda-mod-zsh-theme", as:theme
+zplug "themes/gnzh", from:oh-my-zsh, as:theme
+#zplug "halfo/lambda-mod-zsh-theme", as:theme
 #zplug "zthxxx/jovial", as:theme
 #zplug "yarisgutierrez/classyTouch_oh-my-zsh", as:theme
 
