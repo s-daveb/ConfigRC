@@ -15,17 +15,17 @@ endfunction
 
 function! DarkMode()
 	let g:everforest_background='hard'
-    set background=dark
-	colorscheme everforest
-	AirlineTheme everforest
+    #set background=dark
+	colorscheme dracula
+	AirlineTheme dracula
 	call GuiConfig()
 endfunction
 
 function! LightMode()
 	let g:everforest_background='medium'
-    set background=light
-	colorscheme everforest
-	AirlineTheme everforest
+    #set background=light
+	colorscheme dracula
+	AirlineTheme dracula
 	call GuiConfig()
 endfunction
 
