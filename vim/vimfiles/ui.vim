@@ -48,23 +48,26 @@ function! GuiConfig() " #region detects GVIM and handles some things differently
 
 				" #region enable terminal transparency by disabling background colors.
 				if exists('+termguicolors')
-						let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
-						let &t_8b = "\<ESC>[48;2;%lu;%lu;%lum"
+				"		let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+				"		let &t_8b = "\<ESC>[48;2;%lu;%lu;%lum"
 						set termguicolors
 				endif
+				" Makes background transparent
+				hi Normal ctermbg=None guibg=NONE
 				" #endregion
 
 				" #region change how the end of the file is highlighted.
-				" Just subtly change text width and set a fg color
-				hi Normal ctermbg=None guibg=NONE
-				hi NonText cterm=bold ctermfg=245 ctermbg=None guibg=NONE
-				hi EndOfbuffer cterm=bold ctermfg=245 ctermbg=None guibg=NONE
+				" Subtly change text width and set a fg color
+				"hi NonText cterm=bold ctermfg=245 ctermbg=None guibg=NONE
+				"hi EndOfbuffer cterm=bold ctermfg=245 ctermbg=None guibg=NONE
 				" #endregion
 
-				" #region make sure comments are gray-ish and stand out.
+				" #region remove comment highlight and make text grayzozc
 				hi clear Comment
 				hi Comment term=standout ctermfg=247 ctermbg=228 guifg=#939f91
 				" #endregion
+
+				hi ColorColumn term=reverse ctermbg=6 guibg=#41AC83
 				" #endregion
 		endif
 endfunc	" #endregion

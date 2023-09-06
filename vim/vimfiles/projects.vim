@@ -24,6 +24,11 @@ File	qw_path . '/Makefile.am'		, 'qw/Makefile.am'
 File	qw_path . '/src/tests/Makefile.am'	, 'qw/tests/Makefile.am'
 Callback 'quartz-warriors'			, 'LoadLocalConfig'
 
+let cgi_path="Personal/C++/Projects/mdml-cgi"
+Project cgi_path 				, 'mdml-cgi'
+File 	cgi_path . 'CMakeLists.txt', 'mdml/CMakeLists'
+Callback 'mdml-cgi', 	'LoadLocalConfig'
+
 function! LoadLocalConfig(title)
 	source ~/.vim/projects.d/load-local.vimrc
 endfunction
