@@ -15,13 +15,13 @@ REPODIR=$PWD
 [ ! -d $PLUGDIR ]  && mkdir -p $PLUGDIR
 
 if [ -L "${HOME}/.vim" ]; then
-    unlink -v "${HOME}/.vim"
+    unlink  "${HOME}/.vim"
 else
     mv -v "${HOME}/.vim" "${HOME}/vimconfig.old"
 fi
 
 if [ -L "${HOME}/.vimrc" ]; then
-	unlink "${HOME}/.vim"
+	unlink "${HOME}/.vimrc"
 else
     mv -v "${HOME}/.vimrc" "${HOME}/vimrc.old"
 fi
