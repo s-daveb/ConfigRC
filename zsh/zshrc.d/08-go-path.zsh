@@ -1,6 +1,6 @@
 
-if [ -z "$(echo "${PATH}" | grep "/usr/local/opt/go/libexec/bin")" ]; then
-	export PATH="/usr/local/opt/go/libexec/bin:$PATH"
+if [ -z "$(echo "${PATH}" | grep "/opt/homebrew/opt/go/libexec/bin")" ]; then
+	export PATH="/opt/homebrew/opt/go/libexec/bin:$PATH"
 fi
 
 
