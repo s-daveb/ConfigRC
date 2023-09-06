@@ -44,13 +44,6 @@ fi
 zplug load #--verbose
 #  Zplug configuration is complete. User settings start below.
 
-alias wtf='wtf -o'
-eval "$(thefuck --alias)"
-
-alias howmanyfucks="history | grep fuck | wc -l "
-alias firepower='sudo /usr/libexec/ApplicationFirewall/socketfilterfw'
-alias gd=gallery-dl
-
 # maintains a jump list of the directories you actually use
 #source $(brew --prefix)/etc/profile.d/z.sh
 
