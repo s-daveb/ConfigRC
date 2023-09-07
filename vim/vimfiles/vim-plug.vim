@@ -98,10 +98,10 @@ source $HOME/.vim/tagbar.vim
 source $HOME/.vim/tagbar.keys.vim
 source $HOME/.vim/tmux.compat.vim
 source $HOME/.vim/UltiSnips.vim
-"source $HOME/.vim/editorconfig.vim
 source $HOME/.vim/netrw-conf.vim
 source $HOME/.vim/projects.vim
 source $HOME/.vim/vim-wordmotion.vim
 source $HOME/.vim/vim-asynclsp/asynclsp.vim
 source $HOME/.vim/auto-light-dark.vim
 source $HOME/.vim/termdbg.vim
+source $HOME/.vim/editorconfig.vim
