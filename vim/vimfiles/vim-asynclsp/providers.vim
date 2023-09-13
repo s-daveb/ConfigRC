@@ -1,3 +1,13 @@
+
+
+"let g:lsp_log_verbose = 1
+"let g:lsp_log_file = expand('~/vim-lsp.log')
+"
+"" for asyncomplete.vim log
+"let g:asyncomplete_log_file = expand('~/asyncomplete.log')
+
+
+
 if executable('pyls')
 	" pip install python-language-server
 	au User lsp_setup call lsp#register_server({

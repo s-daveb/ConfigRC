@@ -79,6 +79,8 @@ Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 Plug 'amiorin/vim-project'
 
+Plug 'vim-scripts/applescript.vim'
+
 " Project Integration
 "Plug 'editorconfig/editorconfig-vim'
 
