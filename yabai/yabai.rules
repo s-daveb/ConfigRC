@@ -46,7 +46,18 @@ yabai -m rule --add label="Misc Dialogues" title="(^Convert Image$|Converting)" 
 yabai -m rule --add label="Discord" app="Discord" grid="4:4:1:1:2:2"
 yabai -m rule --add label="game" app="(object-editor|quartz-warriors|Ascendent)" manage="off"
 
-yabai -m rule --add label="iterm2 default term" app="^iTerm2" title="^Default" manage="off" grid="4:4:1:1:2:2"
 yabai -m rule --add label="Ivory" app="^Ivory$" manage="off" grid="4:4:1:1:2:2"
 
 yabai -m rule --add label="Shortcuts" app="^Shortcuts$" manage="off" grid="4:4:1:1:2:2"
+yabai -m rule --add label="Parallels Desktop" app="^Parallels Desktop$" manage="off" grid="4:4:1:1:1:2"
+
+yabai -m rule --add label="Moonlight" app="^Moonlight$" manage="off" 
+yabai -m rule --add label="OmniDiskSweeper" app="^OmniDiskSweeper$" manage="off" 
+
+yabai -m rule --add label="iStatistica Pro" app="iStatistica Pro" manage="off"
+yabai -m rule --add label="iStat Menu" app="iStat Menus" manage="off"
+
+yabai -m rule --add label="Screen Sharing" app="^Screen Sharing$" manage="off" grid="4:4:1:1:1:2"
+
+yabai -m rule --add label="iterm2 default term" app="^iTerm2" title="^Default" manage="off" grid="32:32:8:9:13:17"
+yabai -m rule --add label="iterm2 manpage term" app="^iTerm2" title="^UNIX Manual" manage="off" grid="32:32:8:9:13:17"
