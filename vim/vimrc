@@ -8,11 +8,5 @@ let mapleader=" "
 
 source $HOME/.vim/vim-plug.vim
 
-""""""""   My configuration """""""""
-runtime macros/matchit.vim " for html % matching
-
-source $HOME/.vim/help.vim
-source $HOME/.vim/editorbehavior.vim
-source $HOME/.vim/ui.vim
 
 " vim: set ft=vim tw=80 expandtab tabstop=2 softtabstop=2 sw=2 :

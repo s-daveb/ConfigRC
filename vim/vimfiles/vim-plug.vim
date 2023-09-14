@@ -87,6 +87,12 @@ call plug#end()            " required
 filetype plugin indent on  " required
 """"""""""""""""""""""" PLUGIN CONFIG """""""""""""""""""""""""""""""
 
+runtime macros/matchit.vim " for html % matching
+
+source $HOME/.vim/help.vim
+source $HOME/.vim/editorbehavior.vim
+source $HOME/.vim/ui.vim
+
 source $HOME/.vim/airline.vim
 source $HOME/.vim/better-whitespace.vim
 source $HOME/.vim/hardtime.vim
@@ -99,7 +105,6 @@ source $HOME/.vim/projects.vim
 source $HOME/.vim/fzf.vim
 
 source $HOME/.vim/colorscheme.switcher.vim
-source $HOME/.vim/ui.vim
 source $HOME/.vim/auto-light-dark.vim
 
 source $HOME/.vim/termdbg.vim
