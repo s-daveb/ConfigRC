@@ -3,7 +3,8 @@
 let g:UltiSnipsEditSplit = "horizontal"
 let g:UltiSnipsSnippetsDir = "~/.vim/UltiSnips"
 
-let g:UltiSnipsExpandTrigger="<c-l>"
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsListSnippets="<c-e>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 

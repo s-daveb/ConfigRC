@@ -92,6 +92,6 @@ map l{ :lopen<CR>
 map l} :lclose<CR>
 " Switch to header file
 
-map  :redraw!
+map <leader>l :redraw!
 
 

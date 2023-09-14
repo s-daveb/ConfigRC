@@ -1,13 +1,11 @@
 
 function! SetEverForestOptions()
-	if has('termguicolors')
-        set termguicolors
-    endif
+	call ColorConfig()
 
     " Set contrast.
     " This configuration option should be placed before `colorscheme everforest`.
     " Available values: 'hard', 'medium'(default), 'soft'
-    let g:everforest_background = 'soft'
+    let g:everforest_background = 'hard'
 
     " For better performance
     let g:everforest_better_performance = 1
