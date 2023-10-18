@@ -2,7 +2,6 @@ filetype off
 
 call plug#begin('~/.vim-plug')
 
-
 " Filetypes
 Plug 'tpope/vim-markdown'
 Plug 'kchmck/vim-coffee-script'
@@ -13,7 +12,9 @@ Plug 'pangloss/vim-javascript'
 Plug 'skwp/vim-html-escape'
 Plug 'keith/swift.vim'
 Plug 'mustache/vim-mustache-handlebars'
-Plug 'octol/vim-cpp-enhanced-highlight'
+"Plug 'octol/vim-cpp-enhanced-highlight'
+Plug 'bfrg/vim-cpp-modern'
+"Plug 'vim-scripts/User-Defined-Type-Highlighter'
 Plug 'yump/vim-kerboscript'
 Plug 'vim-scripts/applescript.vim'
 
@@ -34,12 +35,11 @@ Plug 'tpope/vim-vinegar' " Better Netrw config
 " File searching plugins
 Plug 'mileszs/ack.vim'
 Plug '/usr/local/opt/fzf'
-"Plug 'junegunn/fzf'
 
 " No longer needed
 "" Tmux integration
-"Plug 'benmills/vimux'
-"Plug 'christoomey/vim-tmux-navigator'
+Plug 'benmills/vimux'
+Plug 'christoomey/vim-tmux-navigator'
 Plug 'edkolev/tmuxline.vim'
 
 " Fancy status bar
@@ -47,12 +47,13 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
 " Color Themes
-Plug 'spf13/vim-colors'
-Plug 'altercation/vim-colors-solarized'
-Plug 'sickill/vim-monokai'
-Plug 'tomasr/molokai'
+Plug 'lifepillar/vim-solarized8'
+"Plug 'altercation/vim-colors-solarized'
+"Plug 'sickill/vim-monokai'
+Plug 'crusoexia/vim-monokai'
+"Plug 'tomasr/molokai'
 Plug 'dracula/vim'
-Plug 'kitten/vim-adventurous'  " Dracula's baby
+"Plug 'kitten/vim-adventurous'  " Dracula's baby
 Plug 'sjl/badwolf'
 Plug 'marciomazza/vim-brogrammer-theme'
 Plug 'sainnhe/everforest'
@@ -77,8 +78,10 @@ Plug 'honza/vim-snippets'
 " AutoComplete and IDE-like features
 Plug 'tpope/vim-dispatch'	" Integrated builds and error reporting
 Plug 'epheien/termdbg' 		" Debugger integration
-Plug 'yegappan/lsp'			" Simpler Language Server Support
+"Plug 'yegappan/lsp'		" Simpler Language Server Support
 "
+source $HOME/.vim/vim-asynclsp/plug.vim
+
 " Code Navigation
 Plug 'preservim/tagbar'
 
@@ -97,8 +100,7 @@ source $HOME/.vim/airline.vim
 source $HOME/.vim/better-whitespace.vim
 source $HOME/.vim/hardtime.vim
 source $HOME/.vim/vim-wordmotion.vim
-
-source $HOME/.vim/UltiSnips.vim
+source $HOME/.vim/tmux.compat.vim
 
 source $HOME/.vim/netrw-conf.vim
 source $HOME/.vim/projects.vim
@@ -106,7 +108,9 @@ source $HOME/.vim/fzf.vim
 
 source $HOME/.vim/colorscheme.switcher.vim
 source $HOME/.vim/auto-light-dark.vim
+source $HOME/.vim/cpp-modern-highlighting.vim
 
 source $HOME/.vim/termdbg.vim
-source $HOME/.vim/vim9-lsp.vim
+source $HOME/.vim/vim-asynclsp/main.vim
+"source $HOME/.vim/vim9-lsp.vim
 source $HOME/.vim/tagbar.vim

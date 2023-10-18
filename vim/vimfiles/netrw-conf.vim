@@ -8,12 +8,12 @@ let g:netrw_winsize = 30
 let g:netrw_usetab = 1
 let g:netrw_wiw = 15
 
-map <silent> <leader><C-E> :Lexplore<cr>
-map <silent> <C-E> :Lexplore %:p:h<cr>
+map <silent> <leader><C-X> :Lexplore<cr>
+map <silent> <C-X> :Lexplore %:p:h<cr>
 
 fu! NetrwKeyBindings()
 	map <silent><buffer> gn :Ntree<cr>
-	map <silent><buffer><C-E> :close<cr>
+	map <silent><buffer><C-X> :close<cr>
 endfunction
 
 autocmd FileType netrw :call NetrwKeyBindings()
