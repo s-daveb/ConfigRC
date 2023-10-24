@@ -56,7 +56,7 @@ bindkey -e
 # End of lines configured by zsh-newuser-install
 
 if [ -d ~/.zshrc.d ]; then
-	for script in `ls ~/.zshrc.d/*.zsh`; do
+	for script in `/bin/ls ~/.zshrc.d/*.zsh`; do
 		script_compiled=${script//.zsh/.zwc}
 
 		# If there's no precompiled zwc file,
