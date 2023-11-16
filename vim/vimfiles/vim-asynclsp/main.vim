@@ -1,10 +1,10 @@
 let g:asyncomplete_auto_popup = 1
 let g:asyncomplete_remove_duplicates = 0
 
-let g:asyncomplete_auto_completeopt=0
+let g:asyncomplete_auto_completeopt=1
 let g:asyncomplete_popup_delay=500
 
-set completeopt=menuone,popup,noinsert,preview
+set completeopt=menuone,popup,noinsert,noselect,preview
 
 autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
 
@@ -19,9 +19,10 @@ let g:lsp_signs_error = {'text': '✗'}
 let g:lsp_signs_warning = {'text': '‼'} " icons require GUI
 let g:lsp_signs_hint = {'text': '!?' } " icons require GUI
 
-source ~/.vim/vim-asynclsp/providers.vim
+
 source ~/.vim/vim-asynclsp/lsp-settings.vim
 source ~/.vim/vim-asynclsp/keymap.vim
+source ~/.vim/vim-asynclsp/providers.vim
 
 " for asyncomplete.vim log
 "

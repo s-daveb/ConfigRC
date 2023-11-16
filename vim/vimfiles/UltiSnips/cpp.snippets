@@ -31,37 +31,12 @@ snippet doxyclass "Doxygen documentation for a class"
  */
 endsnippet
 
+snippet TEST_SUITE{
+BEGIN_TEST_SUITE(${1}) {
+endsnippet
+
 snippet testsuite_name "Create a static string in this file"
 namespace {
 const char* TEST_SUITE_NAME= "${1}"
-}
-endsnippet
-snippet includefold
-// @fold  #include directives
-// C includes
-${1}
-// STL Includes
-${2}
-// Boost Includes
-${3}
-// Project Includes
-${4}
-// @endfold
-endsnippet
-
-snippet usingfold
-// @fold  #using directives
-// STL Usings
-${2}
-// Boost Usings
-${3}
-// Project Usings
-${4}
-// @endfold
-endsnippet
-
-snippet macrocatch
-catch (std::exception& exc) {
-	THROW_EXCEPTION(exc);
 }
 endsnippet

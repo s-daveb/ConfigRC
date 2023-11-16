@@ -29,11 +29,11 @@ endfunction
 set viewoptions-=options
 set splitbelow
 
-autocmd BufLeave *.* mkview!
-autocmd BufEnter *.* silent loadview
-
-autocmd BufWinLeave *.* mkview!
-autocmd BufWinEnter *.* silent loadview
+"autocmd BufLeave *.* mkview!
+"autocmd BufEnter *.* silent loadview
+"
+"autocmd BufWinLeave *.* mkview!
+"autocmd BufWinEnter *.* silent loadview
 
 syntax on
 
@@ -92,6 +92,9 @@ map l{ :lopen<CR>
 map l} :lclose<CR>
 " Switch to header file
 
-map <leader>l :redraw!
+map <leader>l :redraw!<CR>
 
+ if has('mac')
+   set t_RV=
+endif
 

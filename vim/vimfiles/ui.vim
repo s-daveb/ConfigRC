@@ -7,8 +7,8 @@ set copyindent
 set preserveindent
 set noexpandtab
 set softtabstop=0
-set shiftwidth=4
-set tabstop=4
+set shiftwidth=8
+set tabstop=8
 
 set foldmethod=marker
 set foldmarker=#region,#endregion
@@ -29,7 +29,6 @@ augroup resCur
 augroup END	" #endregion
 function ColorConfig() " #region hard-code some things like background transparency and colorcolums
 
-		" #region enable terminal transparency by disabling background colors.
 		if exists('+termguicolors')
 				"let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
 				"let &t_8b = "\<ESC>[48;2;%lu;%lu;%lum"
@@ -46,12 +45,13 @@ function ColorConfig() " #region hard-code some things like background transpare
 		"hi EndOfbuffer cterm=bold ctermfg=245 ctermbg=None guibg=NONE
 		" #endregion
 		" #region remove comment highlight and make text gray
-		hi clear Comment
-		hi Comment term=standout ctermfg=247 ctermbg=228 guifg=#939f91
+		"hi clear Comment
+		"hi Comment term=standout ctermfg=247 ctermbg=228 guifg=#939f91
 		" #endregion
 
 		hi ColorColumn term=reverse ctermbg=6 guibg=#41AC83
 endfunction " #endregion
+
 function! GuiConfig() " #region detects GVIM and handles some things differently
 		if has('gui_running')
 				if has('macunix')

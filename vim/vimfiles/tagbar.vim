@@ -9,17 +9,17 @@ function! SetTagbarWidth()
   	endif
 
  	" Check if a window named "tagbar.vim" exists and resize it
-  	let l:tagbar_window = bufwinnr('tagbar.vim')
-  	if l:tagbar_window != -1
-		let g:tagbar_expand=0
-		TagbarClose
-		TagbarOpen
-		let g:tagbar_expand=1
-  	endif
+  	"let l:tagbar_window = bufwinnr('tagbar.vim')
+  	"if l:tagbar_window != -1
+	"	let g:tagbar_expand=0
+	"	TagbarClose
+	"	TagbarOpen
+	"	let g:tagbar_expand=1
+  	"endif
 endfunction
 
 " Call SetTagbarWidth when Vim starts
-autocmd VimEnter * call SetTagbarWidth()
+autocmd GuiEnter * call SetTagbarWidth()
 
 " Call SetTagbarWidth when the terminal is resized
 autocmd VimResized * call SetTagbarWidth()

@@ -1,2 +1,2 @@
 
-noremap <C-P> :FZF<CR>
+noremap <C-P> :FZF -i<CR>
