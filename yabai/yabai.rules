@@ -1,5 +1,18 @@
 #!/bin/sh
 
+current_rules="$(yabai -m rule --list  | grep label | awk -F ':' '{ print $2 }' | sed 's/["|,]//g')"
+
+OLDIFS=$IFS
+
+echo "yabai.rules: Removing existing rules"
+IFS=$'\n'
+for rule in ${(f)current_rules}; do
+	#echo "Removing rule $rule"
+	yabai -m rule --remove "$rule"
+done
+IFS=default
+
+echo "yabai.rules: Reloading rules"
 yabai -m rule --add label="Calculator" app="^Calculator$" manage="off"
 yabai -m rule --add label="Developer" app="^Developer$" manage="off"
 yabai -m rule --add label="Reminders" app="^Reminders$" manage="off"
@@ -24,7 +37,7 @@ yabai -m rule --add label="Finder Info" title="Finder" title="^.* Info$" manage=
 yabai -m rule --add label="Music" app="Music" title!="MiniPlayer" manage="off" #grid="4:4:3:1:1:1"
 yabai -m rule --add label="Music MiniPlayer" app="Music" title="MiniPlayer" manage="off" #grid="4:4:3:1:1:1"
 yabai -m rule --add label="Mail" app="Mail" title!="(iCloud|Inbox|Exchange)" manage="off"
-yabai -m rule --add label="Safari" app="Safari" title="^(General|Tabs|AutoFill|Passwords|Search|Security|Privacy|Website|Extensions|Advanced)$" manage="off"
+yabai -m rule --add label="Safari" app="Safari" title="^(Profiles|General|Tabs|AutoFill|Passwords|Search|Security|Privacy|Website|Extensions|Advanced)$" manage="off"
 yabai -m rule --add label="Keychain" app="Keychain"  manage="off"
 yabai -m rule --add label="Pages" app="Pages"  manage="on"
 
@@ -49,15 +62,29 @@ yabai -m rule --add label="game" app="(object-editor|quartz-warriors|Ascendent)"
 yabai -m rule --add label="Ivory" app="^Ivory$" manage="off" grid="4:4:1:1:2:2"
 
 yabai -m rule --add label="Shortcuts" app="^Shortcuts$" manage="off" grid="4:4:1:1:2:2"
-yabai -m rule --add label="Parallels Desktop" app="^Parallels Desktop$" manage="off" grid="4:4:1:1:1:2"
 
-yabai -m rule --add label="Moonlight" app="^Moonlight$" manage="off" 
-yabai -m rule --add label="OmniDiskSweeper" app="^OmniDiskSweeper$" manage="off" 
+yabai -m rule --add label="Parallels Desktop" app="^Parallels Desktop$"  manage="off"
+yabai -m rule --add label="Parallels Desktop" app="^Parallels Desktop$" title="Control Center" manage="off" grid="4:4:1:1:1:2"
+
+yabai -m rule --add label="Moonlight" app="^Moonlight$" manage="off"
+yabai -m rule --add label="OmniDiskSweeper" app="^OmniDiskSweeper$" manage="off"
 
 yabai -m rule --add label="iStatistica Pro" app="iStatistica Pro" manage="off"
 yabai -m rule --add label="iStat Menu" app="iStat Menus" manage="off"
 
 yabai -m rule --add label="Screen Sharing" app="^Screen Sharing$" manage="off" grid="4:4:1:1:1:2"
 
-yabai -m rule --add label="iterm2 default term" app="^iTerm2" title="^Default" manage="off" grid="32:32:8:9:13:17"
-yabai -m rule --add label="iterm2 manpage term" app="^iTerm2" title="^UNIX Manual" manage="off" grid="32:32:8:9:13:17"
+yabai -m rule --add label="iterm2" app="^iTerm2" manage="off" grid="32:32:8:9:13:17"
+yabai -m rule --add label="macvim" app="^MacVim" manage="off" grid="32:32:8:9:13:17"
+
+yabai -m rule --add label="Finder" app="^Finder$" manage="off"
+yabai -m rule --add label="Mail" app="^Mail$" manage="off"
+
+
+yabai_rules_count="$(yabai -m rule --list | grep label | wc -l)"
+
+export yabai_rules_count
+echo "yabai.rules: Loaded $yabai_rules_count yabai rules"
+
+
+# vim: set ft=zsh :
