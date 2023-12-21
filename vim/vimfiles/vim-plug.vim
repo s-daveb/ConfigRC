@@ -22,7 +22,8 @@ Plug 'vim-scripts/applescript.vim'
 Plug 'tpope/vim-abolish'
 Plug 'idanarye/breeze.vim'  " HTML navigation
 Plug 'moll/vim-bbye' 		" buffer cleaner
-Plug 'takac/vim-hardtime' 	" Disables arrow keys
+"Plug 'takac/vim-hardtime' 	" Disables arrow keys  " This is an awful
+"plugin
 Plug 'ntpeters/vim-better-whitespace' " Deletes trailing whitespace
 
 

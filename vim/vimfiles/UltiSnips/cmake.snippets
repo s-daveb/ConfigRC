@@ -1,12 +1,17 @@
+snippet modeline
+# vim: ts=2 sw=2 noet foldmethod=indent :
+endsnippet
+
+
 snippet init
-cmake_minimum_required(VERSION ${0:3.24})
+cmake_minimum_required(VERSION ${0:3.12})
 
 # Prevent in-source builds @
 if (CMAKE_BINARY_DIR STREQUAL CMAKE_SOURCE_DIR)
     message(FATAL_ERROR "Source and build directories cannot be the same.")
 endif()
 
-if (CMAKE_VERSION VERSION_GREATER_EQUAL "3.24.0")
+if (CMAKE_VERSION VERSION_GREATER_EQUAL "3.12.0")
 	cmake_policy(SET CMP0135 NEW)
 endif()
 
@@ -36,6 +41,14 @@ set(CMAKE_C_EXTENSIONS OFF)
 set(CMAKE_CXX_EXTENSIONS OFF)
 endsnippet
 
+snippet standard_c++20
+set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_C_STANDARD 17)
+set(CMAKE_C_EXTENSIONS OFF)
+set(CMAKE_CXX_EXTENSIONS OFF)
+endsnippet
+
+
 snippet gnu_c++
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_C_STANDARD 17)
@@ -55,7 +68,6 @@ endsnippet
 
 snippet include_fetch
 include(FetchContent)
-include(CheckIncludeFile)
 endsnippet
 
 snippet fetch_dep

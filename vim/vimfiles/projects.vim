@@ -1,33 +1,33 @@
 
 " before call project#rc()
-let g:project_enable_welcome = 0
+let g:project_enable_welcome = 1
+set rtp+=~/.vim/bundle/vim-project/
+
 call project#rc("~/Developer")
 
-Project 'Personal/ConfigRC', 				'configrc'
-File	'Personal/ConfigRC/zsh/zshrc',   		'zshrc'
-File	'Personal/ConfigRC/vim/vimrc',          	'vimrc'
-File	'Personal/ConfigRC/vim/vimfiles/vim-plug.vim',	'vim-plug'
-File	'Personal/ConfigRC/vim/vimfiles/vim-asynclsp/asynclsp.vim', 'vim-asynclsp'
+Project 'scratch'
 
-let game_path="Personal/C++/Ascendent"
-Project game_path 				, 'Ascendent'
-File	game_path . '/src/main.cpp' 		, 'game/main'
-File	game_path . '/Makefile.am'		, 'game/Makefile.am'
-File	game_path . '/src/tests/Makefile.am'	, 'game/tests/Makefile.am'
-Callback 'Ascendent'			, 'LoadLocalConfig'
+Project 'ConfigRC' 				, 'configrc'
+File	'ConfigRC/zsh/zshrc'			, 'zshrc'
+File	'ConfigRC/vim/vimrc'			, 'vimrc'
+File	'ConfigRC/vim/vimfiles/vim-plug.vim'	, 'vim-plug'
+File	'ConfigRC/vim/vimfiles/vim-asynclsp/asynclsp.vim', 'vim-asynclsp'
 
-let qw_path="Personal/C++/quartz-warriors"
-
-Project qw_path 				, 'quartz-warriors'
-File	qw_path . '/src/main.cpp' 		, 'qw/main'
-File	qw_path . '/Makefile.am'		, 'qw/Makefile.am'
-File	qw_path . '/src/tests/Makefile.am'	, 'qw/tests/Makefile.am'
+let qw_path='C++/quartz-warriors'
+Project qw_path					, 'quartz-warriors'
+File	qw_path . '/CMakeLists.txt'		, 'qw/CMakeLists.txt'
 Callback 'quartz-warriors'			, 'LoadLocalConfig'
 
-let cgi_path="Personal/C++/mdml-cgi"
+let cgi_path="C++/mdml-cgi"
 Project cgi_path 				, 'mdml-cgi'
-File 	cgi_path . 'CMakeLists.txt', 'mdml/CMakeLists'
+File 	cgi_path . '/CMakeLists.txt'		, 'mdml/CMakeLists'
 Callback 'mdml-cgi', 	'LoadLocalConfig'
+
+
+let elemental_path="C++/elemental-game"
+Project elemental_path 				, 'elemental'
+File elemental_path . '/CMakeLists.txt'		, 'elemental/CMakeLists'
+Callback 'elemental'				, 'LoadLocalConfig'
 
 function! LoadLocalConfig(title)
 	source ~/.vim/projects.d/load-local.vimrc

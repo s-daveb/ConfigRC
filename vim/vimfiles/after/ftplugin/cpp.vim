@@ -5,4 +5,4 @@ source ~/.vim/vim-asynclsp/keymap.vim
 
 "autocmd FileType cpp,cpp.doxygen call SetEditorViewOptions()
 
-autocmd FileType c,cpp,cpp.doxygen,c.doxygen TagbarOpen
+autocmd BufEnter *.h,*.hpp,*.cpp,*.hpp call SetTagbarWidth()
