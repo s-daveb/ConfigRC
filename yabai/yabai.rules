@@ -79,6 +79,7 @@ yabai -m rule --add label="macvim" app="^MacVim" manage="off" grid="32:32:8:9:13
 
 yabai -m rule --add label="Finder" app="^Finder$" manage="off"
 yabai -m rule --add label="Mail" app="^Mail$" manage="off"
+yabai -m rule --add label="godot" app="Godot" manage="off"
 
 
 yabai_rules_count="$(yabai -m rule --list | grep label | wc -l)"
