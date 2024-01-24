@@ -54,8 +54,10 @@ function ColorAdjust() " @{ hard-code some things like background transparency a
 ""		" @}
 ""		" @{ remove comment highlight and make text gray
 		hi clear Comment
+		hi clear SpecialComment
 "		"hi Comment term=standout ctermfg=247 ctermbg=228 guifg=#939f91
 		hi Comment term=bold ctermfg=247 ctermbg=228 gui=italic guifg=#939f91
+		hi SpecialComment term=italic ctermfg=247 ctermbg=228 gui=italic guifg=#939f91
 "		"@}
 "		"@{ More obvious vertical splits
 		hi clear VertSplit
@@ -68,10 +70,10 @@ endfunction " @}
 function! GuiConfig() " @{ detects GVIM and handles some things differently
 		if has('gui_running')
 				if has('macunix')
-						set guifont=BerkeleyMono-Regular:h16
+						set guifont=BerkeleyMono-Regular:h14
 						set macligatures
 				else
-						set guifont=Fira\ Code\ 16
+						set guifont=Fira\ Code\ 14
 				endif
 		else " if has('gui_running') == false
 				if has("mouse_sgr")

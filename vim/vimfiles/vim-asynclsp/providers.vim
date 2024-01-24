@@ -75,9 +75,9 @@ if executable(g:clangd_path)
 		autocmd User lsp_setup call lsp#register_server({
 					\ 'name': 'clangd',
 					\ 'cmd': {server_info->
-					\ [ g:clangd_path,
-					\ '-j=2','--background-index', '--pch-storage=memory',
- 				   	\  '--limit-results=100', '--limit-references=100' ]},
+					\ [ 'nice', '-20', g:clangd_path,
+					\ '-j=8','--background-index', '--pch-storage=memory',
+ 				   	\  '--limit-results=50', '--limit-references=50' ]},
 					\ 'whitelist': ['c', 'cpp', 'cpp.doxygen', 'objc', 'objcpp'],
 					\ })
 "  '--header-insertion=never', '--all-scopes-completion',

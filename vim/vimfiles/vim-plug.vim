@@ -39,8 +39,8 @@ Plug '/usr/local/opt/fzf'
 
 " No longer needed
 "" Tmux integration
-Plug 'benmills/vimux'
-Plug 'christoomey/vim-tmux-navigator'
+"Plug 'benmills/vimux'
+"Plug 'christoomey/vim-tmux-navigator'
 Plug 'edkolev/tmuxline.vim'
 
 " Fancy status bar
@@ -79,7 +79,7 @@ Plug 'honza/vim-snippets'
 " AutoComplete and IDE-like features
 Plug 'tpope/vim-dispatch'	" Integrated builds and error reporting
 Plug 'epheien/termdbg' 		" Debugger integration
-"Plug 'yegappan/lsp'		" Simpler Language Server Support
+Plug 'rhysd/vim-clang-format'
 "
 source $HOME/.vim/vim-asynclsp/plug.vim
 
@@ -110,6 +110,7 @@ source $HOME/.vim/fzf.vim
 source $HOME/.vim/colorscheme.switcher.vim
 source $HOME/.vim/auto-light-dark.vim
 source $HOME/.vim/cpp-modern-highlighting.vim
+source $HOME/.vim/clang-format.vim
 
 source $HOME/.vim/termdbg.vim
 source $HOME/.vim/vim-asynclsp/main.vim

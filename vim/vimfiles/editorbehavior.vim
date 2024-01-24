@@ -94,7 +94,13 @@ map l} :lclose<CR>
 
 map <leader>l :redraw!<CR>
 
- if has('mac')
-   set t_RV=
-endif
+nnoremap <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
+\ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
+\ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
+
+nnoremap . <NOP>
+
+" Enable ack integration for FZF
+let $FZF_DEFAULT_COMMAND='ack -f .'
+let $FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
