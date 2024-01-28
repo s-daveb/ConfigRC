@@ -79,9 +79,8 @@ Plug 'honza/vim-snippets'
 " AutoComplete and IDE-like features
 Plug 'tpope/vim-dispatch'	" Integrated builds and error reporting
 Plug 'epheien/termdbg' 		" Debugger integration
-Plug 'rhysd/vim-clang-format'
-"
-source $HOME/.vim/vim-asynclsp/plug.vim
+
+source $HOME/.vim/async-lsp/plug.vim
 
 " Code Navigation
 Plug 'preservim/tagbar'
@@ -100,7 +99,7 @@ source $HOME/.vim/ui.vim
 source $HOME/.vim/airline.vim
 source $HOME/.vim/better-whitespace.vim
 source $HOME/.vim/hardtime.vim
-source $HOME/.vim/vim-wordmotion.vim
+source $HOME/.vim/wordmotion.vim
 source $HOME/.vim/tmux.compat.vim
 
 source $HOME/.vim/netrw-conf.vim
@@ -110,9 +109,8 @@ source $HOME/.vim/fzf.vim
 source $HOME/.vim/colorscheme.switcher.vim
 source $HOME/.vim/auto-light-dark.vim
 source $HOME/.vim/cpp-modern-highlighting.vim
-source $HOME/.vim/clang-format.vim
+
 
 source $HOME/.vim/termdbg.vim
-source $HOME/.vim/vim-asynclsp/main.vim
-"source $HOME/.vim/vim9-lsp.vim
+source $HOME/.vim/async-lsp/main.vim
 source $HOME/.vim/tagbar.vim

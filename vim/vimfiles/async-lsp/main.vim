@@ -8,9 +8,9 @@ set completeopt=menuone,popup,noinsert,noselect,preview
 
 autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
 
-source ~/.vim/vim-asynclsp/lsp-settings.vim
-source ~/.vim/vim-asynclsp/keymap.vim
-source ~/.vim/vim-asynclsp/providers.vim
+source ~/.vim/async-lsp/lsp-settings.vim
+source ~/.vim/async-lsp/keymap.vim
+source ~/.vim/async-lsp/providers.vim
 
 " for asyncomplete.vim log
 "

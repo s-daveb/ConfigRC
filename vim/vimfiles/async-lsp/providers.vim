@@ -76,10 +76,11 @@ if executable(g:clangd_path)
 					\ 'name': 'clangd',
 					\ 'cmd': {server_info->
 					\ [ 'nice', '-20', g:clangd_path,
-					\ '-j=8','--background-index', '--pch-storage=memory',
+					\ '-j=2','--background-index', '--clang-tidy',
  				   	\  '--limit-results=50', '--limit-references=50' ]},
 					\ 'whitelist': ['c', 'cpp', 'cpp.doxygen', 'objc', 'objcpp'],
 					\ })
+" '-j=2','--background-index', '--pch-storage=memory',
 "  '--header-insertion=never', '--all-scopes-completion',
 		autocmd FileType c setlocal omnifunc=lsp#complete
 		autocmd FileType cpp setlocal omnifunc=lsp#complete

@@ -6,7 +6,7 @@ set backspace=indent,eol,start
 set mouse=a
 let mapleader=" "
 
-source $HOME/.vim/vim-plug.vim
+source $HOME/.vim/plug.vim
 
 
 " vim: set ft=vim tw=80 expandtab tabstop=2 softtabstop=2 sw=2 :
