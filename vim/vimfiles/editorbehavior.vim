@@ -27,13 +27,8 @@ function! FileOffset()
 endfunction
 
 set viewoptions-=options
-set splitbelow
+"set splitbelow
 
-"autocmd BufLeave *.* mkview!
-"autocmd BufEnter *.* silent loadview
-"
-"autocmd BufWinLeave *.* mkview!
-"autocmd BufWinEnter *.* silent loadview
 
 syntax on
 
@@ -41,7 +36,6 @@ function! RepeatChar(char, count)
 	return repeat(a:char, a:count)
 endfunction
 
-"autocmd FileType qf wincmd J
 
 nnoremap s :<C-U>exec "normal a".RepeatChar(nr2char(getchar()), v:count1)<CR>
 nnoremap S :<C-U>exec "normal i".RepeatChar(nr2char(getchar()), v:count1)<CR>
@@ -53,7 +47,7 @@ endfunction
 command WriteRandom call WriteRandomNum()
 nnoremap <leader>rand :WriteRandom<CR>
 
-" # Function to permanently delete views created by 'mkview'
+" # Function to permanently delete views created by 
 function! MyDeleteView()
   let path = fnamemodify(bufname('%'),':p')
   " vim's odd =~ escaping for /
@@ -90,17 +84,10 @@ map l] :ln<CR>
 map l[ :lp<CR>
 map l{ :lopen<CR>
 map l} :lclose<CR>
-" Switch to header file
 
 map <leader>l :redraw!<CR>
 
-nnoremap <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
-\ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
-\ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
-
 nnoremap . <NOP>
 
-" Enable ack integration for FZF
-let $FZF_DEFAULT_COMMAND='ack -f .'
-let $FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
+nnoremap  M-a  echo "Hello!"

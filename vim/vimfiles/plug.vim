@@ -23,9 +23,7 @@ Plug 'tpope/vim-abolish'
 Plug 'idanarye/breeze.vim'  " HTML navigation
 Plug 'moll/vim-bbye' 		" buffer cleaner
 "Plug 'takac/vim-hardtime' 	" Disables arrow keys  " This is an awful
-"plugin
 Plug 'ntpeters/vim-better-whitespace' " Deletes trailing whitespace
-
 
 " Better detect word boundaries
 Plug 'chaoren/vim-wordmotion'
@@ -40,7 +38,7 @@ Plug '/usr/local/opt/fzf'
 " No longer needed
 "" Tmux integration
 "Plug 'benmills/vimux'
-"Plug 'christoomey/vim-tmux-navigator'
+Plug 'christoomey/vim-tmux-navigator'
 Plug 'edkolev/tmuxline.vim'
 
 " Fancy status bar
@@ -49,12 +47,8 @@ Plug 'vim-airline/vim-airline-themes'
 
 " Color Themes
 Plug 'lifepillar/vim-solarized8'
-"Plug 'altercation/vim-colors-solarized'
-"Plug 'sickill/vim-monokai'
 Plug 'crusoexia/vim-monokai'
-"Plug 'tomasr/molokai'
 Plug 'dracula/vim'
-"Plug 'kitten/vim-adventurous'  " Dracula's baby
 Plug 'sjl/badwolf'
 Plug 'marciomazza/vim-brogrammer-theme'
 Plug 'sainnhe/everforest'
@@ -80,10 +74,12 @@ Plug 'honza/vim-snippets'
 Plug 'tpope/vim-dispatch'	" Integrated builds and error reporting
 Plug 'epheien/termdbg' 		" Debugger integration
 
-source $HOME/.vim/async-lsp/plug.vim
-
 " Code Navigation
-Plug 'preservim/tagbar'
+"Plug 'preservim/tagbar'
+Plug 'liuchengxu/vista.vim'
+
+"  Load language server plugins
+source $HOME/.vim/async-lsp/plug.vim
 
 " All of your Plugs must be added before the following line
 call plug#end()            " required
@@ -94,11 +90,9 @@ runtime macros/matchit.vim " for html % matching
 
 source $HOME/.vim/help.vim
 source $HOME/.vim/editorbehavior.vim
-source $HOME/.vim/ui.vim
 
 source $HOME/.vim/airline.vim
 source $HOME/.vim/better-whitespace.vim
-source $HOME/.vim/hardtime.vim
 source $HOME/.vim/wordmotion.vim
 source $HOME/.vim/tmux.compat.vim
 
@@ -106,11 +100,12 @@ source $HOME/.vim/netrw-conf.vim
 source $HOME/.vim/projects.vim
 source $HOME/.vim/fzf.vim
 
-source $HOME/.vim/colorscheme.switcher.vim
-source $HOME/.vim/auto-light-dark.vim
 source $HOME/.vim/cpp-modern-highlighting.vim
-
 
 source $HOME/.vim/termdbg.vim
 source $HOME/.vim/async-lsp/main.vim
-source $HOME/.vim/tagbar.vim
+"source $HOME/.vim/tagbar.vim
+source $HOME/.vim/vista.vim
+
+source $HOME/.vim/ui.vim
+source $HOME/.vim/auto-light-dark.vim

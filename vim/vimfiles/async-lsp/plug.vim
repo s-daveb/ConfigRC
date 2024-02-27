@@ -2,7 +2,7 @@
 " ----------------
 Plug 'prabirshrestha/async.vim'
 Plug 'prabirshrestha/asyncomplete.vim'
-Plug 'prabirshrestha/vim-lsp'
+Plug 's-daveb/vim-lsp'
 Plug 'prabirshrestha/asyncomplete-lsp.vim'
 
 " Completion Sources

@@ -6,26 +6,27 @@ function! SetEverForestOptions()
 	let g:everforest_background = 'medium'
 	let g:everforest_better_performance = 0
 
-	if has('gui_running') 
+	if has('gui_running')
 		let g:everforest_transparent_background = 0
 	else
 		let g:everforest_transparent_background = 1
-	endif
+	endi
+
 endfunction
 
-function! DarkMode()
+function DarkMode()
 	call SetEverForestOptions()
+	colorscheme  dracula
+	AirlineTheme dracula
 	set background=dark
-	colorscheme everforest
-	AirlineTheme solarized 
 	call GuiConfig()
 endfunction
 
-function! LightMode()
+function LightMode()
 	call SetEverForestOptions()
-	set background=light
 	colorscheme everforest
-	AirlineTheme solarized
+	AirlineTheme everforest
+	set background=dark
 	call GuiConfig()
 endfunction
 

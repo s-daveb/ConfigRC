@@ -14,7 +14,7 @@ let g:tmuxcomplete#asyncomplete_source_options = {
 			\     },
 			\ }
 "end
-"Provider- Completion Source: Ultisnips 
+"Provider- Completion Source: Ultisnips
 if has('python3')
     call asyncomplete#register_source(asyncomplete#sources#ultisnips#get_source_options({
         \ 'name': 'ultisnips',
@@ -57,7 +57,7 @@ call asyncomplete#register_source(asyncomplete#sources#buffer#get_source_options
 "    \ 'completor': function('asyncomplete#sources#necovim#completor'),
 "    \ })
 ""end
-"Provider- Language Support: Python3 
+"Provider- Language Support: Python3
 if executable('pyls')
 	" pip install python-language-server
 	au User lsp_setup call lsp#register_server({
@@ -75,9 +75,14 @@ if executable(g:clangd_path)
 		autocmd User lsp_setup call lsp#register_server({
 					\ 'name': 'clangd',
 					\ 'cmd': {server_info->
-					\ [ 'nice', '-20', g:clangd_path,
-					\ '-j=2','--background-index', '--clang-tidy',
- 				   	\  '--limit-results=50', '--limit-references=50' ]},
+					\	[ g:clangd_path, '-j=2',
+					\	  '--background-index',
+					\     '--background-index-priority=background',
+					\     '--clang-tidy',
+ 				   	\ 	  '--limit-results=50', '--limit-references=10',
+					\	  '--pch-storage=memory'
+					\	]
+					\ },
 					\ 'whitelist': ['c', 'cpp', 'cpp.doxygen', 'objc', 'objcpp'],
 					\ })
 " '-j=2','--background-index', '--pch-storage=memory',
