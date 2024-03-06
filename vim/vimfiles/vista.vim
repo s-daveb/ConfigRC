@@ -21,41 +21,42 @@ let g:vista#renderer#enable_icon = 1
 
 " The default icons can't be suitable for all the filetypes, you can extend it as you wish.
 let g:vista#renderer#icons = {
-\    'func': "𝒇",
-\    'function': "𝒇",
-\    'functions': "𝒇",
+\    'class': "ℂ{}",
+\    'func': "𝒇()",
+\    'function': "𝒇()",
+\    'functions': "𝒇()",
 \    'var': "𝓧𝒴𝑍",
+\    'field': "𝓧𝒴𝑍",
 \    'variable': "𝓧𝒴𝑍",
 \    'variables': "𝓧𝒴𝑍",
 \    'const': "🔒",
 \    'constant': "🔒",
 \    'constructor': "🛠️",
-\    'method': "𝑭",
+\    'method': "𝑭()",
 \    'package': "📦",
 \    'packages': "📦",
 \    'enum': "🚩",
 \    'enummember': "◦",
-\    'enumerator': "‣",
+\    'enumerator': "𝑬",
 \    'module': "{}",
 \    'modules': "{}",
 \    'type': "T",
 \    'typedef': ":=",
 \    'macro': "⚙️",
 \    'macros': "⚙️",
-\    'map': "\Uf0645",
-\    'class': "\ueb5b",
-\    'augroup': "\Uf0645",
-\    'struct': "\uea91",
+\    'map': "#:",
+\    'augroup': "au",
+\    'struct': "ς{}",
 \    'union': "\Uf0564",
 \    'member': "\uf02b",
 \    'target': "\Uf0394",
 \    'property': "\ueb65",
 \    'interface': "\ueb61",
-\    'namespace': "\uea8b",
-\    'subroutine': "\Uf04b0",
-\    'implementation': "\uebba",
-\    'typeParameter': "\uea92",
-\    'default': "\uf29c"
+\    'namespace': "{}",
+\    'subroutine': "ς",
+\    'implementation': "𝐼{}",
+\    'typeParameter': "<T>",
+\    'default': "‣"
 \}
 
 " >>>> Vista Dynamic Resizing functions <<<<  {
@@ -99,7 +100,8 @@ endfunction
 
 
 function! ToggleVista()
-	if IsVistaWindowDisplayed()
+	let l:is_open = IsVistaWindowDisplayed()
+	if l:is_open == 1
 		Vista!
 	else
 		Vista
@@ -108,8 +110,9 @@ endfunction
 
 function! ResizeVista()
 	let l:reopen = 0
+	let l:is_open = IsVistaWindowDisplayed()
 
-	if IsVistaWindowDisplayed()
+	if l:is_open == 1
 		Vista!
 		let l:reopen = 1
 	endif
@@ -128,8 +131,8 @@ endfunction
 " }
 
 " Call ResizeVista when the terminal is resized
-autocmd BufWinEnter * call ResizeVista()
-autocmd VimResized * call ResizeVista()
+"autocmd BufWinEnter * call ResizeVista()
+"autocmd VimResized * call ResizeVista()
 
 nmap <leader>tt :call ToggleVista()<CR>
 nmap <leader>tr :call ResizeVista()<CR>

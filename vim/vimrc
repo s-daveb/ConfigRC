@@ -6,6 +6,8 @@ set backspace=indent,eol,start
 set mouse=a
 let mapleader=" "
 
+let &pythonthreedll = '/Users/sdavid/.local/python/bin/python' 
+" trim(system("pyenv which python"))
 source $HOME/.vim/plug.vim
 
 

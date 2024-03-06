@@ -34,6 +34,8 @@ let g:lsp_diagnostics_float_cursor = 1
 let g:lsp_diagnostics_highlight_enabled = 1
 
 let g:lsp_log_verbose = 0
+
+
 "let g:lsp_log_file = expand('~/lsp.log')
 "
 " for asyncomplete.vim log

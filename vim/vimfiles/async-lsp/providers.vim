@@ -92,9 +92,13 @@ if executable(g:clangd_path)
 		autocmd FileType cpp.doxygen setlocal omnifunc=lsp#complete
 		autocmd FileType objc setlocal omnifunc=lsp#complete
 		autocmd FileType objcpp setlocal omnifunc=lsp#complete
+		autocmd FileType cpp.doxygen setlocal foldmethod=expr
+  	  	  \ foldexpr=lsp#ui#vim#folding#foldexpr()
+  	  	  \ foldtext=lsp#ui#vim#folding#foldtext()
 	augroup end
 endif
 "end
+
 "Provider- Language Support: Javascript
 autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 "end
