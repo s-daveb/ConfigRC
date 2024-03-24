@@ -16,7 +16,7 @@ echo "yabai.rules: Reloading rules"
 yabai -m rule --add label="Calculator" app="^Calculator$" manage="off"
 yabai -m rule --add label="Developer" app="^Developer$" manage="off"
 yabai -m rule --add label="Reminders" app="^Reminders$" manage="off"
-yabai -m rule --add label="InputLeap" app="^InputLeap$" manage="off" grid="4:4:1:1:2:2" layer="above"
+yabai -m rule --add label="InputLeap" app="^InputLeap$" manage="off" grid="4:4:1:1:2:2" #layer="above"
 yabai -m rule --add label="DynaPaper" app="^Dynaper$" manage="off"
 yabai -m rule --add label="Loopback" app="^Loopback$" manage="off"
 yabai -m rule --add label="Audio MIDI Setup" app="^Audio MIDI Setup$" manage="off" grid="4:4:1:1:2:2"
@@ -42,7 +42,6 @@ yabai -m rule --add label="Keychain" app="Keychain"  manage="off"
 yabai -m rule --add label="Pages" app="Pages"  manage="on"
 
 yabai -m rule --add label="Pixea" app="^Pixea$" manage="off"
-#yabai -m rule --add label="Iina" app="^IINA$" manage="off"
 yabai -m rule --add label="WhatsApp" app="^WhatsApp$" manage="off" grid="4:4:1:1:2:2"
 yabai -m rule --add label="OBS Studio" app="^OBS Studio" manage="off"
 yabai -m rule --add label="Microsoft RDP" app="Microsoft Remote Desktop" title!="Microsoft Remote Desktop" manage="off"
@@ -69,12 +68,12 @@ yabai -m rule --add label="Parallels Desktop" app="^Parallels Desktop$" title="C
 yabai -m rule --add label="Moonlight" app="^Moonlight$" manage="off"
 yabai -m rule --add label="OmniDiskSweeper" app="^OmniDiskSweeper$" manage="off"
 
-yabai -m rule --add label="iStatistica Pro" app="iStatistica Pro" manage="off"
-yabai -m rule --add label="iStat Menu" app="iStat Menus" manage="off"
+yabai -m rule --add label="iStatistica Pro" app="^iStat" manage="off"
 
-yabai -m rule --add label="Screen Sharing" app="^Screen Sharing$" manage="off" grid="4:4:1:1:1:2"
+yabai -m rule --add label="Screen Sharing" app="^Screen Sharing$" manage="off"
 
-yabai -m rule --add label="iterm2" app="^iTerm2" manage="off" grid="32:32:8:9:13:17"
+yabai -m rule --add label="iterm2" app="^iTerm2$" manage="off" #grid="32:32:8:9:13:17"
+
 yabai -m rule --add label="Terminal" app="^Terminal" manage="off" grid="32:32:8:9:13:17"
 yabai -m rule --add label="macvim" app="^MacVim" manage="off" grid="32:32:8:9:13:17"
 
@@ -86,7 +85,9 @@ yabai -m rule --add label="Xcode" app="^Xcode$" manage="off"
 yabai -m rule --add label="LG Screen Manager" app="^LG Screen Manager$" manage="off"
 
 yabai -m rule --add label="SDL Game" app="MyApp" manage="off"
-yabai -m rule --add label="Numbers"  app="Numbers" manager="off"
+yabai -m rule --add label="Numbers"  app="Numbers" manage="off"
+
+yabai -m rule --add label="Teams"  app="Microsoft Teams classic" manage="off"
 
 yabai_rules_count="$(yabai -m rule --list | grep label | wc -l)"
 
