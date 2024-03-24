@@ -10,13 +10,12 @@ Plug 'dag/vim-fish'
 Plug 'LeonB/vim-nginx'
 Plug 'pangloss/vim-javascript'
 Plug 'skwp/vim-html-escape'
-Plug 'keith/swift.vim'
 Plug 'mustache/vim-mustache-handlebars'
-"Plug 'octol/vim-cpp-enhanced-highlight'
 Plug 'bfrg/vim-cpp-modern'
-"Plug 'vim-scripts/User-Defined-Type-Highlighter'
 Plug 'yump/vim-kerboscript'
 Plug 'vim-scripts/applescript.vim'
+Plug 'keith/swift.vim'
+Plug 'cdelledonne/vim-cmake'
 
 " Command and Edit mode plugins
 Plug 'tpope/vim-abolish'
@@ -34,6 +33,7 @@ Plug 'tpope/vim-vinegar' " Better Netrw config
 " File searching plugins
 Plug 'mileszs/ack.vim'
 Plug '/usr/local/opt/fzf'
+Plug 'junegunn/fzf.vim'
 
 " No longer needed
 "" Tmux integration
@@ -98,14 +98,19 @@ source $HOME/.vim/tmux.compat.vim
 
 source $HOME/.vim/netrw-conf.vim
 source $HOME/.vim/projects.vim
-source $HOME/.vim/fzf.vim
 
 source $HOME/.vim/cpp-modern-highlighting.vim
 
 source $HOME/.vim/termdbg.vim
-source $HOME/.vim/async-lsp/main.vim
 "source $HOME/.vim/tagbar.vim
 source $HOME/.vim/vista.vim
 
 source $HOME/.vim/ui.vim
 source $HOME/.vim/auto-light-dark.vim
+
+source $HOME/.vim/async-lsp/main.vim
+source $HOME/.vim/fzf.vim
+
+if exists('g:load_snippets')
+	source $HOME/.vim/UltiSnips.vim
+endif

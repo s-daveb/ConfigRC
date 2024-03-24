@@ -13,7 +13,7 @@ File	'ConfigRC/vim/vimrc'			, 'vimrc'
 File	'ConfigRC/vim/vimfiles/plug.vim'	, 'vim-plug'
 File	'ConfigRC/vim/vimfiles/async-lsp'    	, 'vim-asynclsp folder'
 
-let qw_path='C++/Archive/quartz-warriors'
+let qw_path='Archived/C++/quartz-warriors'
 Project qw_path					, 'quartz-warriors'
 File	qw_path . '/CMakeLists.txt'		, 'qw/CMakeLists.txt'
 Callback 'quartz-warriors'			, 'LoadLocalConfig'
@@ -29,10 +29,10 @@ Project elemental_path 				, 'elemental'
 File elemental_path . '/CMakeLists.txt'		, 'elemental/CMakeLists'
 Callback 'elemental'				, 'LoadLocalConfig'
 
-let vktest_path="C++/Experiments/vulkan-test"
-Project vktest_path 				, 'vktest'
-File vktest_path . '/CMakeLists.txt'		, 'vktest/CMakeLists'
-Callback 'vktest'				, 'LoadLocalConfig'
+let vktest_path="C++/Projects/IOCore"
+Project vktest_path 				, 'IOCore'
+File vktest_path . '/CMakeLists.txt'		, 'IOCore/CMakeLists'
+Callback 'IOCore'				, 'LoadLocalConfig'
 
 function! LoadLocalConfig(title)
 	source ~/.vim/projects.d/load-local.vimrc

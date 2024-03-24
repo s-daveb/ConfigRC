@@ -4,10 +4,12 @@
 if [[ ! -o interactive ]]; then
 	#echo "ZSH login shell - limited environment"
 	source ~/.zshrc.d/02-usr-local.zsh
+	source ~/.zshrc.d/05-manpath.zsh
+	source ~/.zshrc.d/09-python-env.zsh
+
+	[ -x '/usr/local/bin/gman' ] &&	alias man="/usr/local/bin/gman"
 fi
 
 export HOMEBREW_NO_ENV_HINTS=1
 export MallocNanoZone=0
 
-export VCPKG_ROOT="$HOME/Developer/vcpkg"
-export VCPKG_DISABLE_METRICS=1

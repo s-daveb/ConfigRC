@@ -47,7 +47,7 @@ endfunction
 command WriteRandom call WriteRandomNum()
 nnoremap <leader>rand :WriteRandom<CR>
 
-" # Function to permanently delete views created by 
+" # Function to permanently delete views created by
 function! MyDeleteView()
   let path = fnamemodify(bufname('%'),':p')
   " vim's odd =~ escaping for /
@@ -87,7 +87,22 @@ map l} :lclose<CR>
 
 map <leader>l :redraw!<CR>
 
-nnoremap . <NOP>
+"autocmd InsertEnter,InsertLeave * set cul!
+let &t_SI = "\e[6 q"
+let &t_EI = "\e[2 q"
+
+" reset the cursor on start (for older versions of vim, usually not required)
+augroup BlockCursorToLine
+au!
+autocmd VimEnter * silent !echo -ne "\e[2 q"
+autocmd VimLeave * silent !echo  -ne "\e[6 q"
+augroup END
 
 
-nnoremap  M-a  echo "Hello!"
+function! CloseAll()
+	exe ":%bd|e#"
+	exe ":ProjectList"
+endfunction
+
+command CloseOthers %bd|e#
+command CloseAll call CloseAll()

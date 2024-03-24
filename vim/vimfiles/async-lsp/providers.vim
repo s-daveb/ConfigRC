@@ -24,13 +24,15 @@ if has('python3')
 endif
 "end
 ""Provider- Completion Source: Files
-"" Blacklisted because it's buggy - anything that looks like a URL makes VIM hang
-"au User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#file#get_source_options({
-"    \ 'name': 'file',
-"    \ 'whitelist': ['*'],
-"    \ 'completor': function('asyncomplete#sources#file#completor')
-"    \ }))
-""end
+"" Blacklisted because it now autoregisters itself
+let file_completor_opts = asyncomplete#sources#file#get_source_options({
+    \ 'allowlist': ['*'],
+    \ 'completor': function('asyncomplete#sources#file#completor'),
+	\ 'priority': 1,
+    \ })
+"au User asyncomplete_setup call asyncomplete#register_source(l:file_completor_opts)
+call asyncomplete#register_source(file_completor_opts)
+"end
 "Provider- Completion Source: VIM Omnicomplete
 call asyncomplete#register_source(asyncomplete#sources#omni#get_source_options({
 			\ 'name': 'omni',
@@ -51,21 +53,11 @@ call asyncomplete#register_source(asyncomplete#sources#buffer#get_source_options
 			\ }))
 "end
 ""Provider- Language Support: necovim
-"au User asyncomplete_setup call asyncomplete#register_source({
-"    \ 'name': 'necovim',
-"    \ 'allowlist': ['vim'],
-"    \ 'completor': function('asyncomplete#sources#necovim#completor'),
-"    \ })
-""end
-"Provider- Language Support: Python3
-if executable('pyls')
-	" pip install python-language-server
-	au User lsp_setup call lsp#register_server({
-				\ 'name': 'pyls',
-				\ 'cmd': {server_info->['pyls']},
-				\ 'whitelist': ['python'],
-				\ })
-endif
+au User asyncomplete_setup call asyncomplete#register_source({
+    \ 'name': 'necovim',
+    \ 'allowlist': ['vim'],
+    \ 'completor': function('asyncomplete#sources#necovim#completor'),
+    \ })
 "end
 "Provider- Language Support: C/C++/Obj-C
 let g:clangd_path = '/usr/bin/clangd'
@@ -92,15 +84,34 @@ if executable(g:clangd_path)
 		autocmd FileType cpp.doxygen setlocal omnifunc=lsp#complete
 		autocmd FileType objc setlocal omnifunc=lsp#complete
 		autocmd FileType objcpp setlocal omnifunc=lsp#complete
-		autocmd FileType cpp.doxygen setlocal foldmethod=expr
-  	  	  \ foldexpr=lsp#ui#vim#folding#foldexpr()
-  	  	  \ foldtext=lsp#ui#vim#folding#foldtext()
+		"autocmd FileType cpp.doxygen setlocal foldmethod=expr
+  	  	"  \ foldexpr=lsp#ui#vim#folding#foldexpr()
+  	  	"  \ foldtext=lsp#ui#vim#folding#foldtext()
 	augroup end
 endif
 "end
+"Provider- Language Support: CMake
+if executable('cmake-language-server')
+	" pip install python-language-server
+	au User lsp_setup call lsp#register_server({
+				\ 'name': 'cmake-language-server',
+				\ 'cmd': {server_info->['cmake-language-server']},
+				\ 'whitelist': ['cmake'],
+				\ })
+endif
 
+"end
 "Provider- Language Support: Javascript
 autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 "end
-
+"Provider- Language Support: Python3
+if executable('pyls')
+	" pip install python-language-server
+	au User lsp_setup call lsp#register_server({
+				\ 'name': 'pyls',
+				\ 'cmd': {server_info->['pyls']},
+				\ 'whitelist': ['python'],
+				\ })
+endif
+"end
 " vim: set foldmethod=marker foldmarker="Provider-,"end ts=4 sts=4 sw=4 noet :

@@ -44,6 +44,11 @@ function ColorAdjust() " @{ hard-code some things like background transparency a
 				let &t_8b = "\<ESC>[48;2;%lu;%lu;%lum"
 				set termguicolors
 		endif
+
+		if !has("gui_running")
+				let &t_ZH="\e[3m"
+				let &t_ZR="\e[23m"
+		endif
 "
 "		" @{ Makes background transparent
 "		" Not needed  with everforest
@@ -68,14 +73,16 @@ function ColorAdjust() " @{ hard-code some things like background transparency a
 
 		hi ColorColumn term=reverse ctermbg=6 guibg=#41AC83
 
-		highlight link lspInlayHintsType cComment
-		highlight link lspInlayHintsParameter cComment
+		hi Folded cterm=italic
+		highlight lspInlayHintsType term=bold cterm=italic ctermfg=245 gui=italic guifg=#859289
+
+	highlight link lspInlayHintsParameter lspInlayHintsType
 
 endfunction " @}
 function! GuiConfig() " @{ detects GVIM and handles some things differently
 		if has('gui_running')
 				if has('macunix')
-						set guifont=BerkeleyMono-Regular:h16
+						set guifont=BerkeleyMono-Regular:h14
 						set macligatures
 				else
 						set guifont=Fira\ Code\ 14

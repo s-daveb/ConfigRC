@@ -1,4 +1,4 @@
-#!/bin/sh
+e!/bin/sh
 
 # Script working directory
 SWD="$(dirname $0)"

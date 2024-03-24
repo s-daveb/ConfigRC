@@ -11,8 +11,7 @@ Plug 'prabirshrestha/asyncomplete-lsp.vim'
 Plug 'Shougo/neco-vim'
 Plug 'prabirshrestha/asyncomplete-necovim.vim'
 
-"" Broken: URL-like constructions make VIM hang (??)
-"Plug 'prabirshrestha/asyncomplete-file.vim'
+Plug 's-daveb/asyncomplete-file.vim'
 
 "" For path completion and others
 Plug 'yami-beta/asyncomplete-omni.vim'
@@ -25,9 +24,10 @@ Plug 's-daveb/lsp-actions'
 " Snippet support
 " This is quite brittle
 if has('python3')
-    Plug 'SirVer/ultisnips'
-    Plug 'honza/vim-snippets'
-    Plug 'prabirshrestha/asyncomplete-ultisnips.vim'
+	Plug 'SirVer/ultisnips'
+	Plug 'honza/vim-snippets'
+	Plug 'prabirshrestha/asyncomplete-ultisnips.vim'
+	let g:load_snippets=1
 endif
 
-source $HOME/.vim/UltiSnips.vim
+" vim: set ts=4 noet sw=4 sts=4 :
