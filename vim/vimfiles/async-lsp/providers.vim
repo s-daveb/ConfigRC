@@ -1,4 +1,3 @@
-
 "Provider- Completion Source: TMUX
 let g:tmuxcomplete#asyncomplete_source_options = {
 			\ 'name':      'tmuxcomplete',
@@ -28,7 +27,7 @@ endif
 let file_completor_opts = asyncomplete#sources#file#get_source_options({
     \ 'allowlist': ['*'],
     \ 'completor': function('asyncomplete#sources#file#completor'),
-	\ 'priority': 1,
+	\ 'priority': 10,
     \ })
 "au User asyncomplete_setup call asyncomplete#register_source(l:file_completor_opts)
 call asyncomplete#register_source(file_completor_opts)
@@ -71,8 +70,9 @@ if executable(g:clangd_path)
 					\	  '--background-index',
 					\     '--background-index-priority=background',
 					\     '--clang-tidy',
- 				   	\ 	  '--limit-results=50', '--limit-references=10',
-					\	  '--pch-storage=memory'
+					\     '--header-insertion=iwyu', '--header-insertion-decorators',
+					\     '--function-arg-placeholders',
+					\	  '--pch-storage=memory',
 					\	]
 					\ },
 					\ 'whitelist': ['c', 'cpp', 'cpp.doxygen', 'objc', 'objcpp'],

@@ -2,9 +2,8 @@
 " Automatic completion.
 let g:asyncomplete_auto_popup = 1
 let g:asyncomplete_min_chars = 3
-let g:asyncomplete_popup_delay = 500
-"let g:asyncomplete_auto_completeopt=1
-
+let g:asyncomplete_popup_delay = 900
+let g:asyncomplete_auto_completeopt=0
 set completeopt=menuone,popup,noinsert,noselect,preview
 
 let g:lsp_auto_enable = 1

@@ -13,7 +13,7 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 if [[ -o interactive ]]; then
-  if [ "${ITERM_ENABLE_SHELL_INTEGRATION_WITH_TMUX-}""$TERM" != "screen" -a "${ITERM_SHELL_INTEGRATION_INSTALLED-}" = "" -a "$TERM" != linux -a "$TERM" != dumb ]; then
+  if [ "${ITERM_ENABLE_SHELL_INTEGRATION_WITH_TMUX-}""$TERM" != "tmux-256color" -a "${ITERM_ENABLE_SHELL_INTEGRATION_WITH_TMUX-}""$TERM" != "screen" -a "${ITERM_SHELL_INTEGRATION_INSTALLED-}" = "" -a "$TERM" != linux -a "$TERM" != dumb ]; then
     ITERM_SHELL_INTEGRATION_INSTALLED=Yes
     ITERM2_SHOULD_DECORATE_PROMPT="1"
     # Indicates start of command output. Runs just before command executes.
@@ -173,6 +173,8 @@ if [[ -o interactive ]]; then
     preexec_functions=($preexec_functions iterm2_preexec)
 
     iterm2_print_state_data
-    printf "\033]1337;ShellIntegrationVersion=13;shell=zsh\007"
+    printf "\033]1337;ShellIntegrationVersion=14;shell=zsh\007"
   fi
 fi
+
+alias imgcat=/Users/sdavid/.iterm2/imgcat;alias imgls=/Users/sdavid/.iterm2/imgls;alias it2api=/Users/sdavid/.iterm2/it2api;alias it2attention=/Users/sdavid/.iterm2/it2attention;alias it2check=/Users/sdavid/.iterm2/it2check;alias it2copy=/Users/sdavid/.iterm2/it2copy;alias it2dl=/Users/sdavid/.iterm2/it2dl;alias it2getvar=/Users/sdavid/.iterm2/it2getvar;alias it2git=/Users/sdavid/.iterm2/it2git;alias it2profile=/Users/sdavid/.iterm2/it2profile;alias it2setcolor=/Users/sdavid/.iterm2/it2setcolor;alias it2setkeylabel=/Users/sdavid/.iterm2/it2setkeylabel;alias it2tip=/Users/sdavid/.iterm2/it2tip;alias it2ul=/Users/sdavid/.iterm2/it2ul;alias it2universion=/Users/sdavid/.iterm2/it2universion

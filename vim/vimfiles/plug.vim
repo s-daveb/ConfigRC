@@ -16,6 +16,7 @@ Plug 'yump/vim-kerboscript'
 Plug 'vim-scripts/applescript.vim'
 Plug 'keith/swift.vim'
 Plug 'cdelledonne/vim-cmake'
+Plug 'richq/vim-cmake-completion'
 
 " Command and Edit mode plugins
 Plug 'tpope/vim-abolish'
@@ -54,7 +55,7 @@ Plug 'marciomazza/vim-brogrammer-theme'
 Plug 'sainnhe/everforest'
 
 " Color scheme switching
-Plug 'xolox/vim-misc' 					" needed for vim-colorscheme-switcher
+Plug 'xolox/vim-misc' 			" needed for vim-colorscheme-switcher
 Plug 'xolox/vim-colorscheme-switcher'
 Plug 'nburns/vim-auto-light-dark'
 

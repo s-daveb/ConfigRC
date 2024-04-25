@@ -88,6 +88,14 @@ yabai -m rule --add label="SDL Game" app="MyApp" manage="off"
 yabai -m rule --add label="Numbers"  app="Numbers" manage="off"
 
 yabai -m rule --add label="Teams"  app="Microsoft Teams classic" manage="off"
+yabai -m rule --add label="Mini Motorways"  app="Mini Motorways" manage="off"
+
+yabai -m rule --add label="Sonic 3" app="Sonic 3 A.I.R." manage="off"
+yabai -m rule --add label="Qt Creator" app="Qt Creator" manage="off"
+
+yabai -m rule --add label="Logi Options+" app="Logi Options+" manage="off"
+
+yabai -m  config layout float
 
 yabai_rules_count="$(yabai -m rule --list | grep label | wc -l)"
 

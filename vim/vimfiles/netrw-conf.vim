@@ -8,6 +8,8 @@ let g:netrw_winsize = 20
 let g:netrw_usetab = 1
 let g:netrw_wiw = 15
 
+set wildignore='.*,.DS_Store'
+
 map <silent> <leader><C-E> :Lexplore<cr>
 map <silent> <C-E> :Lexplore %:p:h<cr>
 

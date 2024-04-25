@@ -17,6 +17,7 @@ autocmd BufRead,BufNewFile * if exists("*asyncomplete#_force_refresh")
 			\ | inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 			\ | inoremap <expr> <cr>	pumvisible() ? asyncomplete#close_popup() : "\<cr>"
 			\ | inoremap <buffer> <leader><tab> <Plug>(asyncomplete_force_refresh)
+			\ | inoremap <buffer> <c-@> <Plug>(asyncomplete_force_refresh)
 			\ | endif
 augroup END
 
