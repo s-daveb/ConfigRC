@@ -18,7 +18,9 @@ set colorcolumn=80
 if has("mouse_sgr")
 	set ttymouse=sgr
 else
-	set ttymouse=xterm2
+	if !has("nvim")
+		set ttymouse=xterm2
+	endif
 endif
 
 if has('gui_running') == 0
@@ -45,8 +47,12 @@ function! FontConfig() " for gvim
 			set macligatures
 			set lines=48
 		else
- 	 	 	set guifont=BerkeleyMono Regular\ 14
-			set lines=24
+			if has('nvim')
+				set guifont=Berkeley\ Mono:h12
+ 	 	 	else
+ 	 	 		set guifont=Berkeley\ Mono\ Regular\ 12
+			endif
+				set lines=24
 		endif
 		set columns=83
 	endif
@@ -66,7 +72,7 @@ function! TransparentTerminalFix()
 			set termguicolors
 		endif
 
-		"hi Normal ctermbg=None guibg=NONE
+		hi Normal ctermbg=None guibg=NONE
 		"#endregion
 
 		hi clear Comment

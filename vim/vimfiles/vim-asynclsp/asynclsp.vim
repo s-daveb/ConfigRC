@@ -4,7 +4,9 @@ let g:asyncomplete_remove_duplicates = 1
 let g:asyncomplete_auto_completeopt=0
 let g:asyncomplete_popup_delay=1000
 
-set completeopt=menuone,popup,noinsert
+if !has('nvim')
+    set completeopt=menuone,popup,noinsert
+endif
 
 let g:lsp_async_completion = 1
 

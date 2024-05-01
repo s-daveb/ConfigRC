@@ -13,10 +13,10 @@ endfunction
 function DarkMode()
     set background=dark
 
-	if ( $TMUX != "" || $SSH_CLIENT !="" )
+	if ( $ITERM == "1" )
 		call _everforest_settings()
-		colorscheme  everforest
-		AirlineTheme  everforest
+		colorscheme  dracula
+		AirlineTheme dracula
 	else
 		colorscheme dracula
 		AirlineTheme dracula
@@ -27,9 +27,9 @@ endfunction
 function LightMode()
     set background=light
 
-	if ( $TMUX != "" || $SSH_CLIENT !="" )
+	if ( $ITERM == "1" )
 		call _everforest_settings()
-    	set background=light
+    	set background=dark
 		colorscheme  everforest
 		AirlineTheme  everforest
 	else
