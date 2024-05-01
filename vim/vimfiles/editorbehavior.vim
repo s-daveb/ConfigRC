@@ -1,11 +1,18 @@
 " for sh shell
 let g:is_posix=1
 
-set directory=$HOME/.cache/vim/swap/
-set viewdir=$HOME/.cache/vim/view
-
 set undofile
-set undodir=$HOME/.cache/vim/undo/
+
+if has('nvim')
+	set directory=$HOME/.cache/nvim/swap/
+	set viewdir=$HOME/.cache/nvim/view
+	set undodir=$HOME/.cache/nvim/undo/
+else
+	set directory=$HOME/.cache/vim/swap/
+	set viewdir=$HOME/.cache/vim/view
+	set undodir=$HOME/.cache/vim/undo/
+endif
+
 set undolevels=1000
 set undoreload=10000
 
@@ -18,12 +25,11 @@ set tags=./build/tags,./tags;
 "  '10  :  marks will be remembered for up to 10 previously edited files
 "  "100 :  will save up to 100 lines for each register
 "  :20  :  up to 20 lines of command-line history will be remembered
-"  %    :  saves and restores the buffer list
+"  %	:  saves and restores the buffer list
 "  n... :  where to save the viminfo files
 if !has('nvim')
 	set viminfo='10,\"100,:20,n~/.viminfo
 endif
-
 function! FileOffset()
     echo line2byte(line('.')) + col('.') - 1
 endfunction
