@@ -29,7 +29,6 @@ endfunction
 set viewoptions-=options
 "set splitbelow
 
-
 syntax on
 
 function! RepeatChar(char, count)
@@ -86,18 +85,6 @@ map l{ :lopen<CR>
 map l} :lclose<CR>
 
 map <leader>l :redraw!<CR>
-
-"autocmd InsertEnter,InsertLeave * set cul!
-let &t_SI = "\e[6 q"
-let &t_EI = "\e[2 q"
-
-" reset the cursor on start (for older versions of vim, usually not required)
-augroup BlockCursorToLine
-au!
-autocmd VimEnter * silent !echo -ne "\e[2 q"
-autocmd VimLeave * silent !echo  -ne "\e[6 q"
-augroup END
-
 
 function! CloseAll()
 	exe ":%bd|e#"
