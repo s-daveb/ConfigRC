@@ -36,3 +36,4 @@ function LightMode()
 	call GuiConfig()
 endfunction
 
+" vim: set ts=4 sts=4 noet sw=4 foldmethod=marker foldmarker=@{,@} :

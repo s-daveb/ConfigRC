@@ -80,7 +80,9 @@ function ColorAdjust() " @{ hard-code some things like background transparency a
 endfunction " @}
 function! GuiConfig() " @{ detects GVIM and handles some things differently
 		if has('gui_running')
-				if has('macunix')
+				if has('nvim') 
+						set guifont=Berkeley\ Mono:h14
+				elseif has('macunix')
 						set guifont=BerkeleyMono-Regular:h14
 						set macligatures
 				else
@@ -89,7 +91,7 @@ function! GuiConfig() " @{ detects GVIM and handles some things differently
 		else " if has('gui_running') == false
 				if has("mouse_sgr")
 						set ttymouse=sgr
-				else
+				elseif !has('nvim')
 						set ttymouse=xterm2
 				endif
 

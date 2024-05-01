@@ -16,4 +16,6 @@ function! SendTerminalCommand(bufnr)
 endfunction
 
 " Set up the autocmd to call the helper function when a Terminal window opens
-autocmd TerminalOpen * call SendTerminalCommand(bufnr())
+
+let g:term_event = has('nvim') ? 'TermOpen' : 'TerminalOpen'
+exec 'autocmd ' . g:term_event . ' * call SendTerminalCommand(bufnr())'

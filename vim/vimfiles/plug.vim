@@ -65,7 +65,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 "
 " Project tree Integration
-Plug 'amiorin/vim-project'
+Plug 's-daveb/vim-project'
 
 " Snippet Support
 Plug 'SirVer/ultisnips'
