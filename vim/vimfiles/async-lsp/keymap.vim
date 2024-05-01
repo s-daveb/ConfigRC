@@ -6,18 +6,18 @@ endfunction
 
 inoremap <silent><expr> <TAB>
   \ pumvisible() ? "\<C-n>" :
-  \ <SID>check_back_space() ? "\<TAB>" :
+  \ <SID>check_back_space() ? "\<TAB>" :syn
   \ asyncomplete#force_refresh()
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
 augroup AsyncMappings
 autocmd BufRead,BufNewFile * if exists("*asyncomplete#_force_refresh")
-"\ | echo "asyncomplete detected"
+			"\ | echo "asyncomplete detected"
 			\ | inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
 			\ | inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 			\ | inoremap <expr> <cr>	pumvisible() ? asyncomplete#close_popup() : "\<cr>"
 			\ | inoremap <buffer> <leader><tab> <Plug>(asyncomplete_force_refresh)
-			\ | inoremap <buffer> <c-@> <Plug>(asyncomplete_force_refresh)
+			"\ | inoremap <buffer> <c-x>o <Plug>(asyncomplete_force_refresh)
 			\ | endif
 augroup END
 

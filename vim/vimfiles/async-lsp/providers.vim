@@ -77,16 +77,11 @@ if executable(g:clangd_path)
 					\ },
 					\ 'whitelist': ['c', 'cpp', 'cpp.doxygen', 'objc', 'objcpp'],
 					\ })
-" '-j=2','--background-index', '--pch-storage=memory',
-"  '--header-insertion=never', '--all-scopes-completion',
 		autocmd FileType c setlocal omnifunc=lsp#complete
 		autocmd FileType cpp setlocal omnifunc=lsp#complete
 		autocmd FileType cpp.doxygen setlocal omnifunc=lsp#complete
 		autocmd FileType objc setlocal omnifunc=lsp#complete
 		autocmd FileType objcpp setlocal omnifunc=lsp#complete
-		"autocmd FileType cpp.doxygen setlocal foldmethod=expr
-  	  	"  \ foldexpr=lsp#ui#vim#folding#foldexpr()
-  	  	"  \ foldtext=lsp#ui#vim#folding#foldtext()
 	augroup end
 endif
 "end
