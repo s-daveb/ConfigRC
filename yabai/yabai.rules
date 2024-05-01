@@ -94,8 +94,9 @@ yabai -m rule --add label="Sonic 3" app="Sonic 3 A.I.R." manage="off"
 yabai -m rule --add label="Qt Creator" app="Qt Creator" manage="off"
 
 yabai -m rule --add label="Logi Options+" app="Logi Options+" manage="off"
+yabai -m rule --add label="QtDev Application" title="MainWindow" manage="off"
 
-yabai -m  config layout float
+#yabai -m  config layout float
 
 yabai_rules_count="$(yabai -m rule --list | grep label | wc -l)"
 
