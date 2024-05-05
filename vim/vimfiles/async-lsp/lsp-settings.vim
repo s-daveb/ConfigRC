@@ -1,8 +1,8 @@
 
 " Automatic completion.
-let g:asyncomplete_auto_popup = 0
-let g:asyncomplete_min_chars = 0
-let g:asyncomplete_popup_delay = 1000
+let g:asyncomplete_auto_popup = 1
+let g:asyncomplete_min_chars = 1
+let g:asyncomplete_popup_delay = 500
 let g:asyncomplete_auto_completeopt=1
 "set completeopt=menuone,popup,noinsert,noselect,preview
 
@@ -42,4 +42,4 @@ let g:lsp_diagnostics_highlight_enabled = 1
 
 
 
-" vim:set ts=2 sts=2 sw=2 noet:
+" vim: set ts=4 sts=4 noet sw=4 foldmethod=marker foldmarker=@{,@} ft=vim:

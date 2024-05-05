@@ -6,6 +6,7 @@
 */vimfiles/view
 */vimfiles/plug
 */vimfiles/.netrwhist
+*/vimfiles/pack
 *.swp
 .DS_Store
 *.zwc

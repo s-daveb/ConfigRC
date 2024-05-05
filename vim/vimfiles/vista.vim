@@ -8,13 +8,17 @@ let g:vista_ctags_executable = "/usr/local/bin/ctags"
 " Set the executive for some filetypes explicitly. Use the explicit executive
 " instead of the default one for these filetypes when using `:Vista` without
 " specifying the executive.
-  \ 'c': 'vim_lsp',
-let g:vista_executive_for = {
-  \ 'cpp': 'vim_lsp',
-  \ 'cpp.doxygen': 'vim_lsp',
-  \ 'c': 'vim_lsp',
-  \ 'c.doxygen': 'vim_lsp',
-  \ }
+"let g:vista_executive_for = {
+"  \ 'cpp': [ 'vim_lsp', 'nvim_lsp' ],
+"  \ 'cpp.doxygen': [ 'vim_lsp', 'nvim_lsp'],
+"  \ 'c': [ 'vim_lsp', 'nvim_lsp'],
+"  \ 'c.doxygen': [ 'vim_lsp', 'nvim_lsp'],
+"  \ }
+
+if has('nvim')
+	echo "nvim_lsp detected"
+	let g:vista_default_executive='nvim_lsp'
+endif
 
 " Ensure you have installed some decent font to show these pretty symbols, then you can enable icon for the kind.
 let g:vista#renderer#enable_icon = 1
@@ -134,8 +138,8 @@ endfunction
 "autocmd BufWinEnter * call ResizeVista()
 "autocmd VimResized * call ResizeVista()
 
-nmap <leader>tt :call ToggleVista()<CR>
-nmap <leader>tr :call ResizeVista()<CR>
+nmap <silent> <leader>tt :call ToggleVista()<CR>
+nmap <silent> <leader>tr :call ResizeVista()<CR>
 
 
 " vim: set ts=4 sts=4 noet sw=4 foldmethod=marker foldmarker={,} foldminlines=10 :

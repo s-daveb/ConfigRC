@@ -24,10 +24,7 @@ Plug 's-daveb/lsp-actions'
 " Snippet support
 " This is quite brittle
 if has('python3')
-	Plug 'SirVer/ultisnips'
-	Plug 'honza/vim-snippets'
 	Plug 'prabirshrestha/asyncomplete-ultisnips.vim'
-	let g:load_snippets=1
 endif
 
 " vim: set ts=4 noet sw=4 sts=4 :

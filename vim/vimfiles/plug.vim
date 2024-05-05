@@ -68,8 +68,10 @@ Plug 'airblade/vim-gitgutter'
 Plug 's-daveb/vim-project'
 
 " Snippet Support
-Plug 'SirVer/ultisnips'
-Plug 'honza/vim-snippets'
+if has('python3')
+	Plug 'SirVer/ultisnips'
+	Plug 'honza/vim-snippets'
+endif
 
 " AutoComplete and IDE-like features
 Plug 'tpope/vim-dispatch'	" Integrated builds and error reporting
@@ -80,11 +82,16 @@ Plug 'epheien/termdbg' 		" Debugger integration
 Plug 'liuchengxu/vista.vim'
 
 "  Load language server plugins
-source $HOME/.vim/async-lsp/plug.vim
+if !has('nvim')
+	source $HOME/.vim/async-lsp/plug.vim
+else
+	source $HOME/.vim/nvim-lsp-plug.vim
+endif
 
-" All of your Plugs must be added before the following line
 call plug#end()            " required
 filetype plugin indent on  " required
+
+
 """"""""""""""""""""""" PLUGIN CONFIG """""""""""""""""""""""""""""""
 
 runtime macros/matchit.vim " for html % matching
@@ -109,9 +116,18 @@ source $HOME/.vim/vista.vim
 source $HOME/.vim/ui.vim
 source $HOME/.vim/auto-light-dark.vim
 
-source $HOME/.vim/async-lsp/main.vim
 source $HOME/.vim/fzf.vim
+source ${HOME}/.vim/copilot-settings.vim
 
-if exists('g:load_snippets')
+if has('python3')
 	source $HOME/.vim/UltiSnips.vim
 endif
+
+if has('nvim')
+	lua require('nvim-config').load()
+else
+	source $HOME/.vim/async-lsp/main.vim
+endif
+
+
+

@@ -15,7 +15,8 @@ let g:tmuxcomplete#asyncomplete_source_options = {
 "end
 "Provider- Completion Source: Ultisnips
 if has('python3')
-    call asyncomplete#register_source(asyncomplete#sources#ultisnips#get_source_options({
+	let g:UltiSnipsExpandTrigger="<c-e>"
+	au User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#ultisnips#get_source_options({
         \ 'name': 'ultisnips',
         \ 'allowlist': ['*'],
         \ 'completor': function('asyncomplete#sources#ultisnips#completor'),
@@ -66,7 +67,7 @@ if executable(g:clangd_path)
 		autocmd User lsp_setup call lsp#register_server({
 					\ 'name': 'clangd',
 					\ 'cmd': {server_info->
-					\	[ g:clangd_path, '-j=2',
+					\	[ g:clangd_path, '-j=6',
 					\	  '--background-index',
 					\     '--background-index-priority=background',
 					\     '--clang-tidy',

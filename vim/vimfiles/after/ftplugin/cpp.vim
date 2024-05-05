@@ -1,5 +1,7 @@
 
+if !has('nvim')
 source ~/.vim/async-lsp/keymap.vim
+endif
 
 source ~/.vim/c.keybindings.vim
 

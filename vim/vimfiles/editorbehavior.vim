@@ -95,6 +95,9 @@ map l} :lclose<CR>
 
 map <leader>l :redraw!<CR>
 
+"map <ScrollWheelUp> <C-u>
+"map <ScrollWheelDown> <C-d>
+
 function! CloseAll()
 	exe ":%bd|e#"
 	exe ":ProjectList"
