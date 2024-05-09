@@ -75,7 +75,7 @@ yabai -m rule --add label="Screen Sharing" app="^Screen Sharing$" manage="off"
 yabai -m rule --add label="iterm2" app="^iTerm2$" manage="off" #grid="32:32:8:9:13:17"
 
 yabai -m rule --add label="Terminal" app="^Terminal" manage="off" grid="32:32:8:9:13:17"
-yabai -m rule --add label="macvim" app="^MacVim" manage="off" grid="32:32:8:9:13:17"
+yabai -m rule --add label="macvim" app="(N|Mac)?(Vim|vim)(R?)" manage="off" # grid="32:32:8:9:13:17"
 
 yabai -m rule --add label="Finder" app="^Finder$" manage="off"
 yabai -m rule --add label="Mail" app="^Mail$" manage="off"
@@ -99,6 +99,8 @@ yabai -m rule --add label="Logi Options+" app="Logi Options+" manage="off"
 yabai -m rule --add label="QtDev Application" title="MainWindow" manage="off"
 
 yabai -m rule --add label="Logi Options+" app="Logi Options+" manage="off"
+yabai -m rule --add label="Mac Mouse Fix" app="Mac Mouse Fix" manage="off"
+
 #yabai -m  config layout float
 
 yabai_rules_count="$(yabai -m rule --list | grep label | wc -l)"
