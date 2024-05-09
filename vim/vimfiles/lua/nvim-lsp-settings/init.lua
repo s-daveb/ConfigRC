@@ -1,8 +1,8 @@
 
 local module  = {}
 
-function module.init()
-	require('nvim-lsp.providers')
+function module.load()
+	require('nvim-lsp-settings.providers').init()
 	require('clangd_extensions')
 end
 

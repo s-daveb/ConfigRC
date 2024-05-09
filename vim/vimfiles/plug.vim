@@ -63,9 +63,13 @@ Plug 'nburns/vim-auto-light-dark'
 Plug 'ludovicchabant/vim-lawrencium'
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
-"
-" Project tree Integration
-Plug 's-daveb/vim-project'
+
+" Project  Integration
+if !has('nvim')
+	Plug 's-daveb/vim-project'
+else
+	Plug 'ahmedkhalf/project.nvim'
+endif
 
 " Snippet Support
 if has('python3')
@@ -73,12 +77,15 @@ if has('python3')
 	Plug 'honza/vim-snippets'
 endif
 
-" AutoComplete and IDE-like features
+" IDE-like features
 Plug 'tpope/vim-dispatch'	" Integrated builds and error reporting
 Plug 'epheien/termdbg' 		" Debugger integration
 
+if has('nvim')
+	Plug 'tzachar/local-highlight.nvim'
+endif
+
 " Code Navigation
-"Plug 'preservim/tagbar'
 Plug 'liuchengxu/vista.vim'
 
 "  Load language server plugins
@@ -99,19 +106,18 @@ runtime macros/matchit.vim " for html % matching
 source $HOME/.vim/help.vim
 source $HOME/.vim/editorbehavior.vim
 
-source $HOME/.vim/airline.vim
 source $HOME/.vim/better-whitespace.vim
 source $HOME/.vim/wordmotion.vim
 source $HOME/.vim/tmux.compat.vim
 
 source $HOME/.vim/netrw-conf.vim
-source $HOME/.vim/projects.vim
 
 source $HOME/.vim/cpp-modern-highlighting.vim
 
 source $HOME/.vim/termdbg.vim
 "source $HOME/.vim/tagbar.vim
 source $HOME/.vim/vista.vim
+source $HOME/.vim/airline.vim
 
 source $HOME/.vim/ui.vim
 source $HOME/.vim/auto-light-dark.vim
@@ -126,6 +132,7 @@ endif
 if has('nvim')
 	lua require('nvim-config').load()
 else
+	source $HOME/.vim/projects.vim
 	source $HOME/.vim/async-lsp/main.vim
 endif
 

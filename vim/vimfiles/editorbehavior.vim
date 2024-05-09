@@ -35,6 +35,19 @@ function! FileOffset()
 	echo line2byte(line('.')) + col('.') - 1
 endfunction
 
+function! SetFileTitle()
+	let &titlestring = expand("%:t")
+
+	if &term =~ "screen"
+  		set t_ts=^[k
+  		set t_fs=^[\
+	endif
+	if &term =~ "screen" || &term =~ "xterm"
+  		set title
+	endif
+endfunction
+autocmd BufEnter * call SetFileTitle()
+
 set viewoptions-=options
 "set splitbelow
 
@@ -98,12 +111,15 @@ map <leader>l :redraw!<CR>
 "map <ScrollWheelUp> <C-u>
 "map <ScrollWheelDown> <C-d>
 
+
 function! CloseAll()
-	exe ":%bd|e#"
-	exe ":ProjectList"
+    " Close all buffers
+    exe "%bd"
+    lcd $HOME/Developer/
+    enew
+    exe ":Welcome"
 endfunction
 
+command! CloseAll call CloseAll()
 command CloseOthers %bd|e#
-command CloseAll call CloseAll()
-
 " vim: set ts=4 sts=4 noet sw=4 foldmethod=marker foldmarker=@{,@} :

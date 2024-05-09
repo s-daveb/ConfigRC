@@ -34,6 +34,14 @@ Project vktest_path 				, 'IOCore'
 File vktest_path . '/CMakeLists.txt'		, 'IOCore/CMakeLists'
 Callback 'IOCore'				, 'LoadLocalConfig'
 
+
+let vktest_path="C++/Projects/QJsonModel"
+Project vktest_path 				, 'QJsonModel'
+File vktest_path . '/CMakeLists.txt'		, 'QJsonModel/CMakeLists'
+Callback 'QJsonModel'				, 'LoadLocalConfig'
+
+
+
 function! LoadLocalConfig(title)
 	source ~/.vim/projects.d/load-local.vimrc
 endfunction

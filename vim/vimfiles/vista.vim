@@ -16,8 +16,9 @@ let g:vista_ctags_executable = "/usr/local/bin/ctags"
 "  \ }
 
 if has('nvim')
-	echo "nvim_lsp detected"
 	let g:vista_default_executive='nvim_lsp'
+else
+	let g:vista_default_executive='vim_lsp'
 endif
 
 " Ensure you have installed some decent font to show these pretty symbols, then you can enable icon for the kind.
@@ -132,7 +133,8 @@ function! ResizeVista()
 		 call OpenVista()
 	endif
 endfunction
-" }
+
+autocmd VimEnter *.cpp,*.hpp,*.c,*.h call vista#RunForNearestMethodOrFunction()
 
 " Call ResizeVista when the terminal is resized
 "autocmd BufWinEnter * call ResizeVista()

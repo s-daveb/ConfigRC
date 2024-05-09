@@ -1,4 +1,3 @@
-
 Plug 'neovim/nvim-lspconfig'
 
 Plug 'hrsh7th/cmp-nvim-lsp'
@@ -11,4 +10,3 @@ Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'quangnguyen30192/cmp-nvim-ultisnips'
 
 Plug 'p00f/clangd_extensions.nvim'
-

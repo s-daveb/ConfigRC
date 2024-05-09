@@ -23,10 +23,11 @@ function! ResCur()
 		endif
 endfunction
 
-augroup resCur
-		autocmd!
-		autocmd BufReadPost * call ResCur()
-augroup END	" @}
+"augroup resCur
+"		autocmd!
+"		autocmd BufReadPost * call ResCur()
+"augroup END	" @}
+
 " @{ function SynStack: Syntax Highlighting debugging function
 function! SynStack()
   if !exists("*synstack")
@@ -38,49 +39,51 @@ map <leader>synstack<CR> :call SynStack()<CR>
 " @}
 
 function ColorAdjust() " @{ hard-code some things like background transparency and colorcolums
-		if exists('+termguicolors')
-				let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
-				let &t_8b = "\<ESC>[48;2;%lu;%lu;%lum"
-				set termguicolors
+		if !has('nvim')
+				if exists('+termguicolors')
+						let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+						let &t_8b = "\<ESC>[48;2;%lu;%lu;%lum"
+						set termguicolors
+				endif
+
+				if !has("gui_running")
+						let &t_ZH="\e[3m"
+						let &t_ZR="\e[23m"
+				endif
+				if !has("gui_running") && !has("macvim")
+						"		" @{ Makes background transparent
+						"		" Not needed  with everforest
+						hi Normal ctermbg=None guibg=NONE
+						"		" @}
+						"		" @{ change how the end of the file is highlighted.
+						" Subtly change text width and set a fg color
+						hi NonText cterm=bold ctermfg=245 ctermbg=None guibg=NONE
+						hi EndOfbuffer cterm=bold ctermfg=245 ctermbg=None guibg=NONE
+						""		" @}
+						""		" @{ remove comment highlight and make text gray
+						hi clear Comment
+						hi clear SpecialComment
+						"		"hi Comment term=standout ctermfg=247 ctermbg=228 guifg=#939f91
+						hi Comment term=bold ctermfg=247 ctermbg=228 gui=italic guifg=#939f91
+						hi SpecialComment term=italic ctermfg=247 ctermbg=228 gui=italic guifg=#939f91
+						"		"@}
+						"		"@{ More obvious vertical splits
+						hi clear VertSplit
+						hi VertSplit term=bold cterm=italic ctermfg=247 gui=italic guifg=#939f91
+						" @}
+
+						hi ColorColumn term=reverse ctermbg=6 guibg=#41AC83
+
+						hi Folded cterm=italic
+						highlight lspInlayHintsType term=bold cterm=italic ctermfg=245 gui=italic guifg=#859289
+
+						highlight link lspInlayHintsParameter lspInlayHintsType
+				endif
 		endif
-
-		if !has("gui_running")
-				let &t_ZH="\e[3m"
-				let &t_ZR="\e[23m"
-		endif
-"
-"		" @{ Makes background transparent
-"		" Not needed  with everforest
-		hi Normal ctermbg=None guibg=NONE
-"		" @}
-"		" @{ change how the end of the file is highlighted.
-		" Subtly change text width and set a fg color
-		hi NonText cterm=bold ctermfg=245 ctermbg=None guibg=NONE
-		hi EndOfbuffer cterm=bold ctermfg=245 ctermbg=None guibg=NONE
-""		" @}
-""		" @{ remove comment highlight and make text gray
-		hi clear Comment
-		hi clear SpecialComment
-"		"hi Comment term=standout ctermfg=247 ctermbg=228 guifg=#939f91
-		hi Comment term=bold ctermfg=247 ctermbg=228 gui=italic guifg=#939f91
-		hi SpecialComment term=italic ctermfg=247 ctermbg=228 gui=italic guifg=#939f91
-"		"@}
-"		"@{ More obvious vertical splits
-		hi clear VertSplit
-		hi VertSplit term=bold cterm=italic ctermfg=247 gui=italic guifg=#939f91
-		" @}
-
-		hi ColorColumn term=reverse ctermbg=6 guibg=#41AC83
-
-		hi Folded cterm=italic
-		highlight lspInlayHintsType term=bold cterm=italic ctermfg=245 gui=italic guifg=#859289
-
-	highlight link lspInlayHintsParameter lspInlayHintsType
-
 endfunction " @}
 function! GuiConfig() " @{ detects GVIM and handles some things differently
 		if has('gui_running')
-				if has('nvim') 
+				if has('nvim')
 						set guifont=Berkeley\ Mono:h14
 				elseif has('macunix')
 						set guifont=BerkeleyMono-Regular:h14
@@ -94,10 +97,9 @@ function! GuiConfig() " @{ detects GVIM and handles some things differently
 				elseif !has('nvim')
 						set ttymouse=xterm2
 				endif
-
-				au BufWinEnter :silent set title<CR>
-				call ColorAdjust()
 		endif
+
+		call ColorAdjust()
 endfunc	" @}
 
 

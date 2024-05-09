@@ -1,10 +1,8 @@
 
 local module = {}
+local cmp = require('cmp')
 
 function module.load()
-	local cmp = require('cmp')
-	print("cmp-settings loading")
-
 	cmp.setup({
 		snippet = {
   		-- REQUIRED - you must specify a snippet engine
@@ -19,8 +17,8 @@ function module.load()
 		mapping = cmp.mapping.preset.insert({
   		['<C-b>'] = cmp.mapping.scroll_docs(-4),
   		['<C-f>'] = cmp.mapping.scroll_docs(4),
-  		['<TAB>'] = cmp.mapping.complete(),
-  		['<C-X>O'] = cmp.mapping.complete(),
+  		['<C-TAB>'] = cmp.mapping.complete(),
+  		['<C-X>o'] = cmp.mapping.complete(),
   		['<C-e>'] = cmp.mapping.abort(),
   		['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
 		}),
@@ -58,16 +56,8 @@ function module.load()
 		}),
 		matching = { disallow_symbol_nonprefix_matching = false }
 	})
-
-	-- Set up lspconfig.
-	local capabilities = require('cmp_nvim_lsp').default_capabilities()
-
-	require('lspconfig')['clangd'].setup {
-		capabilities = capabilities
-	}
-
-	print("cmp-settings loaded")
 end
+
 
 return module
 -- vim: set noet sts=0 sw=2 ts=2 :

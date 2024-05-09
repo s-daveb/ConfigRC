@@ -1,10 +1,10 @@
 local ui_module = {}
 
-function ui_module.init()
+function ui_module.load()
 	vim.diagnostic.config({
   		virtual_text = {
     			-- source = "always",  -- Or "if_many"
-    			prefix = 'Ⓓ', -- Could be '■', '▎', 'x'
+    			prefix = '🞊 :', -- Could be '■', '▎', 'x'
   		},
   		severity_sort = true,
   		float = {
