@@ -1,6 +1,8 @@
-let g:hardtime_default_on = 0
+let g:hardtime_default_on = 1
 let g:hardtime_showmsg = 1
 let g:hardtime_timeout = 1000
 let g:hardtime_ignore_quickfix = 1
 let g:hardtime_allow_different_key = 1
-let g:hardtime_maxcount = 8
+let g:hardtime_maxcount = 3
+
+let g:hardtime_ignore_buffer_patterns = [ "tagbar.vim" ]

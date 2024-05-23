@@ -1,11 +1,9 @@
-
-
 let g:UltiSnipsEditSplit = "horizontal"
 let g:UltiSnipsSnippetsDir = "~/.vim/UltiSnips"
 
-let g:UltiSnipsExpandTrigger		= "<C-l>"
-"let g:UltiSnipsRemoveSelectModeMappings = 0
+let g:UltiSnipsExpandTrigger = "<c-e>"
+"let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsListSnippets="<c-s-l>"
 
 let g:snips_author="Saul D. Beniquez"
-
-
+" vim: set ts=4 sts=4 noet sw=4 foldmethod=marker foldmarker=@{,@} ::

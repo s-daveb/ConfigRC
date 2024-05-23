@@ -12,6 +12,7 @@ endfunction
 " }
 "
 
+call SourceIfExists(projroot . "/.vim/local.vimrc")
 call SourceIfExists(projroot . "/editorconfig/local.vimrc")
 
 

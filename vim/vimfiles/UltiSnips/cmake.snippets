@@ -1,0 +1,164 @@
+snippet modeline
+# vim: ts=2 sw=2 noet foldmethod=indent :
+endsnippet
+
+
+snippet init
+cmake_minimum_required(VERSION ${0:3.12})
+
+# Prevent in-source builds @
+if (CMAKE_BINARY_DIR STREQUAL CMAKE_SOURCE_DIR)
+    message(FATAL_ERROR "Source and build directories cannot be the same.")
+endif()
+
+i/f (CMAKE_VERSION VERSION_GREATER_EQUAL "3.12.0")
+	cmake_policy(SET CMP0135 NEW)
+endif()
+
+# When this package is included as a subproject, there's no need to
+# build and run the unit-tests. setting -D ENABLE_TESTS to false could
+# speed up build time for pacakge maintainers
+if (NOT DEFINED PROJECT_NAME)
+	option(ENABLE_TESTS "Build and run unit tests" ON)
+else()
+	option(ENABLE_TESTS "Build and run unit tests" OFF)
+endif()
+endsnippet
+
+snippet project
+project(${0:project_name})
+	VERSION 0.1
+	LANGUAGES C CXX
+	# HOMEPAGE_URL
+	DESCRIPTION "A CGI script written in C++ that converts markdown to HTML"
+)
+endsnippet
+
+snippet standard_c++
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_C_STANDARD 17)
+set(CMAKE_C_EXTENSIONS OFF)
+set(CMAKE_CXX_EXTENSIONS OFF)
+endsnippet
+
+snippet standard_c++20
+set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_C_STANDARD 17)
+set(CMAKE_C_EXTENSIONS OFF)
+set(CMAKE_CXX_EXTENSIONS OFF)
+endsnippet
+
+
+snippet gnu_c++
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_C_STANDARD 17)
+set(CMAKE_C_EXTENSIONS ON)
+set(CMAKE_CXX_EXTENSIONS ON)
+endsnippet
+
+snippet standard_c
+set(CMAKE_C_STANDARD 17)
+set(CMAKE_C_EXTENSIONS OFF)
+endsnippet
+
+snippet gnu_c
+set(CMAKE_C_STANDARD 17)
+set(CMAKE_C_EXTENSIONS ON)
+endsnippet
+
+snippet include_fetch
+include(FetchContent)
+endsnippet
+
+snippet fetch_dep
+FetchContent_Declare(
+  ${0:googletest}
+  GIT_REPOSITORY ${1:https://github.com/google/googletest.git}
+  GIT_TAG        ${2:703bd9caab50b139428cea1aaff9974ebee5742e}
+)
+endsnippet
+
+snippet fetch_dep_url
+FetchContent_Declare(
+  ${0:library_name}
+  URL      ${1:https://library.url}
+  URL_HASH MD5=${2:<md5-hash>}
+)
+endsnippet
+
+snippet fetch_catch2
+if(ENABLE_TESTS)
+FetchContent_Declare(
+   	Catch2
+	URL https://github.com/catchorg/Catch2/archive/refs/tags/v3.4.0.zip
+	URL_HASH MD5=c426e77d4ee0055410bc930182959ae5
+	FIND_PACKAGE_ARGS
+	)
+
+# Avoid building Catch2 if unit tests aren't going to be built
+if (ENABLE_TESTS)
+	FetchContent_MakeAvailable(Catch2)
+	if (TARGET Catch2)
+		set_target_properties(Catch2 PROPERTIES CXX_STANDARD 17)
+	endif()
+
+	if (TARGET Catch2WithMain)
+		set_target_properties(Catch2WithMain PROPERTIES CXX_STANDARD 17)
+endif()
+endsnippet
+
+snippet include_pkgconf
+find_package(PkgConfig)
+endsnippet
+
+snippet pkg_conf_find
+pkg_check_modules(${0:GTKMM} ${1:gtkmm-4.0})
+endsnippet
+
+snippet set_output_dirs
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/build/lib)
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/build/lib)
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/build/bin)
+endsnippet
+
+snippet set_debug_flags
+if(CMAKE_BUILD_TYPE STREQUAL "Debug")
+	set(custom_dbg_flags "-O0 -ggdb")
+
+    # Custom flags for Debug configuration
+    set(CMAKE_C_FLAGS_DEBUG "${CMAKE_C_FLAGS_DEBUG} ${custom_dbg_flags}")
+    set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} ${custom_dbg_flags}")
+
+	# Set static linking of things here
+	#
+	# if(USE_BOOST_STACKTRACE)
+	# 	set(Boost_USE_STATIC_LIBS ON)
+	# endif()
+elseif(CMAKE_BUILD_TYPE STREQUAL "Release")
+	set(custom_rel_flags "-Os")
+
+    set(CMAKE_C_FLAGS_RELEASE "${CMAKE_C_FLAGS_RELEASE} ${custom_rel_flags}")
+    set(
+		CMAKE_CXX_FLAGS_RELEASE
+		"${CMAKE_CXX_FLAGS_RELEASE} ${custom_rel_flags}"
+	)
+
+	# Set shared linking of things here
+	#
+	# if(USE_BOOST_STACKTRACE)
+	# 	set(Boost_USE_STATIC_LIBS ON)
+	# endif()
+
+endif()
+endsnippet
+
+snippet add_subdirectories
+add_subdirectory(src)
+add_subdirectory(apps)
+
+if (ENABLE_TESTS)
+	add_subdirectory(tests)
+endif()
+endsnippet
+
+# vim: set ft=snippets foldmethod=marker foldmarker=snippet,endsnippet :

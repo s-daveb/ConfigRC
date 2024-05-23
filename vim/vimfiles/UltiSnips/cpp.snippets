@@ -10,7 +10,12 @@ snippet /**=
  *  -- Saul `date +%d.%m.%y` ☕️  */
 endsnippet
 
-snippet modeline "// vim: set foldmethod..."
+snippet modeline "// vim: set foldmethod=syntax ts=8 ..."
+// clang-format off
+// vim: set foldmethod=syntax foldminlines=10 textwidth=80 ts=8 sts=0 sw=8 noexpandtab ft=cpp.doxygen :
+endsnippet
+
+snippet modeline_foldmarker "// vim: set foldmethod..."
 // clang-format off
 // vim: set foldmethod=marker foldmarker=#region,#endregion textwidth=80 ts=8 sts=0 sw=8  noexpandtab ft=cpp.doxygen :
 endsnippet
@@ -31,32 +36,12 @@ snippet doxyclass "Doxygen documentation for a class"
  */
 endsnippet
 
+snippet TEST_SUITE{
+BEGIN_TEST_SUITE(${1}) {
+endsnippet
+
 snippet testsuite_name "Create a static string in this file"
 namespace {
 const char* TEST_SUITE_NAME= "${1}"
 }
 endsnippet
-snippet includefold
-// @fold  #include directives
-// C includes
-${1}
-// STL Includes
-${2}
-// Boost Includes
-${3}
-// Project Includes
-${4}
-// @endfold
-endsnippet
-
-snippet usingfold
-// @fold  #using directives
-// STL Usings
-${2}
-// Boost Usings
-${3}
-// Project Usings
-${4}
-// @endfold
-endsnippet
-

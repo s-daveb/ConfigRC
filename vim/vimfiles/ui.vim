@@ -7,115 +7,110 @@ set copyindent
 set preserveindent
 set noexpandtab
 set softtabstop=0
-set shiftwidth=4
-set tabstop=4
+set shiftwidth=8
+set tabstop=8
 
 set foldmethod=marker
-set foldmarker=#region,#endregion
+set foldmarker=@{,@}
 
 set colorcolumn=80
 
-if has("mouse_sgr")
-	set ttymouse=sgr
-else
-	if !has("nvim")
-		set ttymouse=xterm2
-	endif
-endif
-
-if has('gui_running') == 0
-	au BufWinEnter :silent set title<CR>
-endif
-
-" function ResCur - Restore cursor position on file load #region
-function! RestoreCursor()
-	if line("'\"") <= line("$")
-		normal! g`"
-		return 1
-	endif
+" function ResCur - Restore cursor position on file load @{
+function! ResCur()
+		if line("'\"") <= line("$")
+				normal! g`"
+				return 1
+		endif
 endfunction
 
-augroup restoreCursor
-	autocmd!
-	autocmd BufWinEnter * call RestoreCursor()
-augroup END	" #endregion
+"augroup resCur
+"		autocmd!
+"		autocmd BufReadPost * call ResCur()
+"augroup END	" @}
 
-function! FontConfig() " for gvim
-	if has('gui_running')
-		if has('macunix')
-			set guifont=BerkeleyMono-Regular:h15
-			set macligatures
-			set lines=48
-		else
-			if has('nvim')
-				set guifont=Berkeley\ Mono:h12
- 	 	 	else
- 	 	 		set guifont=Berkeley\ Mono\ Regular\ 12
-			endif
-				set lines=24
+" @{ function SynStack: Syntax Highlighting debugging function
+function! SynStack()
+  if !exists("*synstack")
+    return
+  endif
+  echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
+endfunc
+map <leader>synstack<CR> :call SynStack()<CR>
+" @}
+
+function ColorAdjust() " @{ hard-code some things like background transparency and colorcolums
+		if !has('nvim')
+				if exists('+termguicolors')
+						let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+						let &t_8b = "\<ESC>[48;2;%lu;%lu;%lum"
+						set termguicolors
+				endif
+
+				if !has("gui_running")
+						let &t_ZH="\e[3m"
+						let &t_ZR="\e[23m"
+				endif
+				if !has("gui_running") && !has("macvim")
+						"		" @{ Makes background transparent
+						"		" Not needed  with everforest
+						hi Normal ctermbg=None guibg=NONE
+						"		" @}
+						"		" @{ change how the end of the file is highlighted.
+						" Subtly change text width and set a fg color
+						hi NonText cterm=bold ctermfg=245 ctermbg=None guibg=NONE
+						hi EndOfbuffer cterm=bold ctermfg=245 ctermbg=None guibg=NONE
+						""		" @}
+						""		" @{ remove comment highlight and make text gray
+						hi clear Comment
+						hi clear SpecialComment
+						"		"hi Comment term=standout ctermfg=247 ctermbg=228 guifg=#939f91
+						hi Comment term=bold ctermfg=247 ctermbg=228 gui=italic guifg=#939f91
+						hi SpecialComment term=italic ctermfg=247 ctermbg=228 gui=italic guifg=#939f91
+						"		"@}
+						"		"@{ More obvious vertical splits
+						hi clear VertSplit
+						hi VertSplit term=bold cterm=italic ctermfg=247 gui=italic guifg=#939f91
+						" @}
+
+						hi ColorColumn term=reverse ctermbg=6 guibg=#41AC83
+
+						hi Folded cterm=italic
+						highlight lspInlayHintsType term=bold cterm=italic ctermfg=245 gui=italic guifg=#859289
+
+						highlight link lspInlayHintsParameter lspInlayHintsType
+				endif
 		endif
-		set columns=83
-	endif
-endfunc	" #endregion
-
-call FontConfig()
-
-function! TransparentTerminalFix()
-	if !has("gui_running")
-		hi NonText cterm=bold ctermfg=245 ctermbg=None guibg=NONE
-		hi EndOfbuffer cterm=bold ctermfg=245 ctermbg=None guibg=NONE
-
-		" Need these changes to enable terminal transparency in iTerm2 #region
-		if exists('+termguicolors')
-			let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
-			"let &t_8b = "\<ESC>[48;2;%lu;%lu;%lum"
-			set termguicolors
+endfunction " @}
+function! GuiConfig() " @{ detects GVIM and handles some things differently
+		if has('gui_running')
+				if has('nvim')
+						set guifont=Berkeley\ Mono:h14
+				elseif has('macunix')
+						set guifont=BerkeleyMono-Regular:h14
+						set macligatures
+				else
+						set guifont=Fira\ Code\ 14
+				endif
+		else " if has('gui_running') == false
+				if has("mouse_sgr")
+						set ttymouse=sgr
+				elseif !has('nvim')
+						set ttymouse=xterm2
+				endif
 		endif
 
-		hi Normal ctermbg=None guibg=NONE
-		"#endregion
+		call ColorAdjust()
+endfunc	" @}
 
-		hi clear Comment
-		hi Comment term=standout ctermfg=247 ctermbg=228 guifg=#939f91
-		"hi Comment term=standout ctermfg=247 ctermbg=228 guifg=#939f91 guibg=#f3efda
-		"hi Comment term=bold cterm=italic ctermfg=none gui=italic guifg=#95B6B9
-	endif
-endfunction
 
-function! ReloadColors()
-	if exists("g:loaded_auto_light_dark") && (g:loaded_auto_light_dark == 1)
-		call DesiredInterfaceMode()
-	else
-		if has("gui_running")
-			set background=dark
-			colo dracula
-		else
-			set background=dark
-  		if ($TMUX != "" )
-					let g:everforest_transparent_background=2
-					let g:everforest_better_performance = 0
-					let g:everforest_background = 'medium'
-					let g:everforest_transparent_background=1
-					let g:everforest_ui_contrast = 'high'
-					colo everforest
-			else
-				colo dracula
-			endif
-			call TransparentTerminalFix()
-		endif
-	endif
-endfunction
-
-nmap <leader>bg :let &background = ( &background == "dark"? "light" : "dark" )<CR>
-nmap <leader>rc :call ReloadColors()<CR>
-
-" #region  SynStack() - Displays the syntax highlighting group under the cursor
+" @{ func SynStack() - Displays the syntax highlighting group under the cursor
 function! <SID>SynStack()
-	if !exists("*synstack")
-		return
-	endif
-	echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
-endfunc " #endregion
+		if !exists("*synstack")
+				return
+		endif
+		echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
+endfunc " @}
 nmap <leader>sp :call <SID>SynStack()<CR>
 
-" vim: set ts=2 sts=0 sw=2 noet foldmethod=marker foldmarker=#region,#endregion :
+
+" vim: set ts=2 sts=0 sw=4 noet foldmethod=marker foldmarker=@{,@} :

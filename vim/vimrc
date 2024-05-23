@@ -1,4 +1,3 @@
-
 set nocompatible
 set title
 set encoding=utf-8
@@ -6,13 +5,12 @@ set backspace=indent,eol,start
 set mouse=a
 let mapleader=" "
 
-source $HOME/.vim/vim-plug.vim
+if !has('nvim')
+let &pythonthreedll = '/Users/sdavid/.local/python/bin/python' 
+endif
 
-""""""""   My configuration """""""""
-runtime macros/matchit.vim " for html % matching
+" trim(system("pyenv which python"))
+source $HOME/.vim/plug.vim
 
-source $HOME/.vim/editorbehavior.vim
-source $HOME/.vim/help.vim
 
-source $HOME/.vim/ui.vim
 " vim: set ft=vim tw=80 expandtab tabstop=2 softtabstop=2 sw=2 :

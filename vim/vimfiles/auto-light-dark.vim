@@ -1,42 +1,42 @@
 
-" This is a comment
-function _everforest_settings()
-	if !has("gui_running")
-		let g:everforest_transparent_background=2
-	endif
-	let g:everforest_better_performance = 0
+let s:selected_dark_colo="everforest"
+let s:selected_light_colo="everforest"
+
+function! SetEverForestOptions()
+	" Set contrast.
+	" This configuration option should be placed before `colorscheme everforest`.
+	" Available values: 'hard', 'medium'(default), 'soft'
 	let g:everforest_background = 'medium'
-	let g:everforest_transparent_background=1
-	let g:everforest_ui_contrast = 'high'
+	let g:everforest_better_performance = 1
+
+	if has('gui_running')
+		let g:everforest_transparent_background = 0
+	else
+		let g:everforest_transparent_background = 1
+	endif
+
 endfunction
 
 function DarkMode()
-    set background=dark
-
-	if ( $ITERM == "1" )
-		call _everforest_settings()
-		colorscheme  dracula
-		AirlineTheme dracula
-	else
-		colorscheme dracula
-		AirlineTheme dracula
+	if (s:selected_dark_colo == "everforest")
+		call SetEverForestOptions()
+		set background=dark
 	endif
-	call TransparentTerminalFix()
+
+	execute "colorscheme " . s:selected_dark_colo
+	execute "AirlineTheme " . s:selected_dark_colo
+	call GuiConfig()
 endfunction
 
 function LightMode()
-    set background=light
-
-	if ( $ITERM == "1" )
-		call _everforest_settings()
-    	set background=dark
-		colorscheme  everforest
-		AirlineTheme  everforest
-	else
-		set background=dark
-		colorscheme dracula
-		AirlineTheme dracula
+	if (s:selected_light_colo == "everforest")
+		call SetEverForestOptions()
+		set background=light
 	endif
-	call TransparentTerminalFix()
+	execute "colorscheme " . s:selected_light_colo
+	execute "AirlineTheme " . s:selected_light_colo
+
+	call GuiConfig()
 endfunction
 
+" vim: set ts=4 sts=4 noet sw=4 foldmethod=marker foldmarker=@{,@} :

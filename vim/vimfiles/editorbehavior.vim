@@ -1,16 +1,17 @@
 " for sh shell
 let g:is_posix=1
 
-if !has('nvim')
-	set directory=$HOME/.cache/vim/swap/
-	set viewdir=$HOME/.cache/vim/view
-	set undodir=$HOME/.cache/vim/undo/
-else
+set undofile
+
+if has('nvim')
 	set directory=$HOME/.cache/nvim/swap/
 	set viewdir=$HOME/.cache/nvim/view
 	set undodir=$HOME/.cache/nvim/undo/
+else
+	set directory=$HOME/.cache/vim/swap/
+	set viewdir=$HOME/.cache/vim/view
+	set undodir=$HOME/.cache/vim/undo/
 endif
-set undofile
 
 set undolevels=1000
 set undoreload=10000
@@ -29,27 +30,33 @@ set tags=./build/tags,./tags;
 if !has('nvim')
 	set viminfo='10,\"100,:20,n~/.viminfo
 endif
+
 function! FileOffset()
-    echo line2byte(line('.')) + col('.') - 1
+	echo line2byte(line('.')) + col('.') - 1
 endfunction
 
-set viewoptions-=options
-set splitbelow
+function! SetFileTitle()
+	let &titlestring = expand("%:t")
 
-if !has('nvim')
-	autocmd BufLeave *.* mkview!
-	autocmd BufEnter *.* silent loadview
-	autocmd BufWinLeave *.* mkview!
-	autocmd BufWinEnter *.* silent loadview
-endif
+	if &term =~ "screen"
+  		set t_ts=^[k
+  		set t_fs=^[\
+	endif
+	if &term =~ "screen" || &term =~ "xterm"
+  		set title
+	endif
+endfunction
+autocmd BufEnter * call SetFileTitle()
+
+set viewoptions-=options
+"set splitbelow
 
 syntax on
 
 function! RepeatChar(char, count)
-	return repeat(a:char, a:count)
+return repeat(a:char, a:count)
 endfunction
 
-"autocmd FileType qf wincmd J
 
 nnoremap s :<C-U>exec "normal a".RepeatChar(nr2char(getchar()), v:count1)<CR>
 nnoremap S :<C-U>exec "normal i".RepeatChar(nr2char(getchar()), v:count1)<CR>
@@ -61,14 +68,14 @@ endfunction
 command WriteRandom call WriteRandomNum()
 nnoremap <leader>rand :WriteRandom<CR>
 
-" # Function to permanently delete views created by 'mkview'
+" # Function to permanently delete views created by
 function! MyDeleteView()
   let path = fnamemodify(bufname('%'),':p')
   " vim's odd =~ escaping for /
   let path = substitute(path, '=', '==', 'g')
   if empty($HOME)
   else
-      let path = substitute(path, '^'.$HOME, '\~', '')
+	  let path = substitute(path, '^'.$HOME, '\~', '')
   endif
   let path = substitute(path, '/', '=+', 'g') . '='
   " view directory
@@ -86,9 +93,7 @@ com! FormatXML :%!python3 -c "import xml.dom.minidom, sys; print(xml.dom.minidom
 nnoremap <leader>x :FormatXML<CR>
 
 set clipboard=unnamed
-if $DISPLAY =~# 'localhost:'
-	set clipboard=autoselect,exclude:.*
-endi
+
 set errorbells
 
 map q] :cn<CR>
@@ -101,13 +106,20 @@ map l[ :lp<CR>
 map l{ :lopen<CR>
 map l} :lclose<CR>
 
-" Disable obnoxious period repeat thing, so that I can use vim on an ipad
-" without an ESC key with cmd+.
-nnoremap . <nop>
+map <leader>l :redraw!<CR>
 
-function SetEditorViewOptions()
-TagbarOpen
-"Vexplore
+"map <ScrollWheelUp> <C-u>
+"map <ScrollWheelDown> <C-d>
+
+
+function! CloseAll()
+    " Close all buffers
+    exe "%bd"
+    lcd $HOME/Developer/
+    enew
+    exe ":Welcome"
 endfunction
 
-autocmd FileType cpp.doxygen call SetEditorViewOptions()
+command! CloseAll call CloseAll()
+command CloseOthers %bd|e#
+" vim: set ts=4 sts=4 noet sw=4 foldmethod=marker foldmarker=@{,@} :

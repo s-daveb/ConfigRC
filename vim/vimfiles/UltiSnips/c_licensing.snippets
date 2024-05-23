@@ -4,12 +4,12 @@
 #                            TextMate Snippets                            #
 ###########################################################################
 
-priority -5
+priority 99
 
 snippet fileheader "File header with spaces for copyright information"
 /* `!p snip.rv = snip.fn`
- * Copyright © 20${1} ${2}
- * License: ${3}
+ * Copyright © 2024 Saul D. Beniquez
+ * License: ${1}
  */
 endsnippet
 
@@ -22,11 +22,42 @@ Mozilla Public License v. 2.0
 endsnippet
 
 snippet MPL2 "MPL license"
-Mozilla Public License v. 2.0
+Mozilla Public License v2.0 (MPL2)
 *
 * This Source Code Form is subject to the terms of the Mozilla Public License,
 * v.2.0. If a copy of the MPL was not distributed with this file, You can
 * obtain one at https://mozilla.org/MPL/2.0/.
+endsnippet
+
+snippet MIT "MIT LIcense"
+The MIT License (MIT)
+*
+* Permission is hereby granted, free of charge, to any person obtaining
+* a copy of this software and associated documentation files (the "Software"),
+* to deal in the Software without restriction, including without limitation
+* the rights to use, copy, modify, merge, publish, distribute, sublicense,
+* and/or sell copies of the Software, and to permit persons to whom the
+* Software is furnished to do so, subject to the following conditions:
+*
+* The above copyright notice and this permission notice shall be included
+* in all copies or substantial portions of the Software.
+*
+* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+* OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+* DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE
+* OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+endsnippet
+
+snippet BSD "FreeBSD License"
+SPDX-License-Identifier: BSD-2-Clause
+*
+* This source code is subject to the terms of the 2-Clause BSD License,
+* also known as the "Simplified BSD License" or the "FreeBSD License."
+* If a copy of this license is not at the project root, you can obtain one
+* at https://opensource.org/license/bsd-2-clause/
 endsnippet
 
 snippet GPL "GPL License"

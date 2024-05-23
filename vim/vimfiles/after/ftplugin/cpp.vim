@@ -1,10 +1,11 @@
-set preserveindent
-set smartindent
 
-set cindent
-set cindent cinkeys-=0#
+if !has('nvim')
+source ~/.vim/async-lsp/keymap.vim
+endif
 
-source ~/.vim/vim-asynclsp/asynclsp.vim
-source ~/.vim/vim-asynclsp/providers.vim
+source ~/.vim/c.keybindings.vim
 
-source ~/.vim/vim-clang-format.py.vim
+set foldlevelstart=5
+set foldminlines=24    "  Folds must be > this  size to display as closed
+
+"au BufRead *.cpp,*.h,*.hpp :Vista
