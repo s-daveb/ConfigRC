@@ -1,17 +1,16 @@
 " for sh shell
 let g:is_posix=1
 
-set undofile
-
-if has('nvim')
-	set directory=$HOME/.cache/nvim/swap/
-	set viewdir=$HOME/.cache/nvim/view
-	set undodir=$HOME/.cache/nvim/undo/
-else
+if !has('nvim')
 	set directory=$HOME/.cache/vim/swap/
 	set viewdir=$HOME/.cache/vim/view
 	set undodir=$HOME/.cache/vim/undo/
+else
+	set directory=$HOME/.cache/nvim/swap/
+	set viewdir=$HOME/.cache/nvim/view
+	set undodir=$HOME/.cache/nvim/undo/
 endif
+set undofile
 
 set undolevels=1000
 set undoreload=10000
@@ -37,11 +36,12 @@ endfunction
 set viewoptions-=options
 set splitbelow
 
-autocmd BufLeave *.* mkview!
-autocmd BufEnter *.* silent loadview
-
-autocmd BufWinLeave *.* mkview!
-autocmd BufWinEnter *.* silent loadview
+if !has('nvim')
+	autocmd BufLeave *.* mkview!
+	autocmd BufEnter *.* silent loadview
+	autocmd BufWinLeave *.* mkview!
+	autocmd BufWinEnter *.* silent loadview
+endif
 
 syntax on
 
@@ -87,7 +87,7 @@ nnoremap <leader>x :FormatXML<CR>
 
 set clipboard=unnamed
 if $DISPLAY =~# 'localhost:'
-	set clipboard=autoselect,exclude:.* 
+	set clipboard=autoselect,exclude:.*
 endi
 set errorbells
 
