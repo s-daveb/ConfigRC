@@ -5,8 +5,16 @@ local codecompanion = require("codecompanion")
 local adapters = require("codecompanion.adapters")
 
 local env_host = vim.fn.getenv("OLLAMA_HOST")
-local host_url = env_host .. "/api/chat" or "http://localhost:11434/api/chat"
 
+if env_host == nil or type(env_host) == "userdata" then
+    env_host = "localhost:11434"
+else
+    env_host = tostring(env_host)
+end
+
+local host_url = "http://" .. env_host .. "/api/chat"
+
+print(host_url)
 local ollama_adapter = adapters.use("ollama", {
   		url=host_url,
       schema = {
