@@ -108,29 +108,25 @@ source $HOME/.vim/editorbehavior.vim
 
 source $HOME/.vim/better-whitespace.vim
 source $HOME/.vim/wordmotion.vim
-source $HOME/.vim/tmux.compat.vim
 
 source $HOME/.vim/netrw-conf.vim
 
 source $HOME/.vim/cpp-modern-highlighting.vim
 
 source $HOME/.vim/termdbg.vim
-"source $HOME/.vim/tagbar.vim
 source $HOME/.vim/vista.vim
 source $HOME/.vim/airline.vim
 
 source $HOME/.vim/ui.vim
 source $HOME/.vim/auto-light-dark.vim
-
 source $HOME/.vim/fzf.vim
-source ${HOME}/.vim/copilot-settings.vim
 
 if has('python3')
 	source $HOME/.vim/UltiSnips.vim
 endif
 
 if has('nvim')
-	lua require('nvim-config').load()
+	lua require('main-config').load()
 else
 	source $HOME/.vim/projects.vim
 	source $HOME/.vim/async-lsp/main.vim

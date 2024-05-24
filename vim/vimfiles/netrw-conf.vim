@@ -3,19 +3,22 @@ let g:netrw_altv = 1
 
 let g:netrw_preview = 1
 let g:netrw_liststyle = 3
-let g:netrw_winsize = 20
 
 let g:netrw_usetab = 1
-let g:netrw_wiw = 15
 
 set wildignore='.*,.DS_Store'
 
-map <silent> <leader><C-E> :Lexplore<cr>
-map <silent> <C-E> :Lexplore %:p:h<cr>
+if !exists('gui_vimr')
+	let g:netrw_wiw = 15
+	let g:netrw_winsize = 20
 
-fu! NetrwKeyBindings()
-	map <silent><buffer> gn :Ntree<cr>
-	map <silent><buffer><C-E> :close<cr>
-endfunction
+	map <silent> <leader><C-E> :Lexplore<cr>
+	map <silent> <C-E> :Lexplore %:p:h<cr>
 
-autocmd FileType netrw :call NetrwKeyBindings()
+	fu! NetrwKeyBindings()
+		map <silent><buffer> gn :Ntree<cr>
+		map <silent><buffer><C-E> :close<cr>
+	endfunction
+
+	autocmd FileType netrw :call NetrwKeyBindings()
+endif
