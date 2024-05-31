@@ -1,7 +1,7 @@
 local module = {}
+local project_plugin = require('project_nvim')
 
 function module.load()
-	project_plugin = require('project_nvim')
 
 	-- Commented out settings means it's default, or unwanted
 	project_plugin.setup({

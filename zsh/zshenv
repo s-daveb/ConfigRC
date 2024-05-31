@@ -13,6 +13,8 @@ fi
 export HOMEBREW_NO_ENV_HINTS=1
 export MallocNanoZone=0
 
-if [[ -f ~/.zshenv.private ]; then
-	source ~/.zshenv.private
+if [[ -f ~/.zshenv.private ]]; then
+	if [[ -z "${OLLAMA_HOST}" ]]; then
+		source ~/.zshenv.private
+	fi
 fi

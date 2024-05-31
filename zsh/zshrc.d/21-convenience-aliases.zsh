@@ -8,5 +8,5 @@ alias bat="bat --theme=Dracula"
 alias firepower='sudo /usr/libexec/ApplicationFirewall/socketfilterfw'
 alias gd=gallery-dl
 
-alias gvim="vimr"
+alias gvim="neovide --fork"
 alias vim="nvim"

@@ -1,4 +1,4 @@
-
+local vim = vim
 local module = {}
 local cmp = require('cmp')
 
@@ -15,11 +15,11 @@ function module.load()
   		documentation = cmp.config.window.bordered(),
 		},
 		mapping = cmp.mapping.preset.insert({
-  		['<C-b>'] = cmp.mapping.scroll_docs(-4),
-  		['<C-f>'] = cmp.mapping.scroll_docs(4),
-  		['<C-space>'] = cmp.mapping.complete(),
-  		['<C-X>o'] = cmp.mapping.complete(),
-  		['<C-e>'] = cmp.mapping.abort(),
+  		['<C-B>'] = cmp.mapping.scroll_docs(-4),
+  		['<C-F>'] = cmp.mapping.scroll_docs(4),
+  		['<C-Space>'] = cmp.mapping.complete(),
+  		--['<C-X>o'] = cmp.mapping.complete(),
+  		['<ESC>'] = cmp.mapping.abort(),
   		['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
 		}),
 		sources = cmp.config.sources({

@@ -1,6 +1,5 @@
+local python_venv_path="${HOME}/.local/python/"
+alias venv-activate="source ${python_venv_path}/bin/activate"
 
-
-export PATH=${HOME}/.local/python/bin:${PATH}
-
-alias python-activate="source ${HOME}/.local/python/bin/activate"
-
+export PYENV_ROOT="$HOME/.pyenv"
+eval "$(pyenv init -)"
