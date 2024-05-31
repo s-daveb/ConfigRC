@@ -10,16 +10,6 @@ local selected_model = vim.env["OLLAMA_DEFAULT_MODEL"] or "phi3"
 
 local host_url = "http://" .. env_host .. "/api/chat"
 
-if env_host == nil or type(env_host) == "userdata" then
-    env_host = "localhost:11434"
-else
-    env_host = tostring(env_host)
-end
-
-local host_url = "http://" .. env_host .. "/api/chat"
-
-local active = true
-
 local function serverIsReachable(hostname,callback)
 	local url = string.format("http://%s", hostname)
 	Job:new({
@@ -53,22 +43,19 @@ function M.load()
 			print("Server is reachable")
 			env_host = "localhost:11434"
 			host_url = "http://" .. env_host .. "/api/chat"
-		else
-			vim.schedule_wrap(function() 
-				codecompanion.setup({
-					strategies = {
-  					chat = "ollama",
-  					inline = "ollama",
-  					tool = "ollama"
-					},
-  				adapters = {
-    	  		ollama = ollama_adapter,
-  				},
-				})
-				vim.api.nvim_clear_autocmds({ event = "FileType", pattern = "codecompletion" })
-			end)
 		end
 	end)
+	codecompanion.setup({
+		strategies = {
+  		chat = "ollama",
+  		inline = "ollama",
+  		tool = "ollama"
+		},
+  	adapters = {
+    	  ollama = ollama_adapter,
+  	},
+	})
+	vim.api.nvim_clear_autocmds({ event = "FileType", pattern = "codecompletion" })
 end
 
 return M
