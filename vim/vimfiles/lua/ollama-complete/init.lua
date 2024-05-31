@@ -1,16 +1,17 @@
 local vim = vim
 
+local Job = require('plenary.job')
+local Util = require('ollama-complete.util')
+
 local M = {
   hostname = vim.env["OLLAMA_HOST"] or"localhost:11434",
   model = vim.env["OLLAMA_DEFAULT_MODEL"] or "phi3",
   keydelay = 500,
 }
 
-local Job = require('plenary.job')
-local Util = require('ollama-complete.util')
 
 local active = false
-local debug = true
+local debug = false
 
 local cursorInfo = {
   bufnr = 0,
@@ -41,6 +42,7 @@ local function bind_autocmds()
         timer:start(M.keydelay, 0, vim.schedule_wrap(callbacks.on_cursor_hold))
       end
     })
+
     table.insert(runtimeInfo.autoCmdList, autoSuggestions)
 end
 
@@ -49,7 +51,6 @@ local function unbind_autocmds()
     vim.api.nvim_del_autocmd(autocmd_id)
   end
 end
-
 
 local function bindkeys(binding, cmd, opts)
   vim.api.nvim_set_keymap(
@@ -67,7 +68,7 @@ local function bind_keymaps(opts)
   end
 
   local manualCompletion_cmd =
-    '<cmd>lua require("ollama-complete").get_completion()<CR>'
+    '<cmd>lua require("ollama-complete").Complete()<CR>'
 
   bindkeys({'n', '<Leader>gc' }, manualCompletion_cmd, opts)
 end
@@ -78,18 +79,22 @@ local function unbind_keymaps()
   end
 end
 
-function M.enable()
-  runtimeInfo.active = true
+function M.Enable()
+  if (active == false) then
+    active = true
+  end
+
+  vim.cmd("Copilot disable")
+
   M.setup()
-  bind_autocmds()
-  bind_keymaps()
 end
 
-function M.disable()
-  runtimeInfo.active = false
+function M.Disable()
+  active = false
   unbind_autocmds()
   unbind_keymaps()
-  M.setup()
+
+  vim.cmd("Copilot enable")
 end
 
 local function readUserConfig(userConfig)
@@ -109,41 +114,85 @@ local function readUserConfig(userConfig)
   end
 end
 
+local function displayInline(message)
+  local bufnr = cursorInfo.bufnr
+  local line = cursorInfo.lineNumber
+  local column = cursorInfo.columnNumber
+
+	if message ~= nil then
+    debugPrint(
+      string.format("Displaying inline hint: %s at line %d, column %d",
+        message,
+        line,
+        column
+      )
+    )
+
+		local opts = {
+  		virt_text = {{message, "Comment"}},
+  		virt_text_pos = 'eol',
+  		--virt_text_win_col = column,
+		}
+    vim.schedule(
+      function()
+        vim.api.nvim_buf_set_extmark(bufnr, runtimeInfo.namespaceId, line, column, opts)
+      end
+    )
+  end
+end
+
 local function setupCallbacks()
   callbacks.on_cursor_hold = function()
-    if (runtimeInfo.active) then
+    if (active) then
 	    M.Complete()
     end
   end
+
+  callbacks.handleServerResponse = function(server_response)
+    if (server_response == nil) then
+      error("Nil completions returned from server", 1)
+      return
+    end
+    server_response = server_response[1]
+    debugPrint(string.format("Server response type: %s, value: %s", type(server_response), server_response))
+    -- local query_response = vim.json.decode(server_response.response)
+    displayInline("GYNA")
+  end
+
+  --debugPrint("Callbacks setup complete")
+
 end
 
 function M.setup(userConfig)
   if (active == false) then
     return
-  else
-	  readUserConfig(userConfig)
-    setupCallbacks()
-  end
+	end
+
+	readUserConfig(userConfig)
+  setupCallbacks()
+
+  bind_autocmds()
+  bind_keymaps()
 
   -- Check if the server is reachable
   Util.serverIsReachable(M.hostname, function(reachable)
     if not reachable then
       local code = function()
-        M.disable()
-        print("Ollama-complete disabled because the server is not reachable")
+        M.Disable()
+        debugPrint("Disabled because the server is not reachable")
       end
-      vim.schedule_wrap(code);
+      vim.schedule(code);
     end
   end)
 
-  debugPrint("ollama_completions setup complete")
+  debugPrint("Setup complete")
 end
 
-local function query_ollama_server_async(buffer_contents, lineNumber, callback)
-	local prompt = string.format(
-	"Try to complete line %d of the following code. Your response should consist of a single string, or people will be hurt. I know you'll be a hero. Here's the source file:\n%s",
-	lineNumber, buffer_contents
-	)
+local function ollamaQueryAsync(bufferContents, lineNumber, handler)
+	local prompt = --string.format(
+	"Complete the followin pattern: 1 2 3 ... "
+	--lineNumber, bufferContents
+	--)
 
 	local prompt_request = {
 		format = "json",
@@ -153,7 +202,7 @@ local function query_ollama_server_async(buffer_contents, lineNumber, callback)
 	}
 
 	local encoded_request = vim.json.encode(prompt_request)
-	local url = string.format("http://%s/api/chat", M.hostname)
+	local url = string.format("http://%s/api/generate", M.hostname)
 
 	local cmd = 'curl'
 	local args = {
@@ -163,7 +212,7 @@ local function query_ollama_server_async(buffer_contents, lineNumber, callback)
 		url
 	}
 
-	debugPrint("Starting new job with command: ", cmd)
+	--debugPrint(string.format("Starting new job with command: %s %s", cmd, table.concat(args, " ")))
 	runtimeInfo.active_jobs[cmd] = true
 
 	Job:new({
@@ -173,7 +222,7 @@ local function query_ollama_server_async(buffer_contents, lineNumber, callback)
 			runtimeInfo.active_jobs[cmd] = nil
 			local result = j:result()
 			if return_val == 0 and result ~= "" then
-				callback(result)
+				handler(result)
 			else
 				print("HTTP Request Failed:", return_val)
 			end
@@ -182,37 +231,15 @@ local function query_ollama_server_async(buffer_contents, lineNumber, callback)
 end
 
 
-local function displayInline(message)
-  local bufnr = cursorInfo.bufnr
-  local line = cursorInfo.lineNumber - 1
-  local column = cursorInfo.columnNumber
-
-	if message ~= nil then
-
-    debugPrint(string.format("Displaying inline hint: %s at line %d, column %d", message, line, column))
-
-		local opts = {
-  		end_row = line + 1,
-  		id = 1,
-  		virt_text = {{message, "Comment"}},
-  		virt_text_pos = 'overlay',
-  		virt_text_win_col = column,
-		}
-    vim.schedule_wrap(
-      function()
-        vim.api.nvim_buf_set_extmark(bufnr, M.namespace_id, line, column, opts)
-      end
-    )
-  end
-end
 
 function M.Complete()
-	local buffer_contents = Util.getBufferContents(cursorInfo.bufnr)
-	query_ollama_server_async(buffer_contents, cursorInfo.lineNumber, function(completions)
-		if completions and #completions > 0 then
-			displayInline("test")
-		end
-	end)
+	local bufferText = Util.getBufferContents(cursorInfo.bufnr)
+
+	if (callbacks.handleServerResponse ~= nil) then
+	  ollamaQueryAsync(bufferText, cursorInfo.lineNumber, callbacks.handleServerResponse)
+	else
+	  debugPrint("WARNING: No completion handler set")
+  end
 end
 
 

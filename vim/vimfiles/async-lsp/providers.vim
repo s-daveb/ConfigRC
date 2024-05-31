@@ -23,16 +23,18 @@ if has('python3')
         \ }))
 endif
 "end
+
 ""Provider- Completion Source: Files
 "" Blacklisted because it now autoregisters itself
 let file_completor_opts = asyncomplete#sources#file#get_source_options({
     \ 'allowlist': ['*'],
-    \ 'completor': function('asyncomplete#sources#file#completor'),
 	\ 'priority': 10,
+    \ 'completor': function('asyncomplete#sources#file#completor')
     \ })
 "au User asyncomplete_setup call asyncomplete#register_source(l:file_completor_opts)
 call asyncomplete#register_source(file_completor_opts)
 "end
+
 "Provider- Completion Source: VIM Omnicomplete
 call asyncomplete#register_source(asyncomplete#sources#omni#get_source_options({
 			\ 'name': 'omni',
@@ -110,4 +112,4 @@ if executable('pyls')
 				\ })
 endif
 "end
-" vim: set foldmethod=marker foldmarker="Provider-,"end ts=4 sts=4 sw=4 noet :
+" vim: set foldmethod=marker foldmarker="Provider-,"end foldlevel=2 foldminlines=10 ts=4 sts=4 sw=4 noet :

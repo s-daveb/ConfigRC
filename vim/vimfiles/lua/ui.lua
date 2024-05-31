@@ -1,3 +1,4 @@
+local vim = vim
 local ui_module = {}
 
 function ui_module.load()

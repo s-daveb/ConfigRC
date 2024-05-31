@@ -2,7 +2,7 @@
 local M = {}
 local lsp_util = require('lspconfig.util')
 
-M.debug = true 
+M.debug = false
 
 function M.debugPrint(message)
 	if M.debug then

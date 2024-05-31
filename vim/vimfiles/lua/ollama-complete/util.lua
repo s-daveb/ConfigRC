@@ -3,8 +3,8 @@ local Job = require('plenary.job')
 
 Utils = {}
 
-function Utils.debugPrint(Parent, ...)
-	if Parent.debug then
+function Utils.debugPrint(isDebug, ...)
+	if isDebug then
 		print("|OLLAMA-COMP| ", ...)
 	end
 end

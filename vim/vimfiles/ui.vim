@@ -40,6 +40,7 @@ map <leader>synstack<CR> :call SynStack()<CR>
 " @}
 
 function ColorAdjust() " @{ hard-code some things like background transparency and colorcolums
+
 "		if exists('+termguicolors')
 "				let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
 "				let &t_8b = "\<ESC>[48;2;%lu;%lu;%lum"
@@ -65,7 +66,7 @@ function ColorAdjust() " @{ hard-code some things like background transparency a
 				hi clear Comment
 				hi clear SpecialComment
 				"		"hi Comment term=standout ctermfg=247 ctermbg=228 guifg=#939f91
-				hi Comment term=bold ctermfg=247 ctermbg=228 gui=italic guifg=#939f91
+				hi Comment term=bold ctermfg=247 ctermbg=None gui=italic guifg=#939f91
 				hi SpecialComment term=italic ctermfg=247 ctermbg=228 gui=italic guifg=#939f91
 				"		"@}
 				"		"@{ More obvious vertical splits
@@ -85,12 +86,12 @@ endfunction " @}
 function! GuiConfig() " @{ detects GVIM and handles some things differently
 		if has('gui_running')
 				if has('nvim')
-						set guifont=Berkeley\ Mono:h14
+						set guifont=Berkeley\ Mono:h16
 				elseif has('macunix')
-						set guifont=BerkeleyMono-Regular:h14
+						set guifont=BerkeleyMono-Regular:h16
 						set macligatures
 				else
-						set guifont=Fira\ Code\ 14
+						set guifont=Fira\ Code\ 16
 				endif
 	 	else
 				if has('nvim')

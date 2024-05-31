@@ -1,6 +1,14 @@
 
-let s:selected_dark_colo="everforest"
-let s:selected_light_colo="everforest"
+let s:selected_dark_color="dracula"
+let s:selected_light_color="dracula"
+
+
+let iterm_profile = getenv("ITERM_PROFILE")
+
+if iterm_profile && iterm_profile != "ITERM_PROFILE"  || has("gui_running")
+	let s:selected_dark_color="everforest"
+	let s:selected_light_color="everforest"
+endif
 
 function! SetEverForestOptions()
 	" Set contrast.
@@ -18,23 +26,23 @@ function! SetEverForestOptions()
 endfunction
 
 function DarkMode()
-	if (s:selected_dark_colo == "everforest")
+	if (s:selected_dark_color == "everforest")
 		call SetEverForestOptions()
 		set background=dark
 	endif
 
-	execute "colorscheme " . s:selected_dark_colo
-	execute "AirlineTheme " . s:selected_dark_colo
+	execute "colorscheme " . s:selected_dark_color
+	execute "AirlineTheme " . s:selected_dark_color
 	call GuiConfig()
 endfunction
 
 function LightMode()
-	if (s:selected_light_colo == "everforest")
+	if (s:selected_light_color == "everforest")
 		call SetEverForestOptions()
 		set background=light
 	endif
-	execute "colorscheme " . s:selected_light_colo
-	execute "AirlineTheme " . s:selected_light_colo
+	execute "colorscheme " . s:selected_light_color
+	execute "AirlineTheme " . s:selected_light_color
 
 	call GuiConfig()
 endfunction

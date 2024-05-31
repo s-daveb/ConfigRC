@@ -57,10 +57,17 @@ Plug 'sainnhe/everforest'
 " Color scheme switching
 Plug 'xolox/vim-misc' 			" needed for vim-colorscheme-switcher
 Plug 'xolox/vim-colorscheme-switcher'
-Plug 'nburns/vim-auto-light-dark'
 
-" Git/HG integration
-Plug 'ludovicchabant/vim-lawrencium'
+if !has('nvim')
+	Plug 'nburns/vim-auto-light-dark'
+else
+	Plug 'f-person/auto-dark-mode.nvim' " Much faster!
+endif
+
+" HG integration
+" Plug 'ludovicchabant/vim-lawrencium' " The profiler said this was SLOW.
+
+" Git integration
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 
@@ -72,21 +79,48 @@ else
 endif
 
 " Snippet Support
-if has('python3')
+if !has('nvim') && has('python3')
 	Plug 'SirVer/ultisnips'
 	Plug 'honza/vim-snippets'
+else
+"	"  Snippets support
+"	Plug 'dcampos/nvim-snippy'
+"	Plug 'honza/vim-snippets'
+	Plug 'hrsh7th/vim-vsnip'
+	Plug 'hrsh7th/vim-vsnip-integ'
 endif
+
 
 " IDE-like features
 Plug 'tpope/vim-dispatch'	" Integrated builds and error reporting
 Plug 'epheien/termdbg' 		" Debugger integration
 
-if has('nvim')
-	Plug 'tzachar/local-highlight.nvim'
-endif
-
 " Code Navigation
 Plug 'liuchengxu/vista.vim'
+
+if has('nvim')
+
+	" Utilities - Required by many other neovim plugins
+	Plug 'nvim-lua/plenary.nvim'            " Job control and more
+	Plug 'nvim-treesitter/nvim-treesitter'  " Advanced syntax highlighting
+	Plug 'nvim-telescope/telescope.nvim'    " Some sort of file search plugin?
+
+	" UI frameworks
+	Plug 'stevearc/dressing.nvim'           " Improves the default Neovim UI
+	Plug 'folke/edgy.nvim'                  " Window management framework
+	Plug 'MunifTanjim/nui.nvim'
+
+	" Code Companion - Not technically an LSP,
+	Plug 'olimorris/codecompanion.nvim'
+
+	" IDE-like features
+	Plug 'wojciech-kulik/xcodebuild.nvim'
+	Plug 'mfussenegger/nvim-dap'
+	Plug 'Civitasv/cmake-tools.nvim'
+
+	" Highlights words the cursor rests on
+	Plug 'tzachar/local-highlight.nvim'
+endif
 
 "  Load language server plugins
 if !has('nvim')
@@ -97,7 +131,6 @@ endif
 
 call plug#end()            " required
 filetype plugin indent on  " required
-
 
 """"""""""""""""""""""" PLUGIN CONFIG """""""""""""""""""""""""""""""
 
@@ -121,16 +154,21 @@ source $HOME/.vim/ui.vim
 source $HOME/.vim/auto-light-dark.vim
 source $HOME/.vim/fzf.vim
 
-if has('python3')
-	source $HOME/.vim/UltiSnips.vim
-endif
+source $HOME/.vim/tmux-navigator.vim
+
 
 if has('nvim')
+	source $HOME/.vim/vsnip.vim
 	lua require('main-config').load()
 else
+	if has('python3')
+		source $HOME/.vim/UltiSnips.vim
+	endif
+
 	source $HOME/.vim/projects.vim
 	source $HOME/.vim/async-lsp/main.vim
 endif
 
 
 
+" vim: set ts=4 sts=4 noet sw=4 foldmethod=marker foldmarker=@{,@} :

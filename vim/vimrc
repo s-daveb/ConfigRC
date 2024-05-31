@@ -6,7 +6,7 @@ set mouse=a
 let mapleader=" "
 
 if !has('nvim')
-let &pythonthreedll = '/Users/sdavid/.local/python/bin/python' 
+  let &pythonthreedll = '/Users/sdavid/.local/python/bin/python'
 endif
 
 " trim(system("pyenv which python"))

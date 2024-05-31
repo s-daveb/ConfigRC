@@ -12,12 +12,11 @@ if !exists('gui_vimr')
 	let g:netrw_wiw = 15
 	let g:netrw_winsize = 20
 
-	map <silent> <leader><C-E> :Lexplore<cr>
-	map <silent> <C-E> :Lexplore %:p:h<cr>
+	map <silent> <C-E> :Lexplore<CR>
 
 	fu! NetrwKeyBindings()
-		map <silent><buffer> gn :Ntree<cr>
-		map <silent><buffer><C-E> :close<cr>
+		map <silent><buffer> gn :Ntree<CR>
+		map <silent><buffer><C-E> :close<CR>
 	endfunction
 
 	autocmd FileType netrw :call NetrwKeyBindings()

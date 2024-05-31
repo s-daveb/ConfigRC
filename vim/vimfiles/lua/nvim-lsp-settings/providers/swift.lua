@@ -1,28 +1,36 @@
-local lspconfig = require('lspconfig')
-local keymaps = require('nvim-lsp-settings.keymaps')
-local capabilities = nil
+local M = {}
 
-if package.loaded['cmp_nvim_lsp'] then
-	capabilities = require('cmp_nvim_lsp').default_capabilities()
-else
-	capabilities = vim.lsp.protocol.make_client_capabilities()
-end
+local vim = vim
+local lspconfig
+local capabilities
+local keymapper
 
 local sourcekit_path = vim.fn.exepath('sourcekit-lsp')
-if vim.fn.executable(sourcekit_path) == 1 then
-	local cmd = {}
-	local xcrun_path = vim.fn.exepath('xcrun')
-	if vim.fn.executable(xcrun_path) == 1 then
-		cmd = { "xcrun", "sourcekit-lsp"  }
-	else
-		cmd = { sourcekit_path }
+
+function M.setup(opts)
+	lspconfig = require('lspconfig')
+	capabilities = opts.capabilities
+	keymapper = opts.keymapper
+
+	if vim.fn.executable(sourcekit_path) == 1 then
+		local cmd = {}
+
+		-- Check for xcode runtime and use sourcekit-lsp from there
+		local xcrun_path = vim.fn.exepath('xcrun')
+		if vim.fn.executable(xcrun_path) == 1 then
+			cmd = { "xcrun", "sourcekit-lsp"  }
+		else
+			cmd = { sourcekit_path }
+		end
+		lspconfig.sourcekit.setup {
+			cmd = cmd,
+			--filetypes = { "swift", "c", "cpp", "objective-c", "objective-cpp" },
+			on_attach = keymapper.set_keys,
+			capabilities = capabilities
+		}
 	end
-	lspconfig.sourcekit.setup {
-		cmd = cmd,
-		--filetypes = { "swift", "c", "cpp", "objective-c", "objective-cpp" },
-		on_attach = keymaps.set_keys,
-		capabilities = capabilities
-	}
 end
+
+return M
 
 -- vim:set noet sts=0 sw=2 ts=2:

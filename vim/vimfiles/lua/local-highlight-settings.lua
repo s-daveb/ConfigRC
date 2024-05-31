@@ -1,3 +1,4 @@
+local vim = vim
 local module = {}
 
 function module.load()

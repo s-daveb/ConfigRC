@@ -3,7 +3,7 @@ autocmd BufRead,BufNewFile * if exists("*asyncomplete#_force_refresh")
 			\ | inoremap <expr> <Tab>	 pumvisible() ? "\<C-n>" : "\<Tab>"
 			\ | inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 			\ | inoremap <expr> <cr>	pumvisible() ? asyncomplete#close_popup() : "\<cr>"
-			\ | inoremap <expr> <Tab> getline('.')[:col('.')-2] =~ '^\s*$' ? "\<Tab>" : "\<Plug>(asyncomplete_force_refresh)"
+"			\ | inoremap <expr> <Tab> getline('.')[:col('.')-2] =~ '^\s*$' ? "\<Tab>" : "\<Plug>(asyncomplete_force_refresh)"
 "			\ | echo "asyncomplete keymaps set"
 augroup END
 

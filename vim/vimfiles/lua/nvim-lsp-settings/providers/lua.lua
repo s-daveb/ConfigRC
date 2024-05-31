@@ -1,29 +1,32 @@
-local lspconfig = require('lspconfig')
-local keymaps = require('nvim-lsp-settings.keymaps')
+local M = {}
+
+local vim = vim
+local lspconfig
+local capabilities
+local keymapper
+
 local llsd_path = vim.fn.exepath('lua-language-server')
 
-local capabilities = nil
+function M.setup(opts)
+	lspconfig = require('lspconfig')
+	capabilities = opts.capabilities
+	keymapper = opts.keymapper
 
-if package.loaded['cmp_nvim_lsp'] then
-	capabilities = require('cmp_nvim_lsp').default_capabilities()
-else
-	capabilities = vim.lsp.protocol.make_client_capabilities()
-end
-
-
-if vim.fn.executable(llsd_path) == 1 then
-
-	lspconfig.lua_ls.setup{
-		cmd =  { llsd_path },
-		on_attach = keymaps.set_keys,
-		filetypes = { 'lua' },
-		Lua = {
+	if vim.fn.executable(llsd_path) == 1 then
+		lspconfig.lua_ls.setup{
+			cmd =  { llsd_path },
+			on_attach = keymapper.set_keys,
+			filetypes = { 'lua' },
+			Lua = {
       	runtime = {
         	version = "LuaJIT"
       	}
     	},
     	capabilities = capabilities
 		}
+	end
 end
 
+
+return M
 -- vim:set noet sts=0 sw=2 ts=2:
