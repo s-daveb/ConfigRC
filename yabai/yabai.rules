@@ -76,6 +76,7 @@ yabai -m rule --add label="iterm2" app="^iTerm2$" manage="off" #grid="32:32:8:9:
 
 yabai -m rule --add label="Terminal" app="^Terminal" manage="off" grid="32:32:8:9:13:17"
 yabai -m rule --add label="macvim" app="(N|Mac)?(Vim|vim)(R?)" manage="off" # grid="32:32:8:9:13:17"
+yabai -m rule --add label="neovide" app="neovide" manage="off" # grid="32:32:8:9:13:17"
 
 yabai -m rule --add label="Finder" app="^Finder$" manage="off"
 yabai -m rule --add label="Mail" app="^Mail$" manage="off"
@@ -84,7 +85,8 @@ yabai -m rule --add label="godot" app="Godot" manage="off"
 yabai -m rule --add label="Xcode" app="^Xcode$" manage="off"
 yabai -m rule --add label="LG Screen Manager" app="^LG Screen Manager$" manage="off"
 
-yabai -m rule --add label="SDL Game" app="MyApp" manage="off"
+yabai -m rule --add label="ResourceEditor" app="ResourceEditor" manage="off"
+yabai -m rule --add label="SDL Game" app="Phong" manage="off"
 yabai -m rule --add label="Numbers"  app="Numbers" manage="off"
 
 yabai -m rule --add label="Teams"  app="Microsoft Teams classic" manage="off"
