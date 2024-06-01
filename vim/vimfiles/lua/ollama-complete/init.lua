@@ -156,7 +156,7 @@ local function setupCallbacks()
     server_response = server_response[1]
     debugPrint(string.format("Server response type: %s, value: %s", type(server_response), server_response))
     -- local query_response = vim.json.decode(server_response.response)
-    displayInline("GYNA")
+    displayInline("TEST")
   end
 
   --debugPrint("Callbacks setup complete")

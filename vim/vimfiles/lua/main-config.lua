@@ -11,11 +11,11 @@ local function load_plugin_settings()
 	local ui_settings = require('ui')
 
 	local xcodebuild = require("xcodebuild")
+	xcodebuild.setup({})
 
 	local edgy = require('edgy')
 	local codecompanion_settings = require("code-companion-settings")
 
-	xcodebuild.setup({})
 	edgy.setup({
     bottom = {
       	{ ft = "codecompanion", title = "Code Companion Chat", size = { height  = 0.45 } },
