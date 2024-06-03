@@ -1,6 +1,11 @@
 filetype off
 
-call plug#begin('~/.vim-plug')
+let s:plug_dir = '~/.vim-plug'
+
+if has('nvim')
+	let s:plug_dir = '~/.cache/nvim/plugged'
+endif
+call plug#begin(s:plug_dir)
 
 " Filetypes
 Plug 'tpope/vim-markdown'
@@ -33,14 +38,19 @@ Plug 'tpope/vim-vinegar' " Better Netrw config
 
 " File searching plugins
 Plug 'mileszs/ack.vim'
-Plug '/usr/local/opt/fzf'
-Plug 'junegunn/fzf.vim'
+if !has('nvim')
+	Plug '/usr/local/opt/fzf'
+	Plug 'junegunn/fzf.vim'
+else
+	Plug 'nvim-telescope/telescope.nvim', { 'branch': '0.1.x' }
+	Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'cmake -S. -DCMAKE_C_COMPILER_LAUNCHER=ccache  -Bbuild -DCMAKE_BUILD_TYPE=Release -G Ninja && cmake --build build --config Release && cmake --install build --prefix build' }
+endif
 
 " No longer needed
 "" Tmux integration
 "Plug 'benmills/vimux'
 Plug 'christoomey/vim-tmux-navigator'
-Plug 'edkolev/tmuxline.vim'
+"Plug 'edkolev/tmuxline.vim'
 
 " Fancy status bar
 Plug 'vim-airline/vim-airline'
@@ -59,7 +69,7 @@ Plug 'xolox/vim-misc' 			" needed for vim-colorscheme-switcher
 Plug 'xolox/vim-colorscheme-switcher'
 
 if !has('nvim')
-	Plug 'nburns/vim-auto-light-dark'
+	Plug 's-daveb/vim-auto-light-dark'
 else
 	Plug 'f-person/auto-dark-mode.nvim' " Much faster!
 endif
@@ -79,16 +89,9 @@ else
 endif
 
 " Snippet Support
-if !has('nvim') && has('python3')
-	Plug 'SirVer/ultisnips'
-	Plug 'honza/vim-snippets'
-else
-"	"  Snippets support
-"	Plug 'dcampos/nvim-snippy'
-"	Plug 'honza/vim-snippets'
-	Plug 'hrsh7th/vim-vsnip'
-	Plug 'hrsh7th/vim-vsnip-integ'
-endif
+Plug 'hrsh7th/vim-vsnip'
+Plug 'hrsh7th/vim-vsnip-integ'
+Plug 'rafamadriz/friendly-snippets'
 
 
 " IDE-like features
@@ -99,11 +102,11 @@ Plug 'epheien/termdbg' 		" Debugger integration
 Plug 'liuchengxu/vista.vim'
 
 if has('nvim')
-
 	" Utilities - Required by many other neovim plugins
 	Plug 'nvim-lua/plenary.nvim'            " Job control and more
-	Plug 'nvim-treesitter/nvim-treesitter'  " Advanced syntax highlighting
-	Plug 'nvim-telescope/telescope.nvim'    " Some sort of file search plugin?
+
+	" Advanced syntax highlighting
+	Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
 
 	" UI frameworks
 	Plug 'stevearc/dressing.nvim'           " Improves the default Neovim UI
@@ -152,7 +155,6 @@ source $HOME/.vim/airline.vim
 
 source $HOME/.vim/ui.vim
 source $HOME/.vim/auto-light-dark.vim
-source $HOME/.vim/fzf.vim
 
 source $HOME/.vim/tmux-navigator.vim
 
@@ -161,10 +163,7 @@ if has('nvim')
 	source $HOME/.vim/vsnip.vim
 	lua require('main-config').load()
 else
-	if has('python3')
-		source $HOME/.vim/UltiSnips.vim
-	endif
-
+	source $HOME/.vim/fzf.vim
 	source $HOME/.vim/projects.vim
 	source $HOME/.vim/async-lsp/main.vim
 endif

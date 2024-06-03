@@ -19,20 +19,22 @@ function module.set_keys(client, bufnr)
   buf_set_keymap('n', '<leader>stop', '<cmd>lua vim.lsp.stop_client(vim.lsp.get_active_clients())<CR>', opts)
   buf_set_keymap('n', '<leader>rename', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
   buf_set_keymap('n', '<leader>r', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
-  buf_set_keymap('n', '<leader>]', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
-
+  --
+  --buf_set_keymap('n', '<leader>]', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
   buf_set_keymap('n', '<leader>[', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
+
   buf_set_keymap('n', '<leader>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
   buf_set_keymap('n', '<leader>h', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
-  buf_set_keymap('n', '<leader>hint', '<cmd>ClangdToggleInlayHints<CR>', opts)
 
-  buf_set_keymap('n', '<leader>ref', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
+  --buf_set_keymap('n', '<leader>rf', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
 
-	buf_set_keymap('n', '<leader>gh', '<cmd>ClangdSwitchSourceHeader<CR>', opts)
 	buf_set_keymap('n', '<leader>kf', '<cmd>lua vim.lsp.buf.format({async = true})<CR>', opts)
 
+  buf_set_keymap('n', '<leader>fix', '', quickfix_opts) -- has no action because quickfix_opts.callback handles it
 
-  buf_set_keymap('n', '<leader>fix', '', quickfix_opts)
+  -- clangd specific
+  buf_set_keymap('n', '<leader>hint', '<cmd>ClangdToggleInlayHints<CR>', opts)
+	buf_set_keymap('n', '<leader>gh', '<cmd>ClangdSwitchSourceHeader<CR>', opts)
 end
 
 return module

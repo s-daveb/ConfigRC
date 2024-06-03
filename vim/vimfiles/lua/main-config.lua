@@ -2,46 +2,75 @@ local vim = vim
 local module = {}
 
 local function load_plugin_settings()
-	local editorbehavior = require('editorbehavior')
-	local cmp_config = require('cmp-settings')
-	local nvim_lsp_settings =require('nvim-lsp-settings');
 
-	local local_highlight_settings = require('local-highlight-settings')
-	local project_settings = require("project-settings")
-	local ui_settings = require('ui')
+	require('editorbehavior').load()
+	require('cmp-settings').load()
+	require('nvim-lsp-settings').load()
 
-	local xcodebuild = require("xcodebuild")
-	xcodebuild.setup({})
+	require('local-highlight-settings').load()
+	require("project-settings").load()
+	require('ui-settings').load()
+	require("code-companion-settings").load()
+	require('telescope-settings').load()
+--	require("cmp_nvim_ultisnips").setup({})
 
-	local edgy = require('edgy')
-	local codecompanion_settings = require("code-companion-settings")
+	local edgy_options
+	local auto_dark_mode_options
+	local xcodebuild_options
+	local treesitter_options
 
-	edgy.setup({
-    bottom = {
-      	{ ft = "codecompanion", title = "Code Companion Chat", size = { height  = 0.45 } },
+	edgy_options = {
+		bottom = {
+			{
+      	ft = "codecompanion",
+      	title = "Code Companion Chat",
+      	size = { height  = 0.45 },
+      },
     }
-  })
-
-	local auto_dark_mode = require('auto-dark-mode')
-
-	auto_dark_mode.setup({
-		update_interval = 10000,
+  }
+	auto_dark_mode_options = {
 		set_dark_mode = function()
-			vim.fn.DarkMode() -- Defined in ~/.vim/auto-light-dark.vim
+			vim.fn.DarkMode()  -- Defined in ~/.vim/auto-light-dark.vim
 		end,
-		set_light_mode = function()
+		set_light_mode =  function()
 			vim.fn.LightMode() -- Defined in ~/.vim/auto-light-dark.vim
 		end,
+		update_interval = 10000,
+	}
+	xcodebuild_options = {
+	}
+	treesitter_options = {
+		ensure_installed = { "lua", "vim", "vimdoc", "yaml", "cpp" },
+		sync_install = true, -- only applies to ensure_installed providers
+		auto_install = true,
+		highlight = {
+			enable = true,
+		},
+		indent = {
+			enable = true,
+		},
+		incremental_selection = {
+			enable = true,
+      init_selection = "gnn", -- set to `false` to disable one of the mappings
+      node_incremental = "grn",
+      scope_incremental = "grc",
+      node_decremental = "grm",
+		},
+	}
+
+	require('edgy').setup(edgy_options)
+	require('auto-dark-mode').setup(auto_dark_mode_options)
+	require("xcodebuild").setup(xcodebuild_options)
+	require('nvim-treesitter.configs').setup(treesitter_options)
+
+	vim.api.nvim_create_autocmd({"BufNewFile","BufReadPost"}, {
+  	callback = function()
+    	vim.wo.foldmethod = "expr"
+    	vim.wo.foldexpr = "nvim_treesitter#foldexpr()"
+    	vim.wo.foldenable = false
+  	end,
 	})
 
-	ui_settings.load()
-	cmp_config.load()
-	nvim_lsp_settings.load()
-	editorbehavior.load()
-
-	local_highlight_settings.load()
-	project_settings.load()
-	codecompanion_settings.load()
 
 end
 

@@ -9,7 +9,6 @@ if !has('nvim')
   let &pythonthreedll = '/Users/sdavid/.local/python/bin/python'
 endif
 
-" trim(system("pyenv which python"))
 source $HOME/.vim/plug.vim
 
 

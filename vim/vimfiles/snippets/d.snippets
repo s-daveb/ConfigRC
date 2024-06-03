@@ -1,0 +1,47 @@
+	###########################################################################
+	#                            TextMate Snippets                            #
+	###########################################################################
+
+	extends c
+	priority -10
+
+snippet modeline "// vim: set foldmethod..."
+	// vim: set foldmethod=marker foldmarker=@fold,endfold textwidth=80 ts=4 sts=4 expandtab autoindent smartindent cindent ft=d :
+
+
+
+snippet doxyfile "Doxygen documentation for a source file"
+	/** @file ${1:`!p snip.rv = snip.fn`}
+	 * @brief ${2}
+	 *
+	 * ${3}
+	 */
+
+
+
+snippet doxyclass "Doxygen documentation for a class"
+	/** @class ${1}::${2}
+	 * @brief ${3}
+	 *
+	 * ${4}
+	 */
+
+
+snippet doxyfunc  "Doxygen Documentation for a function"
+	/** ${1}.
+	 * ${2}
+	 *
+	 * @param ${3}
+	 * @param ${4}
+	 *
+	 * @returns ${5}
+	 */
+
+
+snippet importfold
+	// @fold  import directives
+	${1}
+	// @endfold
+
+
+	# vim: set ft=snippets :

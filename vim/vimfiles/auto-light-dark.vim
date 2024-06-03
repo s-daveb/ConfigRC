@@ -2,10 +2,9 @@
 let s:selected_dark_color="dracula"
 let s:selected_light_color="dracula"
 
+let s:iterm_profile = getenv("ITERM_PROFILE")
 
-let iterm_profile = getenv("ITERM_PROFILE")
-
-if iterm_profile && iterm_profile != "ITERM_PROFILE"  || has("gui_running")
+if (s:iterm_profile != "pulldown-terminal") || has("gui_running")
 	let s:selected_dark_color="everforest"
 	let s:selected_light_color="everforest"
 endif
@@ -22,7 +21,6 @@ function! SetEverForestOptions()
 	else
 		let g:everforest_transparent_background = 1
 	endif
-
 endfunction
 
 function DarkMode()
@@ -46,5 +44,7 @@ function LightMode()
 
 	call GuiConfig()
 endfunction
+
+call SetEverForestOptions()
 
 " vim: set ts=4 sts=4 noet sw=4 foldmethod=marker foldmarker=@{,@} :

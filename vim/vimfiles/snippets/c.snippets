@@ -1,0 +1,51 @@
+###########################################################################
+#                            TextMate Snippets                            #
+###########################################################################
+priority -20
+
+snippet /**=
+	/* ${1}
+ 	 *  -- Saul `date +%d.%m.%y` ☕️  */
+
+
+snippet modeline "// vim: set foldmethod=syntax ts=8 ..."
+	// clang-format off
+	// vim: set foldmethod=syntax textwidth=80 ts=8 sts=0 sw=8 foldminlines=10 noexpandtab ft=cpp.doxygen :
+
+
+snippet modeline_foldmarker "// vim: set foldmethod..."
+	// clang-format off
+	// vim: set foldmethod=marker foldmarker=#region,#endregion textwidth=80 ts=8 sts=0 sw=8  noexpandtab ft=cpp.doxygen :
+
+
+
+snippet ignoreWarning
+	#pragma GCC diagnostic ignored "${1}"
+
+
+snippet doxyfunc  "Doxygen Documentation for a function"
+	/** ${1}.
+ 	 * ${2}
+ 	 *
+ 	 * @param ${3}
+ 	 * @param ${4}
+ 	 *
+ 	 * @returns ${5}
+ 	 */
+
+
+snippet fold "Insert a VIM fold marker"
+	// @fold ${1}
+
+
+snippet foldc "Insert a VIM fold close marker"
+	// @endfold
+
+
+snippet includefold
+	// @fold  #include directives
+	${1}
+	// @endfold
+
+
+# vim: set ft=snippets :

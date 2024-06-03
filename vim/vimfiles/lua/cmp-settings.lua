@@ -16,9 +16,26 @@ local keymappings = {
 			fallback()
 		end
   end,
-  ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+  ['<CR>'] = cmp.mapping.confirm(
+  	{ select = false } -- Set `select` to `false` or you'll never be able to enter a new line again
+	),
 }
 
+--local ultisnips_loaded,cmp_ultisnips_mappings = pcall(require,"cmp_nvim_ultisnips.mappings")
+--if ultisnips_loaded then
+--	keymappings["<Tab>"] = cmp.mapping(
+--    function(fallback)
+--      cmp_ultisnips_mappings.expand_or_jump_forwards(fallback)
+--    end,
+--    { "i", "s", --[[ "c" (to enable the mapping in command mode) ]] }
+--  )
+--  keymappings["<S-Tab>"] = cmp.mapping(
+--    function(fallback)
+--      cmp_ultisnips_mappings.jump_backwards(fallback)
+--    end,
+--    { "i", "s", --[[ "c" (to enable the mapping in command mode) ]] }
+--  )
+--end
 
 local function loadSources()
 	-- Set configuration for specific filetype.
@@ -55,6 +72,8 @@ function module.load()
 		snippet = {
   		expand = function(args)
 				vim.fn["vsnip#anonymous"](args.body)
+				--vim.fn["UltiSnips#Anon"](args.body)
+				--require('snippy').expand_snippet(args.body)
   		end,
 		},
 		window = {
@@ -65,6 +84,8 @@ function module.load()
 		sources = cmp.config.sources({
   		{ name = 'nvim_lsp' },
 			{ name = 'vsnip' },
+			--{ name = 'ultisnips' },
+			--{ name = 'snippy' },
   		{ name = 'buffer' },
 		})
 	})
