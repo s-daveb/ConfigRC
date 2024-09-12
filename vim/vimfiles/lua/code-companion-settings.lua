@@ -56,6 +56,7 @@ function M.load()
   	},
 	})
 	vim.api.nvim_clear_autocmds({ event = "FileType", pattern = "codecompletion" })
+	--vim.api.nvim.
 end
 
 return M

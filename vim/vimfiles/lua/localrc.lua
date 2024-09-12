@@ -1,8 +1,15 @@
--- ~/.config/nvim/lua/localrc.lua
+local vim = vim
 local M = {}
 local lsp_util = require('lspconfig.util')
 
-M.debug = false
+local cmake_tools_loaded,cmake_tools = pcall(require, "cmake-tools")
+
+M.debug = true
+
+local function is_valid_path(path)
+	local stat = vim.loop.fs_stat(path)
+  return stat and true or false
+end
 
 function M.debugPrint(message)
 	if M.debug then
@@ -31,13 +38,21 @@ end
 
 function M.cd_to_root(dirpath)
   dirpath = dirpath or vim.fn.expand('%:p:h')
-  local root_path = lsp_util.find_git_ancestor(dirpath) or dirpath
+  local root_path = is_valid_path(dirpath) and lsp_util.find_git_ancestor(dirpath) or dirpath
+
+	if (false == is_valid_path(root_path)) then
+		return
+	end
 
 	M.debugPrint("Changing dir to " .. root_path)
   if (root_path and root_path ~= "") then
   	vim.cmd('lcd ' .. root_path)
 
   	M.load_localrc(root_path)
+	end
+
+	if (cmake_tools_loaded) then
+		cmake_tools.select_cwd(root_path)
 	end
 end
 

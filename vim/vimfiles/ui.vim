@@ -83,29 +83,28 @@ function ColorAdjust() " @{ hard-code some things like background transparency a
 		endif
 endfunction " @}
 
-function! GuiConfig() " @{ detects GVIM and handles some things differently
-		if has('gui_running')
-				if has('nvim')
-						set guifont=Berkeley\ Mono:h16
-				elseif has('macunix')
-						set guifont=BerkeleyMono-Regular:h16
-						set macligatures
-				else
-						set guifont=Fira\ Code\ 16
-				endif
-	 	else
-				if has('nvim')
-						set cmdheight=0
-				else
-						if has("mouse_sgr") " for linux framebuffer mouse (gpm) ?
-								set ttymouse=sgr
-						else
-								set ttymouse=xterm2
-						endif
-				endif
-				call ColorAdjust()
+autocmd ColorScheme * call ColorAdjust()
+
+if has('gui_running')
+		if has('nvim')
+				set guifont=Berkeley\ Mono:h16
+		elseif has('macunix')
+				set guifont=BerkeleyMono-Regular:h16
+				set macligatures
+		else
+				set guifont=Fira\ Code\ 16
 		endif
-endfunc	" @}
+else
+		if has('nvim')
+				set cmdheight=0
+		else
+				if has("mouse_sgr") " for linux framebuffer mouse (gpm) ?
+						set ttymouse=sgr
+				else
+						set ttymouse=xterm2
+				endif
+		endif
+endif
 
 
 " @{ func SynStack() - Displays the syntax highlighting group under the cursor

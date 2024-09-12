@@ -6,10 +6,11 @@ function module.set_keys(client, bufnr)
     vim.api.nvim_buf_set_keymap(bufnr, ...)
   end
 
-  local opts = { noremap=true, silent=true }
-	local quickfix_opts = opts
-	quickfix_opts.callback =  function()
-    vim.lsp.buf.code_action({ context = { only = {"quickfix"} }, apply=true })
+  local opts = { noremap = true, silent = true }
+
+  local quickfix_opts = { noremap = true, silent = true }
+  quickfix_opts.callback = function()
+    vim.lsp.buf.code_action({ context = { only = { "quickfix" } }, apply = true })
   end
 
   -- Mappings
@@ -28,13 +29,13 @@ function module.set_keys(client, bufnr)
 
   --buf_set_keymap('n', '<leader>rf', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
 
-	buf_set_keymap('n', '<leader>kf', '<cmd>lua vim.lsp.buf.format({async = true})<CR>', opts)
+  buf_set_keymap('n', '<leader>kf', '<cmd>lua vim.lsp.buf.format({async = true})<CR>', opts)
 
   buf_set_keymap('n', '<leader>fix', '', quickfix_opts) -- has no action because quickfix_opts.callback handles it
 
   -- clangd specific
   buf_set_keymap('n', '<leader>hint', '<cmd>ClangdToggleInlayHints<CR>', opts)
-	buf_set_keymap('n', '<leader>gh', '<cmd>ClangdSwitchSourceHeader<CR>', opts)
+  buf_set_keymap('n', '<leader>gh', '<cmd>ClangdSwitchSourceHeader<CR>', opts)
 end
 
 return module

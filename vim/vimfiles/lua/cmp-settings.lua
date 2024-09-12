@@ -2,6 +2,32 @@ local vim = vim
 local module = {}
 local cmp = require('cmp')
 
+local completion_timer = nil
+
+local function is_cursor_at_word_end()
+    local col = vim.fn.col('.')
+    local line = vim.fn.getline('.')
+    -- Check if the previous character is non-whitespace and the current character is whitespace or end of line
+    return col > 1 and line:sub(col - 1, col - 1):match('%S') and (col > #line or line:sub(col, col):match('%s'))
+end
+
+local function start_completion_timer()
+  -- Cancel any existing timer
+  if completion_timer then
+    completion_timer:stop()
+    completion_timer:close()
+  end
+
+  completion_timer = vim.loop.new_timer()
+  completion_timer:start(600, 0, vim.schedule_wrap(function()
+		if is_cursor_at_word_end() then
+      if completion_timer then
+      	cmp.complete()
+    	end
+    end
+  end))
+end
+
 local keymappings = {
   ['<C-B>'] = cmp.mapping.scroll_docs(-4),
   ['<C-F>'] = cmp.mapping.scroll_docs(4),
@@ -90,12 +116,20 @@ function module.load()
 		})
 	})
 
-	-- vim.api.nvim_create_autocmd({"CursorHoldI","CursorHold"}, {
+	-- Set up an autocmd for CursorHoldI event to start the completion timer
 	vim.api.nvim_create_autocmd("CursorHoldI", {
-  	pattern = "*",
-  	callback = function()
-    	cmp.complete()
-  	end
+    callback = start_completion_timer,
+	})
+
+	-- Set up autocmds to restart the timer whenever the cursor moves
+	vim.api.nvim_create_autocmd({"CursorMovedI", "InsertLeave"}, {
+    callback = function()
+      if completion_timer then
+        completion_timer:stop()
+        completion_timer:close()
+        completion_timer = nil
+      end
+    end
 	})
 
 	loadSources()

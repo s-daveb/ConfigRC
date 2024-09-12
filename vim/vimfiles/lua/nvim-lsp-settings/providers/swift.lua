@@ -1,5 +1,7 @@
 local M = {}
 
+local xcodebuild = require('nvim-lsp-settings.providers.xcodebuild')
+
 local vim = vim
 local lspconfig
 local capabilities
@@ -24,11 +26,13 @@ function M.setup(opts)
 		end
 		lspconfig.sourcekit.setup {
 			cmd = cmd,
-			--filetypes = { "swift", "c", "cpp", "objective-c", "objective-cpp" },
+			iletypes = { "swift" }, --, "c", "cpp", "objective-c", "objective-cpp" },
 			on_attach = keymapper.set_keys,
 			capabilities = capabilities
 		}
 	end
+
+	xcodebuild.setup({})
 end
 
 return M

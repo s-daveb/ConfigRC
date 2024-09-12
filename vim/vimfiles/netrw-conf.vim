@@ -19,5 +19,9 @@ if !exists('gui_vimr')
 		map <silent><buffer><C-E> :close<CR>
 	endfunction
 
-	autocmd FileType netrw :call NetrwKeyBindings()
+	augroup netrw_keybindings
+    au!
+	  autocmd FileType netrw :call NetrwKeyBindings()
+	  autocmd FileType netrw :set nu
+  augroup END
 endif

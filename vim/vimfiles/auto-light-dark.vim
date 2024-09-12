@@ -31,7 +31,6 @@ function DarkMode()
 
 	execute "colorscheme " . s:selected_dark_color
 	execute "AirlineTheme " . s:selected_dark_color
-	call GuiConfig()
 endfunction
 
 function LightMode()
@@ -42,7 +41,6 @@ function LightMode()
 	execute "colorscheme " . s:selected_light_color
 	execute "AirlineTheme " . s:selected_light_color
 
-	call GuiConfig()
 endfunction
 
 call SetEverForestOptions()

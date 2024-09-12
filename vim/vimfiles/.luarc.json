@@ -1,5 +1,6 @@
 {
     "diagnostics.globals": [
-        "local"
+        "local",
+        "xcodebuild"
     ]
 }

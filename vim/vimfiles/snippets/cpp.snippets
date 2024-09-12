@@ -1,72 +1,50 @@
 ###########################################################################
 #                            TextMate Snippets                            #
 ###########################################################################
-
-
 snippet /**= Comment with signature
 	/* $1
 	 *  -- Saul `date +%d.%m.%y` ☕️  */
-
-
 snippet modeline // vim: set foldmethod=syntax ts=8 ...
 	// clang-format off
 	// vim: set foldmethod=syntax foldminlines=10 textwidth=80 ts=8 sts=0 sw=8 noexpandtab ft=cpp.doxygen :
-
-
 snippet modeline_foldmarker // vim: set foldmethod...
 	// clang-format off
 	// vim: set foldmethod=marker foldmarker=#region,#endregion textwidth=80 ts=8 sts=0 sw=8  noexpandtab ft=cpp.doxygen :
-
-
 snippet doxyfile "Doxygen documentation for a source file"
 	/** @file $1:`!p snip.rv = snip.fn`
 	 * @brief $2
 	 *
 	 * $3
 	 */
-
-
 snippet doxyclass "Doxygen documentation for a class"
 	/** @class $1::$2
 	 * @brief $3
 	 *
 	 * $4
 	 */
-
-
 snippet TEST_SUITE{
 	BEGIN_TEST_SUITE($1) {
-
-
 snippet testsuite_name "Create a static string in this file"
 	namespace {
 	const char* TEST_SUITE_NAME= "$1"
 	}
-
-
 snippet fileheader File header with spaces for copyright information
 	/* $0
 	* Copyright © 2024 Saul D. Beniquez
 	* License: $1
 	*/
-
-
 snippet mpl2 "MPL license"
 	Mozilla Public License v. 2.0
 	*
 	* This Source Code Form is subject to the terms of the Mozilla Public License,
 	* v.2.0. If a copy of the MPL was not distributed with this file, You can
 	* obtain one at https://mozilla.org/MPL/2.0/.
-
-
 snippet MPL2 "MPL license"
 	Mozilla Public License v2.0 (MPL2)
 	*
 	* This Source Code Form is subject to the terms of the Mozilla Public License,
 	* v.2.0. If a copy of the MPL was not distributed with this file, You can
 	* obtain one at https://mozilla.org/MPL/2.0/.
-
-
 snippet MIT "MIT LIcense"
 	The MIT License (MIT)
 	*
@@ -87,8 +65,6 @@ snippet MIT "MIT LIcense"
 	* DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 	* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE
 	* OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-
-
 snippet BSD "FreeBSD License"
 	SPDX-License-Identifier: BSD-2-Clause
 	*
@@ -96,8 +72,6 @@ snippet BSD "FreeBSD License"
 	* also known as the "Simplified BSD License" or the "FreeBSD License."
 	* If a copy of this license is not at the project root, you can obtain one
 	* at https://opensource.org/license/bsd-2-clause/
-
-
 snippet GPL "GPL License"
 	GPL v3.0
 	*
@@ -114,5 +88,4 @@ snippet GPL "GPL License"
 	* GNU General Public License for more details.
 	*
 	* You should have received a copy of the GNU General Public License
-
 # vim: set ft=snippets :

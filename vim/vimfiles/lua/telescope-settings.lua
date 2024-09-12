@@ -1,44 +1,60 @@
 local vim = vim
 local telescope = require('telescope')
-local tele_builtin = require('telescope.builtin')
 local module = {}
 
+module.debug = false
+
+local function debugPrint( ... )
+  if module.debug then
+    print( ... )
+  end
+end
+
 local telescope_options = {
+  defaults =  {
+    file_ignore_patterns = {  ".git", "Docs/.*", "%.3" },
+  },
   extensions = {
-		fzf = {
-			fuzzy = true,
-			override_generic_sorter = true,
-			override_file_sorter = true,
-			case_mode = "smart_case",
-		}
+    fzf = {
+      fuzzy = true,
+      override_generic_sorter = false,
+      override_file_sorter = false,
+      case_mode = "ignore_case",
+    }
   }
 }
 local function bindkeys()
   local opts = { noremap = true, silent = true, buffer = true }
 
-  vim.keymap.set('n', '<C-P>',    tele_builtin.find_files, opts)
-  vim.keymap.set('n', '<leader>find', tele_builtin.fd, opts)
-  vim.keymap.set('n', '<leader>buff', tele_builtin.buffers, opts)
-  vim.keymap.set('n', '<leader>rf', tele_builtin.lsp_references, opts)
-  vim.keymap.set('n', '<leader>reff', tele_builtin.lsp_references, opts)
-  vim.keymap.set('n', '<leader>icalls', tele_builtin.lsp_incoming_calls, opts)
-  vim.keymap.set('n', '<leader>ocalls', tele_builtin.lsp_outgoing_calls, opts)
-  vim.keymap.set('n', '<leader>ocalls', tele_builtin.lsp_outgoing_calls, opts)
+  vim.keymap.set('n', '<C-P>', require('telescope.builtin').find_files, opts)
+  vim.keymap.set('n', '<leader>find', require('telescope.builtin').fd, opts)
+  vim.keymap.set('n', '<leader>buff', require('telescope.builtin').buffers, opts)
+  vim.keymap.set('n', '<leader>rf', require('telescope.builtin').lsp_references, opts)
+  vim.keymap.set('n', '<leader>reff', require('telescope.builtin').lsp_references, opts)
+  vim.keymap.set('n', '<leader>icalls', require('telescope.builtin').lsp_incoming_calls, opts)
+  vim.keymap.set('n', '<leader>ocalls', require('telescope.builtin').lsp_outgoing_calls, opts)
+  vim.keymap.set('n', '<leader>ocalls', require('telescope.builtin').lsp_outgoing_calls, opts)
 
-  vim.keymap.set('n', '<leader>def', tele_builtin.lsp_definitions, opts)
-  vim.keymap.set('n', '<leader>]', tele_builtin.lsp_definitions, opts)
+  vim.keymap.set('n', '<leader>def', require('telescope.builtin').lsp_definitions, opts)
+  vim.keymap.set('n', '<leader>]', require('telescope.builtin').lsp_definitions, opts)
 
-  vim.keymap.set('n', '<leader>def', tele_builtin.lsp_definitions, opts)
-  vim.keymap.set('n', '<leader>]', tele_builtin.lsp_definitions, opts)
+  vim.keymap.set('n', '<leader>def', require('telescope.builtin').lsp_definitions, opts)
+  vim.keymap.set('n', '<leader>]', require('telescope.builtin').lsp_definitions, opts)
+  debugPrint("Telescope keybindings set")
 end
 
 function module.load()
-		telescope.setup(telescope_options)
-		telescope.load_extension('fzf')
+  telescope.setup(telescope_options)
+  telescope.load_extension('fzf')
 
-  vim.api.nvim_create_autocmd({"BufReadPost", "BufNewFile"}, {
-      pattern = { "*" },
-      callback = bindkeys
+  vim.api.nvim_create_autocmd({ "BufReadPost", "BufNewFile" }, {
+    pattern = { "*" },
+    callback = function()
+      --local exclusions = { "netrw", "vista","codecompanion" }
+      --if (not vim.tbl_contains(exclusions, vim.bo.filetype)) then
+      bindkeys()
+      --end
+    end
   })
 end
 

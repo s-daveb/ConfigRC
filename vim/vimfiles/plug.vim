@@ -42,6 +42,10 @@ if !has('nvim')
 	Plug '/usr/local/opt/fzf'
 	Plug 'junegunn/fzf.vim'
 else
+	Plug 'mfussenegger/nvim-dap'
+	Plug 'nvim-neotest/nvim-nio'
+	Plug 'rcarriga/nvim-dap-ui'
+
 	Plug 'nvim-telescope/telescope.nvim', { 'branch': '0.1.x' }
 	Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'cmake -S. -DCMAKE_C_COMPILER_LAUNCHER=ccache  -Bbuild -DCMAKE_BUILD_TYPE=Release -G Ninja && cmake --build build --config Release && cmake --install build --prefix build' }
 endif

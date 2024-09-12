@@ -5,8 +5,8 @@ endif
 
 source ~/.vim/c.keybindings.vim
 
-set foldlevelstart=5
-set foldminlines=24    "  Folds must be > this  size to display as closed
+"set foldlevelstart=5
+set foldminlines=10    "  Folds must be > this  size to display as closed
 
 if executable('cppman')
 	autocmd FileType cpp set keywordprg=cppman
