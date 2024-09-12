@@ -1,6 +1,5 @@
 
-source ~/.zshrc.d/common.zsh
-
+#source ~/.zshrc.d/common.zsh
 
 if [ ! -d "${HOME}/.rbenv" ]; then
 	mkdir -p "${HOME}/.rbenv"

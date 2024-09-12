@@ -1,3 +1,5 @@
+#zmodload zsh/zprof
+
 export ZPLUG_INSTALL=/usr/local/opt/zplug
 source $ZPLUG_INSTALL/init.zsh
 
@@ -7,7 +9,7 @@ setopt prompt_subst
 
 #zplug "robbyrussell/oh-my-zsh", use:"lib/*.zsh", defer:0
 #zplug "plugins/git", from:oh-my-zsh
-#zplug "plugins/macos", from:oh-my-zsh, if:"[[ $OSTYPE == *darwin* ]]"
+zplug "plugins/macos", from:oh-my-zsh, if:"[[ $OSTYPE == *darwin* ]]"
 #zplug "plugins/pip", from:oh-my-zsh
 
 zplug "plugins/command-not-found", from:oh-my-zsh
@@ -18,13 +20,10 @@ zplug "mafredri/zsh-async", defer:1
 zplug "zsh-users/zsh-syntax-highlighting", defer:2
 
 # Load the theme.
-
 # Simple > theme
 #zplug "jackharrisonsherlock/common", as:theme
-
 # Robbyrussel + emoji
 #zplug "meiokubo-zz/emoji.zsh-theme", as:theme
-
 # Powerline theme
 #zplug "caiogondim/bullet-train.zsh", as:theme
 
@@ -42,10 +41,6 @@ if ! zplug check --verbose; then
 fi
 
 zplug load #--verbose
-#  Zplug configuration is complete. User settings start below.
-
-# maintains a jump list of the directories you actually use
-#source $(brew --prefix)/etc/profile.d/z.sh
 
 #oh-my-zsh seems to enable this by default. No me gusta en macOS.
 DISABLE_AUTO_TITLE="true"
@@ -55,8 +50,13 @@ setopt autocd beep extendedglob notify
 bindkey -e
 # End of lines configured by zsh-newuser-install
 
+rm -rf ~/zsh.perf.log
+
 if [ -d ~/.zshrc.d ]; then
 	for script in `/bin/ls ~/.zshrc.d/*.zsh`; do
+		if [[ "$script" =~ ".*/empty.zsh" ]]; then
+			continue
+		fi
 		script_compiled=${script//.zsh/.zwc}
 
 		# If there's no precompiled zwc file,
@@ -72,7 +72,7 @@ if [ -d ~/.zshrc.d ]; then
 		else
 			source $script
 		fi
-
 	done
 fi
 
+#zprof
