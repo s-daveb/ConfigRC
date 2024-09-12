@@ -46,7 +46,8 @@ yabai -m rule --add label="WhatsApp" app="^WhatsApp$" manage="off" grid="4:4:1:1
 yabai -m rule --add label="OBS Studio" app="^OBS Studio" manage="off"
 yabai -m rule --add label="Microsoft RDP" app="Microsoft Remote Desktop" title!="Microsoft Remote Desktop" manage="off"
 
-yabai -m rule --add label="Things 3 Settings" app="Things" title="(General|Things Cloud|Quick Entry|Reminders|Calendar)" manage="off"  grid="4:4:1:1:2:2"
+#yabai -m rule --add label="Things 3 Settings" app="Things" title="(General|Today|Things Cloud|Quick Entry|Reminders|Calendar)" manage="off"  grid="4:4:1:1:2:2"
+yabai -m rule --add label="Things 3 Settings" app="Things"  manage="off" 
 yabai -m rule --add label="Day One Settings" app="Day One" title="(Lock Screen|General|Sync|Journals|Appearance|Reminders|Security|Support|Templates)" manage="off"  grid="4:4:1:1:2:2"
 yabai -m rule --add label="Flow Timer" app="Flow" manage="off"  grid="4:4:1:1:2:2"
 yabai -m rule --add label="Bear" app="^Bear$" manage="off"
@@ -65,7 +66,7 @@ yabai -m rule --add label="Shortcuts" app="^Shortcuts$" manage="off" grid="4:4:1
 yabai -m rule --add label="Parallels Desktop" app="^Parallels Desktop$"  manage="off"
 yabai -m rule --add label="Parallels Desktop" app="^Parallels Desktop$" title="Control Center" manage="off" grid="4:4:1:1:1:2"
 
-yabai -m rule --add label="Moonlight" app="^Moonlight$" manage="off"
+#yabai -m rule --add label="Moonlight" app="^Moonlight$" manage="off"
 yabai -m rule --add label="OmniDiskSweeper" app="^OmniDiskSweeper$" manage="off"
 
 yabai -m rule --add label="iStatistica Pro" app="^iStat" manage="off"
@@ -76,7 +77,7 @@ yabai -m rule --add label="iterm2" app="^iTerm2$" manage="off" #grid="32:32:8:9:
 
 yabai -m rule --add label="Terminal" app="^Terminal" manage="off" grid="32:32:8:9:13:17"
 yabai -m rule --add label="macvim" app="(N|Mac)?(Vim|vim)(R?)" manage="off" # grid="32:32:8:9:13:17"
-yabai -m rule --add label="neovide" app="neovide" manage="off" # grid="32:32:8:9:13:17"
+#yabai -m rule --add label="neovide" app="neovide" manage="off" # grid="32:32:8:9:13:17"
 
 yabai -m rule --add label="Finder" app="^Finder$" manage="off"
 yabai -m rule --add label="Mail" app="^Mail$" manage="off"
@@ -102,6 +103,8 @@ yabai -m rule --add label="QtDev Application" title="MainWindow" manage="off"
 
 yabai -m rule --add label="Logi Options+" app="Logi Options+" manage="off"
 yabai -m rule --add label="Mac Mouse Fix" app="Mac Mouse Fix" manage="off"
+
+yabai -m rule --add label="Citrix Viewer" app="Citrix Viewer" manage="off"
 
 #yabai -m  config layout float
 
