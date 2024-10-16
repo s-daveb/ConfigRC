@@ -7,7 +7,7 @@ PLUGDIR="${HOME}/.vim-plug"
 SWAPDIR="${HOME}/.cache/vim"
 
 NVIM_CONFDIR="${HOME}/.config/nvim"
-NVIMRC="${NVIM_CONFDIR}/init.vim"
+#NVIMRC="${NVIM_CONFDIR}/init.vim"
 NVIM_SWAPDIR="`echo ${SWAPDIR} | sed 's/vim/nvim/g'`"
 
 cd $SWD
@@ -46,8 +46,16 @@ else
     mv -v "${NVIMRC}" "${HOME}/init.vim.old"
 fi
 
+if [ -L "${NVIM_CONFDIR}" ]; then
+	cmd_echo unlink "${NVIM_CONFDIR}"
+else
+    	mv -v "${NVIM_CONFDIR}" "${HOME}/init.vim.old"
+fi
+
 ln -sv "${REPODIR}/vimrc"     "${VIMRC}"
-ln -sv "${REPODIR}/init.nvim" "${NVIMRC}"
+#ln -sv "${REPODIR}/init.nvim" "${NVIMRC}"
 ln -sv "${REPODIR}/vimfiles"  "${HOME}/.vim"
+
+ln -sv "${REPODIR}/nvimfiles" "${NVIM_CONFDIR}"
 
 vim +PlugInstall +qa
