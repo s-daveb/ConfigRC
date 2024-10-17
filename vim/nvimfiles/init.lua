@@ -1,8 +1,10 @@
 
 require('options')
 require('keymaps')
+
 require('user-scripts')
 require('plugins')
+
 
 require('colorscheme').initialize("everforest");
 
