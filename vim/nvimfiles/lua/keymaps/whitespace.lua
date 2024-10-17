@@ -1,4 +1,3 @@
-local vim = vim
 
 -- Highlight whitespace
 vim.cmd([[highlight ExtraWhitespace ctermbg=red guibg=red]])
@@ -10,11 +9,13 @@ vim.api.nvim_exec([[
 ]], false)
 
 -- Define a function to remove trailing whitespace
-local function remove_trailing_whitespace()
+function RemoveTrailingWhitespace()
   -- Search and replace trailing whitespace globally in the buffer
   vim.api.nvim_command([[%s/\s\+$//e]])
 end
 
+vim.cmd([[command! TrimWhiteSpace lua RemoveTrailingWhitespace()]])
+
 -- Map CTRL-W F to the function in normal mode
-vim.api.nvim_set_keymap('i', '<C-w>F', ':lua remove_trailing_whitespace()<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<C-w>F', ':lua remove_trailing_whitespace()<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>ws', ':TrimWhiteSpace<CR>', { noremap = true, silent = true })
+

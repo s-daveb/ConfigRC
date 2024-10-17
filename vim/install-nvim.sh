@@ -6,6 +6,7 @@ NVIM_CACHEDIR="${HOME}/.cache/nvim"
 NVIM_CONFDIR="${HOME}/.config/nvim"
 
 cd $REPODIR
+REPODIR="$PWD"
 
 cmd_echo() {
 	echo "$@"
