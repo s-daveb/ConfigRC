@@ -102,6 +102,9 @@ local plugins = {
     --Cmake Project support
     {
         'Civitasv/cmake-tools.nvim',
+        config = function()
+            require('config.cmake-tools').load()
+        end
     },
     -- Xcode project support
     {
