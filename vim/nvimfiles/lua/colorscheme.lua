@@ -1,11 +1,9 @@
--- define your colorscheme here
-
 local vim = vim
 local this = {}
 
 local default_color = 'everforest'
 
-function this.initialize(colorscsheme)
+function this.initialize(colorscheme)
 	if colorscheme == nil or colorscheme == "" then
 		colorscheme = default_color
 	end

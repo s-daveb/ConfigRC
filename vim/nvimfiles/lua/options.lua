@@ -1,4 +1,3 @@
-local vim = vim
 ------------------
 -- options.lua  --
 ------------------
@@ -6,11 +5,16 @@ local vim = vim
 vim.opt.clipboard = 'unnamedplus'   -- use system clipboard 
 vim.opt.mouse = 'a'                 -- allow the mouse to be used in Nvim
 
+vim.opt.updatetime = 300
+
 -- Tab
 vim.opt.tabstop = 8                 -- number of visual spaces per TAB
 vim.opt.softtabstop = 8             -- number of spacesin tab when editing
 vim.opt.shiftwidth = 8              -- indent 8 spaces when using >>, <<, ==, etc. 
 vim.opt.expandtab = false           -- tabs are spaces, mainly because of python
+
+-- Highlights
+vim.opt.colorcolumn = "80"          -- highlight column 80
 
 -- UI config
 vim.opt.number = true               -- show absolute number
@@ -33,10 +37,11 @@ vim.opt.completeopt =
 vim.opt.undofile = true
 vim.opt.undodir = os.getenv("HOME") .. "/.cache/nvim/undo"
 
-
 -- Enable swap file
 vim.opt.swapfile = true
 vim.opt.directory = os.getenv("HOME") .. "/.cache/nvim/swap"
+
+vim.opt.wrap = false
 
 -- Enable view saving
 vim.opt.viewoptions = "cursor,folds,slash,unix" -- Customize what is saved in views
@@ -53,3 +58,6 @@ vim.api.nvim_create_autocmd("BufWinEnter", {
     pattern = "*",
     command = "silent! loadview"
 })
+
+-- Highlight trailing whitespace as a syntax error
+vim.fn.matchadd('DiagnosticUnderlineError', [[\s\+$]])

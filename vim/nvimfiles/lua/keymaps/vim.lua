@@ -1,8 +1,6 @@
 -----------------
 -- keymaps.lua --
 -----------------
-local vim = vim;
-
 -- define common options
 local opts = {
     noremap = true,      -- non-recursive
@@ -30,4 +28,3 @@ vim.keymap.set('n', '<C-S-h>', ':vertical resize +2<CR>', opts)
 vim.keymap.set('v', '<', '<gv', opts)
 vim.keymap.set('v', '>', '>gv', opts)
 
-require('config.mac_keybindings').setup();
