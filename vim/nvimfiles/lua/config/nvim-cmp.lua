@@ -4,7 +4,6 @@ local M = {}
 local luasnip = require("luasnip")
 local cmp = require("cmp")
 
-local M = {}
 
 local function is_cursor_at_word_end()
     local col = vim.fn.col('.')
@@ -32,7 +31,7 @@ local function start_async_completion()
 end
 
 function M.load(opts)
-    local opts = opts or {}
+    opts = opts or {}
 
     -- Set up an autocmd for CursorHoldI event to start the completion timer
     vim.api.nvim_create_autocmd("CursorHoldI", {

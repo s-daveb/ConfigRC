@@ -4,7 +4,6 @@ local M  = {}
 
 function M.load()
 	require('config.lsp.providers').init()
-	require('clangd_extensions')
 
 	vim.diagnostic.config({
   		virtual_text = {

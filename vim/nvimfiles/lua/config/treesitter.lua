@@ -13,7 +13,7 @@ function M.load()
     ensure_installed = { "lua", "vim", "vimdoc", "yaml", "cpp" },
     sync_install = true, -- only applies to ensure_installed providers
     auto_install = false,
-    ignore_install = { "copilot.lua" },
+    --ignore_install = { "copilot.lua" },
     highlight = {
       enable = true,
     },
@@ -37,7 +37,7 @@ function M.load()
     end,
   })
 
-  vim.treesitter.language.register("copilot.lua", "markdown")
+  --vim.treesitter.language.register("copilot.lua", "markdown")
 
   debugPrint("Treesitter settings loaded")
 end

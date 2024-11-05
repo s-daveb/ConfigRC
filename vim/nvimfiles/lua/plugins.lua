@@ -17,7 +17,6 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 local plugins = {
-    'sainnhe/everforest',
     {
         "nvim-treesitter/nvim-treesitter",
         config = function()
@@ -96,16 +95,70 @@ local plugins = {
     {
         "rcarriga/nvim-dap-ui",
         dependencies = {
+            "nvim-neotest/nvim-nio",
             "mfussenegger/nvim-dap"
-        }
+        },
+        config = function()
+            local port = 12345
+            local dap = require('dap')
+            local dapui = require('dapui')
+            dap.adapters.lldb = {
+                type = "server",
+                port =  port,
+                executable = {
+                    command = "/Users/sdavid/Downloads/codelldb-x86_64-darwin/extension/adapter/codelldb",
+                    args = { '--port', port }
+                }
+            }
+            dapui.setup()
+        end,
     },
-    --Cmake Project support
+    --[[ *bad* Cmake Project support
     {
         'Civitasv/cmake-tools.nvim',
         config = function()
+            vim.api.nvim_create_autocmd("DirChanged", {
+                callback = function()
+                    local cwd = vim.uv.cwd()
+                    if vim.fn.filereadable(cwd .. "/CMakeLists.txt") == 1 then
+                        vim.c
+                    end
+                end,
+            })
+
             require('config.cmake-tools').load()
         end
+    }, --]]
+    -- Custom build system support
+    {
+        'Shatur/neovim-tasks',
+        dependencies = { 'nvim-lua/plenary.nvim' },
+        config = function()
+            local Path = require('plenary.path')
+            require('tasks').setup({
+                default_params = { -- Default module parameters with which `neovim.json` will be created.
+                    cmake = {
+                        cmd = 'cmake', -- CMake executable to use, can be changed using `:Task set_module_param cmake cmd`.
+                        build_dir = tostring(Path:new('{cwd}', 'build', '{build_type}')), -- Build directory. The expressions `{cwd}`, `{os}` and `{build_type}` will be expanded with the corresponding text values. Could be a function that return the path to the build directory.
+                        build_type = 'Debug', -- Build type, can be changed using `:Task set_module_param cmake build_type`.
+                        dap_name = 'lldb',
+                        args = { -- Task default arguments.
+                            configure = { '-D', 'CMAKE_EXPORT_COMPILE_COMMANDS=1', '-G', 'Ninja', '-D', 'USE_MOLD=1', '-D', 'USE_CCACHE=1' },
+                        },
+                    },
+                },
+                save_before_run = true, -- If true, all files will be saved before executing a task.
+                params_file = 'neovim.json', -- JSON file to store module and task parameters.
+                quickfix = {
+                    pos = '', -- Default quickfix position.
+                    height = 12, -- Default height.
+                },
+                dap_open_command = require('dapui').open,
+            })
+            require('devel.project').setup({})
+        end,
     },
+
     -- Xcode project support
     {
         "wojciech-kulik/xcodebuild.nvim",
@@ -174,6 +227,22 @@ local plugins = {
         'stevearc/dressing.nvim',
         opts = {},
     },
+    {
+        "hedyhli/outline.nvim",
+        lazy = true,
+        cmd = { "Outline", "OutlineOpen" },
+        keys = { -- Example mapping to toggle outline
+            { "<leader>o", "<cmd>Outline<CR>", desc = "Toggle outline" },
+        },
+        opts = {
+            -- Your setup opts here
+        },
+        config = function() require('outline').setup({}) end,
+    },
+}
+local color_plugins = {
+    'sainnhe/everforest',
+    'Mofiqul/dracula.nvim'
 }
 local vimplugins = {
     {
@@ -190,7 +259,8 @@ require("lazy").setup({
         { "LazyVim/LazyVim" },
 
         plugins,
-        vimplugins
+        vimplugins,
+        color_plugins
     },
     defaults = {
         -- By default, only LazyVim plugins will be lazy-loaded. Your custom plugins will load during startup.

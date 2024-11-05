@@ -26,7 +26,7 @@ function M.setup(opts)
 		end
 		lspconfig.sourcekit.setup {
 			cmd = cmd,
-			filetypes = { 'swift' },
+			filetypes = { 'swift' }, --, 'objc', 'objcpp' },
 			on_attach = keymapper.set_keys,
 			capabilities = capabilities
 		}

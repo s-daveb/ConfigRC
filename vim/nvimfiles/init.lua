@@ -2,11 +2,10 @@
 require('options')
 require('keymaps')
 
-require('user-scripts')
 require('plugins')
 
+require('config.ui').load()
 
-require('colorscheme').initialize("everforest");
-
+require('user-scripts')
 
 -- vim: set ts=2 sts=0 sw=2 noet :

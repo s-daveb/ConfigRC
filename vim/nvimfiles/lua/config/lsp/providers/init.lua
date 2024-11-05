@@ -1,6 +1,6 @@
-local module = {}
-
 local vim = vim
+
+local module = {}
 local lspconfig = require('lspconfig')
 local keymaps = require('config.lsp.keymaps')
 
