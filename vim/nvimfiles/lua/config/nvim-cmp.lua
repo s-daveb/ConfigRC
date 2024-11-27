@@ -54,7 +54,7 @@ function M.load(opts)
         snippet = {
             -- REQUIRED - you must specify a snippet engine
             expand = function(args)
-                luasnip.lsp_expand(args.body) -- For `luasnip` users.
+                luasnip.lsp_expand(args.body)
             end,
         },
         mapping = cmp.mapping.preset.insert({
@@ -110,8 +110,8 @@ function M.load(opts)
 
         -- Set source precedence
         sources = cmp.config.sources({
-            { name = 'nvim_lsp' },    -- For nvim-lsp
-            { name = 'luasnip' },     -- For luasnip user
+            { name = 'luasnip' },
+            { name = 'nvim_lsp' },
             { name = 'buffer' },      -- For buffer word completion
             { name = 'path' },        -- For path completion
         })

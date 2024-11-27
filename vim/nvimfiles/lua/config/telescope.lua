@@ -22,7 +22,11 @@ local telescope_options = {
             override_generic_sorter = false,
             override_file_sorter = false,
             case_mode = "ignore_case",
-        }
+        },
+        file_browser = {
+            --theme = "ivy",
+            hijack_netrw = false,
+        },
     }
 }
 
@@ -30,7 +34,6 @@ function M.load(opts)
     local opts = opts or {}
 
     telescope.setup(telescope_options)
-    telescope.load_extension('fzf')
 
     vim.api.nvim_create_autocmd(
         { "BufReadPost", "BufNewFile" },
