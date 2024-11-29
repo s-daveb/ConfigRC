@@ -1,3 +1,0 @@
-[submodule "bash-osx/.bashrc.d/from-github/tmux-bash-completion"]
-	path = bash-macOS/.bashrc.d/from-github/tmux-bash-completion
-	url = https://github.com/imomaliev/tmux-bash-completion

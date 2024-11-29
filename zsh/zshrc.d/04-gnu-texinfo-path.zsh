@@ -1,3 +1,4 @@
-if [ -z "$(echo "${PATH}" | grep "/usr/local/opt/texinfo/bin")" ]; then
-	export PATH="/usr/local/opt/texinfo/bin:$PATH"
+
+if [ -z "$(echo "${PATH}" | grep "${HOMEBREW_PREFIX}/opt/texinfo/bin")" ]; then
+	export PATH="${HOMEBREW_PREFIX}/opt/texinfo/bin:$PATH"
 fi

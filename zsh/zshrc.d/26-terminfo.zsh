@@ -1,7 +1,8 @@
 
 function update_terminfo() {
     local x ncdir terms
-    ncdir="/usr/local/opt/ncurses"
+
+    ncdir="${HOMEBREW_PREFIX}/opt/ncurses"
     terms=(tmux tmux-256color)
 
     mkdir -p ~/.terminfo && cd ~/.terminfo
@@ -35,5 +36,5 @@ else
 	export TERMINFO_DIRS="$HOME/.local/share/terminfo:${TERMINFO_DIRS}"
 fi
 
-# testing 
+# testing
 

@@ -12,6 +12,7 @@ fi
 
 export HOMEBREW_NO_ENV_HINTS=1
 export MallocNanoZone=0
+export skip_global_compinit=1
 
 if [[ -f ~/.zshenv.private ]]; then
 	if [[ -z "${OLLAMA_HOST}" ]]; then

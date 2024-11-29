@@ -1,1 +1,0 @@
-from-github/tmux-bash-completion/completions/tmux

@@ -1,78 +1,104 @@
 #zmodload zsh/zprof
 
-export ZPLUG_INSTALL=/usr/local/opt/zplug
-source $ZPLUG_INSTALL/init.zsh
+CPU_TYPE_FILE="$HOME/.cpu_type"
 
-# Load oh-my-zsh plugins.
-autoload colors && colors
-setopt prompt_subst
+# Function to detect CPU type and cache it
+detect_and_cache_cpu_type() {
+  if [[ "$(uname -m)" == "arm64" ]]; then
+    echo "apple_silicon" > "$CPU_TYPE_FILE"
+  else
+    echo "intel" > "$CPU_TYPE_FILE"
+  fi
+}
 
-#zplug "robbyrussell/oh-my-zsh", use:"lib/*.zsh", defer:0
-#zplug "plugins/git", from:oh-my-zsh
-zplug "plugins/macos", from:oh-my-zsh, if:"[[ $OSTYPE == *darwin* ]]"
-#zplug "plugins/pip", from:oh-my-zsh
-
-zplug "plugins/command-not-found", from:oh-my-zsh
-
-## Syntax highlighting bundle.
-zplug "zsh-users/zsh-autosuggestions", defer:1
-zplug "mafredri/zsh-async", defer:1
-zplug "zsh-users/zsh-syntax-highlighting", defer:2
-
-# Load the theme.
-# Simple > theme
-#zplug "jackharrisonsherlock/common", as:theme
-# Robbyrussel + emoji
-#zplug "meiokubo-zz/emoji.zsh-theme", as:theme
-# Powerline theme
-#zplug "caiogondim/bullet-train.zsh", as:theme
-
-# Multi-line prompts
-zplug "themes/gnzh", from:oh-my-zsh, as:theme
-#zplug "halfo/lambda-mod-zsh-theme", as:theme
-#zplug "zthxxx/jovial", as:theme
-#zplug "yarisgutierrez/classyTouch_oh-my-zsh", as:theme
-
-if ! zplug check --verbose; then
-    #printf "Install? [y/N]: "
-    #if read -q; then
-    echo; zplug install
-    #fi
+# Check if the cache file exists and is not empty
+if [[ -s "$CPU_TYPE_FILE" ]]; then
+  CPU_TYPE=$(<"$CPU_TYPE_FILE")
+else
+  detect_and_cache_cpu_type
+  CPU_TYPE=$(<"$CPU_TYPE_FILE")
 fi
 
-zplug load #--verbose
-
-#oh-my-zsh seems to enable this by default. No me gusta en macOS.
-DISABLE_AUTO_TITLE="true"
-
-# Lines configured by zsh-newuser-install
-setopt autocd beep extendedglob notify
-bindkey -e
-# End of lines configured by zsh-newuser-install
-
-rm -rf ~/zsh.perf.log
-
-if [ -d ~/.zshrc.d ]; then
-	for script in `/bin/ls ~/.zshrc.d/*.zsh`; do
-		if [[ "$script" =~ ".*/empty.zsh" ]]; then
-			continue
-		fi
-		script_compiled=${script//.zsh/.zwc}
-
-		# If there's no precompiled zwc file,
-		# or the compiled file is older than the zsh file, 
-		if [ ! -f $script_compiled ] ||
-		   [ $script_compiled -ot $script ] ; then
-			zsh -c "zcompile $script" & # recompile but do not wait for the job to finish
-  		  	disown
-		fi
-
-		if [ -f $script_compiled ]; then
- 		   	source $script_compiled
-		else
-			source $script
-		fi
-	done
+# Set HOMEBREW_PREFIX based on CPU type
+if [[ "$CPU_TYPE" == "apple_silicon" ]]; then
+  export HOMEBREW_PREFIX="/opt/homebrew"
+else
+  export HOMEBREW_PREFIX="/usr/local"
 fi
 
-#zprof
+if [ -n "${HOMEBREW_PREFIX}" ]; then
+	export ZPLUG_INSTALL="${HOMEBREW_PREFIX}/opt/zplug"
+	source $ZPLUG_INSTALL/init.zsh
+
+	# Load oh-my-zsh plugins.
+	autoload colors && colors
+	setopt prompt_subst
+
+	#zplug "robbyrussell/oh-my-zsh", use:"lib/*.zsh", defer:0
+	#zplug "plugins/git", from:oh-my-zsh
+	zplug "plugins/macos", from:oh-my-zsh, if:"[[ $OSTYPE == *darwin* ]]"
+	#zplug "plugins/pip", from:oh-my-zsh
+
+	zplug "plugins/command-not-found", from:oh-my-zsh
+
+	## Syntax highlighting bundle.
+	zplug "zsh-users/zsh-autosuggestions", defer:1
+	zplug "mafredri/zsh-async", defer:1
+	zplug "zsh-users/zsh-syntax-highlighting", defer:2
+
+	# Load the theme.
+	# Simple > theme
+	#zplug "jackharrisonsherlock/common", as:theme
+	# Robbyrussel + emoji
+	#zplug "meiokubo-zz/emoji.zsh-theme", as:theme
+	# Powerline theme
+	#zplug "caiogondim/bullet-train.zsh", as:theme
+
+	# Multi-line prompts
+	zplug "themes/gnzh", from:oh-my-zsh, as:theme
+	#zplug "halfo/lambda-mod-zsh-theme", as:theme
+	#zplug "zthxxx/jovial", as:theme
+	#zplug "yarisgutierrez/classyTouch_oh-my-zsh", as:theme
+
+	if ! zplug check --verbose; then
+	    #printf "Install? [y/N]: "
+	    #if read -q; then
+	    echo; zplug install
+	    #fi
+	fi
+
+	zplug load #--verbose
+
+	#oh-my-zsh seems to enable this by default. No me gusta en macOS.
+	DISABLE_AUTO_TITLE="true"
+
+	# Lines configured by zsh-newuser-install
+	setopt autocd beep extendedglob notify
+	bindkey -e
+	# End of lines configured by zsh-newuser-install
+
+
+	if [ -d ~/.zshrc.d ]; then
+		for script in `/bin/ls ~/.zshrc.d/*.zsh`; do
+			if [[ "$script" =~ ".*/empty.zsh" ]]; then
+				continue
+			fi
+			script_compiled=${script//.zsh/.zwc}
+
+			# If there's no precompiled zwc file,
+			# or the compiled file is older than the zsh file,
+			if [ ! -f $script_compiled ] ||
+			   [ $script_compiled -ot $script ] ; then
+				zsh -c "zcompile $script" & # recompile but do not wait for the job to finish
+				disown
+				source $script
+				continue
+			else
+				source $script_compiled
+			fi
+		done
+	fi
+
+else
+	echo "This zsh configuration requires homebrew. Please install it"
+fi
