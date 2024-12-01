@@ -1,8 +1,57 @@
 #/usr/bin/env zsh
 
+export brew_loaded=0
+
+function detect_brew() { #<
+	CPU_TYPE_FILE="$HOME/.cpu_type"
+
+	# Function to detect CPU type and cache it
+	local function detect_and_cache_cpu_type() {
+	  if [[ "$(uname -m)" == "arm64" ]]; then
+	    echo "apple_silicon" > "$CPU_TYPE_FILE"
+	  else
+	    echo "intel" > "$CPU_TYPE_FILE"
+	  fi
+	}
+
+	# Check if the cache file exists and is not empty
+	if [[ -s "$CPU_TYPE_FILE" ]]; then
+	  CPU_TYPE=$(<"$CPU_TYPE_FILE")
+	else
+	  detect_and_cache_cpu_type
+	  CPU_TYPE=$(<"$CPU_TYPE_FILE")
+	fi
+
+	if [[ "$CPU_TYPE" == "apple_silicon" ]]; then
+	  export HOMEBREW_PREFIX="/opt/homebrew"
+	else
+	  export HOMEBREW_PREFIX="/usr/local"
+	fi
+
+	if [ ! -d ${HOMEBREW_PREFIX} ]; then
+		echo "Homebrew not found at ${HOMEBREW_PREFIX}"
+	fi
+} #>
+
+function load_brew() { #<
+	if [[ ${brew_loaded} -eq 1 ]]; then
+		return
+	fi
+
+	brew_cmd="${HOMEBREW_PREFIX}/bin/brew"
+
+	if [ -x "$(command -v ${brew_cmd})" ]; then
+		eval "$(${brew_cmd} shellenv)"
+	fi
+	export brew_loaded=1
+}
+
+
 
 if [[ ! -o interactive ]]; then
-	#echo "ZSH login shell - limited environment"
+#	echo "Not an interactive shell"
+	detect_brew
+	source ~/.zshrc.d/00-common.zsh
 	source ~/.zshrc.d/02-usr-local.zsh
 	source ~/.zshrc.d/05-manpath.zsh
 	source ~/.zshrc.d/09-python-env.zsh
@@ -19,3 +68,5 @@ if [[ -f ~/.zshenv.private ]]; then
 		source ~/.zshenv.private
 	fi
 fi
+
+# vim: ft=zsh ts=4 sts=4 sw=4 noet foldmethod=marker foldmarker=#<,#> :

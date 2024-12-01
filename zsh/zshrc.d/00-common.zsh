@@ -30,3 +30,4 @@ local function append_path() {
 
 	echo "${path_to_append}"
 }
+

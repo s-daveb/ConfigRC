@@ -1,32 +1,10 @@
 #zmodload zsh/zprof
 
-CPU_TYPE_FILE="$HOME/.cpu_type"
-
-# Function to detect CPU type and cache it
-detect_and_cache_cpu_type() {
-  if [[ "$(uname -m)" == "arm64" ]]; then
-    echo "apple_silicon" > "$CPU_TYPE_FILE"
-  else
-    echo "intel" > "$CPU_TYPE_FILE"
-  fi
-}
-
-# Check if the cache file exists and is not empty
-if [[ -s "$CPU_TYPE_FILE" ]]; then
-  CPU_TYPE=$(<"$CPU_TYPE_FILE")
-else
-  detect_and_cache_cpu_type
-  CPU_TYPE=$(<"$CPU_TYPE_FILE")
-fi
-
-# Set HOMEBREW_PREFIX based on CPU type
-if [[ "$CPU_TYPE" == "apple_silicon" ]]; then
-  export HOMEBREW_PREFIX="/opt/homebrew"
-else
-  export HOMEBREW_PREFIX="/usr/local"
-fi
+detect_brew
 
 if [ -n "${HOMEBREW_PREFIX}" ]; then
+	load_brew
+
 	export ZPLUG_INSTALL="${HOMEBREW_PREFIX}/opt/zplug"
 	source $ZPLUG_INSTALL/init.zsh
 
@@ -83,19 +61,18 @@ if [ -n "${HOMEBREW_PREFIX}" ]; then
 			if [[ "$script" =~ ".*/empty.zsh" ]]; then
 				continue
 			fi
-			script_compiled=${script//.zsh/.zwc}
+			script_compiled=${script}.zwc
 
 			# If there's no precompiled zwc file,
 			# or the compiled file is older than the zsh file,
 			if [ ! -f $script_compiled ] ||
 			   [ $script_compiled -ot $script ] ; then
-				zsh -c "zcompile $script" & # recompile but do not wait for the job to finish
-				disown
 				source $script
+				zsh -c "zcompile $script" &
+				disown
 				continue
-			else
-				source $script_compiled
 			fi
+			source $script
 		done
 	fi
 
