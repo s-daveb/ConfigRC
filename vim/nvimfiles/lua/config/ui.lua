@@ -15,7 +15,7 @@ function M.load(opts)
 
     colorconfig.set(nil, function()
         if is_gui == false then
-            vim.g.everforest_transparent_background = 2
+            vim.g.everforest_transparent_background = 1
         end
     end)
     vim.opt.cmdheight = 0

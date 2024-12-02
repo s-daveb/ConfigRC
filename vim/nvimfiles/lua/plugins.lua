@@ -88,7 +88,7 @@ local plugins = {
     -- GitHub Copilot
     {
         'github/copilot.vim',
-        event = 'BufRead', -- Only load Copilot when entering insert mode to optimize startup time
+        -- event = 'BufEnter', -- Only load Copilot when entering insert mode to optimize startup time
         config = function()
             -- Optional: You can add Copilot specific configurations here
             vim.g.copilot_no_tab_map = false  -- Disable default tab mapping
@@ -187,6 +187,10 @@ local plugins = {
             require('neo-tree').setup({
                 filesystem = {
                     hijack_netrw_behavior = "open_current"
+                },
+                sources = {
+                    'filesystem',
+                    'netman.ui.neo-tree',
                 }
             })
             require('keymaps.neotree').load()
