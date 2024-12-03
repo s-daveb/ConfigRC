@@ -3,7 +3,7 @@ local M = {}
 
 local default_gui_theme = "everforest"
 local default_term_theme = "everforest"
-local default_tmux_theme = "everforest"
+local default_tmux_theme = "dracula"
 
 local background = vim.o.background
 

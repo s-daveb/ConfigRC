@@ -1,4 +1,4 @@
-local vim = vim
+
 local lazypath = vim.fn.stdpath('data') .. '/lazy/lazy.nvim'
 
 if not (vim.uv and vim.uv.fs_stat or vim.loop and vim.loop.fs_stat)(lazypath) then
@@ -163,60 +163,18 @@ local plugins = {
             require('xcodebuild').setup()
         end,
     },
-    -- Modern File browsing
-    {
-        'miversen33/netman.nvim',
-        dependencies = {
-            'nvim-neo-tree/neo-tree.nvim',
-            'nvim-telescope/telescope-file-browser.nvim',
-        },
-        -- Note, you do not need this if you plan on using Netman with any of the
-        -- supported UI Tools such as Neo-tree
-        config = true
-    },
-    {
-        "nvim-neo-tree/neo-tree.nvim",
-        branch = "v3.x",
-        dependencies = {
-            "nvim-lua/plenary.nvim",
-            "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
-            "MunifTanjim/nui.nvim",
-            "3rd/image.nvim", -- Optional image support in preview window: See `# Preview Mode` for more information
-        },
-        config = function()
-            require('neo-tree').setup({
-                filesystem = {
-                    hijack_netrw_behavior = "open_current"
-                },
-                sources = {
-                    'filesystem',
-                    'netman.ui.neo-tree',
-                }
-            })
-            require('keymaps.neotree').load()
-        end
-    },
-    {
-        'nvim-telescope/telescope-file-browser.nvim',
-        dependencies = {
-            'nvim-lua/plenary.nvim',
-            'nvim-telescope/telescope.nvim',
-        },
-    },
     {
         'nvim-telescope/telescope.nvim',
         dependencies = {
             'nvim-lua/plenary.nvim',
-            'nvim-telescope/telescope-fzf-native.nvim',
-            'nvim-telescope/telescope-file-browser.nvim',
-            build = 'make',
-            config = function()
-                require('telescope').load_extension('fzf')
-                require('telescope').load_extension('file_browser')
-            end,
+            {
+                'nvim-telescope/telescope-fzf-native.nvim',
+                build = 'make',
+            }
         },
         config = function()
             require('config.telescope').load()
+            require('telescope').load_extension('fzf')
         end
     },
     -- Linting Support
@@ -276,12 +234,12 @@ local color_plugins = {
     'Mofiqul/dracula.nvim'
 }
 local vimplugins = {
-    --[[{
+    {
         'tpope/vim-vinegar',
         config = function()
             require('config.netrw').load()
         end,
-    },--]]
+    },
     {'tpope/vim-fugitive'},
 }
 
@@ -313,7 +271,7 @@ require('lazy').setup({
                 'gzip',
                 -- 'matchit',
                 -- 'matchparen',
-                'netrwPlugin',
+                -- 'netrwPlugin',
                 'tarPlugin',
                 'tohtml',
                 'tutor',
