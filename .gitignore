@@ -12,3 +12,4 @@
 *.zwc
 lazy-lock.json
 legacy
+.luarc.json

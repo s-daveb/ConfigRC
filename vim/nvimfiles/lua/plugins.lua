@@ -163,6 +163,7 @@ local plugins = {
             require('xcodebuild').setup()
         end,
     },
+    --  File Navigation Plugsin
     {
         'nvim-telescope/telescope.nvim',
         dependencies = {
@@ -170,11 +171,67 @@ local plugins = {
             {
                 'nvim-telescope/telescope-fzf-native.nvim',
                 build = 'make',
-            }
+            },
+            "nvim-telescope/telescope-file-browser.nvim",
         },
         config = function()
-            require('config.telescope').load()
+            local opts = {
+                defaults =    {
+                    file_ignore_patterns = {  ".git", "%.3" },
+                },
+                extensions = {
+                    fzf = {
+                        fuzzy = true,
+                        override_generic_sorter = false,
+                        override_file_sorter = false,
+                        case_mode = "ignore_case",
+                    },
+                    file_browser = {
+                        theme = "ivy",
+                        -- disables netrw and use telescope-file-browser in its place
+                        hijack_netrw = true,
+                    }
+                }
+            }
+            require('config.telescope').load(opts)
             require('telescope').load_extension('fzf')
+            require('telescope').load_extension('file_browser')
+        end
+    },
+        {
+        "nvim-neo-tree/neo-tree.nvim",
+        branch = "v3.x",
+        dependencies = {
+            "nvim-lua/plenary.nvim",
+            "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
+            "MunifTanjim/nui.nvim",
+            {
+                's-daveb/netman.nvim',
+            },
+            "3rd/image.nvim", -- Optional image support in preview window: See `# Preview Mode` for more information
+        },
+        config= function()
+            local opts = {
+                sources = {
+                    "filesystem",
+                    "netman.ui.neo-tree", -- netman
+                    "document_symbols"
+                },
+                filesystem = {
+                    hijack_netrw_behavior = 'disabled'
+                },
+                window = {
+                    mappings = {}
+                }
+            }
+            require('config.neotree').load(opts)
+        end
+    },
+    {
+        's-daveb/netman.nvim',
+        branch = 'custom',
+        config = function()
+            require('netman')
         end
     },
     -- Linting Support
@@ -271,7 +328,7 @@ require('lazy').setup({
                 'gzip',
                 -- 'matchit',
                 -- 'matchparen',
-                -- 'netrwPlugin',
+                --'netrwPlugin',
                 'tarPlugin',
                 'tohtml',
                 'tutor',

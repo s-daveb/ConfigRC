@@ -2,8 +2,6 @@ local vim = vim
 local M = {}
 
 local telescope = require('telescope')
-local keymaps = require('keymaps.telescope')
-
 local debug = false
 
 local function debugPrint( ... )
@@ -12,29 +10,15 @@ local function debugPrint( ... )
 	end
 end
 
-local telescope_options = {
-	defaults =    {
-		file_ignore_patterns = {  ".git", "Docs/.*", "%.3" },
-	},
-	extensions = {
-		fzf = {
-			fuzzy = true,
-			override_generic_sorter = false,
-			override_file_sorter = false,
-			case_mode = "ignore_case",
-		},
-	}
-}
-
 function M.load(opts)
-	telescope.setup(telescope_options)
+	telescope.setup(opts)
 
 	vim.api.nvim_create_autocmd(
 		{ "BufReadPost", "BufNewFile" },
 		{
 			pattern = { "*" },
 			callback = function()
-				keymaps.bindkeys()
+				require('keymaps.telescope').bindkeys()
 				debugPrint("Telescope keymaps bound")
 			end
 		})
