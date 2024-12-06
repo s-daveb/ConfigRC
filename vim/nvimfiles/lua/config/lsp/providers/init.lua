@@ -2,7 +2,7 @@ local vim = vim
 
 local module = {}
 local lspconfig = require('lspconfig')
-local keymaps = require('config.lsp.keymaps')
+local keymaps = require('keymaps.lsp')
 
 
 function module.init()

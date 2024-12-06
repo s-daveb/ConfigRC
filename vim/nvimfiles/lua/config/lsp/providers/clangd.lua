@@ -13,17 +13,17 @@ function M.setup(opts)
 	keymapper = opts.keymapper
 
 	local clang_cmd = {
-        "clangd",
-        "-j=4",
-        "--background-index",
-        "--clang-tidy",
-        "--fallback-style=llvm",
-        "--all-scopes-completion",
-        "--completion-style=detailed",
-        "--header-insertion=iwyu",
-        "--header-insertion-decorators",
-        "--pch-storage=memory",
-    }
+		"clangd",
+		"-j=4",
+		"--background-index",
+		"--clang-tidy",
+		"--fallback-style=llvm",
+		"--all-scopes-completion",
+		"--completion-style=detailed",
+		"--header-insertion=iwyu",
+		"--header-insertion-decorators",
+		"--pch-storage=memory"
+	}
 
 	if vim.fn.executable(clangd_path) == 1 then
 			lspconfig.clangd.setup {
@@ -35,18 +35,7 @@ function M.setup(opts)
 
 		require("clangd_extensions").setup{
 			 server = {
-					cmd = {
-						 "clangd",
-						 "-j=4",
-						 "--background-index",
-						 "--clang-tidy",
-						 "--fallback-style=llvm",
-						 "--all-scopes-completion",
-						 "--completion-style=detailed",
-						 "--header-insertion=iwyu",
-						 "--header-insertion-decorators",
-						 "--pch-storage=memory",
-					},
+					cmd = clang_cmd,
 					initialization_options = {
 						 fallback_flags = { },
 					},
@@ -54,6 +43,12 @@ function M.setup(opts)
 		}
 		require("clangd_extensions.inlay_hints").setup_autocmd()
 		require("clangd_extensions.inlay_hints").set_inlay_hints()
+
+
+	-- Remove trailing whitespace before saving these files
+	vim.cmd [[
+		autocmd BufWritePre *.c,*.h,*.cpp,*.hpp lua vim.lsp.buf.format({ async = false })
+	]]
 	end
 end
 

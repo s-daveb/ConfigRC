@@ -38,9 +38,7 @@ local plugins = {
         'L3MON4D3/LuaSnip',
         version = 'v2.*',
         build = 'make install_jsregexp',
-        config = function()
-            require('luasnip.loaders.from_snipmate').load()
-        end,
+        config = function() require('luasnip.loaders.from_snipmate').load() end
     },
     -- Auto-completion engine
     {
@@ -104,49 +102,16 @@ local plugins = {
             'nvim-neotest/nvim-nio',
             'mfussenegger/nvim-dap'
         },
-        config = function()
-            local port = 12345
-            local dap = require('dap')
-            local dapui = require('dapui')
-            dap.adapters.lldb = {
-                type = 'server',
-                port =  port,
-                executable = {
-                    command = '/Users/sdavid/Downloads/codelldb-x86_64-darwin/extension/adapter/codelldb',
-                    args = { '--port', port }
-                }
-            }
-            dapui.setup()
-        end,
+        config = function () require('config.dap').setup() end,
     },
     -- Custom build system support
     {
-        'Shatur/neovim-tasks',
-        dependencies = { 'nvim-lua/plenary.nvim' },
-        config = function()
-            local Path = require('plenary.path')
-            require('tasks').setup({
-                default_params = { -- Default module parameters with which `neovim.json` will be created.
-                    cmake = {
-                        cmd = 'cmake', -- CMake executable to use, can be changed using `:Task set_module_param cmake cmd`.
-                        build_dir = tostring(Path:new('{cwd}', 'build', '{build_type}')), -- Build directory. The expressions `{cwd}`, `{os}` and `{build_type}` will be expanded with the corresponding text values. Could be a function that return the path to the build directory.
-                        build_type = 'Debug', -- Build type, can be changed using `:Task set_module_param cmake build_type`.
-                        dap_name = 'lldb',
-                        args = { -- Task default arguments.
-                            configure = { '-D', 'CMAKE_EXPORT_COMPILE_COMMANDS=1', '-G', 'Ninja', '-D', 'USE_MOLD=1', '-D', 'USE_CCACHE=1' },
-                        },
-                    },
-                },
-                save_before_run = true, -- If true, all files will be saved before executing a task.
-                params_file = 'neovim.json', -- JSON file to store module and task parameters.
-                quickfix = {
-                    pos = '', -- Default quickfix position.
-                    height = 12, -- Default height.
-                },
-                dap_open_command = require('dapui').open,
-            })
-            --require('devel.project').setup({})
-        end,
+    	'Shatur/neovim-tasks',
+        dependencies = {
+        	'nvim-lua/plenary.nvim',
+		    'rcarriga/nvim-dap-ui',
+        },
+        config = function() require('config.neovim-tasks').setup() end,
     },
     -- Xcode project support
     {
@@ -177,7 +142,7 @@ local plugins = {
         config = function()
             local opts = {
                 defaults =    {
-                    file_ignore_patterns = {  ".git", "%.3" },
+                    file_ignore_patterns = {  ".git","Docs", "build", "%.3" },
                 },
                 extensions = {
                     fzf = {
@@ -198,7 +163,7 @@ local plugins = {
             require('telescope').load_extension('file_browser')
         end
     },
-        {
+    {
         "nvim-neo-tree/neo-tree.nvim",
         branch = "v3.x",
         dependencies = {
@@ -338,3 +303,4 @@ require('lazy').setup({
     },
 })
 
+-- vim: set ts=4 sw=4 sts=0 et : --

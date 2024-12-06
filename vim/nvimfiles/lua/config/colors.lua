@@ -3,9 +3,9 @@ local M = {}
 
 local default_gui_theme = "everforest"
 local default_term_theme = "everforest"
-local default_tmux_theme = "dracula"
+local default_tmux_theme = "everforest"
 
-local background = vim.o.background
+local keymaps = require('keymaps.colors')
 
 local is_gui = (vim.fn.has('gui_running') == 1) and true or false
 M.is_gui = is_gui
@@ -40,7 +40,6 @@ function M.set(themeset, preexec)
             os.getenv("TMUX") ~= "" and
             os.getenv("SSH_CONNECTION") ~= nil then
             new_theme= themeset.tmux
-            vim.o.background = "dark"
         else
             new_theme= themeset.term
         end
@@ -51,6 +50,7 @@ function M.set(themeset, preexec)
     end
 
     vim.cmd("colorscheme " .. new_theme)
+    keymaps.load()
 end
 
 return M
