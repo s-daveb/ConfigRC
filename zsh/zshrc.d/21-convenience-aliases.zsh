@@ -1,6 +1,6 @@
 
-alias wtf='wtf -o'
-eval "$(thefuck --alias)"
+#alias wtf='wtf -o'
+#eval "$(thefuck --alias)"
 
 
 alias bat="bat --theme=Dracula"
