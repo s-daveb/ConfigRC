@@ -176,20 +176,7 @@ local plugins = {
             "3rd/image.nvim", -- Optional image support in preview window: See `# Preview Mode` for more information
         },
         config= function()
-            local opts = {
-                sources = {
-                    "filesystem",
-                    "netman.ui.neo-tree", -- netman
-                    "document_symbols"
-                },
-                filesystem = {
-                    hijack_netrw_behavior = 'disabled'
-                },
-                window = {
-                    mappings = {}
-                }
-            }
-            require('config.neotree').load(opts)
+            require('config.neotree').load()
         end
     },
     {
