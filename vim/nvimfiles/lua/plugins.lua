@@ -86,14 +86,7 @@ local plugins = {
     -- GitHub Copilot
     {
         'github/copilot.vim',
-        -- event = 'BufEnter', -- Only load Copilot when entering insert mode to optimize startup time
-        config = function()
-            -- Optional: You can add Copilot specific configurations here
-            vim.g.copilot_no_tab_map = false  -- Disable default tab mapping
-            vim.api.nvim_set_keymap('i', '<C-Right>', "copilot#Accept('<CR>')", { silent = true, expr = true })
-            vim.api.nvim_set_keymap('i', '<C-Space>', "copilot#Accept('<CR>')", { silent = true, expr = true })
-            vim.api.nvim_set_keymap('i', '<C-L>', "copilot#Accept('<CR>')", { silent = true, expr = true })
-        end
+        config = function() require('config.copilot').setup() end,
     },
     -- Debugger Framework
     {
@@ -237,6 +230,11 @@ local plugins = {
         },
         config = function() require('outline').setup({}) end,
     },
+    -- Tmux integration
+    {
+        's-daveb/neomux',
+        config = true
+    }
 }
 local color_plugins = {
     'sainnhe/everforest',
@@ -252,12 +250,24 @@ local vimplugins = {
     {'tpope/vim-fugitive'},
 }
 
+local myplugins = {
+	--[[{
+		-- Uses a local directory for the plugin source
+		dir = "~/.config/nvim/lua/devel/tmuxigator.nvim",
+		name = "tmuxigator",
+		config = function()
+			require("devel.tmuxigator").setup()
+		end
+	} --]]
+}
+
 require('lazy').setup({
     spec =  {
         { 'LazyVim/LazyVim' },
         plugins,
         vimplugins,
-        color_plugins
+        color_plugins,
+		myplugins,
     },
     defaults = {
         -- By default, only LazyVim plugins will be lazy-loaded. Your custom plugins will load during startup.
