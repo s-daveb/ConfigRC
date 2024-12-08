@@ -66,6 +66,9 @@ function M.load()
                 if vim.tbl_contains(custom.lsp_filetypes, filetype) then
                     vim.schedule(function()
                         vim.cmd("Outline!")
+                        if (vim.fn.has("gui_running") == 1) and (vim.o.columns < 120) then
+                            vim.o.columns = vim.o.columns + 20
+                        end
                     end)
                 end
             end,

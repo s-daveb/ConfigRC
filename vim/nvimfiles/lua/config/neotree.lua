@@ -86,7 +86,9 @@ M.load = function(opts)
             if vim.fn.has("gui_running") == 1 then
                 M.open_neotree_left()
                 vim.schedule(function()
-                    vim.o.columns = vim.o.columns + 20
+                    if (vim.o.columns  < 120 ) then
+                        vim.o.columns = vim.o.columns + 20
+                    end
                 end)
                 vim.cmd("wincmd p")
             end
