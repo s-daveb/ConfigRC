@@ -85,10 +85,10 @@ M.load = function(opts)
         callback = function()
             if vim.fn.has("gui_running") == 1 then
                 M.open_neotree_left()
-                --M.open_tagbar_right()
-                vim.o.columns = 180
-                -- move focus back to the code window
-                vim.cmd("wincmd h")
+                vim.schedule(function()
+                    vim.o.columns = vim.o.columns + 20
+                end)
+                vim.cmd("wincmd p")
             end
         end,
         desc = "Open Neo-tree agbar on buffer enter for specific file types",

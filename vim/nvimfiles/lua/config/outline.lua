@@ -64,7 +64,9 @@ function M.load()
                 local buf = args.buf
                 local filetype = vim.bo[buf].filetype
                 if vim.tbl_contains(custom.lsp_filetypes, filetype) then
-                    vim.cmd("Outline!")
+                    vim.schedule(function()
+                        vim.cmd("Outline!")
+                    end)
                 end
             end,
             desc = "Open Outline after LSP attaches to a relevant file"
