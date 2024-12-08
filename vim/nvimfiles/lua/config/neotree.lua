@@ -82,6 +82,9 @@ M.load = function()
         callback = function()
             M.open_neotree_left()
             M.open_tagbar_right()
+            vim.o.columns = 180
+            -- move focus back to the code window
+            vim.cmd("wincmd h")
         end,
         desc = "Open Neo-tree and Tagbar on buffer enter for specific file types",
     })
