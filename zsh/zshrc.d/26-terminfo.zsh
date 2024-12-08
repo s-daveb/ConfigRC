@@ -3,7 +3,7 @@ macOSVersion=$(sw_vers -productVersion)
 
 # Check if the current version is not 14.0 or higher (macOS Sonoma)
 #  This hack is only needed on legacy macos
-if !is-at-least 14.0 "$macOSVersion"; then
+if ! is-at-least 14.0 "$macOSVersion"; then
 	function update_terminfo() {
 		local x ncdir terms
 
