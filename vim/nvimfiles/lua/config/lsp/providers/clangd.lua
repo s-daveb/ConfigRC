@@ -6,24 +6,24 @@ local capabilities
 local keymapper
 
 local clangd_path = vim.fn.exepath('clangd')
+local clang_cmd = {
+	clangd_path,
+	"-j=4",
+	"--background-index",
+	"--clang-tidy",
+	"--fallback-style=llvm",
+	"--all-scopes-completion",
+	"--completion-style=detailed",
+	"--header-insertion=iwyu",
+	"--header-insertion-decorators",
+	"--pch-storage=memory"
+}
 
 function M.setup(opts)
 	lspconfig = require('lspconfig')
 	capabilities = opts.capabilities
 	keymapper = opts.keymapper
 
-	local clang_cmd = {
-		"clangd",
-		"-j=4",
-		"--background-index",
-		"--clang-tidy",
-		"--fallback-style=llvm",
-		"--all-scopes-completion",
-		"--completion-style=detailed",
-		"--header-insertion=iwyu",
-		"--header-insertion-decorators",
-		"--pch-storage=memory"
-	}
 
 	if vim.fn.executable(clangd_path) == 1 then
 			lspconfig.clangd.setup {
@@ -45,10 +45,10 @@ function M.setup(opts)
 		require("clangd_extensions.inlay_hints").set_inlay_hints()
 
 
-	-- Remove trailing whitespace before saving these files
-	vim.cmd [[
-		autocmd BufWritePre *.c,*.h,*.cpp,*.hpp lua vim.lsp.buf.format({ async = false })
-	]]
+		-- Remove trailing whitespace before saving these files
+		vim.cmd [[
+			autocmd BufWritePre *.c,*.h,*.cpp,*.hpp lua vim.lsp.buf.format({ async = false })
+		]]
 	end
 end
 

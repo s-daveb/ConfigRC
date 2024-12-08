@@ -1,6 +1,5 @@
-local vim = vim
 local M = {}
-local debug = false
+local debug =  false
 
 local function debugPrint(...)
   if debug then
@@ -9,23 +8,26 @@ local function debugPrint(...)
 end
 
 function M.load()
+  local luajit_version = tonumber(jit.version:match("2%.%d+%.(%d+)$"))
+  local highlight_enabled = false
+
+  debugPrint("Luajit version is " .. luajit_version )
+  -- Treesitter highlighting is broken with old versions of luajit
+  if luajit_version and luajit_version > 1732813678 then
+    debugPrint("Luajit version " .. luajit_version .. " can run Treesitter")
+    highlight_enabled = true
+  end
+
   require('nvim-treesitter.configs').setup({
     ensure_installed = { "lua", "vim", "vimdoc", "yaml", "cpp" },
     sync_install = true, -- only applies to ensure_installed providers
-    auto_install = false,
-    --ignore_install = { "copilot.lua" },
+    auto_install = true,
+    ignore_install = { "copilot.lua" },
     highlight = {
-      enable = true,
+      enable = highlight_enabled
     },
     indent = {
       enable = true,
-    },
-    incremental_selection = {
-      enable = true,
-      init_selection = "gnn", -- set to `false` to disable one of the mappings
-      node_incremental = "grn",
-      scope_incremental = "grc",
-      node_decremental = "grm",
     },
   })
 

@@ -15,7 +15,7 @@ if not command_loaded then
     return
 end
 
-M.opts = {
+local default_opts = {
 	sources = {
 		"filesystem",
 		"netman.ui.neo-tree", -- netman
@@ -72,21 +72,26 @@ function M.change_root()
 end
 
 -- Function to set up Neo-tree with the configured options
-M.load = function()
+M.load = function(opts)
+    opts = opts or {}
+    local neotree_opts = vim.tbl_deep_extend("force", default_opts, opts)
+
     -- Setup Neo-tree with the options
-    neo_tree.setup(M.opts)
+    neo_tree.setup(neotree_opts)
 
     -- Set up the autocommand to open Neo-tree and Tagbar on file buffer enter
     vim.api.nvim_create_autocmd("VimEnter", {
         pattern = {"*.c", "*.h", "*.cpp", "*.hpp"},
         callback = function()
-            M.open_neotree_left()
-            M.open_tagbar_right()
-            vim.o.columns = 180
-            -- move focus back to the code window
-            vim.cmd("wincmd h")
+            if vim.fn.has("gui_running") == 1 then
+                M.open_neotree_left()
+                --M.open_tagbar_right()
+                vim.o.columns = 180
+                -- move focus back to the code window
+                vim.cmd("wincmd h")
+            end
         end,
-        desc = "Open Neo-tree and Tagbar on buffer enter for specific file types",
+        desc = "Open Neo-tree agbar on buffer enter for specific file types",
     })
 
 	require('keymaps.neotree').load()

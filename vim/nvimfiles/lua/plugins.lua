@@ -21,7 +21,8 @@ local plugins = {
         'nvim-treesitter/nvim-treesitter',
         config = function()
             require('config.treesitter').load()
-        end
+        end,
+        build = ":TSUpdate"
     },
     {
         'nvim-telescope/telescope.nvim',
@@ -219,16 +220,10 @@ local plugins = {
         opts = {},
     },
     {
-        'hedyhli/outline.nvim',
-        lazy = true,
-        cmd = { 'Outline', 'OutlineOpen' },
-        keys = { -- Example mapping to toggle outline
-            { '<leader>o', '<cmd>Outline<CR>', desc = 'Toggle outline' },
-        },
-        opts = {
-            -- Your setup opts here
-        },
-        config = function() require('outline').setup({}) end,
+        "hedyhli/outline.nvim",
+        config = function()
+            require('config.outline').load({})
+        end
     },
     -- Tmux integration
     {
