@@ -7,15 +7,21 @@ local function debugPrint(...)
   end
 end
 
-function M.load()
-  local luajit_version = tonumber(jit.version:match("2%.%d+%.(%d+)$"))
-  local highlight_enabled = false
+-- Luajit versions that have issues with TS highlight
+local highlight_luajit_blocklist = {
+  "LuaJIT 2.1.1732813678"
+}
 
-  debugPrint("Luajit version is " .. luajit_version )
-  -- Treesitter highlighting is broken with old versions of luajit
-  if luajit_version and luajit_version > 1732813678 then
-    debugPrint("Luajit version " .. luajit_version .. " can run Treesitter")
-    highlight_enabled = true
+function M.load()
+  local luajit_version = jit.version
+  local highlight_enabled = true
+
+  debugPrint("Lujit version is " .. luajit_version )
+  for _, v in ipairs(highlight_luajit_blocklist) do
+    if luajit_version == v then
+      debugPrint("Disabling TS highlight: Luajit version " .. luajit_version .. " is in the blocklist")
+      highlight_enabled = false
+    end
   end
 
   require('nvim-treesitter.configs').setup({
@@ -38,10 +44,6 @@ function M.load()
       vim.wo.foldenable = false
     end,
   })
-
-  --vim.treesitter.language.register("copilot.lua", "markdown")
-
-  debugPrint("Treesitter settings loaded")
 end
 
 return M
