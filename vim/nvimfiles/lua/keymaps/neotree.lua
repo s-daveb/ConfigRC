@@ -27,13 +27,13 @@ function M.bindkeys()
         })
     end, {})
 
-    vim.keymap.set('n', '<C-t>', function()
-        require('neo-tree.command').execute({
-            action = "focus",
-            source = "document_symbols",
-            position = "right",
-        })
-    end, { noremap = true, silent = true })
+    --vim.keymap.set('n', '<C-t>', function()
+    --    require('neo-tree.command').execute({
+    --        action = "focus",
+    --        source = "document_symbols",
+    --        position = "right",
+    --    })
+    --end, { noremap = true, silent = true })
 
     -- These get loaded on FileType event for Neotree
     local function NeoTreeKeyBindings()
