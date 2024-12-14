@@ -58,6 +58,12 @@ local plugins = {
             require('config.lsp').load()
         end,
     },
+    --{
+    --    'p00f/clangd_extensions.nvim',
+    --    config = function()
+    --        require('clangd_extensions').setup()
+    --    end,
+    --},
     -- LSP manager
     {
         'williamboman/mason.nvim',

@@ -19,36 +19,62 @@ local clang_cmd = {
 	"--pch-storage=memory"
 }
 
+local function disable_inlay_hints_on_insert(client, buf)
+	vim.api.nvim_create_autocmd("FileType", {
+		pattern = { "cpp", "cpp.doxygen" },
+		callback = function()
+			local group = vim.api.nvim_create_augroup("clangd_no_inlay_hints_in_insert", { clear = true })
+
+			-- Autocmd for disabling inlay hints on InsertEnter
+			vim.api.nvim_create_autocmd("InsertEnter", {
+				group = group,
+				buffer = buf,
+				callback = require("clangd_extensions.inlay_hints").disable_inlay_hints
+			})
+
+			-- Autocmd for setting inlay hints on TextChanged and InsertLeave
+			vim.api.nvim_create_autocmd({ "TextChanged", "InsertLeave" }, {
+				group = group,
+				buffer = buf,
+				callback = require("clangd_extensions.inlay_hints").set_inlay_hints
+			})
+		end,
+	})
+end
+
+
 function M.setup(opts)
 	lspconfig = require('lspconfig')
 	capabilities = opts.capabilities
 	keymapper = opts.keymapper
 
+	require("clangd_extensions").setup{
+		server = {
+			cmd = clang_cmd,
+			initialization_options = {
+				fallback_flags = { },
+			},
+		},
+	}
 
 	if vim.fn.executable(clangd_path) == 1 then
-			lspconfig.clangd.setup {
-				cmd = clang_cmd,
-				filetypes = { 'c', 'cpp', 'c.doxygen', 'cpp.doxygen', 'objc', 'objcpp' },
-				on_attach = keymapper.set_keys,
-				capabilities = capabilities
-			}
-
-		require("clangd_extensions").setup{
-			 server = {
-					cmd = clang_cmd,
-					initialization_options = {
-						 fallback_flags = { },
-					},
-			 },
+		lspconfig.clangd.setup {
+			cmd = clang_cmd,
+			filetypes = { 'c', 'cpp', 'c.doxygen', 'cpp.doxygen', 'objc', 'objcpp' },
+			on_attach = function(client, bufnr)
+				require("clangd_extensions.inlay_hints").setup_autocmd()
+				require("clangd_extensions.inlay_hints").set_inlay_hints()
+				disable_inlay_hints_on_insert(client, bufnr)
+				keymapper.set_keys(client, bufnr)
+			end,
+			capabilities = capabilities
 		}
-		require("clangd_extensions.inlay_hints").setup_autocmd()
-		require("clangd_extensions.inlay_hints").set_inlay_hints()
 
 
 		-- Remove trailing whitespace before saving these files
 		vim.cmd [[
 			autocmd BufWritePre *.c,*.h,*.cpp,*.hpp lua vim.lsp.buf.format({ async = false })
-		]]
+			]]
 	end
 end
 
