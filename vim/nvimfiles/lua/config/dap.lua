@@ -60,7 +60,7 @@ function M.setup()
         type = 'server',
         port =  port,
         executable = {
-            command = '/Users/sdavid/Downloads/codelldb-x86_64-darwin/extension/adapter/codelldb',
+            command = '/Users/sdavid/Downloads/codelldb-arm64-darwin/adapter/codelldb',
             args = { '--port', port }
         }
     }

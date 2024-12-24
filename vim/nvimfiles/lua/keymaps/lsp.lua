@@ -25,7 +25,9 @@ function module.set_keys(client, bufnr)
   buf_set_keymap('n', '<leader>[', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
 
   buf_set_keymap('n', '<leader>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
-  buf_set_keymap('n', '<leader>h', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
+
+  --buf_set_keymap('n', '<leader>h', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
+  buf_set_keymap('n', '<leader>h', '<cmd>lua require(\'config.lsp\').hover_diagnostic()<CR>', opts)
 
   --buf_set_keymap('n', '<leader>rf', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
 
@@ -36,6 +38,7 @@ function module.set_keys(client, bufnr)
   -- clangd specific
   buf_set_keymap('n', '<leader>hint', '<cmd>ClangdToggleInlayHints<CR>', opts)
   buf_set_keymap('n', '<leader>gh', '<cmd>ClangdSwitchSourceHeader<CR>', opts)
+
 end
 
 return module

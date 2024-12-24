@@ -51,12 +51,23 @@ local plugins = {
             'hrsh7th/cmp-path',
             'hrsh7th/cmp-cmdline',
             'L3MON4D3/LuaSnip',
-            'saadparwaiz1/cmp_luasnip'
+            'saadparwaiz1/cmp_luasnip',
+            'p00f/clangd_extensions.nvim',
+            "neovim/nvim-lspconfig",
         },
         config = function()
             require('config.nvim-cmp').load()
             require('config.lsp').load()
         end,
+    },
+    {
+      "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
+      config = function()
+        require("lsp_lines").setup()
+        vim.diagnostic.config({
+          virtual_text = false,
+        })
+      end,
     },
     --{
     --    'p00f/clangd_extensions.nvim',
@@ -65,6 +76,7 @@ local plugins = {
     --    end,
     --},
     -- LSP manager
+    --[[
     {
         'williamboman/mason.nvim',
         dependencies = {
@@ -90,6 +102,7 @@ local plugins = {
             })
         end,
     },
+    --]]
     -- GitHub Copilot
     {
         'github/copilot.vim',
