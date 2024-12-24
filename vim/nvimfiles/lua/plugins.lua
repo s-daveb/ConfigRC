@@ -244,6 +244,12 @@ local plugins = {
             require('config.outline').load({})
         end
     },
+    {
+        'nvim-lualine/lualine.nvim',
+        dependencies = { 'nvim-tree/nvim-web-devicons' },
+        config = true,
+        opts = { theme = 'dracula-nvim' },
+    },
     -- Tmux integration
     {
         's-daveb/neomux',
@@ -252,7 +258,14 @@ local plugins = {
 }
 local color_plugins = {
     'sainnhe/everforest',
-    'Mofiqul/dracula.nvim'
+    {
+        'Mofiqul/dracula.nvim',
+        config=function()
+            require('dracula').setup({
+                transparent_bg = true
+            })
+        end
+    }
 }
 local vimplugins = {
     {

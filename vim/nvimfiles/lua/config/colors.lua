@@ -2,8 +2,8 @@ local vim = vim
 local M = {}
 
 local default_gui_theme = "everforest"
-local default_term_theme = "everforest"
-local default_tmux_theme = "everforest"
+local default_term_theme = "dracula"
+local default_tmux_theme = "dracula"
 
 local keymaps = require('keymaps.colors')
 
