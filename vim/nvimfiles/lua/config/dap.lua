@@ -55,12 +55,22 @@ end
 
 function M.setup()
     local port = 12345
+    local codelldb_path = '/Users/sdavid/Downloads/codelldb-arm64-darwin/adapter/codelldb'
+
+    -- if the arch is x86_64, use codelldb-x86_64-darwin
+    -- if the arch is arm64, use codelldb-arm64-darwin
+    local arch = vim.fn.system('uname -m')
+    if arch == 'x86_64\n' then
+        codelldb_path = '/Users/sdavid/Downloads/codelldb-x86_64-darwin/extension/adapter/codelldb'
+    else
+        codelldb_path = '/Users/sdavid/Downloads/codelldb-arm64-darwin/adapter/codelldb'
+    end
 
     dap.adapters.lldb = {
         type = 'server',
         port =  port,
         executable = {
-            command = '/Users/sdavid/Downloads/codelldb-arm64-darwin/adapter/codelldb',
+            command = codelldb_path,
             args = { '--port', port }
         }
     }
