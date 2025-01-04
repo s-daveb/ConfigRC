@@ -2,7 +2,7 @@
 -- options.lua  --
 ------------------
 
-vim.opt.clipboard = 'unnamedplus'   -- use system clipboard 
+vim.opt.clipboard = 'unnamedplus'   -- use system clipboard
 vim.opt.mouse = 'a'                 -- allow the mouse to be used in Nvim
 
 vim.opt.updatetime = 300
@@ -10,7 +10,7 @@ vim.opt.updatetime = 300
 -- Tab
 vim.opt.tabstop = 8                 -- number of visual spaces per TAB
 vim.opt.softtabstop = 8             -- number of spacesin tab when editing
-vim.opt.shiftwidth = 8              -- indent 8 spaces when using >>, <<, ==, etc. 
+vim.opt.shiftwidth = 8              -- indent 8 spaces when using >>, <<, ==, etc.
 vim.opt.expandtab = false           -- tabs are spaces, mainly because of python
 
 -- Highlights
@@ -31,7 +31,7 @@ vim.opt.smartcase = true            -- but make it case sensitive if an uppercas
 
 -- Completion
 vim.opt.completeopt =
-    {'menu', 'menuone', 'noselect'} -- better completion experience
+    {'menu', 'menuone', 'noselect', 'noinsert', 'popup'} -- better completion experience
 
 -- Enable persistent undo
 vim.opt.undofile = true

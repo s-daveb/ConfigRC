@@ -16,6 +16,7 @@ if not (vim.uv and vim.uv.fs_stat or vim.loop and vim.loop.fs_stat)(lazypath) th
 end
 vim.opt.rtp:prepend(lazypath)
 
+
 local plugins = {
     {
         'nvim-treesitter/nvim-treesitter',
@@ -69,14 +70,7 @@ local plugins = {
         })
       end,
     },
-    --{
-    --    'p00f/clangd_extensions.nvim',
-    --    config = function()
-    --        require('clangd_extensions').setup()
-    --    end,
-    --},
-    -- LSP manager
-    --[[
+    --[[ -- Mason, LSP and DAP manager. Leaving in for future reference
     {
         'williamboman/mason.nvim',
         dependencies = {
@@ -107,6 +101,31 @@ local plugins = {
     {
         'github/copilot.vim',
         config = function() require('config.copilot').setup() end,
+    },
+    {
+        "CopilotC-Nvim/CopilotChat.nvim",
+        dependencies = {
+            { "github/copilot.vim" }, -- or zbirenbaum/copilot.lua
+            { "nvim-lua/plenary.nvim", branch = "master" }, -- for curl, log and async functions
+        },
+        build = "make tiktoken", -- Only on MacOS or Linux
+        opts = {
+            -- See Configuration section for options
+        },
+        -- See Commands section for default commands if you want to lazy load on them
+    },
+    {
+        "olimorris/codecompanion.nvim",
+        dependencies = {
+            "nvim-lua/plenary.nvim",
+            "nvim-treesitter/nvim-treesitter",
+        },
+        config = function()
+            require("config.codecompanion").setup({
+                --host = "localhost",
+                model = "phi3:latest",
+            })
+        end
     },
     -- Debugger Framework
     {
@@ -241,7 +260,7 @@ local plugins = {
     {
         "hedyhli/outline.nvim",
         config = function()
-            require('config.outline').load({})
+            require('config.outline').load()
         end
     },
     {
@@ -278,14 +297,18 @@ local vimplugins = {
 }
 
 local myplugins = {
-	--[[{
-		-- Uses a local directory for the plugin source
-		dir = "~/.config/nvim/lua/devel/tmuxigator.nvim",
-		name = "tmuxigator",
-		config = function()
-			require("devel.tmuxigator").setup()
-		end
-	} --]]
+    --[[{
+        "project.nvim",
+        dir = vim.fn.expand("~/.config/nvim/lua/devel/project"),
+        config = function()
+            local ok, project = pcall(require, "project")
+            if not ok then
+                vim.notify("Failed to load project.nvim: " .. project, vim.log.levels.ERROR)
+            else
+                project.setup()
+            end
+        end,
+    } --]]
 }
 
 require('lazy').setup({
