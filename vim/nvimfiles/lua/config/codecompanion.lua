@@ -120,7 +120,6 @@ function M.setup(opts)
      opts = normalize_host(opts) or {}
 
 
-    print("1. Code Companion connecting on " .. opts.host .. ":" .. opts.port)
     local env_opts = try_ollama_env() or {}
 
     if env_opts then
