@@ -18,6 +18,8 @@ function M.load(opts)
             vim.g.everforest_transparent_background = 1
         end
     end)
+
+    vim.g.neovide_theme = 'auto' -- change neovide UI `bg` setting to match the colorscheme
     vim.opt.cmdheight = 0
 end
 

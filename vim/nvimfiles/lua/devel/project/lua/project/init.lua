@@ -1,7 +1,7 @@
 local vim = vim
 local M = {}
 
-function M.setup(opts)
+function M.setup()
     vim.api.nvim_create_autocmd('BufReadPost', {
         callback = function()
             local filepath = vim.fn.expand('%:p')

@@ -7,8 +7,7 @@ local default_tmux_theme = "dracula"
 
 local keymaps = require('keymaps.colors')
 
-local is_gui = (vim.fn.has('gui_running') == 1) and true or false
-M.is_gui = is_gui
+M.is_gui = (vim.fn.has('gui_running') == 1) and true or false
 
 function M.make_themeset(term, gui, tmux)
     return {
@@ -19,6 +18,7 @@ function M.make_themeset(term, gui, tmux)
 end
 
 function M.set(themeset, preexec)
+
     themeset = themeset or {}
     local new_theme =  default_term_theme
 
@@ -33,7 +33,7 @@ function M.set(themeset, preexec)
         themeset.tmux = default_tmux_theme
     end
 
-    if is_gui then
+    if M.is_gui then
         new_theme = themeset.gui
     else
         if os.getenv("TMUX") ~= nil and

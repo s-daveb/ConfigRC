@@ -1,6 +1,5 @@
 
 local M = {}
-local codecompanion = require("codecompanion")
 local adapters = require("codecompanion.adapters")
 
 local default_opts = {
@@ -35,8 +34,9 @@ local function normalize_host(opts)
 end
 
 local  function configure_adapters(opts)
+    vim.notify("Setting up CodeCompanion Model: " .. opts.model)
 
-    return {
+    local retval =  {
         ollama_linux = function()
             return adapters.extend("ollama", {
                 name = "ollama_linux",
@@ -68,6 +68,8 @@ local  function configure_adapters(opts)
             })
         end,
     }
+
+    return retval
 end
 
 local function check_connection_sync(host, port, timeout)
@@ -117,31 +119,38 @@ end
 
 
 function M.setup(opts)
-     opts = normalize_host(opts) or {}
+    local calculated_opts = {}
+    -- use vim.tbl_extend to load settings in the following order:
+    -- 1. default_opts
+    -- 2. environment_opts
+    -- 3. opts
+    calculated_opts = vim.tbl_extend("force", default_opts, try_ollama_env() or {})
+    calculated_opts = vim.tbl_extend("force", calculated_opts, opts)
+    calculated_opts = normalize_host(calculated_opts)
 
+    -- initialize only after lazy loading with lua nvim autocmd
+    --vim.api.nvim_create_autocmd( "VeryLazy", {
+    --    pattern = { '*.*' },
+    --    callback = function()
+            local configured_adapters =  configure_adapters(calculated_opts)
 
-    local env_opts = try_ollama_env() or {}
+            require('codecompanion').setup({
+                adapters = configured_adapters,
+                strategies = {
+                    chat = {
+                        adapter = "ollama_linux",
+                    },
+                    inline = {
+                        adapter = "ollama_linux",
+                    },
+                    cmd = {
+                        adapter = "auth_copilot",
+                    }
+                },
+            })
+    --  end
+    --})
 
-    if env_opts then
-        opts = vim.tbl_extend("force", env_opts, opts)
-    end
-
---    print("Code Companion connecting on " .. opts.host .. ":" .. opts.port)
-
-    codecompanion.setup({
-        strategies = {
-            chat = {
-                adapter = "ollama_linux",
-            },
-            inline = {
-                adapter = "ollama_linux",
-            },
-            cmd = {
-                adapter = "auth_copilot",
-            }
-        },
-        adapters = configure_adapters(opts),
-    })
 end
 
 return M

@@ -120,10 +120,18 @@ local plugins = {
             "nvim-lua/plenary.nvim",
             "nvim-treesitter/nvim-treesitter",
         },
+        lazy = true,
+        event = 'VeryLazy',
         config = function()
+            local ollama_model = "phi3:latest"
+
+            -- check if apple silicon
+            if string.find(vim.fn.system('uname -m | grep arm64'),'arm64') then
+                   -- print("Apple Silicon detected, using Mixtral model")
+                    ollama_model = "Mixtral:latest"
+            end
             require("config.codecompanion").setup({
-                --host = "localhost",
-                model = "phi3:latest",
+                model = ollama_model,
             })
         end
     },
@@ -249,9 +257,16 @@ local plugins = {
             })
         end,
     },
-    -- UI Improvements
+    -- similar to tpope/surround
     {
-        'folke/edgy.nvim',
+        "kylechui/nvim-surround",
+        version = "*", -- Use for stability; omit to use `main` branch for the latest features
+        event = "VeryLazy",
+        config = function()
+            require("nvim-surround").setup({
+                -- Configuration here, or leave empty to use defaults
+            })
+        end
     },
     {
         'stevearc/dressing.nvim',
@@ -273,16 +288,21 @@ local plugins = {
     {
         's-daveb/neomux',
         config = true
-    }
+    },
+
 }
 local color_plugins = {
     'sainnhe/everforest',
     {
         'Mofiqul/dracula.nvim',
         config=function()
-            require('dracula').setup({
-                transparent_bg = true
-            })
+            local dracula_opts = {}
+            if (vim.fn.has('gui_running') == 0) then
+                dracula_opts = {
+                    transparent_bg = true
+                }
+            end
+            require('dracula').setup(dracula_opts)
         end
     }
 }
@@ -297,18 +317,13 @@ local vimplugins = {
 }
 
 local myplugins = {
-    --[[{
-        "project.nvim",
-        dir = vim.fn.expand("~/.config/nvim/lua/devel/project"),
+    {
+        dir = "~/.config/nvim/lua/devel/project",
+        name = "project",
         config = function()
-            local ok, project = pcall(require, "project")
-            if not ok then
-                vim.notify("Failed to load project.nvim: " .. project, vim.log.levels.ERROR)
-            else
-                project.setup()
-            end
+            require("project").setup()
         end,
-    } --]]
+    },
 }
 
 require('lazy').setup({
