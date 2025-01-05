@@ -1,9 +1,10 @@
 local vim = vim
 local M = {}
 
-local default_gui_theme = "everforest"
-local default_term_theme = "dracula"
-local default_tmux_theme = "dracula"
+local default_gui_theme = "amber"
+local default_term_theme = "brogrammer"
+local default_tmux_theme = "dracula-soft"
+
 
 local keymaps = require('keymaps.colors')
 
@@ -18,6 +19,12 @@ function M.make_themeset(term, gui, tmux)
 end
 
 function M.set(themeset, preexec)
+    local neovide_theme_override = os.getenv("NEOVIDE_BG")  or nil
+    if vim.fn.exists("g:neovide") then
+        if neovide_theme_override ~= nil then
+            vim.g.neovide_theme = neovide_theme_override;
+        end
+    end
 
     themeset = themeset or {}
     local new_theme =  default_term_theme
@@ -36,9 +43,11 @@ function M.set(themeset, preexec)
     if M.is_gui then
         new_theme = themeset.gui
     else
-        if os.getenv("TMUX") ~= nil and
-            os.getenv("TMUX") ~= "" and
-            os.getenv("SSH_CONNECTION") ~= nil then
+        if (os.getenv("TMUX") ~= nil and
+            os.getenv("TMUX") ~= ""  and
+            os.getenv("SSH_CONNECTION") ~= nil)
+        or (os.getenv("ITERM_PROFILE") == "pulldown-terminal")
+        then
             new_theme= themeset.tmux
         else
             new_theme= themeset.term

@@ -10,7 +10,16 @@ function M.load(opts)
     if is_gui then
         vim.opt.guifont = "Berkeley Mono:h16"
         vim.g.neovide_theme = "auto"
-    end
+
+
+        -- macOS only
+        if vim.fn.has('mac') == 1 then
+            vim.g.neovide_transparency = 0.9
+            vim.g.neovide_normal_opacity = 0.75
+            vim.g.neovide_window_blurred = true
+        end
+
+        end
 
 
     colorconfig.set(nil, function()
@@ -19,7 +28,6 @@ function M.load(opts)
         end
     end)
 
-    vim.g.neovide_theme = 'auto' -- change neovide UI `bg` setting to match the colorscheme
     vim.opt.cmdheight = 0
 end
 

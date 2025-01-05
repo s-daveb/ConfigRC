@@ -63,10 +63,13 @@ export HOMEBREW_NO_ENV_HINTS=1
 export MallocNanoZone=0
 export skip_global_compinit=1
 
+export NEOVIDE_BG=dark
+
 if [[ -f ~/.zshenv.private ]]; then
 	if [[ -z "${OLLAMA_HOST}" ]]; then
 		source ~/.zshenv.private
 	fi
+
 fi
 
 # vim: ft=zsh ts=4 sts=4 sw=4 noet foldmethod=marker foldmarker=#<,#> :

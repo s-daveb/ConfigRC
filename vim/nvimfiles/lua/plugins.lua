@@ -282,7 +282,9 @@ local plugins = {
         'nvim-lualine/lualine.nvim',
         dependencies = { 'nvim-tree/nvim-web-devicons' },
         config = true,
-        opts = { theme = 'dracula-nvim' },
+        lazy = true,
+        event = 'VeryLazy',
+        --opts = { theme = 'dracula-nvim' },
     },
     -- Tmux integration
     {
@@ -293,6 +295,8 @@ local plugins = {
 }
 local color_plugins = {
     'sainnhe/everforest',
+	'foxbunny/vim-amber',
+	'marciomazza/vim-brogrammer-theme',
     {
         'Mofiqul/dracula.nvim',
         config=function()
@@ -304,8 +308,9 @@ local color_plugins = {
             end
             require('dracula').setup(dracula_opts)
         end
-    }
+    },
 }
+
 local vimplugins = {
     {
         'tpope/vim-vinegar',

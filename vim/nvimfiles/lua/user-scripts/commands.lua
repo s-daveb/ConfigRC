@@ -58,3 +58,27 @@ end
 
 -- Create a user command "H" that uses the SplitHelp function
 vim.api.nvim_create_user_command("H", SplitHelp, { nargs = '*', complete = "help" })
+
+vim.api.nvim_create_user_command("ReloadModule", function(args)
+    local module = args.args
+    if module == "" then
+        print("Please provide a module name to reload.")
+        return
+    end
+
+    local plenary_reload = require("plenary.reload").reload_module
+    plenary_reload(module)
+    print("Reloaded module: " .. module)
+end, { nargs = 1, complete = "file" })
+
+vim.api.nvim_create_user_command("ReLazy", function()
+    -- Reload the plugin.lua file
+    local plugin_file = vim.fn.stdpath("config") .. "/lua/plugins.lua"
+
+    -- Reinitialize lazy.nvim
+    --require("lazy").setup() -- Ensure `lazy.nvim` is properly reconfigured
+    dofile(plugin_file)
+
+
+    print("Reloaded plugin.lua and reinitialized lazy.nvim")
+end, {})
