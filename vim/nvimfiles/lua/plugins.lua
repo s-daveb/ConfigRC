@@ -323,6 +323,10 @@ local vimplugins = {
     {
       'KSP-KOS/EditorTools',
       config = function()
+        -- Get the path to the EditorTools repo in the lazy directory
+        local editor_tools_path = vim.fn.stdpath('data') .. '/lazy/EditorTools/VIM/vim-kerboscript'
+        -- Add the path to the runtimepath
+        vim.o.runtimepath = vim.o.runtimepath .. ',' .. editor_tools_path
         -- Ensure syntax is enabled for .ks files
         vim.cmd([[
           augroup filetypedetect
