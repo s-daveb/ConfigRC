@@ -330,7 +330,7 @@ local vimplugins = {
         -- Ensure syntax is enabled for .ks files
         vim.cmd([[
           augroup filetypedetect
-            autocmd! BufRead,BufNewFile *.ks set filetype=kos
+            autocmd! BufRead,BufNewFile *.ks set filetype=kerboscript
           augroup END
           syntax on
         ]])
