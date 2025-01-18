@@ -3,6 +3,10 @@ local M = {}
 function M.setup()
     vim.api.nvim_create_autocmd('VimEnter', {
         callback = function()
+            --check for empty buffer
+            if vim.api.nvim_buf_get_name(0) == '' then
+                return
+            end
             local filepath = vim.fn.expand('%:p')
 
             -- Check if the file path starts with sftp:// to exclude remote directories
