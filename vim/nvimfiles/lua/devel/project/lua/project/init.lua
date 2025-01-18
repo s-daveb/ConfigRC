@@ -1,10 +1,15 @@
-local vim = vim
 local M = {}
 
 function M.setup()
-    vim.api.nvim_create_autocmd('BufReadPost', {
+    vim.api.nvim_create_autocmd('VimEnter', {
         callback = function()
             local filepath = vim.fn.expand('%:p')
+
+            -- Check if the file path starts with sftp:// to exclude remote directories
+            if string.match(filepath, '^sftp://') then
+                return
+            end
+
             local dir = vim.fn.fnamemodify(filepath, ':h')
 
             local function find_project_dir(start_dir)
@@ -24,7 +29,8 @@ function M.setup()
             local project_dir = find_project_dir(dir)
             if project_dir then
                 vim.api.nvim_command('tcd ' .. project_dir)
-                --print("Set working directory to " .. project_dir)
+                -- Uncomment the line below to debug
+                -- print("Set working directory to " .. project_dir)
             end
         end
     })

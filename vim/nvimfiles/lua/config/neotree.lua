@@ -18,7 +18,6 @@ end
 local default_opts = {
 	sources = {
 		"filesystem",
-		"netman.ui.neo-tree", -- netman
 		"document_symbols"
 	},
 	mappings = {

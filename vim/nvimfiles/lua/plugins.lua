@@ -210,22 +210,23 @@ local plugins = {
             "nvim-lua/plenary.nvim",
             "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
             "MunifTanjim/nui.nvim",
-            {
-                's-daveb/netman.nvim',
-            },
+            --{
+            --    's-daveb/netman.nvim',
+            --},
             "3rd/image.nvim", -- Optional image support in preview window: See `# Preview Mode` for more information
         },
         config= function()
             require('config.neotree').load()
         end
     },
-    {
-        's-daveb/netman.nvim',
-        branch = 'custom',
-        config = function()
-            require('netman')
-        end
-    },
+    ---- this project is incompatible with UNIX and only works on Linux
+    --{
+    --    's-daveb/netman.nvim',
+    --    branch = 'custom',
+    --    config = function()
+    --        require('netman')
+    --    end
+    --},
     -- Linting Support
     {
         'mfussenegger/nvim-lint' ,
