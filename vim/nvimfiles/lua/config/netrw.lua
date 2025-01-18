@@ -22,16 +22,16 @@ end
 
 function M.load()
     -- Disable the netrw banner
-    vim.g.netrw_banner = 0
+    vim.g.netrw_banner = 1
     vim.g.netrw_altv = 1
 
     -- Netrw settings
     vim.g.netrw_preview = 1
-    vim.g.netrw_liststyle = 3
+    vim.g.netrw_liststyle = 1
     vim.g.netrw_usetab = 1
 
     -- Wildignore setting
-    vim.opt.wildignore = { '.*', '.DS_Store' }
+    vim.opt.wildignore = {  '.DS_Store' }
 end
 
 function M.bindkeys()
