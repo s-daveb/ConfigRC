@@ -320,6 +320,18 @@ local vimplugins = {
         end,
     },
     {'tpope/vim-fugitive'},
+    {
+      'KSP-KOS/EditorTools',
+      config = function()
+        -- Ensure syntax is enabled for .ks files
+        vim.cmd([[
+          augroup filetypedetect
+            autocmd! BufRead,BufNewFile *.ks set filetype=kos
+          augroup END
+          syntax on
+        ]])
+      end,
+    }
 }
 
 local myplugins = {
