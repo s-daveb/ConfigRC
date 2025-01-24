@@ -61,7 +61,8 @@ function M.set(themeset, preexec)
     vim.cmd("colorscheme " .. new_theme)
     if not M.is_gui then
         vim.cmd("hi Normal guibg=NONE ctermbg=NONE")
-        vim.cmd("hi EndOfBuffer guibg=NONE ctermbg=NONE")
+        vim.cmd("hi NonText guibg=NONE ctermbg=NONE")
+        vim.cmd("hi link EndOfBuffer NonText")
     end
     keymaps.load()
 end

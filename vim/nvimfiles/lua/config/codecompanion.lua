@@ -106,6 +106,7 @@ local function try_ollama_env()
     local opts = {
         host = os.getenv("OLLAMA_HOST") or default_opts.host,
         port = 0,
+        model = os.getenv("OLLAMA_DEFAULT_MODEL") or default_opts.model,
     }
     opts= normalize_host(opts)
     opts = vim.tbl_extend("force", default_opts, opts)

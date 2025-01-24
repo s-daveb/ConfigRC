@@ -128,7 +128,7 @@ local plugins = {
             -- check if apple silicon
             if string.find(vim.fn.system('uname -m | grep arm64'),'arm64') then
                    -- print("Apple Silicon detected, using Mixtral model")
-                    ollama_model = "Mixtral:latest"
+                    ollama_model = "dolphin-mistral"
             end
             require("config.codecompanion").setup({
                 model = ollama_model,
