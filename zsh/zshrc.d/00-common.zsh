@@ -1,3 +1,18 @@
+export brew_loaded=0
+local function load_brew() { #<
+	if [[ ${brew_loaded} -eq 1 ]]; then
+		return
+	fi
+
+	brew_cmd="${HOMEBREW_PREFIX}/bin/brew"
+
+	if [ -x "$(command -v ${brew_cmd})" ]; then
+		eval "$(${brew_cmd} shellenv)"
+	fi
+	export brew_loaded=1
+}
+
+
 
 local function prepend_path() {
 	local path_to_prepend="$1"
