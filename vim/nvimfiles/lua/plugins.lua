@@ -123,16 +123,8 @@ local plugins = {
         lazy = true,
         event = 'VeryLazy',
         config = function()
-            local ollama_model = "phi3:latest"
 
-            -- check if apple silicon
-            if string.find(vim.fn.system('uname -m | grep arm64'),'arm64') then
-                   -- print("Apple Silicon detected, using Mixtral model")
-                    ollama_model = "dolphin-mistral"
-            end
-            require("config.codecompanion").setup({
-                model = ollama_model,
-            })
+            require("config.codecompanion").setup({})
         end
     },
     -- Debugger Framework
@@ -310,6 +302,7 @@ local color_plugins = {
             require('dracula').setup(dracula_opts)
         end
     },
+    { "catppuccin/nvim", name = "catppuccin", priority = 1000 }
 }
 
 local vimplugins = {
