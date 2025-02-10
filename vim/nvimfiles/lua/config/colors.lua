@@ -1,10 +1,16 @@
 local vim = vim
 local M = {}
 
-local default_gui_theme = "amber"
-local default_term_theme = "brogrammer"
+local default_term_theme = "dracula"
 local default_tmux_theme = "dracula-soft"
+local default_gui_theme_light = "dhampir"
+local default_gui_theme_dark = "dracula"
 
+
+local default_gui_theme = default_gui_theme_dark
+if (vim.opt.background == "light") then
+    default_gui_theme = default_gui_theme_light
+end
 
 local keymaps = require('keymaps.colors')
 

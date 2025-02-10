@@ -98,21 +98,41 @@ local plugins = {
     },
     --]]
     -- GitHub Copilot
+    --{
+    --    'github/copilot.vim',
+    --    config = function() require('config.copilot').setup() end,
+    --},
+    --{
+    --    "CopilotC-Nvim/CopilotChat.nvim",
+    --    dependencies = {
+    --        { "github/copilot.vim" }, -- or zbirenbaum/copilot.lua
+    --        { "nvim-lua/plenary.nvim", branch = "master" }, -- for curl, log and async functions
+    --    },
+    --    build = "make tiktoken", -- Only on MacOS or Linux
+    --    opts = {
+    --        -- See Configuration section for options
+    --    },
+    --    -- See Commands section for default commands if you want to lazy load on them
+    --},
+    -- Local AI features
     {
-        'github/copilot.vim',
-        config = function() require('config.copilot').setup() end,
-    },
-    {
-        "CopilotC-Nvim/CopilotChat.nvim",
-        dependencies = {
-            { "github/copilot.vim" }, -- or zbirenbaum/copilot.lua
-            { "nvim-lua/plenary.nvim", branch = "master" }, -- for curl, log and async functions
-        },
-        build = "make tiktoken", -- Only on MacOS or Linux
+        'jacob411/Ollama-Copilot',
         opts = {
-            -- See Configuration section for options
+            model_name = "deepseek-coder-v2:16b-lite-instruct-q3_K_S",
+            stream_suggestion = false,
+            python_command = "python3",
+            filetypes = {'python', 'cpp', 'cpp.doxygen', 'c', 'c.doxygen', 'lua', 'vim', "markdown"},
+            --ollama_model_opts = {
+            --    num_predict = 40,
+            --    temperature = 0.1,
+            --},
+            keymaps = {
+                suggestion = '<leader>os',
+                reject = '<leader>or',
+                insert_accept = '<Tab>',
+            },
         },
-        -- See Commands section for default commands if you want to lazy load on them
+        config = true,
     },
     {
         "olimorris/codecompanion.nvim",
@@ -123,8 +143,8 @@ local plugins = {
         lazy = true,
         event = 'VeryLazy',
         config = function()
-
-            require("config.codecompanion").setup({})
+            require("config.codecompanion").setup({
+            })
         end
     },
     -- Debugger Framework
@@ -302,6 +322,11 @@ local color_plugins = {
             require('dracula').setup(dracula_opts)
         end
     },
+    --{
+    --    "s-daveb/dhampir.nvim",
+    --    lazy = false,
+    --    priority = 1000
+    --},
     { "catppuccin/nvim", name = "catppuccin", priority = 1000 }
 }
 
@@ -339,7 +364,19 @@ local myplugins = {
             require("project").setup()
         end,
     },
+    {
+        dir = "~/Developer/Lua/Nvim/dhampir.nvim",
+        name = "dhampir.nvim",
+        config = function()
+            require("project").setup()
+        end,
+    },
 }
+
+
+
+-- Print the highlight group of the character under the cursor
+vim.keymap.set('n', '<leader>ss', function() vim.cmd('Inspect') end)
 
 require('lazy').setup({
     spec =  {

@@ -5,7 +5,7 @@ local adapters = require("codecompanion.adapters")
 local default_opts = {
     host = "localhost";
     port = 11434;
-    model = "phi3:latest";
+    model = "phi4:latest";
 }
 
 local function split_string(input, delimiter)
