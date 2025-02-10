@@ -71,33 +71,6 @@ local plugins = {
         })
       end,
     },
-    --[[ -- Mason, LSP and DAP manager. Leaving in for future reference
-    {
-        'williamboman/mason.nvim',
-        dependencies = {
-            'williamboman/mason-lspconfig.nvim',
-            'neovim/nvim-lspconfig',
-            'swiftlang/sourcekit-lsp',
-            'p00f/clangd_extensions.nvim',
-        },
-        config = function()
-            require('mason').setup({
-                ui = {
-                    icons = {
-                        package_installed = '✓',
-                        package_pending = '➜',
-                        package_uninstalled = '✗'
-                    }
-                }
-            })
-
-            require('mason-lspconfig').setup({
-                -- A list of servers to automatically install if they're not already installed
-                ensure_installed = { 'pylsp', }
-            })
-        end,
-    },
-    --]]
     -- GitHub Copilot
     --{
     --    'github/copilot.vim',
@@ -117,26 +90,24 @@ local plugins = {
     --},
     -- Local AI features
     {
-        'jacob411/Ollama-Copilot',
-        priority=100,
-        --lazy = true,
-        --event = 'VimEnter',
+        's-daveb/Ollama-Copilot',
         opts = {
             model_name = "deepseek-coder-v2:16b-lite-instruct-q3_K_S",
             stream_suggestion = false,
             python_command = "python3",
             filetypes = {'python', 'cpp', 'cpp.doxygen', 'c', 'c.doxygen', 'lua', 'vim', "markdown"},
-            --ollama_model_opts = {
-            --    num_predict = 40,
-            --    temperature = 0.1,
-            --},
+            ollama_model_opts = {
+                num_predict = 40,
+                temperature = 0.1,
+            },
             keymaps = {
                 suggestion = '<leader>os',
                 reject = '<leader>or',
                 insert_accept = '<Tab>',
             },
         },
-        config = true,
+
+       config = true,
     },
     {
         "olimorris/codecompanion.nvim",
