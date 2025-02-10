@@ -5,7 +5,7 @@ local custom = {
     keymap_toggle = "<C-T>",
     keymap_leader_toggle = "<leader>o",
     lsp_autocmd_enabled = true,
-    lsp_filetypes = { "cpp", "cpp.doxygen" },
+    lsp_filetypes = { "cpp", "cpp.doxygen", "lua" },
 }
 
 local outline_opts = {

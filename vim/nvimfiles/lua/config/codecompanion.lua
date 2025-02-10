@@ -6,7 +6,8 @@ local adapters = require("codecompanion.adapters")
 local default_opts = {
     host = "localhost";
     port = 11434;
-    model = "phi4:latest";
+    inline_model = "phi4:latest",
+    chat_model = "phi4:latest",
 }
 
 local function split_string(input, delimiter)
@@ -32,9 +33,14 @@ local function normalize_host(opts)
     if not opts.port then
         opts.port = default_opts.port
     end
-    if not opts.model then
+    if not opts.chat_model then
         opts.model = default_opts.model
     end
+    if not opts.inline_model then
+        opts.model = default_opts.model
+    end
+
+
 
     return opts
 end
@@ -44,9 +50,9 @@ local  function configure_adapters(opts)
     --vim.notify("Setting up CodeCompanion Host: " .. opts.host)
 
     local retval =  {
-        ollama_linux = function()
+        ollama_chat = function()
             return adapters.extend("ollama", {
-                name = "ollama_linux",
+                name = "ollama_chat",
                 env = {
                     url = "http://" .. opts.host .. ":" .. opts.port,
                 },
@@ -58,7 +64,26 @@ local  function configure_adapters(opts)
                 },
                 schema = {
                     model = {
-                        default = opts.model
+                        default = opts.chat_model
+                    }
+                }
+            })
+        end,
+        ollama_inline = function()
+            return adapters.extend("ollama", {
+                name = "ollama_inline",
+                env = {
+                    url = "http://" .. opts.host .. ":" .. opts.port,
+                },
+                headers = {
+                    ["Content-Type"] = "application/json",
+                },
+                parameters = {
+                    sync = true,
+                },
+                schema = {
+                    model = {
+                        default = opts.inline_model
                     }
                 }
             })
@@ -128,7 +153,8 @@ local function try_ollama_env()
     local opts = {
         host = os.getenv("OLLAMA_HOST") or default_opts.host,
         port = 0,
-        model = os.getenv("OLLAMA_DEFAULT_MODEL") or default_opts.model,
+        chat_model = os.getenv("OLLAMA_DEFAULT_MODEL") or default_opts.chat_model,
+        inline_model = os.getenv("OLLAMA_NVIM_INLINE_MODEL") or default_opts.inline_model
     }
 
     opts = normalize_host(opts)
@@ -155,10 +181,10 @@ function M.setup(opts)
         adapters = configured_adapters,
         strategies = {
             chat = {
-                adapter = "ollama_linux",
+                adapter = "ollama_chat",
             },
             inline = {
-                adapter = "ollama_linux",
+                adapter = "ollama_inline",
             },
             cmd = {
                 adapter = "auth_copilot",

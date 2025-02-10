@@ -106,7 +106,6 @@ local plugins = {
                 insert_accept = '<Tab>',
             },
         },
-
        config = true,
     },
     {
@@ -341,18 +340,19 @@ local myplugins = {
         end,
     },
     {
-        dir = "~/Developer/Lua/Nvim/dhampir.nvim",
-        name = "dhampir.nvim",
-        config = function()
-            require("project").setup()
-        end,
+        dir = "~/.config/nvim/lua/devel/dhampir.nvim",
+        dependencies = {
+            'Mofiqul/dracula.nvim',
+        },
+        lazy = true,
+        event = "VimEnter",
+        name = "dhampir",
+        config = function() require('dhampir') end
     },
 }
 
 
 
--- Print the highlight group of the character under the cursor
-vim.keymap.set('n', '<leader>ss', function() vim.cmd('Inspect') end)
 
 require('lazy').setup({
     spec =  {

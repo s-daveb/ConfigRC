@@ -3,11 +3,13 @@ local M = {}
 
 local default_term_theme = "dracula"
 local default_tmux_theme = "dracula-soft"
+
 local default_gui_theme_light = "dhampir"
 local default_gui_theme_dark = "dracula"
 
 
 local default_gui_theme = default_gui_theme_dark
+
 if (vim.opt.background == "light") then
     default_gui_theme = default_gui_theme_light
 end
@@ -52,7 +54,7 @@ function M.set(themeset, preexec)
         if (os.getenv("TMUX") ~= nil and
             os.getenv("TMUX") ~= ""  and
             os.getenv("SSH_CONNECTION") ~= nil)
-        or (os.getenv("ITERM_PROFILE") == "pulldown-terminal")
+            or (os.getenv("ITERM_PROFILE") == "pulldown-terminal")
         then
             new_theme= themeset.tmux
         else
@@ -64,12 +66,12 @@ function M.set(themeset, preexec)
         preexec()
     end
 
-    vim.cmd("colorscheme " .. new_theme)
-    --if not M.is_gui then
-    --    vim.cmd("hi Normal guibg=NONE ctermbg=NONE")
-    --    vim.cmd("hi NonText guibg=NONE ctermbg=NONE")
-    --    vim.cmd("hi link EndOfBuffer NonText")
-    --end
+    vim.api.nvim_create_autocmd({ "User" }, {
+        pattern = "VeryLazy",
+        callback = function()
+            vim.cmd("colorscheme " .. new_theme)
+        end
+    })
     keymaps.load()
 end
 
