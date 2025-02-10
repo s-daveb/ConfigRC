@@ -105,7 +105,7 @@ local function setup_bufread_autocmd()
         "copilot"
     }
     -- Setup autocommands for toggling hover diagnostics based on filetype
-    vim.api.nvim_create_autocmd("BufEnter", {
+    vim.api.nvim_create_autocmd("BufWinEnter", {
         group = vim.api.nvim_create_augroup("ToggleHoverDiagnostics", { clear = true }),
         callback = function()
             if vim.tbl_contains(incompatible_filetypes, vim.bo.filetype) then
@@ -115,6 +115,15 @@ local function setup_bufread_autocmd()
             end
         end,
     })
+
+    vim.api.nvim_create_autocmd('BufWinEnter', {
+      desc = 'Setup LSP keymaps for current buffer',
+      callback = function()
+        local bufnr = vim.api.nvim_get_current_buf()
+        require('keymaps.lsp').set_keys(nil, bufnr)
+      end,
+    })
+
 end
 
 -- Load function to initialize the module

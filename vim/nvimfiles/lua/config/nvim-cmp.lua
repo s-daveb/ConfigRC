@@ -85,21 +85,21 @@ function M.load(opts)
     local cmp_opts = vim.tbl_deep_extend("force", default_opts, opts)
 
    --Set up an autocmd for CursorHoldI event to start the completion timer
-    vim.api.nvim_create_autocmd("CursorHoldI", {
-        callback = function()
-            start_async_completion()
-        end
-    })
-    -- Set up autocmds to restart the timer whenever the cursor moves
-    vim.api.nvim_create_autocmd({"CursorMovedI", "InsertLeave"}, {
-        callback = function()
-            if completion_timer then
-                completion_timer:stop()
-                completion_timer:close()
-                completion_timer = nil
-            end
-        end
-    })
+   -- vim.api.nvim_create_autocmd("CursorHoldI", {
+   --     callback = function()
+   --         start_async_completion()
+   --     end
+   -- })
+   -- -- Set up autocmds to restart the timer whenever the cursor moves
+   -- vim.api.nvim_create_autocmd({"CursorMovedI", "InsertLeave"}, {
+   --     callback = function()
+   --         if completion_timer then
+   --             completion_timer:stop()
+   --             completion_timer:close()
+   --             completion_timer = nil
+   --         end
+   --     end
+   -- })
 
     cmp.setup(cmp_opts)
 end
