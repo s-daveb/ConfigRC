@@ -139,12 +139,21 @@ local plugins = {
         dependencies = {
             "nvim-lua/plenary.nvim",
             "nvim-treesitter/nvim-treesitter",
+            "j-hui/fidget.nvim"
         },
         lazy = true,
         event = 'VeryLazy',
         config = function()
-            require("config.codecompanion").setup({
-            })
+            require("config.codecompanion").setup()
+        end
+    },
+    {
+        "j-hui/fidget.nvim",
+        dependencies = {
+            "olimorris/codecompanion.nvim",
+        },
+        config = function()
+            require('config.fidget'):init()
         end
     },
     -- Debugger Framework
