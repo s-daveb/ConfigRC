@@ -6,7 +6,7 @@ local cmp = require("cmp")
 
 local default_opts = {
         completion = {
-            autocomplete = { autocomplete = false },
+            autocomplete = { autocomplete = true },
         },
         snippet = {
             expand = function(args)

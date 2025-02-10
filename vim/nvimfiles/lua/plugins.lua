@@ -45,6 +45,7 @@ local plugins = {
     -- Auto-completion engine
     {
         'hrsh7th/nvim-cmp',
+        priority = 1000,
         dependencies = {
             'lspkind.nvim',
             'hrsh7th/cmp-nvim-lsp',
@@ -117,6 +118,9 @@ local plugins = {
     -- Local AI features
     {
         'jacob411/Ollama-Copilot',
+        priority=100,
+        --lazy = true,
+        --event = 'VimEnter',
         opts = {
             model_name = "deepseek-coder-v2:16b-lite-instruct-q3_K_S",
             stream_suggestion = false,
@@ -321,15 +325,7 @@ local color_plugins = {
 	'marciomazza/vim-brogrammer-theme',
     {
         'Mofiqul/dracula.nvim',
-        config=function()
-            local dracula_opts = {}
-            if (vim.fn.has('gui_running') == 0) then
-                dracula_opts = {
-                    transparent_bg = true
-                }
-            end
-            require('dracula').setup(dracula_opts)
-        end
+        config=true
     },
     --{
     --    "s-daveb/dhampir.nvim",
