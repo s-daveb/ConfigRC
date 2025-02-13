@@ -91,34 +91,21 @@ local plugins = {
     -- Local AI features
     {
         's-daveb/Ollama-Copilot',
-        opts = {
-            model_name = "deepseek-coder-v2:16b-lite-instruct-q3_K_S",
-            stream_suggestion = false,
-            python_command = "python3",
-            filetypes = {'python', 'cpp', 'cpp.doxygen', 'c', 'c.doxygen', 'lua', 'vim', "markdown"},
-            ollama_model_opts = {
-                num_predict = 40,
-                temperature = 0.1,
-            },
-            keymaps = {
-                suggestion = '<leader>os',
-                reject = '<leader>or',
-                insert_accept = '<Tab>',
-            },
-        },
-       config = true,
+        dependencies = { 'ollama-env' },
+        config = function()
+            require('config.Ollama-copilot').setup()
+        end
     },
     {
         "olimorris/codecompanion.nvim",
         dependencies = {
             "nvim-lua/plenary.nvim",
             "nvim-treesitter/nvim-treesitter",
-            "j-hui/fidget.nvim"
+            "j-hui/fidget.nvim",
+            "ollama-env"
         },
-        lazy = true,
-        event = 'VeryLazy',
         config = function()
-            require("config.codecompanion").setup()
+            require('config.codecompanion').setup()
         end
     },
     {
@@ -332,6 +319,23 @@ local vimplugins = {
 }
 
 local myplugins = {
+    {
+        dir = "~/.config/nvim/lua/devel/ollama-env.nvim",
+        name = "ollama-env",
+        priority = 1,
+        --opts = {},
+        config = function()
+            require("ollama-env").setup({})
+        end
+        --[[opts = {
+            host         = "localhost",
+            port         = 11434,
+            inline_model = "phi4:latest",
+            chat_model   = "phi4:latest",
+            cmd_model    = "phi4:latest",
+        }
+        --]]
+    },
     {
         dir = "~/.config/nvim/lua/devel/project",
         name = "project",
