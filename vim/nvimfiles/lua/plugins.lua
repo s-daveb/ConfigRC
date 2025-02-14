@@ -91,6 +91,8 @@ local plugins = {
     -- Local AI features
     {
         's-daveb/Ollama-Copilot',
+        lazy = true,
+        event = "VeryLazy",
         dependencies = { 'ollama-env' },
         config = function()
             require('config.Ollama-copilot').setup()
@@ -111,7 +113,7 @@ local plugins = {
     {
         "j-hui/fidget.nvim",
         dependencies = {
-            "olimorris/codecompanion.nvim",
+            "olimorris/codecompanion.nvim"
         },
         config = function()
             require('config.fidget'):init()
@@ -319,23 +321,7 @@ local vimplugins = {
 }
 
 local myplugins = {
-    {
-        dir = "~/.config/nvim/lua/devel/ollama-env.nvim",
-        name = "ollama-env",
-        priority = 1,
-        --opts = {},
-        config = function()
-            require("ollama-env").setup({})
-        end
-        --[[opts = {
-            host         = "localhost",
-            port         = 11434,
-            inline_model = "phi4:latest",
-            chat_model   = "phi4:latest",
-            cmd_model    = "phi4:latest",
-        }
-        --]]
-    },
+
     {
         dir = "~/.config/nvim/lua/devel/project",
         name = "project",
@@ -352,6 +338,23 @@ local myplugins = {
         event = "VimEnter",
         name = "dhampir",
         config = function() require('dhampir') end
+    },
+    {
+        dir = "~/.config/nvim/lua/devel/ollama-env.nvim",
+        name = "ollama-env",
+        priority = 1,
+        --opts = {},
+        config = function()
+            require("ollama-env").setup()
+        end
+        --[[opts = {
+            host         = "localhost",
+            port         = 11434,
+            inline_model = "phi4:latest",
+            chat_model   = "phi4:latest",
+            cmd_model    = "phi4:latest",
+        }
+        --]]
     },
 }
 

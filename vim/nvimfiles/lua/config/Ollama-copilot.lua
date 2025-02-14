@@ -2,12 +2,10 @@
 local M = {}
 
 function M.setup()
-
-    local ollama_env = require("ollama-env")
-
+    local ollama_env = require("ollama-env").get_config()
     local opts = {
-        model_name = ollama_env.config.inline_model,
-        stream_suggestion = false,
+        model_name = ollama_env.inline_model,
+        stream_suggestion = true,
         python_command = "python3",
         filetypes = {'python', 'cpp', 'cpp.doxygen', 'c', 'c.doxygen', 'lua', 'vim', "markdown"},
         ollama_model_opts = {

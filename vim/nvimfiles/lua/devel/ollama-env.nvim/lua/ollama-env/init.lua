@@ -9,16 +9,17 @@ local default_opts = {
     cmd_model    = "phi4:latest",
 }
 
-local function split_string(input, delimiter)
-    local result = {}
-    for match in (input .. delimiter):gmatch("(.-)" .. delimiter) do
-        table.insert(result, match)
-    end
-    return result
-end
 
 local function normalize_opts(opts)
     opts = opts or {}
+
+    local function split_string(input, delimiter)
+        local result = {}
+        for match in (input .. delimiter):gmatch("(.-)" .. delimiter) do
+            table.insert(result, match)
+        end
+        return result
+    end
 
     if opts.host and opts.host:find(":") then
         local parts = split_string(opts.host, ":")
@@ -107,10 +108,12 @@ end
 --- Setup ollama-env.
 --- @param opts table: A table with keys `host`, `port`, `chat_model`, `inline_model`, and `cmd_model`.
 function M.setup(opts)
+    if opts == {} then opts = nil end
+
     opts = opts or try_ollama_env()
     opts = normalize_opts(opts)
-
     if not check_connection_sync(opts.host, opts.port) then
+        echo "Failed to connect"
         opts = default_opts
     end
 

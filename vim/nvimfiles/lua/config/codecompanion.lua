@@ -44,28 +44,47 @@ local M = {}
                             default = opts.inline_model
                         }
                     }
-                })
-            end,
-            auth_copilot = function()
-                return adapters.extend("copilot", {
-                    name = "auth_copilot",
-                    env = {
-                        XDG_CONFIG_HOME = vim.fn.expand("~/.config"),
-                    },
-                    parameters = {
-                        sync = true,
-                    },
-                })
-            end,
-        }
+            })
+        end,
+        ollama_cmd = function()
+            return adapters.extend("ollama", {
+                name="olama_cmd",
+                env = {
+                    url = "http://" .. opts.host .. ":" .. opts.port,
+                },
+                headers = {
+                    ["Content-Type"] = "application/json",
+                },
+                parameters = {
+                    sync = true,
+                },
+                schema = {
+                    model = {
+                        default = opts.cmd_model
+                    }
+                }
+            })
+        end,
+        auth_copilot = function()
+            return adapters.extend("copilot", {
+                name = "auth_copilot",
+                env = {
+                    XDG_CONFIG_HOME = vim.fn.expand("~/.config"),
+                },
+                parameters = {
+                    sync = true,
+                },
+            })
+        end,
+    }
 
-        return retval
-    end
+    return retval
+end
 
-function M.setup()
-    local configured_adapters = configure_adapters(env_opts)
-    require('codecompanion').setup({
-        adapters = configured_adapters,
+        function M.setup()
+            local configured_adapters = configure_adapters(env_opts)
+            require('codecompanion').setup({
+            adapters = configured_adapters,
         strategies = {
             chat = {
                 adapter = "ollama_chat",
@@ -75,7 +94,7 @@ function M.setup()
             },
             cmd = {
                 --adapter = "auth_copilot",
-                adapter = "ollama_inline",
+                adapter = "ollama_cmd",
             }
         },
     })
