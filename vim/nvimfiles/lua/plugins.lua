@@ -335,9 +335,9 @@ local myplugins = {
             'Mofiqul/dracula.nvim',
         },
         lazy = true,
-        event = "VimEnter",
+        event = "VeryLazy",
         name = "dhampir",
-        config = function() require('dhampir') end
+        config = function() require('dhampir').setup(require('keymaps.colors')) end
     },
     {
         dir = "~/.config/nvim/lua/devel/ollama-env.nvim",
