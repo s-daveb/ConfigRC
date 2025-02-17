@@ -18,15 +18,15 @@ local colors = {
     pink          = "#A3144F",
     purple        = "#654BCA",
     background    = "#CCCCCC",
-    selection     = "#D0D0DF",
+    selection     = "#DBC358",
     comment       = "#645E98",
     line_highlight = "#DDDFEF",
     mid_gray      = "#4B4B4B",
     off_white     = "#F1F1F1",
 
     -- For strings
-    string_orange = "#9E4F18",
-    string_bg     = "#BBBBBB",
+    gold_accent   = "#B2690D",
+    darkened_bg   = "#BBBBBB",
 }
 
 local highlights = {
@@ -58,18 +58,18 @@ local highlights = {
     NeoTreeGitModified = { fg = colors.orange, italic = true },
 
     -- Syntax (Preferring Vim highlight groups over TreeSitter)
-    String        = { fg = colors.string_orange, bg = colors.string_bg, italic = true },
-    Constant      = { fg = colors.string_orange, bg = colors.string_bg, italic = true },
-    Number        = { fg = colors.mid_gray, italic = true },
-    Keyword       = { fg = colors.orange, bold = true },
-    Function      = { fg = colors.red },
-    Identifier    = { fg = colors.mid_gray , italic = true },
-    Type          = { fg = colors.mid_gray, italic = true, bold = true },
-    Statement     = { fg = colors.mid_gray },
-    PreProc       = { fg = colors.mid_gray },
-    Special       = { fg = colors.mid_gray },
-    Error         = { fg = colors.mid_gray, bold = true },
-    Todo          = { fg = colors.foreground, bg = colors.mid_gray, bold = true },
+    String       = { fg = colors.gold_accent,  bg= colors.darkened_bg, bold = false, italic = true },
+    Constant     = { fg = colors.orange, bold = true, italic = true },
+    Number       = { fg = colors.mid_gray, italic = true },
+    Keyword      = { fg = colors.red, bold = false },
+    Function     = { fg = colors.red, italics = false },
+    Identifier   = { fg = colors.mid_gray, italic = true },
+    Type         = { fg = colors.mid_gray, italic = false, bold = false },
+    Statement    = { fg = colors.mid_gray },
+    PreProc      = { fg = colors.cyan, italic = true },
+    Special      = { fg = colors.mid_gray },
+    Error        = { fg = colors.mid_gray, bold = true },
+    Todo         = { fg = colors.foreground, bg = colors.mid_gray, bold = true },
 
     -- Diff
     DiffAdd       = { fg = colors.green, bg = "#E6FFED" },
@@ -91,6 +91,13 @@ local highlights = {
     GitGutterAdd    = { fg = colors.green },
     GitGutterChange = { fg = colors.yellow },
     GitGutterDelete = { fg = colors.red },
+
+    -- Additional C++-specific TreeSitter highlights
+    ["@preproc.cpp"]                    = { fg = colors.purple, bold = true, italic = true },
+    ["@function.macro.cpp"]             = { fg = colors.purple, bold = true, italic = true },
+    ["@keyword.import.cpp"]             = { fg = colors.purple, bold = false, italic = true },
+    ["@keyword.directive.define.cpp"]   = { fg = colors.purple, bold = true, italic = true },
+    ["@include.cpp"] = { fg = colors.cyan, italic = true },
 }
 
 for group, opts in pairs(highlights) do
@@ -110,4 +117,3 @@ vim.g.colors_name = "dhampir"
 if (vim.o.background ~= "light") then
     vim.o.background = "light"
 end
-
