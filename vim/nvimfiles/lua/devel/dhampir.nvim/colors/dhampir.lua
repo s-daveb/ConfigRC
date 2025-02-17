@@ -6,15 +6,10 @@ if vim.fn.exists("syntax_on") == 1 then
     vim.cmd("syntax reset")
 end
 
-vim.g.colors_name = "dhampir"
-
-if (vim.opt.background:get() ~= "light") then
-    vim.opt.background = "light"
-end
-
+-- Original palette, plus a new 'string_bg' color
 local colors = {
     foreground    = "#202021",
-    red           = "#CC3B2C",
+    red           = "#CC2019",
     orange        = "#A34F15",
     yellow        = "#837116",
     green         = "#14730C",
@@ -22,19 +17,23 @@ local colors = {
     blue          = "#285278",
     pink          = "#A3144F",
     purple        = "#654BCA",
-    background    = "#F5F7EE",
+    background    = "#CCCCCC",
     selection     = "#D0D0DF",
     comment       = "#645E98",
     line_highlight = "#DDDFEF",
     mid_gray      = "#4B4B4B",
     off_white     = "#F1F1F1",
+
+    -- For strings
+    string_orange = "#9E4F18",
+    string_bg     = "#BBBBBB",
 }
 
 local highlights = {
     -- Editor UI
     Normal        = { fg = colors.foreground, bg = colors.background },
     NormalNC      = { fg = colors.foreground, bg = colors.background },
-    Comment       = { fg = colors.comment, italic = true },
+    Comment       = { fg = colors.orange, italic = true },
     Cursor        = { bg = colors.comment },
     CursorLine    = { bg = colors.line_highlight },
     CursorLineNr  = { fg = colors.purple, bg = colors.line_highlight, bold = true },
@@ -50,59 +49,39 @@ local highlights = {
     Search        = { fg = colors.background, bg = colors.yellow },
     IncSearch     = { fg = colors.background, bg = colors.orange },
     Directory     = { fg = colors.purple, bold = true },
-    NormalFloat = {  bg = nil },
-    Title         = { bg = nil, fg = colors.foreground },
+    NormalFloat   = { bg = nil },
+    Title         = { fg = colors.foreground, bg = nil },
 
     -- Diff colors
-    Removed = { bg = nil, fg = colors.red },
-    Added   = { bg = nil, fg = colors.green },
-    NeoTreeGitModified =  { bg = nil, fg = colors.orange, italic = true},
+    Removed            = { fg = colors.red },
+    Added              = { fg = colors.green },
+    NeoTreeGitModified = { fg = colors.orange, italic = true },
 
-    -- Syntax Highlighting
-    String        = { fg = colors.yellow },
-    Constant      = { fg = colors.purple },
-    Number        = { fg = colors.purple },
-    Keyword       = { fg = colors.pink, bold = true},
-    Function      = { fg = colors.green },
-    Identifier    = { fg = colors.orange },
-    Type          = { fg = colors.cyan },
-    Statement     = { fg = colors.pink },
-    PreProc       = { fg = colors.pink },
-    Special       = { fg = colors.blue },
-    Error         = { fg = colors.red, bold = true },
-    Todo          = { fg = colors.foreground, bg = colors.yellow, bold = true },
-
-    -- Treesitter support
-    ["@function"]         = { fg = colors.green },
-    ["@method"]           = { fg = colors.green },
-    ["@keyword"]          = { fg = colors.pink, bold = false, italic = false },
-    ["@type"]             = { fg = colors.cyan },
-    ["@variable"]         = { fg = colors.green, bold = false, italic = false },
-    ["@parameter"]        = { fg = colors.orange },
-    ["@comment"]          = { fg = colors.comment, italic = true },
-    ["@string"]           = { fg = colors.yellow },
-    ["@number"]           = { fg = colors.purple },
-    ["@constant"]         = { fg = colors.purple },
-    ["@operator"]         = { fg = colors.pink },
-    ["@punctuation"]      = { fg = colors.foreground },
-    ["@tag"]              = { fg = colors.pink },
-    ["@tag.attribute"]    = { fg = colors.green },
-    ["@text.title"]       = { fg = colors.purple, bold = true },
-    ["@text.strong"]      = { fg = colors.foreground, bold = true },
-    ["@text.emphasis"]    = { fg = colors.foreground, italic = true },
-    ["@text.underline"]   = { fg = colors.foreground, underline = true },
+    -- Syntax (Preferring Vim highlight groups over TreeSitter)
+    String        = { fg = colors.string_orange, bg = colors.string_bg, italic = true },
+    Constant      = { fg = colors.string_orange, bg = colors.string_bg, italic = true },
+    Number        = { fg = colors.mid_gray, italic = true },
+    Keyword       = { fg = colors.orange, bold = true },
+    Function      = { fg = colors.red },
+    Identifier    = { fg = colors.mid_gray , italic = true },
+    Type          = { fg = colors.mid_gray, italic = true, bold = true },
+    Statement     = { fg = colors.mid_gray },
+    PreProc       = { fg = colors.mid_gray },
+    Special       = { fg = colors.mid_gray },
+    Error         = { fg = colors.mid_gray, bold = true },
+    Todo          = { fg = colors.foreground, bg = colors.mid_gray, bold = true },
 
     -- Diff
     DiffAdd       = { fg = colors.green, bg = "#E6FFED" },
     DiffChange    = { fg = colors.yellow, bg = "#FFF5B1" },
-    DiffDelete    = { fg = colors.red, bg = "#FFDCE0" },
-    DiffText      = { fg = colors.blue, bg = "#D1ECFF", bold = true },
+    DiffDelete    = { fg = colors.red,    bg = "#FFDCE0" },
+    DiffText      = { fg = colors.blue,   bg = "#D1ECFF", bold = true },
 
     -- Diagnostics
-    DiagnosticError = { fg = colors.red },
-    DiagnosticWarn  = { fg = colors.orange },
-    DiagnosticInfo  = { fg = colors.blue },
-    DiagnosticHint  = { fg = colors.cyan },
+    DiagnosticError          = { fg = colors.red },
+    DiagnosticWarn           = { fg = colors.orange },
+    DiagnosticInfo           = { fg = colors.blue },
+    DiagnosticHint           = { fg = colors.cyan },
     DiagnosticUnderlineError = { undercurl = true, sp = colors.red },
     DiagnosticUnderlineWarn  = { undercurl = true, sp = colors.orange },
     DiagnosticUnderlineInfo  = { undercurl = true, sp = colors.blue },
@@ -124,5 +103,11 @@ for group, opts in pairs(highlights) do
         undercurl = opts.undercurl,
         sp        = opts.sp,
     })
+end
+
+vim.g.colors_name = "dhampir"
+
+if (vim.o.background ~= "light") then
+    vim.o.background = "light"
 end
 

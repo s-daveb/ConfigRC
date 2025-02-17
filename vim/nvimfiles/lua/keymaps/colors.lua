@@ -18,8 +18,8 @@ end
 function M.load()
     -- Print the highlight group of the character under the cursor
     vim.keymap.set('n', '<leader>ss', function() vim.cmd('Inspect') end)
-    vim.keymap.set({'n','i','v'}, '<F5>', M.toggle_bg, { noremap = true, silent = true })
-    vim.keymap.set({'n'},'<leader>bg', M.toggle_bg, { noremap = true, silent = true })
+    vim.keymap.set({'n','i','v'}, '<F5>',function()  M.toggle_bg() end, { noremap = true, silent = true })
+    vim.keymap.set({'n'},'<leader>bg',function()  M.toggle_bg() end, { noremap = true, silent = true })
 end
 
 return M

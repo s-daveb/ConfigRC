@@ -9,7 +9,6 @@ local function debugMsg(...)
     end
 end
 
-
 local default_term_theme = "dracula"
 local default_tmux_theme = "dracula-soft"
 
@@ -131,6 +130,7 @@ function M.set(themeset, preexec)
     debugMsg("Attempting to set colorscheme:", M.colorscheme)
     if M.colorscheme ~= nil then
         debugMsg("Setting colorscheme command:", "colorscheme " .. M.colorscheme)
+        vim.cmd("colorscheme " .. M.colorscheme)
         vim.cmd("colorscheme " .. M.colorscheme)
     else
         debugMsg("Error: No valid colorscheme found")

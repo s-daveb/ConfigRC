@@ -115,7 +115,7 @@ function M.setup()
     local configured_adapters = configure_adapters(env_opts)
     require('codecompanion').setup({
         adapters = configured_adapters,
-        prompts = custom_prompts,
+        -- prompts = custom_prompts,
         strategies = {
             chat = {
                 adapter = "ollama_chat",
