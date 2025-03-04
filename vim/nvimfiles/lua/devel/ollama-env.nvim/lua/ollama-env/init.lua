@@ -113,7 +113,7 @@ function M.setup(opts)
     opts = opts or try_ollama_env()
     opts = normalize_opts(opts)
     if not check_connection_sync(opts.host, opts.port) then
-        echo "Failed to connect"
+        print("Failed to connect")
         opts = default_opts
     end
 

@@ -22,6 +22,26 @@ local clang_cmd = {
 --end
 
 
+vim.api.nvim_create_user_command('ToggleHints',
+	function()
+		local enabled = vim.lsp.inlay_hint.is_enabled()
+		if enabled then
+			vim.lsp.inlay_hint.enable(false)
+		else
+			vim.lsp.inlay_hint.enable()
+		end
+
+		-- Set a global variable to remember the state
+		vim.g.ToggleInlayHintsLastAction = not enabled
+
+		-- Update status line (optional)
+		local statusline = string.format(' %s ', enabled and 'Disable' or 'Enable')
+		vim.opt.statusline:append(statusline)
+	end,
+	{}
+)
+
+
 function M.setup(opts)
 
 	if vim.fn.executable(clangd_path) == 1 then
@@ -47,6 +67,7 @@ function M.setup(opts)
 			end,
 			capabilities = capabilities
 		}
+
 
 		-- Remove trailing whitespace before saving these files
 		vim.cmd [[

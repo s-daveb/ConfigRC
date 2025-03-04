@@ -26,7 +26,7 @@ local colors = {
 
     -- For strings
     gold_accent   = "#B2690D",
-    darkened_bg   = "#BBBBBB",
+    darkened_bg   = "#DCDCDB"
 }
 
 local highlights = {
@@ -51,6 +51,9 @@ local highlights = {
     Directory     = { fg = colors.purple, bold = true },
     NormalFloat   = { bg = nil },
     Title         = { fg = colors.foreground, bg = nil },
+
+
+    LspInlayHint       = { fg = colors.mid_gray, bg=colors.darkened_bg, bold=false, italic = true },
 
     -- Diff colors
     Removed            = { fg = colors.red },
