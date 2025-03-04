@@ -1,0 +1,29 @@
+#compdef ollama
+#
+# Function to get available ollama models
+get_ollama_models() {
+    ollama list | grep -v NAME | awk '{ print $1 }'
+}
+
+_ollama() {
+  # Only activate our custom completions for certain subcommands.
+  local subcmd=${words[2]}
+  case $subcmd in
+    run|rm|show)
+      # Use _arguments to capture the current word.
+      _arguments '*:model:->models'
+      case $state in
+        models)
+          local -a models
+          models=($(ollama list | grep -v NAME | awk '{print $1}'))
+          compadd -a models
+          return 0
+          ;;
+      esac
+      ;;
+    *)
+      # Otherwise, let zsh fall back to its default completions.
+      return 1
+      ;;
+  esac
+}
