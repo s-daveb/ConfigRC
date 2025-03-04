@@ -221,7 +221,15 @@ local plugins = {
     },
     -- Quality of Life editor features
     {
+        "folke/snacks.nvim",
+        priority = 1000,
+        lazy = false,
+    },
+    {
         'tzachar/local-highlight.nvim',
+        dependencies = {
+            'folke/snacks.nvim'
+        },
         config = function()
             local local_highlight = require('local-highlight')
             local_highlight.setup({
