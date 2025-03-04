@@ -45,8 +45,8 @@ function M.chdir()
         debugPrint("Empty buffer detected, ignoring project_dir")
         return
     end
-    if string.match(filepath, '^sftp://') then
-        debugPrint("sftp netrw window detected, ignoring project_dir")
+    if string.match(filepath, '^sftp://') or  string.match(filepath, '^.*://') then
+        debugPrint("sftp/netrw or protocol window detected, ignoring project_dir")
         return
     end
 

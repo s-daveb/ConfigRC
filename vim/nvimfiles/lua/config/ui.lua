@@ -12,7 +12,7 @@ function M.neovide_trans(amount)
     if vim.g.neovide then
         vim.g.neovide_theme = 'auto'
         vim.g.neovide_transparency = amount
-        vim.g.neovide_normal_opacity = 0.9
+        vim.g.neovide_normal_opacity = 1.0
         vim.g.neovide_window_blurred = true
     end
 end
