@@ -17,7 +17,12 @@ local function setup_commands()
         {
             cmd_name = 'CMakeConfigure',
             task_cmd = 'Task start cmake configure',
-            nargs = 0
+            nargs = '*',  -- Allow the command to accept variable number of arguments
+            complete = function(arg_lead, cmd_line, cursor_pos)
+                -- Provide completion suggestions for CMake configure arguments if needed
+                -- This function can be customized based on your requirements
+                return { '-D', '-G', '-W', '--warn-uninitialized', '--warn-unused-vars' }
+            end
         },
         {
             cmd_name = 'CMakeBuild',
@@ -34,6 +39,11 @@ local function setup_commands()
             task_cmd = 'Task start cmake debug',
             nargs = 0
         },
+        {
+            cmd_name = 'CMakeClean',
+            task_cmd = 'Task start cmake clean',
+            nargs = 0
+        }
     }
     for _, cmd in ipairs(commands) do
         local opts = { nargs = cmd.nargs }
@@ -76,7 +86,7 @@ function M.setup()
                 build_type = 'Debug', -- Build type, can be changed using `:Task set_module_param cmake build_type`.
                 dap_name = 'lldb',
                 args = { -- Task default arguments.
-                    configure = { '-D', 'CMAKE_EXPORT_COMPILE_COMMANDS=1', '-G', 'Ninja', '-D', 'USE_MOLD=1', '-D', 'USE_CCACHE=1' },
+                    configure = { '-D', 'CMAKE_EXPORT_COMPILE_COMMANDS=1', '-G', 'Ninja' },
                 },
             },
         },

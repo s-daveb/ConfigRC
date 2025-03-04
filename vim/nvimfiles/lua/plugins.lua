@@ -322,7 +322,6 @@ local vimplugins = {
 }
 
 local myplugins = {
-
     {
         dir = "~/.config/nvim/lua/devel/project",
         name = "project",

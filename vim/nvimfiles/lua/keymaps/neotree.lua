@@ -16,6 +16,8 @@ function M.bindkeys()
                 reveal_force_cwd = true,
             })
         end, { noremap = true, silent = true })
+    else
+        vim.cmd("cd %:p:h")
     end
 
     -- Define a command to open the tags tree

@@ -1,6 +1,10 @@
 ------------------
 -- options.lua  --
 ------------------
+---
+vim.keymap.set("",
+    "<Space>", "<Nop>")             -- Disable default behavior of <Space>
+vim.g.mapleader = '<space>'
 
 vim.opt.clipboard = 'unnamedplus'   -- use system clipboard
 vim.opt.mouse = 'a'                 -- allow the mouse to be used in Nvim

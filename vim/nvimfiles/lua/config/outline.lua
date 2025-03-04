@@ -65,9 +65,9 @@ function M.load()
                 local filetype = vim.bo[buf].filetype
                 if vim.tbl_contains(custom.lsp_filetypes, filetype) then
                     vim.schedule(function()
-                        vim.cmd("Outline!")
-                        if (vim.fn.has("gui_running") == 1) and (vim.o.columns < 120) then
-                            vim.o.columns = vim.o.columns + 20
+                        -- If the window is very small, do not open the outline window
+                        if vim.api.nvim_win_get_width(0) >= 100 then
+                            vim.cmd("Outline!")
                         end
                     end)
                 end
@@ -75,6 +75,7 @@ function M.load()
             desc = "Open Outline after LSP attaches to a relevant file"
         })
     end
+
 end
 
 return M

@@ -6,8 +6,7 @@ local cmp = require("cmp")
 
 local default_opts = {
         completion = {
-            autocomplete = { autocomplete = true },
-        },
+            autocomplete = { require("cmp.types").cmp.TriggerEvent.TextChanged }        },
         snippet = {
             expand = function(args)
                 luasnip.lsp_expand(args.body)

@@ -1,7 +1,7 @@
 
 local M = {}
 
-M.debug =  false
+M.debug = false
 
 local function debugMsg(...)
     if (M.debug) then
@@ -60,7 +60,7 @@ function M.isDarkMode()
             local output = handle:read('*a')
             handle:close()
             if output == "" then output = "light" end
-            debugMsg('>>> ' .. output .. ' <<<')
+            debugMsg('MacOS theme: ' .. output)
             return (output:gsub('%s+', '') == 'Dark')
         end
     else
