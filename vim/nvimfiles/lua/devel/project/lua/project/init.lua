@@ -4,7 +4,7 @@ M.debug = false
 
 local debugPrint = function(message)
     if (M.debug) then
-        print(message)
+        debugPrint(message)
     end
 
 end
@@ -39,7 +39,7 @@ end
 
 function M.chdir()
     local filepath = vim.fn.expand('%:p')
-    print(filepath)
+    debugPrint(filepath)
 
     if vim.api.nvim_buf_get_name(0) == '' then
         debugPrint("Empty buffer detected, ignoring project_dir")
@@ -55,7 +55,7 @@ function M.chdir()
     local project_dir = find_project_dir(dir)
     if project_dir then
         vim.cmd('cd ' .. project_dir)
-        print("Set working directory to " .. project_dir)
+        debugPrint("Set working directory to " .. project_dir)
     end
 end
 
@@ -71,10 +71,10 @@ function M.setup()
     })
     --print('leader: ' .. ((vim.g.mapleader == " ") and  "<space>" or  vim.g.mapleader))
 
-    print("mapping  F8")
+    debugPrint("mapping  F8")
     vim.keymap.set('n','<F8>',
         function()
-            print('keycombo')
+            debugPrint('keycombo')
             require("project").chdir()
         end,
         { noremap = true, silent = true}

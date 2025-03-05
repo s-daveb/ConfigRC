@@ -100,6 +100,15 @@ local plugins = {
     --    end
     --},
     {
+        'trevin-j/olly.nvim',
+        lazy = true,
+        event = "VeryLazy",
+        dependencies = { 'ollama-env' },
+        config = function()
+            require('config.Ollama-copilot').setup()
+        end
+    },
+    {
         "olimorris/codecompanion.nvim",
         dependencies = {
             "nvim-lua/plenary.nvim",
