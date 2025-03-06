@@ -6,6 +6,8 @@ if vim.fn.exists("syntax_on") == 1 then
     vim.cmd("syntax reset")
 end
 
+vim.o.background = "light"
+
 -- Original palette, plus a new 'string_bg' color
 local colors = {
     foreground    = "#202021",
@@ -17,7 +19,7 @@ local colors = {
     blue          = "#285278",
     pink          = "#A3144F",
     purple        = "#654BCA",
-    background    = "#FEFEF1",
+    background    = "#FAFAFB",
     selection     = "#DBC358",
     comment       = "#645E98",
     line_highlight = "#DDDFEF",
@@ -61,7 +63,7 @@ local highlights = {
     NeoTreeGitModified = { fg = colors.orange, italic = true },
 
     -- Syntax (Preferring Vim highlight groups over TreeSitter)
-    String       = { fg = colors.gold_accent,  bg= colors.darkened_bg, bold = false, italic = true },
+    String       = { fg = colors.gold_accent,  bg=colors.off_white, bold = false, italic = true },
     Constant     = { fg = colors.orange, bold = true, italic = true },
     Number       = { fg = colors.mid_gray, italic = true },
     Keyword      = { fg = colors.red, bold = false },
@@ -116,7 +118,3 @@ for group, opts in pairs(highlights) do
 end
 
 vim.g.colors_name = "dhampir"
-
-if (vim.o.background ~= "light") then
-    vim.o.background = "light"
-end

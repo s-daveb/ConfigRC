@@ -13,6 +13,7 @@ function M.setBgChanging(value)
 end
 
 function M.default_bg_toggle()
+    print("default_bg_toggle")
     if (M.background_toggling) then
         M.background_toggling = true
         if vim.o.background == "dark" then

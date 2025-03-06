@@ -91,7 +91,6 @@ function M.make_themeset(term, gui, tmux)
 end
 
 function M.set(themeset, preexec)
-
     -- Set default_gui_theme based on background
     debugMsg("Current background:", vim.o.background)
 
@@ -130,7 +129,6 @@ function M.set(themeset, preexec)
     debugMsg("Attempting to set colorscheme:", M.colorscheme)
     if M.colorscheme ~= nil then
         debugMsg("Setting colorscheme command:", "colorscheme " .. M.colorscheme)
-        vim.cmd("colorscheme " .. M.colorscheme)
         vim.cmd("colorscheme " .. M.colorscheme)
     else
         debugMsg("Error: No valid colorscheme found")

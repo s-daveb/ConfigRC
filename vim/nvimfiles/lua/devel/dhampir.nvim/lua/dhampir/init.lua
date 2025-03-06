@@ -40,19 +40,36 @@ function M.dracula_switch_colorscheme()
     end
 end
 
-vim.api.nvim_create_autocmd('OptionSet',
-    {
-        pattern = 'background',
+local function set_autocmds()
+    local augroup = vim.api.nvim_create_augroup("dhampir autocmds", {clear = true})
+
+    print("set_autocmds called")
+
+    -- Set the OptionSet autocommand only after VIM is initialized
+    vim.api.nvim_create_autocmd('VimEnter', {
+        group = augroup,
+        desc = "Sets the OptionSet autocmd for `background` field",
         callback = function()
-            if (M.colors_keymapper) then
-                M.colors_keymapper.toggle_bg()
-            end
+            print("Setting OptionSet autocmd")
+            vim.api.nvim_create_autocmd('OptionSet',
+                {
+                    desc = "calls a funciton when background is toggled",
+                    group = augroup,
+                    pattern = 'background',
+                    callback = function()
+                        if (M.colors_keymapper) then
+                            M.colors_keymapper.toggle_bg()
+                        end
+                    end
+                })
         end
     })
+end
 
 
 function M.setup(color_keymapper)
     M.colors_keymapper = color_keymapper
+
     if (color_keymapper == nil) then
         print("Error: dhampir requires you pass in module with a  toggle_bg method")
         return
@@ -60,6 +77,7 @@ function M.setup(color_keymapper)
     M.original_bg_toggler =  color_keymapper.toggle_bg
 
     color_keymapper.set_bg_toggler(require('dhampir').dracula_switch_colorscheme)
+    set_autocmds()
 end
 
 return M

@@ -29,6 +29,7 @@ function M.load(opts)
 
     if is_gui then
         vim.opt.guifont = "Berkeley Mono:h16"
+        vim.opt.guifontwide = "Hack Nerd Font:h16"
     end
 
     colorconfig.set(nil, function()
