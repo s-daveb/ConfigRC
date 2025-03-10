@@ -354,7 +354,9 @@ local myplugins = {
         lazy = true,
         event = "VeryLazy",
         name = "dhampir",
-        config = function() require('dhampir').setup(require('keymaps.colors')) end
+        config = function()
+            require('dhampir').setup(require('keymaps.colors'))
+        end
     },
     {
         dir = "~/.config/nvim/lua/devel/ollama-env.nvim",

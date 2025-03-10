@@ -101,7 +101,6 @@ function M.set(themeset, preexec)
         debugMsg("Using dark theme for GUI:", default_gui_theme_dark)
     end
 
-    local keymaps = require('keymaps.colors')
 
     -- Check if running in GUI
     debugMsg("Running in GUI?", (vim.fn.has('gui_running') == 1))
@@ -134,9 +133,11 @@ function M.set(themeset, preexec)
         debugMsg("Error: No valid colorscheme found")
     end
 
-    debugMsg("Loading keymaps...")
-    keymaps.load()
+    --keymaps.load()
 end
+
+
+require('keymaps.colors')
 
 return M
 

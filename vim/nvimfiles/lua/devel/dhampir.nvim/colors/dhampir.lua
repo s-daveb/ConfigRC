@@ -1,12 +1,11 @@
-if vim.g.colors_name then
-    vim.cmd("hi clear")
-end
+vim.cmd("hi clear")
 
 if vim.fn.exists("syntax_on") == 1 then
     vim.cmd("syntax reset")
 end
 
 vim.o.background = "light"
+vim.g.colors_name = "dhampir"
 
 -- Original palette, plus a new 'string_bg' color
 local colors = {
@@ -117,4 +116,5 @@ for group, opts in pairs(highlights) do
     })
 end
 
+vim.o.background = "light"
 vim.g.colors_name = "dhampir"
