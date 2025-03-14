@@ -42,4 +42,9 @@ if ! is-at-least 14.0 "$macOSVersion"; then
 	fi
 fi
 
+# Fix macOS <delete> key
+if [[ "$(uname)" == "Darwin" ]]; then
+    bindkey "^[[3~" delete-char
+fi
+
 # vim: set ft=zsh ts=4 sw=4 et :

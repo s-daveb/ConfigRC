@@ -14,10 +14,12 @@ function M.load(opts)
 	telescope.setup(opts)
 
 	vim.api.nvim_create_autocmd(
-		{ "BufReadPost", "BufNewFile" },
+        { "BufWinEnter", "BufNewFile" },
+		--{ "BufReadPost", "BufNewFile" },
 		{
 			pattern = { "*" },
 			callback = function()
+---@diagnostic disable-next-line: different-requires
 				require('keymaps.telescope').bindkeys()
 				debugPrint("Telescope keymaps bound")
 			end
