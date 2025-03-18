@@ -9,7 +9,7 @@ local opts = {
 
 vim.g.mapleader = ' '             -- set leader to space
 
--- Normal mode 
+-- Normal mode
 -----------------
 
 -- Better window navigation

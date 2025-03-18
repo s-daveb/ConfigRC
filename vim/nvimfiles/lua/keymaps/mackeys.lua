@@ -20,4 +20,3 @@ map('n', '<M-S-`>', ':tabprev<CR>', opts)
 map('n', '<D-t>', ':tabnew<CR>', opts)
 -- Close tab
 map('n', '<D-w>', ':tabclose<CR>', opts)
-

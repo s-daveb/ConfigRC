@@ -102,7 +102,7 @@ local plugins = {
     {
         'trevin-j/olly.nvim',
         lazy = true,
-        event = "VeryLazy",
+        event = "BufWinEnter",
         dependencies = { 'ollama-env' },
         config = function()
             require('config.Ollama-copilot').setup()
@@ -181,9 +181,9 @@ local plugins = {
                 extensions = {
                     fzf = {
                         fuzzy = true,
-                        override_generic_sorter = false,
-                        override_file_sorter = false,
-                        case_mode = "ignore_case",
+                        override_generic_sorter = true,
+                        override_file_sorter = true,
+                        case_mode = "smart_case",
                     },
                     file_browser = {
                         theme = "ivy",
@@ -196,6 +196,10 @@ local plugins = {
             require('telescope').load_extension('fzf')
             require('telescope').load_extension('file_browser')
         end
+    },
+    {
+        'nvim-telescope/telescope-fzf-native.nvim',
+        build = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release'
     },
     {
         "nvim-neo-tree/neo-tree.nvim",
@@ -298,8 +302,8 @@ local plugins = {
 }
 local color_plugins = {
     'sainnhe/everforest',
-	'foxbunny/vim-amber',
-	'marciomazza/vim-brogrammer-theme',
+    'foxbunny/vim-amber',
+    'marciomazza/vim-brogrammer-theme',
     {
         'Mofiqul/dracula.nvim',
         config=true
@@ -321,20 +325,20 @@ local vimplugins = {
     },
     {'tpope/vim-fugitive'},
     {
-      'KSP-KOS/EditorTools',
-      config = function()
-        -- Get the path to the EditorTools repo in the lazy directory
-        local editor_tools_path = vim.fn.stdpath('data') .. '/lazy/EditorTools/VIM/vim-kerboscript'
-        -- Add the path to the runtimepath
-        vim.o.runtimepath = vim.o.runtimepath .. ',' .. editor_tools_path
-        -- Ensure syntax is enabled for .ks files
-        vim.cmd([[
+        'KSP-KOS/EditorTools',
+        config = function()
+            -- Get the path to the EditorTools repo in the lazy directory
+            local editor_tools_path = vim.fn.stdpath('data') .. '/lazy/EditorTools/VIM/vim-kerboscript'
+            -- Add the path to the runtimepath
+            vim.o.runtimepath = vim.o.runtimepath .. ',' .. editor_tools_path
+            -- Ensure syntax is enabled for .ks files
+            vim.cmd([[
           augroup filetypedetect
-            autocmd! BufRead,BufNewFile *.ks set filetype=kerboscript
+          autocmd! BufRead,BufNewFile *.ks set filetype=kerboscript
           augroup END
           syntax on
-        ]])
-      end,
+          ]])
+        end,
     }
 }
 
@@ -386,7 +390,7 @@ require('lazy').setup({
         plugins,
         vimplugins,
         color_plugins,
-		myplugins,
+        myplugins,
     },
     defaults = {
         -- By default, only LazyVim plugins will be lazy-loaded. Your custom plugins will load during startup.
