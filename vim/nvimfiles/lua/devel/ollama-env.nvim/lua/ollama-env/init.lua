@@ -108,9 +108,8 @@ end
 --- Setup ollama-env.
 --- @param opts table: A table with keys `host`, `port`, `chat_model`, `inline_model`, and `cmd_model`.
 function M.setup(opts)
-    if opts == {} then opts = nil end
+    opts = (opts == nil or opts == {}) and opts or try_ollama_env()
 
-    opts = opts or try_ollama_env()
     opts = normalize_opts(opts)
     if not check_connection_sync(opts.host, opts.port) then
         print("Failed to connect")
