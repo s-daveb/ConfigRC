@@ -18,6 +18,7 @@ local function setup_commands()
             cmd_name = 'CMakeConfigure',
             task_cmd = 'Task start cmake configure',
             nargs = '*',  -- Allow the command to accept variable number of arguments
+            ---@diagnostic disable-next-line: unused-local
             complete = function(arg_lead, cmd_line, cursor_pos)
                 -- Provide completion suggestions for CMake configure arguments if needed
                 -- This function can be customized based on your requirements
@@ -27,7 +28,8 @@ local function setup_commands()
         {
             cmd_name = 'CMakeBuild',
             task_cmd = 'Task start cmake build',
-            nargs = 0
+            nargs = '*' -- Allow the command to accept variable number of arguments
+
         },
         {
             cmd_name = 'CMakeRun',
