@@ -4,7 +4,7 @@ local M = {}
 function M.setup()
     --local ollama_env = require("ollama-env").get_config()
     local opts = {
-        model_name = "qwen-2.5-coder:1.5b",
+        model_name = "codegemma:code",
         stream_suggestion = true,
         python_command = "python3",
         filetypes = {'python', 'cpp', 'cpp.doxygen', 'c', 'c.doxygen', 'lua', 'vim', "markdown"},
