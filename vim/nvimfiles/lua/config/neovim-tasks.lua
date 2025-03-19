@@ -75,6 +75,18 @@ local function setup_commands()
         )
     end
 
+    vim.api.nvim_create_user_command('CMakePump', function(args)
+        local ProjectConfig = require('tasks.project_config')
+        local project_config = ProjectConfig.new()
+        local orig_cmd = project_config.cmake.cmd
+        -- Prefix pump before the original cmake command
+        project_config.cmake.cmd = 'pump ' .. orig_cmd
+        tasks.start('cmake', 'build', args.args)
+        -- Restore the original command
+        project_config.cmake.cmd = orig_cmd
+        project_config:write()
+    end, { nargs = '*' })
+
 end
 
 function M.setup()
