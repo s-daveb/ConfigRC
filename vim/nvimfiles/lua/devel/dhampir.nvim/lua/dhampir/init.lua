@@ -1,6 +1,4 @@
-
-local M = {}
-local color_mapper = require('keymaps.colors')
+local Mlocal M = {}
 
 M.debug = false
 M.current_theme = nil
@@ -50,8 +48,8 @@ function M.dracula_option_handler()
     M.colors_keymapper.setBgChanging(false)
 end
 
-local function set_autocmds()
-    local augroup = vim.api.nvim_create_augroup("dhampir autocmds", {clear = true})
+local function setup_autocmds()
+    local group = vim.api.nvim_create_augroup("DhampirSwitch", { clear = true })
 
     debugMsg("set_autocmds called")
 
@@ -77,9 +75,11 @@ local function set_autocmds()
     })
 end
 
-
 function M.setup(color_keymapper)
-    M.colors_keymapper = color_keymapper
+    --if not color_keymapper then
+    --    print("Error: dhampir requires you pass in a module with a toggle_bg method")
+    --    return
+    --end
 
     if (color_keymapper == nil) then
         debugMsg("Error: dhampir requires you pass in module with a  toggle_bg method")
