@@ -6,7 +6,9 @@ local cmp = require("cmp")
 
 local default_opts = {
         completion = {
-            autocomplete = { require("cmp.types").cmp.TriggerEvent.TextChanged }        },
+            --autocomplete = { require("cmp.types").cmp.TriggerEvent.TextChanged }        },
+            autocomplete = false,
+        },
         snippet = {
             expand = function(args)
                 luasnip.lsp_expand(args.body)
@@ -53,7 +55,6 @@ local default_opts = {
         }),
     }
 
-
 local function is_cursor_at_word_end()
     local col = vim.fn.col('.')
     local line = vim.fn.getline('.')
@@ -64,13 +65,12 @@ end
 local completion_timer = nil
 
 local function start_async_completion()
-    -- Cancel any existing timer
     if completion_timer then
         completion_timer:stop()
         completion_timer:close()
     end
     completion_timer = vim.loop.new_timer()
-    completion_timer:start(1000, 0, vim.schedule_wrap(function()
+    completion_timer:start(5000, 0, vim.schedule_wrap(function()
         if completion_timer then
             if is_cursor_at_word_end() then
                 cmp.complete()
@@ -79,27 +79,30 @@ local function start_async_completion()
     end))
 end
 
+local function setup_autocmds()
+    --Set up an autocmd for CursorHoldI event to start the completion timer
+    vim.api.nvim_create_autocmd({"CursorHoldI","TextChangedI"}, {
+        callback = function()
+            start_async_completion()
+        end
+    })
+    -- Set up autocmds to restart the timer whenever the cursor moves
+    vim.api.nvim_create_autocmd({"CursorMovedI", "InsertLeave"}, {
+        callback = function()
+            if completion_timer then
+                completion_timer:stop()
+                completion_timer:close()
+                completion_timer = nil
+            end
+        end
+    })
+end
+
 function M.load(opts)
     opts = opts or {}
     local cmp_opts = vim.tbl_deep_extend("force", default_opts, opts)
 
-   --Set up an autocmd for CursorHoldI event to start the completion timer
-   -- vim.api.nvim_create_autocmd("CursorHoldI", {
-   --     callback = function()
-   --         start_async_completion()
-   --     end
-   -- })
-   -- -- Set up autocmds to restart the timer whenever the cursor moves
-   -- vim.api.nvim_create_autocmd({"CursorMovedI", "InsertLeave"}, {
-   --     callback = function()
-   --         if completion_timer then
-   --             completion_timer:stop()
-   --             completion_timer:close()
-   --             completion_timer = nil
-   --         end
-   --     end
-   -- })
-
+    setup_autocmds()
     cmp.setup(cmp_opts)
 end
 
