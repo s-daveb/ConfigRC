@@ -76,19 +76,15 @@ local function setup_autocmds()
 end
 
 function M.setup(color_keymapper)
-    --if not color_keymapper then
-    --    print("Error: dhampir requires you pass in a module with a toggle_bg method")
-    --    return
-    --end
-
-    if (color_keymapper == nil) then
-        debugMsg("Error: dhampir requires you pass in module with a  toggle_bg method")
+    if not color_keymapper then
+        print("Error: dhampir requires you pass in a module with a toggle_bg method")
         return
     end
+    M.colors_keymapper = color_keymapper
     M.original_bg_toggler =  color_keymapper.default_bg_toggle
 
     color_keymapper.set_bg_toggler(require('dhampir').dracula_switch_colorscheme)
-    set_autocmds()
+    setup_autocmds()
 end
 
 return M
