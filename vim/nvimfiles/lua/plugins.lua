@@ -89,20 +89,10 @@ local plugins = {
     --    -- See Commands section for default commands if you want to lazy load on them
     --},
     -- Local AI features
-    -- This was not very good
-    --{
-    --    's-daveb/Ollama-Copilot',
-    --    lazy = true,
-    --    event = "VeryLazy",
-    --    dependencies = { 'ollama-env' },
-    --    config = function()
-    --        require('config.Ollama-copilot').setup()
-    --    end
-    --},
     {
-        'trevin-j/olly.nvim',
+        'jamesoram/olly.nvim',
         lazy = true,
-        event = "BufReadPost",
+        event = "FileType",
         dependencies = { 'ollama-env' },
         config = function()
             require('config.Ollama-copilot').setup()

@@ -4,9 +4,10 @@ local M = {}
 local default_opts = {
     host         = "localhost",
     port         = 11434,
-    inline_model = "phi4:latest",
-    chat_model   = "phi4:latest",
-    cmd_model    = "phi4:latest",
+    inline_model = "qwen2.5-coder:1.5b",
+    chat_model   = "qwen2.5-coder:1.5b",
+    cmd_model    = "qwen2.5-coder:1.5b",
+    copilot_model    = "qwen2.5-coder:1.5b",
 }
 
 
@@ -45,6 +46,10 @@ local function normalize_opts(opts)
 
     if not opts.cmd_model then
         opts.cmd_model = default_opts.cmd_model
+    end
+
+    if not opts.copilot_model then
+        opts.copilot_model = default_opts.cmd_model
     end
 
     return opts
@@ -94,6 +99,7 @@ local function try_ollama_env()
         chat_model   = os.getenv("OLLAMA_DEFAULT_MODEL") or default_opts.chat_model,
         inline_model = os.getenv("OLLAMA_NVIM_INLINE_MODEL") or default_opts.inline_model,
         cmd_model    = os.getenv("OLLAMA_NVIM_CMD_MODEL") or default_opts.cmd_model,
+        copilot_model    = os.getenv("OLLAMA_NVIM_COPILOT_MODEL") or default_opts.copilot_model,
     }
 
     opts = normalize_opts(opts)

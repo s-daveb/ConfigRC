@@ -1,9 +1,10 @@
 
 local M = {}
+local ollama_env = require("ollama-env")
 
 function M.setup()
     local opts = {
-        model_name = "codegemma:2b-code-q8_0",
+        model_name = ollama_env.config.copilot_model,
         stream_suggestion = true,
         python_command = "python3",
         filetypes = {
@@ -22,12 +23,11 @@ function M.setup()
         keymaps = {
             suggestion = '<leader>os',
             reject = '<leader>or',
-            insert_accept = '<Tab>',
+            insert_accept = '<c-return>',
         },
         fill_in_middle = true
     }
     require('olly').setup(opts)
-
 end
 
 return M
