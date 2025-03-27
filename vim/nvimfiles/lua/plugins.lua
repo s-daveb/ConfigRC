@@ -102,7 +102,7 @@ local plugins = {
     {
         'trevin-j/olly.nvim',
         lazy = true,
-        event = "BufWinEnter",
+        event = "BufReadPost",
         dependencies = { 'ollama-env' },
         config = function()
             require('config.Ollama-copilot').setup()
