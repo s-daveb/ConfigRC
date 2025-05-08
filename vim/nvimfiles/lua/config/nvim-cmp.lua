@@ -6,8 +6,8 @@ local cmp = require("cmp")
 
 local default_opts = {
         completion = {
-            --autocomplete = { require("cmp.types").cmp.TriggerEvent.TextChanged }        },
-            autocomplete = false,
+            autocomplete = { require("cmp.types").cmp.TriggerEvent.TextChanged }, --        },
+            --autocomplete = false,
         },
         snippet = {
             expand = function(args)
@@ -79,7 +79,7 @@ local function start_async_completion()
     end))
 end
 
-local function setup_autocmds()
+--[[local function setup_autocmds()
     --Set up an autocmd for CursorHoldI event to start the completion timer
     vim.api.nvim_create_autocmd({"CursorHoldI","TextChangedI"}, {
         callback = function()
@@ -96,13 +96,13 @@ local function setup_autocmds()
             end
         end
     })
-end
+end  --]]
 
 function M.load(opts)
     opts = opts or {}
     local cmp_opts = vim.tbl_deep_extend("force", default_opts, opts)
 
-    setup_autocmds()
+    --setup_autocmds()
     cmp.setup(cmp_opts)
 end
 

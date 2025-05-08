@@ -71,6 +71,25 @@ local plugins = {
         })
       end,
     },
+    -- Refactoring Support
+  {
+    "ThePrimeagen/refactoring.nvim",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "nvim-treesitter/nvim-treesitter",
+    },
+    lazy = false,
+    config = function()
+            require("refactoring").setup()
+            vim.keymap.set({ "n", "x" }, "<leader>re", function() return require('refactoring').refactor('Extract Function') end, { expr = true })
+            vim.keymap.set({ "n", "x" }, "<leader>rf", function() return require('refactoring').refactor('Extract Function To File') end, { expr = true })
+            vim.keymap.set({ "n", "x" }, "<leader>rv", function() return require('refactoring').refactor('Extract Variable') end, { expr = true })
+            vim.keymap.set({ "n", "x" }, "<leader>rI", function() return require('refactoring').refactor('Inline Function') end, { expr = true })
+            vim.keymap.set({ "n", "x" }, "<leader>ri", function() return require('refactoring').refactor('Inline Variable') end, { expr = true })
+            vim.keymap.set({ "n", "x" }, "<leader>rbb", function() return require('refactoring').refactor('Extract Block') end, { expr = true })
+            vim.keymap.set({ "n", "x" }, "<leader>rbf", function() return require('refactoring').refactor('Extract Block To File') end, { expr = true })
+        end,
+    },
     -- GitHub Copilot
     --{
     --    'github/copilot.vim',
@@ -89,15 +108,16 @@ local plugins = {
     --    -- See Commands section for default commands if you want to lazy load on them
     --},
     -- Local AI features
-    {
-        'jamesoram/olly.nvim',
-        lazy = true,
-        event = "FileType",
-        dependencies = { 'ollama-env' },
-        config = function()
-            require('config.Ollama-copilot').setup()
-        end
-    },
+    -- -- Commented out because it's very loud on startup 'Starting Olly'
+    --{
+    --    'jamesoram/olly.nvim',
+    --    lazy = true,
+    --    event = "FileType",
+    --    dependencies = { 'ollama-env' },
+    --    config = function()
+    --        require('config.Ollama-copilot').setup()
+    --    end
+    --},
     {
         "olimorris/codecompanion.nvim",
         dependencies = {
@@ -159,7 +179,6 @@ local plugins = {
             'nvim-lua/plenary.nvim',
             {
                 'nvim-telescope/telescope-fzf-native.nvim',
-                build = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release',
             },
             "nvim-telescope/telescope-file-browser.nvim",
         },
@@ -189,7 +208,7 @@ local plugins = {
     },
     {
         'nvim-telescope/telescope-fzf-native.nvim',
-        build = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release'
+        build = 'cmake -S. -B build -DCMAKE_POLICY_VERSION_MINIMUM=3.5 -DCMAKE_BUILD_TYPE=Release && cmake --build build'
     },
     {
         "nvim-neo-tree/neo-tree.nvim",

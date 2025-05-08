@@ -5,7 +5,7 @@ local ollama_env = require("ollama-env")
 function M.setup()
     local opts = {
         model_name = ollama_env.config.copilot_model,
-        stream_suggestion = true,
+        stream_suggestion = false,
         python_command = "python3",
         filetypes = {
             'sh', 'bash', 'zsh',
