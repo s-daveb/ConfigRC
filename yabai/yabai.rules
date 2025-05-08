@@ -64,7 +64,10 @@ yabai -m rule --add label="Ivory" app="^Ivory$" manage="off" grid="4:4:1:1:2:2"
 yabai -m rule --add label="Shortcuts" app="^Shortcuts$" manage="off" grid="4:4:1:1:2:2"
 
 yabai -m rule --add label="Parallels Desktop" app="^Parallels Desktop$"  manage="off"
-yabai -m rule --add label="Parallels Desktop" app="^Parallels Desktop$" title="Control Center" manage="off" grid="4:4:1:1:1:2"
+yabai -m rule --add label="Windows Explorer" app="^Explorer$"  manage="off"
+yabai -m rule --add label="EA app" app="^EA app$"  manage="off"
+yabai -m rule --add label="EA Games Launcher" app="^EA$"  manage="off"
+yabai -m rule --add label="The Sims 4" app="^The Sims 4$"  manage="off"
 
 #yabai -m rule --add label="Moonlight" app="^Moonlight$" manage="off"
 yabai -m rule --add label="OmniDiskSweeper" app="^OmniDiskSweeper$" manage="off"
