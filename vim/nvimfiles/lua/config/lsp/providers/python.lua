@@ -5,7 +5,7 @@ local lspconfig
 local capabilities
 local keymapper
 
-local pyls_path = vim.fn.exepath('pyls')
+local pyls_path = vim.fn.exepath('pylsp')
 
 function M.setup(opts)
 	lspconfig = opts.lspconfig

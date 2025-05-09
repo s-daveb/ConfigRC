@@ -55,7 +55,6 @@ if [ -n "${HOMEBREW_PREFIX}" ]; then
 	bindkey -e
 	# End of lines configured by zsh-newuser-install
 
-
 	if [ -d ~/.zshrc.d ]; then
 		for script in `/bin/ls ~/.zshrc.d/*.zsh`; do
 			if [[ "$script" =~ ".*/empty.zsh" ]]; then
@@ -79,3 +78,5 @@ if [ -n "${HOMEBREW_PREFIX}" ]; then
 else
 	echo "This zsh configuration requires homebrew. Please install it"
 fi
+
+
