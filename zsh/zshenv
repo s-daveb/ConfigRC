@@ -53,8 +53,6 @@ if [[ ! -o interactive ]]; then
 	detect_brew
 	source ~/.zshrc.d/00-common.zsh
 	source ~/.zshrc.d/02-usr-local.zsh
-	source ~/.zshrc.d/05-manpath.zsh
-	source ~/.zshrc.d/09-python-env.zsh
 
 	[ -x '/usr/local/bin/gman' ] &&	alias man="/usr/local/bin/gman"
 fi

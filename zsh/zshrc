@@ -74,9 +74,8 @@ if [ -n "${HOMEBREW_PREFIX}" ]; then
 			source $script
 		done
 	fi
-
 else
 	echo "This zsh configuration requires homebrew. Please install it"
 fi
 
-
+# vim: set ts=4 sts=4 et sw=4 :
