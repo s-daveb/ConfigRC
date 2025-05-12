@@ -14,35 +14,41 @@ if [ $reinstall -eq 1 ]; then
 	pip install --upgrade pip setuptools wheel
 fi
 
-function micromamba_init()
-{
-	shell="${1:-dash}"
+if [ -x "$(command -v micromamba)" ]; then
+	function micromamba_init()
+	{
+		shell="${1:-dash}"
 
-	case "$shell" in
-		dash)
-			# Code for dash shell
-			env -i PATH="$PATH" HOME="$HOME" TERM="$TERM" /bin/dash
-			;;
-		zsh)
-			# Code for zsh shell
-			env -i PATH="$PATH" HOME="$HOME" TERM="$TERM" /bin/zsh --no-rcs -l
-			;;
-		*)
-			case "$SHELL" in
-				dash)
-					# Code for bash shell
-					env -i PATH="$PATH" HOME="$HOME" TERM="$TERM" /bin/dash -l
-					;;
-				zsh)
-					# Code for zsh shell
-					env -i PATH="$PATH" HOME="$HOME" TERM="$TERM" /bin/zsh --no-rc -l
-					;;
-				*)
-					echo "using unsupported shell" 1>&2
-					return
-					;;
-			esac
-	esac
-}
+		case "$shell" in
+			dash)
+				# Code for dash shell
+				env -i PATH="$PATH" HOME="$HOME" TERM="$TERM" /bin/dash -l
+				;;
+			sh)
+				# Code for bash sh shell
+				env -i PATH="$PATH" HOME="$HOME" TERM="$TERM" /bin/sh -l
+				;;
+			zsh)
+				# Code for zsh shell
+				env -i PATH="$PATH" HOME="$HOME" TERM="$TERM" /bin/zsh --no-rcs -l
+				;;
+			*)
+				case "$SHELL" in
+					dash)
+						# Code for bash shell
+						env -i PATH="$PATH" HOME="$HOME" TERM="$TERM" /bin/dash -l
+						;;
+					zsh)
+						# Code for zsh shell
+						env -i PATH="$PATH" HOME="$HOME" TERM="$TERM" /bin/zsh --no-rc -l
+						;;
+					*)
+						echo "using unsupported shell" 1>&2
+						return
+						;;
+				esac
+		esac
+	}
+fi
 
 # vim: set ts=4 sts=4 noet sw=4 :
