@@ -14,3 +14,4 @@ lazy-lock.json
 legacy
 .luarc.json
 lazyvim.json
+home/conda/*

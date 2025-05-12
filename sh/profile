@@ -1,0 +1,24 @@
+# ex: set ts=4 sts=4 noet sw=4 :
+
+ARCH="arm64"
+HOMEBREW_PREFIX="/opt/homebrew"
+
+# check for intel mac
+if [ $(uname -m) = "x86_64" ]; then
+	ARCH="x86"
+	HOMEBREW_PREFIX="/usr/local/"
+fi
+
+
+# if path doesnt contain homebrew_prefix
+if [ -n `echo $PATH | grep $HOMEBREW_PREFIX`  ]; then
+	PATH=$HOMEBREW_PREFIX/bin:$PATH
+fi
+
+# Before loading mamba, check if interactive shell
+
+if command -v micromamba >/dev/null 2>&1; then
+	eval "`micromamba shell hook -s posix`"
+	echo 'micromamba loaded~ 🐍'
+fi
+
