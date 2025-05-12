@@ -56,7 +56,7 @@ local function normalize_opts(opts)
 end
 
 local function check_connection_sync(host, port, timeout)
-    timeout = timeout or 5000
+    timeout = timeout or 50
     local result = nil
 
     local ip_info = vim.loop.getaddrinfo(host, nil, { family = "inet" })
