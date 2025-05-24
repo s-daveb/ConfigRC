@@ -10,4 +10,4 @@ cd $HOME
 
 unlink "${HOME}/.profile"
 
-ln -sv "${REPODIR}/sh/profile" "${HOME}/.profile"
+ln -sv "${REPODIR}/profile" "${HOME}/.profile"
