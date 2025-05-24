@@ -3,12 +3,11 @@
 current_rules="$(yabai -m rule --list  | grep label | awk -F ':' '{ print $2 }' | sed 's/["|,]//g')"
 
 OLDIFS=$IFS
-
 echo "yabai.rules: Removing existing rules"
 IFS=$'\n'
 for rule in ${current_rules}; do
 	#echo "Removing rule $rule"
-	yabai -m rule --remove "$rule"
+	yabai -m rule --remove "$rule" 1> /dev/null 2> /dev/null
 done
 IFS=$OLDIFS
 
@@ -76,11 +75,12 @@ yabai -m rule --add label="iStatistica Pro" app="^iStat" manage="off"
 
 yabai -m rule --add label="Screen Sharing" app="^Screen Sharing$" manage="off"
 
-yabai -m rule --add label="iterm2" app="^iTerm2$" manage="off" #grid="32:32:8:9:13:17"
+yabai -m rule --add label="iterm2" app="iTerm2" manage="on"
+yabai -m rule --add label="iterm2" app="iTerm2" title="^pulldown-terminal" manage="off"
 
 yabai -m rule --add label="Terminal" app="^Terminal" manage="off" grid="32:32:8:9:13:17"
-yabai -m rule --add label="macvim" app="(N|Mac)?(Vim|vim)(R?)" manage="off" # grid="32:32:8:9:13:17"
-#yabai -m rule --add label="neovide" app="neovide" manage="off" # grid="32:32:8:9:13:17"
+yabai -m rule --add label="macvim" app="(N|Mac)?(Vim|vim)(R?)" manage="off"
+#yabai -m rule --add label="neovide" app="neovide" manage="off"
 
 yabai -m rule --add label="Finder" app="^Finder$" manage="off"
 yabai -m rule --add label="Mail" app="^Mail$" manage="off"
