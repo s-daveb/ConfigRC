@@ -11,4 +11,3 @@ alias gd=gallery-dl
 alias gvim="neovide --fork"
 alias vim="nvim"
 
-alias ckan="mono /Applications/CKAN.app/Contents/MacOS/ckan.exe"

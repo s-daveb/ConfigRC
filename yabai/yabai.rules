@@ -77,7 +77,7 @@ yabai -m rule --add label="iStatistica Pro" app="^iStat" manage="off"
 yabai -m rule --add label="Screen Sharing" app="^Screen Sharing$" manage="off"
 
 yabai -m rule --add label="iterm2" app="iTerm2" manage="on"
-yabai -m rule --add label="iterm2" app="iTerm2" title="^pulldown-terminal" manage="off"
+yabai -m rule --add label="iterm2-pulldown" app="iTerm2" title="^pulldown-terminal" manage="off"
 
 yabai -m rule --add label="Terminal" app="^Terminal" manage="off" grid="32:32:8:9:13:17"
 yabai -m rule --add label="macvim" app="(N|Mac)?(Vim|vim)(R?)" manage="off"
