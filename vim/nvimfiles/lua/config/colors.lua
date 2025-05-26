@@ -16,7 +16,7 @@ local default_gui_theme_light = "dhampir"
 local default_gui_theme_dark = "dracula"
 local default_gui_theme = default_gui_theme_dark
 
-M.colorscheme = default_term_theme
+M.theme_pack = default_term_theme
 
 local function get_os_and_arch()
     local raw_os_name = 'unknown'
@@ -82,7 +82,7 @@ function M.isDarkMode()
 end
 
 
-function M.make_themeset(term, gui, tmux)
+function M.make_theme_pack(term, gui, tmux)
     return {
         term =  term or default_term_theme,
         gui =  gui or default_gui_theme,
@@ -90,7 +90,7 @@ function M.make_themeset(term, gui, tmux)
     }
 end
 
-function M.set(themeset, preexec)
+function M.set_theme_pack(theme_pack, preexec)
     -- Set default_gui_theme based on background
     debugMsg("Current background:", vim.o.background)
 
@@ -101,34 +101,33 @@ function M.set(themeset, preexec)
         debugMsg("Using dark theme for GUI:", default_gui_theme_dark)
     end
 
-
     -- Check if running in GUI
     debugMsg("Running in GUI?", (vim.fn.has('gui_running') == 1))
     M.is_gui = (vim.fn.has('gui_running') == 1) and true or false
 
 
-    debugMsg("themeset before assignment:", themeset)
-    themeset = themeset or os.getenv("NEOVIDE_BG") or nil
-    debugMsg("themeset after assignment:", themeset)
+    debugMsg("theme_pack before assignment:", theme_pack)
+    theme_pack = theme_pack or os.getenv("NEOVIDE_BG") or nil
+    debugMsg("theme_pack after assignment:", theme_pack)
 
-    if themeset == nil then
-        debugMsg("themeset is nil; creating default themeset")
-        themeset = M.make_themeset(nil, nil, nil)  -- Create a default themeset if none is provided
+    if theme_pack == nil then
+        debugMsg("theme_pack is nil; creating default theme_pack")
+        theme_pack = M.make_theme_pack(nil, nil, nil)  -- Create a default themeset if none is provided
     end
 
     -- Set colorscheme with fallback
-    debugMsg("Setting M.colorscheme to:", themeset.gui)
-    M.colorscheme = themeset.gui
+    debugMsg("Setting M.colorscheme to:", theme_pack.gui)
+    M.theme_pack = theme_pack.gui
 
     if (preexec) then
         preexec()
     end
 
     -- Add a check to ensure colorscheme is not nil before using it
-    debugMsg("Attempting to set colorscheme:", M.colorscheme)
-    if M.colorscheme ~= nil then
-        debugMsg("Setting colorscheme command:", "colorscheme " .. M.colorscheme)
-        vim.cmd("colorscheme " .. M.colorscheme)
+    debugMsg("Attempting to set colorscheme:", M.theme_pack)
+    if M.theme_pack ~= nil then
+        debugMsg("Setting colorscheme command:", "colorscheme " .. M.theme_pack)
+        vim.cmd("colorscheme " .. M.theme_pack)
     else
         debugMsg("Error: No valid colorscheme found")
     end
