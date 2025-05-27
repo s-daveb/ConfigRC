@@ -12,7 +12,7 @@ local default_neovide_transparency = 0.50
 local neovide_group = vim.api.nvim_create_augroup('NeovideSettings', { clear = true })
 
 
-function M.neovide_trans(amount)
+function M.set_neovide_opacity(amount)
     if vim.g.neovide then
         vim.g.neovide_opacity = neovide_window_base_opacity
         vim.g.neovide_normal_opacity = amount
@@ -21,38 +21,55 @@ function M.neovide_trans(amount)
     end
 end
 
-function M.load(opts)
-    opts = opts or {}
-    opts.transparency = opts.transparency or default_neovide_transparency
-
-    if is_gui then
+function M.configure_neovide(amount)
+    if vim.g.neovide then
         vim.g.neovide_theme = 'auto'
         vim.g.neovide_opacity = 1.0
-
-        vim.opt.guifont = "Berkeley_Mono:h16"
 
         -- Create an autocommand in the 'NeovideSettings' group
         vim.api.nvim_create_autocmd('User', {
             pattern = "VeryLazy",
             group = neovide_group,
-            callback =  function() M.neovide_trans(opts.transparency) end
+            callback =  function() M.set_neovide_opacity(amount) end
         })
 
         -- Define a new Neovim command :NeovideTrans
         vim.api.nvim_create_user_command('SetOpacity', function()
             -- Prompt for the value
-            local amount = vim.fn.input("Enter the amount: ")
+            local input = vim.fn.input("Enter the amount: ")
             -- Check if the input is a valid number
-            if tonumber(amount) then
+            if tonumber(input) then
                 -- Call M.neovide_trans with the entered value
-                M.neovide_trans(tonumber(amount))
+                M.set_neovide_opacity(tonumber(input))
             else
                 print("Invalid input. Please enter a numeric amount.")
             end
         end, { desc = 'Call neovide_trans with a specified amount' })
-    else
-        vim.g.everforest_transparent_background = 1
+
+        vim.api.nvim_create_autocmd("UIEnter", {
+            callback = function()
+            if vim.g.neovide then
+                M.set_neovide_opacity(amount);
+            end
+        end,
+})
     end
+end
+
+function M.load(opts)
+    opts = opts or {}
+    opts.transparency = opts.transparency or default_neovide_transparency
+
+    if is_gui then
+        vim.opt.guifont = "Berkeley_Mono:h16"
+
+        if vim.g.neovide then
+            M.configure_neovide(opts.transparency);
+        end
+    else
+        vim.g.everforest_transparent_background = 1 -- disable(??) everforest background
+    end
+
 
     colorconfig.set_theme_pack(nil, nil)
 end
