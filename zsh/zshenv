@@ -53,6 +53,8 @@ if [[ ! -o interactive ]]; then
 	detect_brew
 	source ~/.zshrc.d/00-common.zsh
 	source ~/.zshrc.d/02-usr-local.zsh
+	source ~/.zshrc.d/23-java-paths.zsh
+
 
 	[ -x '/usr/local/bin/gman' ] &&	alias man="/usr/local/bin/gman"
 fi

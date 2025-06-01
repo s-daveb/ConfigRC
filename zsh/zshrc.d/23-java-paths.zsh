@@ -1,7 +1,7 @@
 openjdk_root="$HOMEBREW_PREFIX/opt/openjdk"
 
 if [ -d "${openjdk_root}" ]; then
-	export JAVA_HOME="${openjdk_root}"
+	export JAVA_HOME="${openjdk_root}/libexec/openjdk.jdk/Contents/Home"
 	export PATH="${openjdk_root}/bin:$PATH"
 fi
 
