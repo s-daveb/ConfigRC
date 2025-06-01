@@ -2,11 +2,33 @@ local M = {}
 
 local lspconfig
 local capabilities
+
 local keymapper
+M.debug = false
+
+M.debugPrint = function(...)
+	if (M.debug) then
+			vim.print(...)
+	end
+end
+
+
+local function load_home_venv()
+	local uv = vim.loop
+	local venv_path = os.getenv("HOME") .. "/.venv/bin"
+
+	-- Check if the directory exists
+	local stat = uv.fs_stat(venv_path)
+	if stat and stat.type == "directory" then
+		vim.env.PATH = venv_path .. ":" .. vim.env.PATH
+	end
+end
+
+load_home_venv()
 
 local pyls_path = vim.fn.exepath('pylsp')
 
-M.python_search_paths = {}
+M.python_extra_paths = {}
 M.current_opts = {}
 
 if not pyls_path then
@@ -16,7 +38,7 @@ end
 local root_finder = require("lspconfig.util")
 		.root_pattern("pycodestyle.conf", "*.pyworkspace", "pyproject.toml")
 
-local function read_lines(filepath)
+local read_lines = function(filepath)
   local lines = {}
   local fd = io.open(filepath, "r")
   if not fd then
@@ -32,7 +54,9 @@ local function read_lines(filepath)
 end
 
 -- Main function: scan for *.pyworkspace, read them, add to pylsp
-function M.read_pyworkspace_files()
+M.read_pyworkspace_extra_paths = function()
+	M.python_extra_paths = {}
+
 	-- Remove duplicate entries from a list of strings
 	local function uniq(list)
 		local seen = {}
@@ -58,7 +82,7 @@ function M.read_pyworkspace_files()
 
   local workspace_files = vim.fn.globpath(project_root, "*.pyworkspace", false, true)
   if vim.tbl_isempty(workspace_files) then
-		vim.print("no .pyworkspace files found");
+		M.debugPrint("no .pyworkspace files found");
     return
   end
 
@@ -66,88 +90,67 @@ function M.read_pyworkspace_files()
   for _, ws_file in ipairs(workspace_files) do
     local dirs = read_lines(ws_file)
     for _, dirpath in ipairs(dirs) do
+
       -- If it’s a relative path, make it absolute relative to project_root
       if not dirpath:match("^/") then
         dirpath = project_root .. "/" .. dirpath
       end
 
-      -- 5) Finally, tell the active LSP client to add this folder
-      --    That will make pylsp index it as a workspace folder.
-      --    This only works if pylsp is already attached to the buffer.
-
-			vim.print("inserting " .. dirpath)
-			table.insert(M.python_search_paths, dirpath)
+			M.debugPrint("inserting " .. dirpath)
+			table.insert(M.python_extra_paths, dirpath)
     end
   end
-	M.python_search_paths = uniq(M.python_search_paths);
+	M.python_extra_paths = uniq(M.python_extra_paths);
 end
 
 
-local function update_python_search_paths()
-	M.read_pyworkspace_files()
-  return {
-    pylsp = {
-      plugins = {
-        rope = {
-          python_path = M.python_search_paths,
-        },
-        jedi = {
-          extra_paths = M.python_search_paths,
-        },
-      },
-    },
-  }
-end
-
-local function configure_pylsp(opts)
-	update_python_search_paths()
-
-	if vim.fn.executable(pyls_path) == 1 then
-		lspconfig.pylsp.setup {
-			cmd = { pyls_path },
-			filetypes = { 'python' },
-			root_dir = root_finder,
-			on_attach = keymapper.set_keys,
-			settings = {
-				pylsp = {
-					plugins = {
-						rope_autoimport = {
-							enabled = true,
-							completions = {
-								enabled = true,
-							},
-							code_actions = {
-								enabled = true,
-							},
-						},
-						rope_completion = {
-							enabled = true,
-							eager = true,
-						},
-						rope = {
-							python_path = vim.deepcopy(M.python_search_paths),
-						},
-						jedi = {
-							prioritize_extra_paths = true,
-							extra_paths = vim.deepcopy(M.python_search_paths),
-						},
-					},
-				},
-				capabilities = capabilities
-			}
-		}
-	end
-
-end
-
-function M.setup(opts)
+local configure_pylsp = function(opts)
 	lspconfig = opts.lspconfig
 	capabilities = opts.capabilities
 	keymapper = opts.keymapper
 
+	M.debugPrint("configuring...")
+	M.read_pyworkspace_extra_paths()
+
+	lspconfig.pylsp.setup({
+		cmd = { pyls_path },
+		filetypes = { 'python' },
+		root_dir = root_finder,
+		on_attach = keymapper.set_keys,
+		settings = {
+			pylsp = {
+				plugins = {
+					rope_autoimport = {
+						enabled = true,
+						completions = {
+							enabled = true,
+						},
+						code_actions = {
+							enabled = true,
+						},
+					},
+					rope_completion = {
+						enabled = true,
+						eager = true,
+					},
+					rope = {
+						python_path = vim.deepcopy(M.python_extra_paths),
+					},
+					jedi = {
+						prioritize_extra_paths = true,
+						extra_paths = vim.deepcopy(M.python_extra_paths),
+					},
+				},
+			},
+			capabilities = capabilities
+		}
+	})
+end
+
+M.setup = function(opts)
 	M.current_opts = vim.deepcopy(opts);
 
-	vim.api.nvim_create_autocmd("FileType", {
+	vim.api.nvim_create_autocmd({"FileType", "VimEnter"}, {
 		pattern = "python",
 		callback = function()
 			local clients = vim.lsp.get_clients()
@@ -155,12 +158,13 @@ function M.setup(opts)
 				if (client.name == "pylsp") then
 					client.stop();
 				end
-
-				configure_pylsp(M.current_opts)
-				vim.defer_fn(function()
-					vim.cmd("LspStart pylsp")
-				end, 50)
 			end
+
+			configure_pylsp(M.current_opts)
+
+			vim.defer_fn(function()
+				vim.cmd("LspStart pylsp")
+			end, 50)
 		end
 	})
 
