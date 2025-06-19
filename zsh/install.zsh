@@ -8,9 +8,19 @@ REPODIR=$PWD
 
 cd $HOME
 
-[[ ! -d $HOME/.zsh ]] && mkdir -pv ${HOME}/.zsh
+mode="Install"
+case $1 in
+"-u" | "--uninstall" | "-r" | "--remove")
+	mode="Uninstall"
+	shift
+	;;
+esac
 
-if [[ -d ${HOME}/.zsh/completions ]] && [[ ! -L ${HOME}/.zsh/completions ]]; then
+
+
+[[ "${mode}" == "Install" ]] && [ ! -d $HOME/.zsh ]] && mkdir -pv ${HOME}/.zsh
+
+if [[ "${mode}" == "Install" ]] && [[ -d ${HOME}/.zsh/completions ]] && [[ ! -L ${HOME}/.zsh/completions ]]; then
 	echo "detected existing completions, moving to ~/.zsh/completions.old"
 	mv ${HOME}/.zsh/completions{,.old}
 fi
@@ -21,8 +31,10 @@ unlink "${HOME}/.zshen.d" 2> /dev/null
 unlink "${HOME}/.zshrc.d"
 unlink "${HOME}/.zsh/completions" 2> /dev/null
 
-ln -sv "${REPODIR}/zshrc" "${HOME}/.zshrc"
-ln -sv "${REPODIR}/zshenv" "${HOME}/.zshenv"
-ln -sv "${REPODIR}/zshrc.d" "${HOME}/.zshrc.d"
-ln -sv "${REPODIR}/completions" "${HOME}/.zsh"
+if [[ "${mode}" != "Uninstall" ]]; then
+	ln -sv "${REPODIR}/zshrc" "${HOME}/.zshrc"
+	ln -sv "${REPODIR}/zshenv" "${HOME}/.zshenv"
+	ln -sv "${REPODIR}/zshrc.d" "${HOME}/.zshrc.d"
+	ln -sv "${REPODIR}/completions" "${HOME}/.zsh"
+fi
 
