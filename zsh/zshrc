@@ -5,38 +5,38 @@ detect_brew
 if [ -n "${HOMEBREW_PREFIX}" ]; then
 	load_brew
 
-	export ZPLUG_INSTALL="${HOMEBREW_PREFIX}/opt/zplug"
-	source $ZPLUG_INSTALL/init.zsh
+    if [ -z $MICROMAMBA_INIT ]; then
+        export ZPLUG_INSTALL="${HOMEBREW_PREFIX}/opt/zplug"
+        source $ZPLUG_INSTALL/init.zsh
+        # Load oh-my-zsh plugins.
+        autoload colors && colors
+        setopt prompt_subst
 
-	# Load oh-my-zsh plugins.
-	autoload colors && colors
-	setopt prompt_subst
+        #zplug "robbyrussell/oh-my-zsh", use:"lib/*.zsh", defer:0
+        #zplug "plugins/git", from:oh-my-zsh
+        zplug "plugins/macos", from:oh-my-zsh, if:"[[ $OSTYPE == *darwin* ]]"
+        #zplug "plugins/pip", from:oh-my-zsh
 
-	#zplug "robbyrussell/oh-my-zsh", use:"lib/*.zsh", defer:0
-	#zplug "plugins/git", from:oh-my-zsh
-	zplug "plugins/macos", from:oh-my-zsh, if:"[[ $OSTYPE == *darwin* ]]"
-	#zplug "plugins/pip", from:oh-my-zsh
+        zplug "plugins/command-not-found", from:oh-my-zsh
 
-	zplug "plugins/command-not-found", from:oh-my-zsh
+        ## Syntax highlighting bundle.
+        zplug "zsh-users/zsh-autosuggestions", defer:1
+        zplug "mafredri/zsh-async", defer:1
+        zplug "zsh-users/zsh-syntax-highlighting", defer:2
 
-	## Syntax highlighting bundle.
-	zplug "zsh-users/zsh-autosuggestions", defer:1
-	zplug "mafredri/zsh-async", defer:1
-	zplug "zsh-users/zsh-syntax-highlighting", defer:2
+        # Load the theme.
+        # Simple > theme
+        #zplug "jackharrisonsherlock/common", as:theme
+        # Robbyrussel + emoji
+        #zplug "meiokubo-zz/emoji.zsh-theme", as:theme
+        # Powerline theme
+        #zplug "caiogondim/bullet-train.zsh", as:theme
 
-	# Load the theme.
-	# Simple > theme
-	#zplug "jackharrisonsherlock/common", as:theme
-	# Robbyrussel + emoji
-	#zplug "meiokubo-zz/emoji.zsh-theme", as:theme
-	# Powerline theme
-	#zplug "caiogondim/bullet-train.zsh", as:theme
-
-	# Multi-line prompts
-	zplug "themes/gnzh", from:oh-my-zsh, as:theme
-	#zplug "halfo/lambda-mod-zsh-theme", as:theme
-	#zplug "zthxxx/jovial", as:theme
-	#zplug "yarisgutierrez/classyTouch_oh-my-zsh", as:theme
+        # Multi-line prompts
+        zplug "themes/gnzh", from:oh-my-zsh, as:theme
+        #zplug "halfo/lambda-mod-zsh-theme", as:theme
+        #zplug "zthxxx/jovial", as:theme
+        #zplug "yarisgutierrez/classyTouch_oh-my-zsh", as:theme
 
 	if ! zplug check --verbose; then
 	    #printf "Install? [y/N]: "
@@ -55,7 +55,7 @@ if [ -n "${HOMEBREW_PREFIX}" ]; then
 	bindkey -e
 	# End of lines configured by zsh-newuser-install
 
-	if [ -d ~/.zshrc.d ]; then
+if [ -d ~/.zshrc.d ]; then
 		for script in `/bin/ls ~/.zshrc.d/*.zsh`; do
 			if [[ "$script" =~ ".*/empty.zsh" ]]; then
 				continue
@@ -74,6 +74,8 @@ if [ -n "${HOMEBREW_PREFIX}" ]; then
 			source $script
 		done
 	fi
+
+    fi
 else
 	echo "This zsh configuration requires homebrew. Please install it"
 fi

@@ -4,13 +4,13 @@ local M  = {}
 local is_gui = (vim.fn.has('gui_running') == 1) and true or false
 local colorconfig = require('config.colors')
 
+local _border = "rounded"
 
 local neovide_window_base_opacity = 0.75
-local default_neovide_transparency = 0.50
+local default_neovide_transparency = 0.75
 
 -- Create an autogroup named 'NeovideSettings'
 local neovide_group = vim.api.nvim_create_augroup('NeovideSettings', { clear = true })
-
 
 function M.set_neovide_opacity(amount)
     if vim.g.neovide then
@@ -21,17 +21,22 @@ function M.set_neovide_opacity(amount)
     end
 end
 
-function M.configure_neovide(amount)
+function M.setup_gui(opts)
+    vim.opt.guifont = "Berkeley_Mono:h14"
+
+    if vim.g.neovide then
+        M.configure_transparency(opts.transparency);
+    end
+
+end
+
+function M.configure_transparency(amount)
     if vim.g.neovide then
         vim.g.neovide_theme = 'auto'
         vim.g.neovide_opacity = 1.0
 
         -- Create an autocommand in the 'NeovideSettings' group
-        vim.api.nvim_create_autocmd('User', {
-            pattern = "VeryLazy",
-            group = neovide_group,
-            callback =  function() M.set_neovide_opacity(amount) end
-        })
+        M.set_neovide_opacity(amount)
 
         -- Define a new Neovim command :NeovideTrans
         vim.api.nvim_create_user_command('SetOpacity', function()
@@ -45,14 +50,6 @@ function M.configure_neovide(amount)
                 print("Invalid input. Please enter a numeric amount.")
             end
         end, { desc = 'Call neovide_trans with a specified amount' })
-
-        vim.api.nvim_create_autocmd("UIEnter", {
-            callback = function()
-            if vim.g.neovide then
-                M.set_neovide_opacity(amount);
-            end
-        end,
-})
     end
 end
 
@@ -60,16 +57,18 @@ function M.load(opts)
     opts = opts or {}
     opts.transparency = opts.transparency or default_neovide_transparency
 
-    if is_gui then
-        vim.opt.guifont = "Berkeley_Mono:h16"
-
-        if vim.g.neovide then
-            M.configure_neovide(opts.transparency);
-        end
-    else
+    if not is_gui then
         vim.g.everforest_transparent_background = 1 -- disable(??) everforest background
     end
 
+    -- Create an autocommand in the 'NeovideSettings' group
+    vim.api.nvim_create_autocmd({'UIEnter'}, {
+        group = neovide_group,
+        callback =  function()
+            M.setup_gui(opts)
+        end
+    })
+    vim.o.winborder = 'rounded'
 
     colorconfig.set_theme_pack(nil, nil)
 end

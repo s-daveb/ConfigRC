@@ -8,7 +8,7 @@ M.debug = false
 
 M.debugPrint = function(...)
 	if (M.debug) then
-			vim.print(...)
+			vim.print(string.format(...))
 	end
 end
 
@@ -86,9 +86,15 @@ M.read_pyworkspace_extra_paths = function()
     return
   end
 
+	for _, file in ipairs(workspace_files) do
+			M.debugPrint("Found workspace file: %s", file)
+			break -- Stops after printing the first one
+	end
+
   -- 4) For each .pyworkspace file, read every non-blank line as a path
   for _, ws_file in ipairs(workspace_files) do
     local dirs = read_lines(ws_file)
+
     for _, dirpath in ipairs(dirs) do
 
       -- If it’s a relative path, make it absolute relative to project_root
@@ -96,7 +102,7 @@ M.read_pyworkspace_extra_paths = function()
         dirpath = project_root .. "/" .. dirpath
       end
 
-			M.debugPrint("inserting " .. dirpath)
+			M.debugPrint("adding extra_path: " .. dirpath)
 			table.insert(M.python_extra_paths, dirpath)
     end
   end
@@ -104,7 +110,7 @@ M.read_pyworkspace_extra_paths = function()
 end
 
 
-local configure_pylsp = function(opts)
+local reconfigure_pylsp = function(opts)
 	lspconfig = opts.lspconfig
 	capabilities = opts.capabilities
 	keymapper = opts.keymapper
@@ -150,17 +156,19 @@ end
 M.setup = function(opts)
 	M.current_opts = vim.deepcopy(opts);
 
-	vim.api.nvim_create_autocmd({"FileType", "VimEnter"}, {
-		pattern = "python",
+	vim.api.nvim_create_autocmd({"BufReadPost", "BufWinEnter"}, {
+		pattern = "*.py",
 		callback = function()
 			local clients = vim.lsp.get_clients()
+
+			-- Find the pylsp server and stop it
 			for _, client in ipairs(clients) do
 				if (client.name == "pylsp") then
 					client.stop();
 				end
 			end
 
-			configure_pylsp(M.current_opts)
+			reconfigure_pylsp(M.current_opts)
 
 			vim.defer_fn(function()
 				vim.cmd("LspStart pylsp")

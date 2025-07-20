@@ -1,5 +1,5 @@
-local vim = vim
 local M = {}
+
 
 -- Try requiring neo-tree safely
 local neotree_loaded, neo_tree = pcall(require, "neo-tree")

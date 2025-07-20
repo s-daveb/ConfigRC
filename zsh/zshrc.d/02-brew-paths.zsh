@@ -4,7 +4,6 @@ if [[ ${brew_loaded} -eq 0 ]]; then
 fi
 
 extra_paths_dir="${HOME}/.zshrc.d/brew-paths.d"
-ls $extra_paths_dir
 
 if [ -d $extra_paths_dir ]; then
 	for script in ${extra_paths_dir}/*.zsh; do

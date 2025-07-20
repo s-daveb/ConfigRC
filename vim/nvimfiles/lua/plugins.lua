@@ -25,11 +25,6 @@ local plugins = {
         end,
         build = ":TSUpdate"
     },
-    {
-        'nvim-telescope/telescope.nvim',
-        dependencies = { 'nvim-lua/plenary.nvim' },
-        ignore_install = { 'copilot.lua' },
-    },
     -- Vscode-like pictograms
     {
         'onsails/lspkind.nvim',
@@ -80,15 +75,9 @@ local plugins = {
     },
     lazy = false,
     config = function()
-            require("refactoring").setup()
-            vim.keymap.set({ "n", "x" }, "<leader>re", function() return require('refactoring').refactor('Extract Function') end, { expr = true })
-            vim.keymap.set({ "n", "x" }, "<leader>rf", function() return require('refactoring').refactor('Extract Function To File') end, { expr = true })
-            vim.keymap.set({ "n", "x" }, "<leader>rv", function() return require('refactoring').refactor('Extract Variable') end, { expr = true })
-            vim.keymap.set({ "n", "x" }, "<leader>rI", function() return require('refactoring').refactor('Inline Function') end, { expr = true })
-            vim.keymap.set({ "n", "x" }, "<leader>ri", function() return require('refactoring').refactor('Inline Variable') end, { expr = true })
-            vim.keymap.set({ "n", "x" }, "<leader>rbb", function() return require('refactoring').refactor('Extract Block') end, { expr = true })
-            vim.keymap.set({ "n", "x" }, "<leader>rbf", function() return require('refactoring').refactor('Extract Block To File') end, { expr = true })
-        end,
+        require("refactoring").setup()
+        require('keymaps.refactoring').load()
+    end
     },
     -- GitHub Copilot
     --{
@@ -181,6 +170,8 @@ local plugins = {
                 'nvim-telescope/telescope-fzf-native.nvim',
             },
             "nvim-telescope/telescope-file-browser.nvim",
+            'nvim-telescope/telescope-ui-select.nvim'
+
         },
         config = function()
             local opts = {
@@ -198,17 +189,24 @@ local plugins = {
                         theme = "ivy",
                         -- disables netrw and use telescope-file-browser in its place
                         hijack_netrw = true,
+                    },
+                    ["ui-select"] = {
+                        require('telescope.themes').get_dropdown({})
                     }
                 }
             }
             require('config.telescope').load(opts)
             require('telescope').load_extension('fzf')
             require('telescope').load_extension('file_browser')
+            require("telescope").load_extension("ui-select")
         end
     },
     {
         'nvim-telescope/telescope-fzf-native.nvim',
         build = 'cmake -S. -B build -DCMAKE_POLICY_VERSION_MINIMUM=3.5 -DCMAKE_BUILD_TYPE=Release && cmake --build build'
+    },
+    {
+        'nvim-telescope/telescope-ui-select.nvim'
     },
     {
         "nvim-neo-tree/neo-tree.nvim",

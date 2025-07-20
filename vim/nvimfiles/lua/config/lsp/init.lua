@@ -21,7 +21,7 @@ function M.async_hover_diagnostic()
     last_cursor_pos = current_pos
 
     hover_timer = vim.loop.new_timer()
-    hover_timer:start(2000, 0, vim.schedule_wrap(function()
+    hover_timer:start(500, 0, vim.schedule_wrap(function()
         M.hover_diagnostic()
     end))
 end
@@ -53,9 +53,10 @@ local function enable_hover_diagnostics()
         group = "ToggleHoverDiagnostics",
 
     })
-    if #autocommands > 0 then
-        return
-    end
+    --if #autocommands > 0 then
+    --    vim.notify("hints setup aborted!!!")
+    --    return
+    --end
 
     vim.api.nvim_create_autocmd("CursorHold", {
         group = vim.api.nvim_create_augroup("HoverDiagnostics", { clear = true }),
@@ -105,7 +106,7 @@ local function setup_bufread_autocmd()
         "copilot"
     }
     -- Setup autocommands for toggling hover diagnostics based on filetype
-    vim.api.nvim_create_autocmd("BufWinEnter", {
+    vim.api.nvim_create_autocmd({"BufReadPost", "BufWinEnter"}, {
         group = vim.api.nvim_create_augroup("ToggleHoverDiagnostics", { clear = true }),
         callback = function()
             if vim.tbl_contains(incompatible_filetypes, vim.bo.filetype) then
@@ -116,7 +117,7 @@ local function setup_bufread_autocmd()
         end,
     })
 
-    vim.api.nvim_create_autocmd('BufWinEnter', {
+    vim.api.nvim_create_autocmd({'BufWinEnter','LspAttach'}, {
       desc = 'Setup LSP keymaps for current buffer',
       callback = function()
         local bufnr = vim.api.nvim_get_current_buf()

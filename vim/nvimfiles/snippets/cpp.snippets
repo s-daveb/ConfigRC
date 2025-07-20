@@ -4,12 +4,15 @@
 snippet /**= Comment with signature
 	/* $1
 	 *  -- Saul `date +%d.%m.%y` ☕️  */
-snippet modeline // vim: set foldmethod=syntax ts=8 ...
+snippet modeline // vim: set ts=8 ...
 	// clang-format off
-	// vim: set foldmethod=syntax foldminlines=10 textwidth=80 ts=8 sts=0 sw=8 noexpandtab ft=cpp.doxygen :
+	// vim: set ts=8 sts=0 sw=8 noexpandtab ft=cpp.doxygen :
+snippet modeline_foldsyntax // vim: set foldmethod...
+	// clang-format off
+	// vim: set foldmethod=syntax foldminlines=10 ts=8 sts=0 sw=8  noexpandtab ft=cpp.doxygen :
 snippet modeline_foldmarker // vim: set foldmethod...
 	// clang-format off
-	// vim: set foldmethod=marker foldmarker=#region,#endregion textwidth=80 ts=8 sts=0 sw=8  noexpandtab ft=cpp.doxygen :
+	// vim: set foldmethod=marker foldmarker=#region,#endregion ts=8 sts=0 sw=8  noexpandtab ft=cpp.doxygen :
 snippet doxyfile "Doxygen documentation for a source file"
 	/** @file $1:`!p snip.rv = snip.fn`
 	 * @brief $2

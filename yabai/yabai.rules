@@ -24,7 +24,7 @@ yabai -m rule --add label="Font Book" app="^Font Book$" manage="off" grid="4:4:1
 yabai -m rule --add label="Home" app="^Home$" manage="off"
 yabai -m rule --add label="System Settings" app="^System Settings$" manage="off"
 yabai -m rule --add label="System Information" app="System Information" manage="off"
-yabai -m rule --add label="Stickies" app="^Stickies$" manage="off"
+yabai -m rule --add label="Stickies" app="Stickies" manage="off"
 yabai -m rule --add label="Calendar" app="^Calendar$" manage="off"
 yabai -m rule --add label="Keychain" app="Keychain"  manage="off"
 yabai -m rule --add label="FaceTime" app="^FaceTime$" manage="off"
@@ -69,19 +69,15 @@ yabai -m rule --add label="EA app" app="^EA app$"  manage="off"
 yabai -m rule --add label="EA Games Launcher" app="^EA$"  manage="off"
 yabai -m rule --add label="The Sims 4" app="^The Sims 4$"  manage="off"
 
-#yabai -m rule --add label="Moonlight" app="^Moonlight$" manage="off"
 yabai -m rule --add label="OmniDiskSweeper" app="^OmniDiskSweeper$" manage="off"
 
 yabai -m rule --add label="iStatistica Pro" app="^iStat" manage="off"
 
 yabai -m rule --add label="Screen Sharing" app="^Screen Sharing$" manage="off"
 
-yabai -m rule --add label="iterm2" app="iTerm2" manage="on"
-yabai -m rule --add label="iterm2-pulldown" app="iTerm2" title="^pulldown-terminal" manage="off"
 
 yabai -m rule --add label="Terminal" app="^Terminal" manage="off" grid="32:32:8:9:13:17"
-yabai -m rule --add label="macvim" app="(N|Mac)?(Vim|vim)(R?)" manage="off"
-#yabai -m rule --add label="neovide" app="neovide" manage="off"
+yabai -m rule --add label="Visual Studio" app="^Visual Studio" manage="off"
 
 yabai -m rule --add label="Finder" app="^Finder$" manage="off"
 yabai -m rule --add label="Mail" app="^Mail$" manage="off"
@@ -109,6 +105,11 @@ yabai -m rule --add label="Logi Options+" app="Logi Options+" manage="off"
 yabai -m rule --add label="Mac Mouse Fix" app="Mac Mouse Fix" manage="off"
 
 yabai -m rule --add label="ffdec" app="FFdec" manage="off"
+
+yabai -m rule --add label="iterm2" app="iTerm2" manage="on"
+yabai -m rule --add label="iterm2-pulldown"  title="^pulldown" manage="off"
+
+yabai -m rule --apply
 
 #yabai -m  config layout float
 

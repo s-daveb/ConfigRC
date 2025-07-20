@@ -8,10 +8,7 @@ function module.set_keys(client, bufnr)
 
   local opts = { noremap = true, silent = true }
 
-  local quickfix_opts = { noremap = true, silent = true }
-  quickfix_opts.callback = function()
-    vim.lsp.buf.code_action({ context = { only = { "quickfix" } }, apply = true })
-  end
+  local quickfix_args = { context = { only = { "quickfix" } }, apply = true }
 
   -- Mappings
   buf_set_keymap('n', '<leader>d', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
@@ -26,9 +23,17 @@ function module.set_keys(client, bufnr)
 
   buf_set_keymap('n', '<leader>h', '<cmd>lua require(\'config.lsp\').hover_diagnostic()<CR>', opts)
 
+
   buf_set_keymap('n', '<leader>kf', '<cmd>lua vim.lsp.buf.format({async = true})<CR>', opts)
 
-  buf_set_keymap('n', '<leader>fix', '', quickfix_opts) -- has no action because quickfix_opts.callback handles it
+
+  local quickfix = function ()
+      vim.lsp.buf.code_action({
+        filter = function(a) return a.isPreferred end, apply = true
+      })
+  end
+
+  vim.keymap.set('n', '<leader>fix', quickfix, opts)
 
   -- clangd specific
   buf_set_keymap('n', '<leader>hint', '<cmd>lua vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())<CR>' , opts)
