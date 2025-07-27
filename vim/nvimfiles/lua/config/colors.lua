@@ -12,8 +12,8 @@ end
 local default_term_theme = "dracula"
 local default_tmux_theme = "dracula-soft"
 
-local default_gui_theme_light = "dhampir"
-local default_gui_theme_dark = "dracula"
+local default_gui_theme_light = "tokyonight-day"
+local default_gui_theme_dark = "tokyonight-storm"
 local default_gui_theme = default_gui_theme_dark
 
 M.theme_pack = default_term_theme

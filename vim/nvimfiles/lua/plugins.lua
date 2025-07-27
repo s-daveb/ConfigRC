@@ -315,6 +315,7 @@ local color_plugins = {
         'Mofiqul/dracula.nvim',
         config=true
     },
+    {   'folke/tokyonight.nvim' },
     --{
     --    "s-daveb/dhampir.nvim",
     --    lazy = false,
