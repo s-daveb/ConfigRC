@@ -47,6 +47,7 @@ function load_brew() { #<
 }
 
 
+export iterm2_hostname="$(hostname)"
 
 if [[ ! -o interactive ]]; then
 	source ~/.zshrc.d/00-common.zsh

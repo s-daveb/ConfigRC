@@ -2,11 +2,12 @@
 # modify it under the terms of the GNU General Public License
 # as published by the Free Software Foundation; either version 2
 # of the License, or (at your option) any later version.
-#
+# 
 # This program is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.#
+# GNU General Public License for more details.
+# 
 # You should have received a copy of the GNU General Public License
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
@@ -111,7 +112,7 @@ if [[ -o interactive ]]; then
       ITERM2_SHOULD_DECORATE_PROMPT=""
 
       # Add our escape sequences just before the prompt is shown.
-      # Use ITERM2_SQUELCH_MARK for people who can't mdoify PS1 directly, like powerlevel9k users.
+      # Use ITERM2_SQUELCH_MARK for people who can't modify PS1 directly, like powerlevel9k users.
       # This is gross but I had a heck of a time writing a correct if statetment for zsh 5.0.2.
       local PREFIX=""
       if [[ $PS1 == *"$(iterm2_prompt_mark)"* ]]; then
@@ -175,5 +176,4 @@ if [[ -o interactive ]]; then
     printf "\033]1337;ShellIntegrationVersion=14;shell=zsh\007"
   fi
 fi
-
-alias imgcat=/Users/sdavid/.iterm2/imgcat;alias imgls=/Users/sdavid/.iterm2/imgls;alias it2api=/Users/sdavid/.iterm2/it2api;alias it2attention=/Users/sdavid/.iterm2/it2attention;alias it2check=/Users/sdavid/.iterm2/it2check;alias it2copy=/Users/sdavid/.iterm2/it2copy;alias it2dl=/Users/sdavid/.iterm2/it2dl;alias it2getvar=/Users/sdavid/.iterm2/it2getvar;alias it2git=/Users/sdavid/.iterm2/it2git;alias it2profile=/Users/sdavid/.iterm2/it2profile;alias it2setcolor=/Users/sdavid/.iterm2/it2setcolor;alias it2setkeylabel=/Users/sdavid/.iterm2/it2setkeylabel;alias it2tip=/Users/sdavid/.iterm2/it2tip;alias it2ul=/Users/sdavid/.iterm2/it2ul;alias it2universion=/Users/sdavid/.iterm2/it2universion
+alias imgcat=${HOME}/.iterm2/imgcat;alias imgls=${HOME}/.iterm2/imgls;alias it2api=${HOME}/.iterm2/it2api;alias it2attention=${HOME}/.iterm2/it2attention;alias it2check=${HOME}/.iterm2/it2check;alias it2copy=${HOME}/.iterm2/it2copy;alias it2dl=${HOME}/.iterm2/it2dl;alias it2getvar=${HOME}/.iterm2/it2getvar;alias it2git=${HOME}/.iterm2/it2git;alias it2setcolor=${HOME}/.iterm2/it2setcolor;alias it2setkeylabel=${HOME}/.iterm2/it2setkeylabel;alias it2tip=${HOME}/.iterm2/it2tip;alias it2ul=${HOME}/.iterm2/it2ul;alias it2universion=${HOME}/.iterm2/it2universion;alias it2profile=${HOME}/.iterm2/it2profile;alias it2cat=${HOME}/.iterm2/it2cat

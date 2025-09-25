@@ -81,3 +81,6 @@ else
 fi
 
 # vim: set ts=4 sts=4 et sw=4 :
+
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+

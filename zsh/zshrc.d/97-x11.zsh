@@ -1,4 +1,4 @@
 
-export XAUTHORITY="~/.config/x11/.Xauthority"
+export XAUTHORITY="${HOME}/.config/x11/.Xauthority"
 
 [ ! -d "${XAUTHORITY}" ] && mkdir -p "${XAUTHORITY}"
