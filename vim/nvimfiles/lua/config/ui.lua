@@ -22,7 +22,7 @@ function M.set_neovide_opacity(amount)
 end
 
 function M.setup_gui(opts)
-    vim.opt.guifont = "Berkeley_Mono:h14"
+    vim.opt.guifont = "Berkeley_Mono:h18"
 
     if vim.g.neovide then
         M.configure_transparency(opts.transparency);
