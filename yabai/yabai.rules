@@ -108,6 +108,7 @@ yabai -m rule --add label="ffdec" app="FFdec" manage="off"
 
 yabai -m rule --add label="iterm2" app="iTerm2" manage="on"
 yabai -m rule --add label="iterm2-pulldown"  title="^pulldown" manage="off"
+yabai -m rule --add label="RealVNC Viewer"  app="VNC Viewer" manage="off"
 
 yabai -m rule --apply
 
